@@ -1,0 +1,66 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 4/10/2016, 12:59:57 AM
+    Author     : rcortes
+*/
+.container .row h2{
+    color: #888;
+    border-bottom: 1px double #ddd;
+}
+.lado_derecho{
+    width: 50%;
+    float: left;
+    padding-right: 45px;
+    padding-left: 15px;
+}
+.lado_izquierdo{
+    position: relative;
+    min-height: 1px;
+    width: 50%;
+    padding-right: 15px;
+    padding-left: 45px;
+    float: right;
+}
+.form-busc{
+    background: rgba(160,160,16,0.3);
+    margin: 10px 0;
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+.agregar_element{
+    margin: 0 auto;
+}
+.input-busc{
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.margen-boton{
+    margin-bottom: 3px;
+}
+.bordebajo{
+ border-bottom: 1px double #ddd;
+ margin-bottom: 5px;
+}
+.centrar-btn-vp{
+  margin-top: 25px;
+}
+.centrar-btn{
+    margin-top:35px;
+}
