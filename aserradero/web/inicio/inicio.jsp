@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : inicio
     Created on : 11-sep-2016, 21:22:34
     Author     : lmarcoss
@@ -6,12 +6,12 @@
 
 <%@page import="entidades.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% 
-    response.setHeader( "Pragma", "no-cache" ); 
-    response.addHeader( "Cache-Control", "must-revalidate" ); 
-    response.addHeader( "Cache-Control", "no-cache" ); 
-    response.addHeader( "Cache-Control", "no-store" ); 
-    response.setDateHeader("Expires", 0); 
+<%
+    response.setHeader( "Pragma", "no-cache" );
+    response.addHeader( "Cache-Control", "must-revalidate" );
+    response.addHeader( "Cache-Control", "no-cache" );
+    response.addHeader( "Cache-Control", "no-store" );
+    response.setDateHeader("Expires", 0);
 %>
 <%
     HttpSession sesion = request.getSession(false);
@@ -34,11 +34,24 @@
             String id_jefe = (String)sesion.getAttribute("id_jefe");
             String rol = (String)sesion.getAttribute("rol");
             String estatus = (String)sesion.getAttribute("estatus");
-            out.print("Empleado: " +id_empleado);
-            out.print("Jefe: " +id_jefe);
-            out.print("Rol: " +rol);
-            out.print("Estatus: " +estatus);
         %>
+        <div class="container">
+           <div class="perfil">
+               <img src="/aserradero/dist/images/avatar.png" alt="" class="avatar">
+                <%
+                    out.print("<span class='l1id'>Empleado: </span>");
+                    out.print("<span class='l2id'>"+id_empleado+"</span>");
+                    out.print("<span class='l1id'> Jefe: </span>");
+                    out.print("<span class='l2id'>"+id_jefe+"</span>");
+                    out.print("<span class='l1rol'>Rol: </span>");
+                    out.print("<span class='l2rol'>"+rol+"</span>");
+                    out.print("<span class='l1estatus'>Estatus: </span>");                    
+                    out.print("<span class='l2estatus'>"+estatus+"</span>");                    
+                    //out.print("<div class='logoestatus'></div>");
+                    out.print("<div class='divisor'></div>");
+                %>
+            </div> 
+        </div>            
     </body>
 </html>
 

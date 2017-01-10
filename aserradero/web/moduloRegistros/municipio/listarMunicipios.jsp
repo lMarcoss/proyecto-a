@@ -27,15 +27,15 @@
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>">
-        <div class="container" style="margin-top:60px;">
-          <div class="row">
-              <div class="col-lg-12">
-                  <h2>Lista de municipios</h2>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-12">
-                  <div class="panel panel-primary">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Lista de municipios</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
                       <div class="panel-heading">
                           <h3 class="panel-title">Si el Municipio que busca no aparece, agréguelo</h3>
                       </div>
