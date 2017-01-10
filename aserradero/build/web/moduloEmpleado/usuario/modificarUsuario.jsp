@@ -4,7 +4,7 @@
     Author     : lmarcoss
 --%>
 
-<%@page import="entidades.Usuario"%>
+<%@page import="entidades.empleado.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%Usuario usuario = (Usuario) request.getAttribute("usuario");%>
@@ -27,7 +27,9 @@
                     <table>
                         <tr>
                             <td style="padding-left: 10px;"><label for="id_empleado">Id empleado:</label></td>
-                            <td style="padding-left: 10px;"><input type="text" name="id_empleado" value="<%= usuario.getId_empleado()%>" pattern="[A-Za-z].{3,}[A-Za-z]" title="Sólo letras aA-zZ, al menos 4 letras" maxlength="6" required="" readonly=""/></td>
+                            <td style="padding-left: 10px;">
+                                <select></select>
+                                <input type="text" name="id_empleado" value="<%= usuario.getId_empleado()%>" pattern="[A-Za-z].{3,}[A-Za-z]" title="Sólo letras aA-zZ, al menos 4 letras" maxlength="6" required="" readonly=""/></td>
                         </tr>
                         <tr>
                             <td style="padding-left: 10px;"><label for="nombre_usuario">Usuario:</label></td>

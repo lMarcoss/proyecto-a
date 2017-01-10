@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>UsuarioServlet</servlet-name>
-        <servlet-class>controlador.UsuarioController</servlet-class>
+        <servlet-class>controlador.empleado.UsuarioController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MunicipioController</servlet-name>

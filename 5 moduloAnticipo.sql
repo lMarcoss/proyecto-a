@@ -142,7 +142,7 @@ BEGIN
     DECLARE _monto_extra 	DECIMAL(20,2);
 
 	-- ventas por paquete al cliente
-    IF EXISTS (SELECT id_cliente FROM VENTA,VENTA_PAQUETE WHERE id_cliente = _id_cliente LIMIT 1) THEN 
+    IF EXISTS (SELECT id_cliente FROM VENTA,VENTA_PAQUETE WHERE VENTA.id_venta = VENTA_PAQUETE.id_venta AND id_cliente = _id_cliente LIMIT 1) THEN 
 		-- monto total de la venta
         SELECT SUM(monto) INTO _monto_paquete 
         FROM VENTA, VENTA_PAQUETE 
@@ -153,7 +153,7 @@ BEGIN
     END IF;
     
     -- ventas por mayoreo al cliente
-    IF EXISTS (SELECT id_cliente FROM VENTA,VENTA_MAYOREO WHERE id_cliente = _id_cliente LIMIT 1) THEN 
+    IF EXISTS (SELECT id_cliente FROM VENTA,VENTA_MAYOREO WHERE VENTA.id_venta = VENTA_MAYOREO.id_venta AND id_cliente = _id_cliente LIMIT 1) THEN 
 		-- monto total de la venta
         SELECT SUM(monto) INTO _monto_mayoreo 
         FROM VENTA, VENTA_MAYOREO 
@@ -164,7 +164,7 @@ BEGIN
     END IF;
     
     -- ventas extra al cliente
-    IF EXISTS (SELECT id_cliente FROM VENTA,VENTA_EXTRA WHERE id_cliente = _id_cliente LIMIT 1) THEN 
+    IF EXISTS (SELECT id_cliente FROM VENTA,VENTA_EXTRA WHERE VENTA.id_venta = VENTA_EXTRA.id_venta AND id_cliente = _id_cliente LIMIT 1) THEN 
 		-- monto total de la venta
         SELECT SUM(monto) INTO _monto_extra 
         FROM VENTA, VENTA_EXTRA 
@@ -242,3 +242,4 @@ SELECT
     id_jefe,
     ABS(monto) AS monto
 FROM CUENTAS_CLIENTE WHERE monto > 0;
+

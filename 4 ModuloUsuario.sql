@@ -1,7 +1,6 @@
 USE aserradero;
 
 DROP VIEW IF EXISTS VISTA_USUARIO;
-
 CREATE VIEW VISTA_USUARIO AS
 SELECT 
 	nombre_usuario,
@@ -10,6 +9,7 @@ SELECT
     email,
     EMPLEADO.id_empleado AS id_empleado,
     id_persona,
+    (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE EMPLEADO.id_persona = id_persona LIMIT 1) as empleado,
     id_jefe,
     rol,
     estatus

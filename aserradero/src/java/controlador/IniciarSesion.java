@@ -1,7 +1,7 @@
 package controlador;
 
-import dao.UsuarioCRUD;
-import entidades.Usuario;
+import dao.empleado.UsuarioCRUD;
+import entidades.empleado.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletConfig;

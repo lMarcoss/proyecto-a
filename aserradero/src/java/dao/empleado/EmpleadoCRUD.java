@@ -49,7 +49,7 @@ public class EmpleadoCRUD extends Conexion implements OperacionesCRUD {
         List<Empleado> empleados;
         try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM PERSONAL_EMPLEADO WHERE id_jefe = ?")) {
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM PERSONAL_EMPLEADO WHERE id_jefe = ? ORDER BY rol, empleado")) {
                 st.setString(1, id_jefe);
                 empleados = new ArrayList();
                 try (ResultSet rs = st.executeQuery()) {
@@ -174,6 +174,41 @@ public class EmpleadoCRUD extends Conexion implements OperacionesCRUD {
                     while (rs.next()) {
                         Empleado empleado = (Empleado) extraerObject(rs);
                         empleados.add(empleado);
+                    }
+                }
+            } catch (Exception e) {
+                empleados = null;
+                System.out.println(e);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
+        return empleados;
+    }
+
+    public List<Empleado> empleadosParaUsuario(String id_jefe) throws Exception {
+        List<Empleado> empleados;
+        try {
+            this.abrirConexion();
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM PERSONAL_EMPLEADO WHERE rol = 'Administrador'")) {
+                empleados = new ArrayList();
+                try (ResultSet rs = st.executeQuery()) {
+                    while (rs.next()) {
+                        Empleado empleado = (Empleado) extraerObject(rs);
+                        empleados.add(empleado);
+                    }
+                }
+                PreparedStatement st1 = this.conexion.prepareStatement("SELECT * FROM PERSONAL_EMPLEADO WHERE (rol = 'Empleado' OR rol = 'Vendedor') AND id_jefe = ?");
+                st1.setString(1, id_jefe);
+                System.out.println("jefe: " + id_jefe);
+                try (ResultSet rs1 = st1.executeQuery()) {
+                    while (rs1.next()) {
+                        Empleado empleado = (Empleado) extraerObject(rs1);
+                        empleados.add(empleado);
+                        System.out.println("Encontrado");
                     }
                 }
             } catch (Exception e) {

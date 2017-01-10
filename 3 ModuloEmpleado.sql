@@ -1,6 +1,6 @@
 USE aserradero;
 
--- Disparador para crear id_jefe: para administrador
+-- Disparador para crear id_jefe: para administrador y para empleado
 DROP TRIGGER IF EXISTS EMPLEADO;
 DELIMITER //
 CREATE TRIGGER EMPLEADO BEFORE INSERT ON EMPLEADO
@@ -35,7 +35,7 @@ DROP VIEW IF EXISTS PERSONAL_ADMINISTRADOR;
 CREATE VIEW PERSONAL_ADMINISTRADOR AS
 SELECT 
 		id_administrador, 
-		(SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE id_persona = SUBSTRING(id_administrador,1,18))as nombre,
+		(SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE id_persona = SUBSTRING(id_administrador,1,18) LIMIT 1)as nombre,
         cuenta_inicial
 FROM ADMINISTRADOR;
 
@@ -44,9 +44,9 @@ DROP VIEW IF EXISTS PERSONAL_EMPLEADO;
 CREATE VIEW PERSONAL_EMPLEADO AS
 SELECT id_empleado,
 		id_persona,
-        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) as nombre FROM PERSONA WHERE PERSONA.id_persona = EMPLEADO.id_persona) as empleado,
+        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) as nombre FROM PERSONA WHERE PERSONA.id_persona = EMPLEADO.id_persona LIMIT 1) as empleado,
         id_jefe,
-        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) as nombre FROM PERSONA WHERE id_persona = SUBSTRING(id_jefe,1,18)) as jefe, 
+        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) as nombre FROM PERSONA WHERE id_persona = SUBSTRING(id_jefe,1,18) LIMIT 1) as jefe, 
         rol,estatus 
 FROM EMPLEADO;
 
@@ -56,7 +56,7 @@ CREATE VIEW VISTA_PAGO_EMPLEADO AS
 SELECT id_pago_empleado,
 		fecha,
         EMPLEADO.id_empleado AS id_empleado,
-        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) as nombre FROM PERSONA WHERE id_persona = EMPLEADO.id_persona)as empleado,
+        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) as nombre FROM PERSONA WHERE id_persona = EMPLEADO.id_persona LIMIT 1)as empleado,
         EMPLEADO.id_jefe AS id_jefe,
         monto,
         observacion 
