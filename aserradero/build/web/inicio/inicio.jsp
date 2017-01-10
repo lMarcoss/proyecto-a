@@ -4,21 +4,28 @@
     Author     : lmarcoss
 --%>
 
-<%@page import="entidades.Usuario"%>
+<%@page import="entidades.empleado.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+<<<<<<< HEAD
     response.setHeader( "Pragma", "no-cache" );
     response.addHeader( "Cache-Control", "must-revalidate" );
     response.addHeader( "Cache-Control", "no-cache" );
     response.addHeader( "Cache-Control", "no-store" );
+=======
+    response.setHeader("Pragma", "no-cache");
+    response.addHeader("Cache-Control", "must-revalidate");
+    response.addHeader("Cache-Control", "no-cache");
+    response.addHeader("Cache-Control", "no-store");
+>>>>>>> master
     response.setDateHeader("Expires", 0);
 %>
 <%
     HttpSession sesion = request.getSession(false);
-    String nombre_usuario = (String)sesion.getAttribute("nombre_usuario");
-    if(nombre_usuario.equals("")){
+    String nombre_usuario = (String) sesion.getAttribute("nombre_usuario");
+    if (nombre_usuario.equals("")) {
         response.sendRedirect("/aserradero/");
-    }else if( nombre_usuario != null){
+    } else if (nombre_usuario != null) {
 %>
 <!DOCTYPE html>
 <html>
@@ -30,10 +37,28 @@
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
         <%
+<<<<<<< HEAD
             String id_empleado = (String)sesion.getAttribute("id_empleado");
             String id_jefe = (String)sesion.getAttribute("id_jefe");
             String rol = (String)sesion.getAttribute("rol");
             String estatus = (String)sesion.getAttribute("estatus");
+=======
+            String id_empleado = (String) sesion.getAttribute("id_empleado");
+            String id_jefe = (String) sesion.getAttribute("id_jefe");
+            String rol = (String) sesion.getAttribute("rol");
+            String estatus = (String) sesion.getAttribute("estatus");
+            if (rol.equals("Administrador") || rol.equals("Empleado") || rol.equals("Vendedor")) {
+                out.print("Empleado: " + id_empleado);
+                out.print("Jefe: " + id_jefe);
+                out.print("Rol: " + rol);
+                out.print("Estatus: " + estatus);
+            }else{
+                System.out.println("Sólo Administrador, empleado y vendedor pueden iniciar sesión");
+                sesion.invalidate();
+                response.sendRedirect("/aserradero/");
+            }
+
+>>>>>>> master
         %>
         <div class="container">
            <div class="perfil">
@@ -55,8 +80,7 @@
     </body>
 </html>
 
-<%
-    }else{
+<%    } else {
         response.sendRedirect("/aserradero/");
     }
 %>

@@ -1,6 +1,7 @@
-package dao;
+package dao.empleado;
 
-import entidades.Usuario;
+import dao.Conexion;
+import entidades.empleado.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,15 +33,16 @@ public class UsuarioCRUD extends Conexion{
         } 
     }
     
-    public List<Usuario> listar() throws Exception {
+    public List<Usuario> listar(String id_jefe) throws Exception {
         List<Usuario> usuarios;
         try{
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM USUARIO")) {
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_USUARIO WHERE (rol = 'Administrador' OR rol = 'Empleado' OR rol = 'Vendedor') AND id_jefe = ?")) {
+                st.setString(1, id_jefe);
                 usuarios = new ArrayList();
                 try (ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {
-                        Usuario usuario = extraerUsuario(rs);
+                        Usuario usuario = extraerUsuario(rs,"");
                         usuarios.add(usuario);
                     }
                 }
@@ -60,11 +62,11 @@ public class UsuarioCRUD extends Conexion{
     public Usuario modificar(Usuario usuarioM) throws Exception{
         Usuario usuario = null;
         this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM USUARIO WHERE nombre_usuario = ?")) {
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_USUARIO WHERE nombre_usuario = ?")) {
                 st.setString(1, usuarioM.getNombre_usuario());
                 try (ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {
-                        usuario = extraerUsuario(rs);
+                        usuario = extraerUsuario(rs,"");
                     }
                 }
             }
@@ -113,7 +115,7 @@ public class UsuarioCRUD extends Conexion{
                 usuarios = new ArrayList();
                 try (ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {
-                        Usuario usuario = extraerUsuario(rs);
+                        Usuario usuario = extraerUsuario(rs,"");
                         usuarios.add(usuario);
                     }
                 }
@@ -131,13 +133,13 @@ public class UsuarioCRUD extends Conexion{
         Usuario user = null;
         try{
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT  * FROM VISTA_USUARIO WHERE nombre_usuario = ? AND contrasenia = (SELECT SHA1(?)) AND estatus = ?")) {
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT  * FROM VISTA_USUARIO WHERE nombre_usuario = ? AND contrasenia = (SELECT SHA1(?)) AND estatus = ? AND (rol = 'Administrador' OR rol = 'Empleado' OR rol = 'Vendedor')")) {
                 st.setString(1,nombre_usuario);
                 st.setString(2,contrasenia);
                 st.setString(3,"Activo");
                 try (ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {
-                        user = extraerUsuario(rs);
+                        user = extraerUsuario(rs,"validar");
                     }
                 }catch(Exception e){
                     System.out.println(e);
@@ -152,14 +154,18 @@ public class UsuarioCRUD extends Conexion{
         return user;
     }
 
-    private Usuario extraerUsuario(ResultSet rs) throws SQLException {
+    private Usuario extraerUsuario(ResultSet rs, String action) throws SQLException {
         Usuario usuario = new Usuario();
         usuario.setNombre_usuario(rs.getString("nombre_usuario"));
-        usuario.setContrasenia(rs.getString("contrasenia"));
+        if(action.equals("validar")){
+            usuario.setContrasenia(rs.getString("contrasenia"));
+        }
         usuario.setId_empleado(rs.getString("id_empleado"));
+        usuario.setEmpleado(rs.getString("empleado"));
         usuario.setId_jefe(rs.getString("id_jefe"));
         usuario.setRol(rs.getString("rol"));
         usuario.setEstatus(rs.getString("estatus"));
+        usuario.setEmail(rs.getString("email"));
         return usuario;
     }
     

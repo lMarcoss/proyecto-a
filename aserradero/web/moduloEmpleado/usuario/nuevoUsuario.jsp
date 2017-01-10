@@ -5,7 +5,7 @@
 --%>
 
 
-<%@page import="entidades.Empleado"%>
+<%@page import="entidades.empleado.Empleado"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%List <Empleado> empleados = (List<Empleado>) request.getAttribute("empleados");%>
@@ -21,7 +21,7 @@
         
         <!-- ******************* Formulario de registro-->
         <div>
-            <form action="/aserradero/UsuarioController?action=nuevo" method="post" id="formregistro">
+            <form action="/aserradero/UsuarioController?action=insertar" method="post" id="formregistro">
                 <h3>Registrar usuario</h3>
                 <fieldset id="user-details">
                     <table>
@@ -32,7 +32,7 @@
                                     <option></option>
                                     <%
                                         for (Empleado empleado : empleados) {
-                                            out.print("<option value='"+empleado.getId_empleado()+"'>"+empleado.getEmpleado()+"</option>");
+                                            out.print("<option value='"+empleado.getId_empleado()+"'>"+empleado.getRol()+": "+empleado.getEmpleado()+"</option>");
                                         }
                                     %>
                                 </select>

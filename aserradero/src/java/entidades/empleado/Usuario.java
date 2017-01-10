@@ -1,4 +1,4 @@
-package entidades;
+package entidades.empleado;
 
 /**
  *
@@ -10,6 +10,7 @@ public class Usuario {
     public String contrasenia;
     public String email;
     public String id_empleado;
+    public String empleado;
     public String id_jefe;
     public String rol;
     public String estatus;
@@ -17,11 +18,12 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre_usuario, String contrasenia, String email, String id_empleado, String id_jefe, String rol, String estatus) {
+    public Usuario(String nombre_usuario, String contrasenia, String email, String id_empleado, String empleado, String id_jefe, String rol, String estatus) {
         this.nombre_usuario = nombre_usuario;
         this.contrasenia = contrasenia;
         this.email = email;
         this.id_empleado = id_empleado;
+        this.empleado = empleado;
         this.id_jefe = id_jefe;
         this.rol = rol;
         this.estatus = estatus;
@@ -41,6 +43,10 @@ public class Usuario {
 
     public void setId_empleado(String id_empleado) {
         this.id_empleado = id_empleado;
+    }
+
+    public void setEmpleado(String empleado) {
+        this.empleado = empleado;
     }
 
     public void setId_jefe(String id_jefe) {
@@ -71,6 +77,10 @@ public class Usuario {
         return id_empleado;
     }
 
+    public String getEmpleado() {
+        return empleado;
+    }
+
     public String getId_jefe() {
         return id_jefe;
     }
@@ -82,5 +92,5 @@ public class Usuario {
     public String getEstatus() {
         return estatus;
     }
-
+    
 }

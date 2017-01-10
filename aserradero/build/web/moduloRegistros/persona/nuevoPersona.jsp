@@ -42,7 +42,11 @@
                                 <div class="lado_derecho"><!-- Grupo derecho-->
                                     <div class="form-group">
                                         <label class="control-label">Id_persona:</label>
-                                        <input class="form-control" type="text" name="id_persona" id="id_persona" maxlength="18" placeholder="Se genera automáticamente" required readonly="" title="Se genera después de escribir fecha de nacimiento"/>
+                                        <input class="form-control" type="text" name="id_persona" id="id_persona" maxlength="18" placeholder="Escriba la CURP de la persona" required pattern=""/>
+                                    </div>
+                                    <div class="form-group">
+                                        <!--<label class="control-label">Id_persona:</label>-->
+                                        <input class="form-control" type="button" value="Crear un id para la persona" onclick="crearIdPersona()">
                                     </div>
                                     <div class="form-group">
                                         <i class="glyphicon glyphicon-user"></i>
@@ -120,7 +124,7 @@
                                     <br>
                                     <div class="form-group pull-right col-md-11">
                                         <a href="/aserradero/PersonaController?action=listar"><input class="btn btn-warning col-md-5 pull-left" type="button" value="Cancelar"/></a>
-                                        <input class="btn btn-success col-md-5 pull-right" type="submit" id="registrar" value="Guardar" onclick="crearIdPersona()"/>
+                                        <input class="btn btn-success col-md-5 pull-right" type="submit" id="registrar" value="Guardar">
                                     </div>
                                 </div>
                             </form>

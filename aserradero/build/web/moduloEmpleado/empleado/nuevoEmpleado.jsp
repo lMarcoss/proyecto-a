@@ -30,7 +30,7 @@
                     <table>
                         <tr>
                             <td style="padding-left: 10px;"><label>Empleado:</label></td>
-                            <input type="hidden" name="id_empleado" value="" readonly=""> <!--Se calcula en el CRUD-->
+                            <input type="hidden" name="id_empleado" value="" readonly=""> <!-- Se calcula en el crud-->
                             <td style="padding-left: 10px;">
                                 <!-- Seleccionar persona que se va a asignar como empleado-->
                                 <select name="id_persona" required="" title="Si no existe la persona que busca, primero agreguelo en la lista de personas">

@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="entidades.Usuario"%>
+<%@page import="entidades.empleado.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     List <Usuario> usuarios = (List<Usuario>) request.getAttribute("usuarios");
@@ -47,9 +47,8 @@
             <table class="table-condensed">
                     <tr>
                         <th>N°</th>
-                        <th>Id empleado</th>
+                        <th>Empleado</th>
                         <th>Usuario</th>
-                        <th>Contraseña</th>
                         <th>Email</th>
                     </tr>
                     <%
@@ -57,9 +56,8 @@
                         for (Usuario usuario : usuarios) {
                             out.print("<tr>"
                                 +"<td>"+(i+1)+"</td>"
-                                    +"<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona="+usuario.getId_empleado()+"\">"+usuario.getId_empleado()+"</a></td>"
+                                    +"<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona="+usuario.getId_empleado()+"\">"+usuario.getEmpleado()+"</a></td>"
                                     +"<td>"+usuario.getNombre_usuario()+"</td>"
-                                    +"<td>"+usuario.getContrasenia()+"</td>"
                                     +"<td>"+usuario.getEmail()+"</td>"
                                 +"<td><a href=\"/aserradero/UsuarioController?action=modificar&nombre_usuario="+usuario.getNombre_usuario()+"\">Actualizar</a></td>"
                                 + "<td><a href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/UsuarioController?action=eliminar&nombre_usuario="+usuario.getNombre_usuario()+"';};\">Eliminar</a></td>"
