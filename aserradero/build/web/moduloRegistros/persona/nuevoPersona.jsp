@@ -42,7 +42,7 @@
                                 <div class="lado_derecho"><!-- Grupo derecho-->
                                     <div class="form-group">
                                         <label class="control-label">Id_persona:</label>
-                                        <input class="form-control" type="text" name="id_persona" id="id_persona" maxlength="18" placeholder="Escriba la CURP de la persona" required pattern=""/>
+                                        <input class="form-control" type="text" name="id_persona" id="id_persona" maxlength="18" placeholder="Escriba la CURP de la persona" />
                                     </div>
                                     <div class="form-group">
                                         <!--<label class="control-label">Id_persona:</label>-->
