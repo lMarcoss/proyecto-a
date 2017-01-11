@@ -41,7 +41,7 @@ public class ClienteController extends HttpServlet {
         String rol = (String) sesion.getAttribute("rol");
         if (nombre_usuario.equals("")) {
             response.sendRedirect("/aserradero/");
-        } else if (rol.equals("Administrador") || rol.equals("Empleado")|| rol.equals("Vendedor")) {
+        } else if (rol.equals("Administrador") || rol.equals("Empleado") || rol.equals("Vendedor")) {
             //Acción a realizar
             String action = request.getParameter("action");
             switch (action) {
@@ -148,7 +148,7 @@ public class ClienteController extends HttpServlet {
         String dato = request.getParameter("dato");
         ClienteCRUD clienteCRUD = new ClienteCRUD();
         try {
-            listaClientes = (List<Cliente>) clienteCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            listaClientes = (List<Cliente>) clienteCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarClientes(request, response, listaClientes, action);
         } catch (Exception ex) {
             listarClientes(request, response, sesion, "error_buscar_campo");
@@ -174,7 +174,7 @@ public class ClienteController extends HttpServlet {
         try {
             //consultamos la lista de personas para registrarlos como cliente
             List<Persona> personas;
-            personas = personaCRUD.listarPersonasPara("cliente",(String) sesion.getAttribute("id_jefe"));
+            personas = personaCRUD.listarPersonasPara("cliente", (String) sesion.getAttribute("id_jefe"));
             request.setAttribute("personas", personas);
 
             RequestDispatcher view = request.getRequestDispatcher("moduloRegistros/cliente/nuevoCliente.jsp");
@@ -193,7 +193,7 @@ public class ClienteController extends HttpServlet {
         List<Cliente> listaClientes;
         ClienteCRUD clienteCRUD = new ClienteCRUD();
         try {
-            listaClientes = (List<Cliente>) clienteCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaClientes = (List<Cliente>) clienteCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarClientes(request, response, listaClientes, action);
         } catch (Exception ex) {
             System.out.println(ex);

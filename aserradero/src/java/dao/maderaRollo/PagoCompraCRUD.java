@@ -3,7 +3,6 @@ package dao.maderaRollo;
 import dao.Conexion;
 import entidades.maderaRollo.CuentaPago;
 import entidades.maderaRollo.PagoCompra;
-import entidadesVirtuales.VistaMontoPagoCompra;
 import interfaces.OperacionesCRUD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,11 +45,17 @@ public class PagoCompraCRUD extends Conexion implements OperacionesCRUD {
     }
 
     @Override
-    public <T> List listar(String id_jefe) throws Exception {
+    public <T> List listar(String id_jefe, String rol) throws Exception {
         List<PagoCompra> pagoCompras;
+        String consulta;
+        if (rol.equals("Administrador")) {
+            consulta = "SELECT * FROM VISTA_PAGO_COMPRA WHERE id_administrador = ? ORDER BY fecha DESC";
+        } else {
+            consulta = "SELECT * FROM VISTA_PAGO_COMPRA WHERE id_administrador = ? AND fecha = CURDATE() ORDER BY fecha DESC";
+        }
         try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_PAGO_COMPRA WHERE id_administrador = ?")) {
+            try (PreparedStatement st = this.conexion.prepareStatement(consulta)) {
                 st.setString(1, id_jefe);
                 pagoCompras = new ArrayList<>();
                 try (ResultSet rs = st.executeQuery()) {
@@ -146,11 +151,17 @@ public class PagoCompraCRUD extends Conexion implements OperacionesCRUD {
     }
 
     @Override
-    public <T> List buscar(String nombre_campo, String dato, String id_jefe) throws Exception {
+    public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<PagoCompra> pagoCompras;
+        String consulta;
+        if (rol.equals("Administrador")) {
+            consulta = "SELECT * FROM VISTA_PAGO_COMPRA WHERE " + nombre_campo + " like ? ORDER BY fecha DESC";
+        } else {
+            consulta = "SELECT * FROM VISTA_PAGO_COMPRA WHERE " + nombre_campo + " like ? AND fecha = CURDATE() ORDER BY fecha DESC";
+        }
         try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_PAGO_COMPRA WHERE " + nombre_campo + " like ?")) {
+            try (PreparedStatement st = this.conexion.prepareStatement(consulta)) {
                 st.setString(1, "%" + dato + "%");
                 pagoCompras = new ArrayList<>();
                 try (ResultSet rs = st.executeQuery()) {
@@ -168,42 +179,6 @@ public class PagoCompraCRUD extends Conexion implements OperacionesCRUD {
         }
         return pagoCompras;
     }
-
-//    public <T> List listarMontoPagoCompra(String administrador) throws Exception {
-//        List<VistaMontoPagoCompra> listaMontoPagoCompra;
-//        try {
-//            this.abrirConexion();
-//            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_MONTO_PAGO_COMPRA WHERE id_administrador = ? AND existe_entrada > 0")) {
-//                st.setString(1, administrador);
-//                listaMontoPagoCompra = new ArrayList();
-//                try (ResultSet rs = st.executeQuery()) {
-//                    while (rs.next()) {
-//                        VistaMontoPagoCompra montoPagoCompra = (VistaMontoPagoCompra) extraerMontoPagoCompra(rs);
-//                        listaMontoPagoCompra.add(montoPagoCompra);
-//                    }
-//                }
-//            } catch (Exception e) {
-//                listaMontoPagoCompra = null;
-//                System.out.println(e);
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e);
-//            throw e;
-//        } finally {
-//            this.cerrarConexion();
-//        }
-//        return listaMontoPagoCompra;
-//    }
-//
-//    private VistaMontoPagoCompra extraerMontoPagoCompra(ResultSet rs) throws SQLException {
-//        VistaMontoPagoCompra monto = new VistaMontoPagoCompra();
-//        monto.setId_proveedor(rs.getString("id_proveedor"));
-//        monto.setProveedor(rs.getString("proveedor"));
-//        monto.setMonto_por_pagar(rs.getBigDecimal("monto_por_pagar"));
-//        monto.setCuenta_por_cobrar(rs.getBigDecimal("cuenta_por_cobrar"));
-//        monto.setId_administrador(rs.getString("id_administrador"));
-//        return monto;
-//    }
 
     public <T> List listarCuentaPago(String id_jefe) throws Exception {
         List<CuentaPago> listaCuentas;

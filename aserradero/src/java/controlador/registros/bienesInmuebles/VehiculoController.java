@@ -138,7 +138,7 @@ public class VehiculoController extends HttpServlet {
 
     private Vehiculo extraerVehiculoForm(HttpServletRequest request, HttpSession sesion, String action) {
         Vehiculo vehiculo = new Vehiculo();
-        if(action.equals("actualizar")){
+        if (action.equals("actualizar")) {
             vehiculo.setId_vehiculo(Integer.valueOf(request.getParameter("id_vehiculo")));
         }
         vehiculo.setMatricula(request.getParameter("matricula"));
@@ -170,7 +170,7 @@ public class VehiculoController extends HttpServlet {
         String dato = request.getParameter("dato");
         VehiculoCRUD vehiculocrud = new VehiculoCRUD();
         try {
-            vehiculos = (List<Vehiculo>) vehiculocrud.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            vehiculos = (List<Vehiculo>) vehiculocrud.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarVehiculos(request, response, vehiculos, action);
         } catch (Exception ex) {
             listarVehiculos(request, response, sesion, "error_buscar");
@@ -204,7 +204,7 @@ public class VehiculoController extends HttpServlet {
         List<Vehiculo> listaVehiculos;
         VehiculoCRUD vehiculoCRUD = new VehiculoCRUD();
         try {
-            listaVehiculos = (List<Vehiculo>) vehiculoCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaVehiculos = (List<Vehiculo>) vehiculoCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarVehiculos(request, response, listaVehiculos, action);
         } catch (Exception ex) {
             System.out.println(ex);

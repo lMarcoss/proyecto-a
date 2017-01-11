@@ -178,7 +178,7 @@ public class SalidaMaderaRolloController extends HttpServlet {
         String dato = request.getParameter("dato");
         SalidaMaderaRolloCRUD salidaMaderaRolloCRUD = new SalidaMaderaRolloCRUD();
         try {
-            salidas = (List<SalidaMaderaRollo>) salidaMaderaRolloCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            salidas = (List<SalidaMaderaRollo>) salidaMaderaRolloCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarSalidaMaderaRollo(request, response, salidas, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -223,7 +223,7 @@ public class SalidaMaderaRolloController extends HttpServlet {
         List<SalidaMaderaRollo> listaSalidaMaderaRollo;
         SalidaMaderaRolloCRUD salidaMaderaRolloCRUD = new SalidaMaderaRolloCRUD();
         try {
-            listaSalidaMaderaRollo = (List<SalidaMaderaRollo>) salidaMaderaRolloCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaSalidaMaderaRollo = (List<SalidaMaderaRollo>) salidaMaderaRolloCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarSalidaMaderaRollo(request, response, listaSalidaMaderaRollo, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -244,7 +244,7 @@ public class SalidaMaderaRolloController extends HttpServlet {
             //enviamos el inventario de madera rollo
             InventarioMaderaRolloCRUD inventarioMRCRUD = new InventarioMaderaRolloCRUD();
             List<InventarioMaderaRollo> inventarioMR = (List<InventarioMaderaRollo>) inventarioMRCRUD.listar((String) sesion.getAttribute("id_jefe"));
-            if(inventarioMR.isEmpty()){
+            if (inventarioMR.isEmpty()) {
                 InventarioMaderaRollo inventario = new InventarioMaderaRollo(
                         "", 0, BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0), 0, BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0), 0, BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0), 0, BigDecimal.valueOf(0), BigDecimal.valueOf(0));
                 inventarioMR.add(inventario);

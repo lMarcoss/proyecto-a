@@ -8,7 +8,10 @@
 <%@page import="entidades.empleado.Empleado"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%List <Empleado> empleados = (List<Empleado>) request.getAttribute("empleados");%>
+<%
+    HttpSession sesion = request.getSession(false);
+    List <Empleado> empleados = (List<Empleado>) request.getAttribute("empleados");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,7 +20,11 @@
     </head>
     <body>
         <!--menu-->
-        <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
+            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%}else{%>
+            <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%}%>
         
         <!-- ******************* Formulario de registro-->
         <div>
@@ -39,7 +46,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding-left: 10px;"><label for="nombre_usuario">Nombre usuario:</label></td>
+                            <td style="padding-left: 10px;"><label for="nombre_usuario">Nombre de usuario:</label></td>
                             <td style="padding-left: 10px;"><input type="text" name="nombre_usuario" pattern="[A-Za-z].{3,}[A-Za-z]" title="Sólo letras aA-zZ, al menos 4 letras" maxlength="45" required="" /></td>
                         </tr>
                         <tr>

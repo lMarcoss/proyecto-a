@@ -172,7 +172,7 @@ public class MaderaAserradaClasifController extends HttpServlet {
         String dato = request.getParameter("dato");                 // Valor a buscar en el campo
         MaderaAserradaClasifCRUD mAClasifCRUD = new MaderaAserradaClasifCRUD();
         try {
-            listaMaderaAserradaClasif = (List<MaderaAserradaClasif>) mAClasifCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            listaMaderaAserradaClasif = (List<MaderaAserradaClasif>) mAClasifCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarMaderaAserradaClasif(request, response, listaMaderaAserradaClasif, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -208,7 +208,7 @@ public class MaderaAserradaClasifController extends HttpServlet {
         List<MaderaAserradaClasif> listaMaderaAserradaClasif;
         MaderaAserradaClasifCRUD mAClasifCRUD = new MaderaAserradaClasifCRUD();
         try {
-            listaMaderaAserradaClasif = (List<MaderaAserradaClasif>) mAClasifCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaMaderaAserradaClasif = (List<MaderaAserradaClasif>) mAClasifCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarMaderaAserradaClasif(request, response, listaMaderaAserradaClasif, action);
         } catch (Exception ex) {
             System.out.println(ex);

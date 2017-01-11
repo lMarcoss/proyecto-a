@@ -84,7 +84,8 @@ public class PagoCompraController extends HttpServlet {
         } else {
             try {
                 sesion.invalidate();
-            } catch (Exception e) {
+                response.sendRedirect("/aserradero/");
+            } catch (IOException e) {
                 System.out.println(e);
                 response.sendRedirect("/aserradero/");
             }
@@ -184,7 +185,7 @@ public class PagoCompraController extends HttpServlet {
         String dato = request.getParameter("dato");                 // Valor a buscar en el campo
         PagoCompraCRUD pagoCompraCRUD = new PagoCompraCRUD();
         try {
-            listaPagoCompra = (List<PagoCompra>) pagoCompraCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute(dato));
+            listaPagoCompra = (List<PagoCompra>) pagoCompraCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute(dato), (String) sesion.getAttribute("rol"));
             mostrarPagoCompras(request, response, listaPagoCompra, action);
         } catch (Exception ex) {
             listarPagoCompra(request, response, sesion, "error_buscar_campo");
@@ -222,7 +223,7 @@ public class PagoCompraController extends HttpServlet {
         List<PagoCompra> listaPagoCompras;
         PagoCompraCRUD pagoCompraCRUD = new PagoCompraCRUD();
         try {
-            listaPagoCompras = (List<PagoCompra>) pagoCompraCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaPagoCompras = (List<PagoCompra>) pagoCompraCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarPagoCompras(request, response, listaPagoCompras, action);
         } catch (Exception ex) {
             System.out.println(ex);

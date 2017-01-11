@@ -7,6 +7,7 @@
 <%@page import="entidades.empleado.Empleado"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    HttpSession sesion = request.getSession(false);
     Empleado empleado = (Empleado) request.getAttribute("empleado");
 %>
 <!DOCTYPE html>
@@ -18,7 +19,15 @@
     </head>
     <body>
         <!--menu-->
-        <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%if (((String) sesion.getAttribute("rol")).equals("Administrador")) {%>
+        <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%} else {%>
+        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
+            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%}else{%>
+            <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%}%>
+        <%}%>
         <!-- ******************* Formulario de registro-->
         <div>
             <form action="/aserradero/EmpleadoController?action=actualizar" method="post" id="formregistro">

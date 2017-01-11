@@ -166,7 +166,7 @@ public class VentaPaqueteController extends HttpServlet {
         List<Venta> listaVentas;
         VentaPaqueteCRUD ventaPaqueteCrud = new VentaPaqueteCRUD();
         try {
-            listaVentas = (List<Venta>) ventaPaqueteCrud.listar((String) sesion.getAttribute("id_jefe"));
+            listaVentas = (List<Venta>) ventaPaqueteCrud.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarVentas(request, response, listaVentas, sesion, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -226,7 +226,7 @@ public class VentaPaqueteController extends HttpServlet {
         String dato = request.getParameter("dato");
         VentaPaqueteCRUD ventaPaqueteCRUD = new VentaPaqueteCRUD();
         try {
-            ventaPaquetes = (List<Venta>) ventaPaqueteCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            ventaPaquetes = (List<Venta>) ventaPaqueteCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarVentas(request, response, ventaPaquetes, sesion, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -248,12 +248,12 @@ public class VentaPaqueteController extends HttpServlet {
             //Enviamos la lista de inventario
             List<InventarioMaderaAserrada> listaInventario;
             InventarioMaderaAserradaCRUD inventarioMA = new InventarioMaderaAserradaCRUD();
-            listaInventario = (List<InventarioMaderaAserrada>) inventarioMA.listar((String) sesion.getAttribute("id_jefe"));
+            listaInventario = (List<InventarioMaderaAserrada>) inventarioMA.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("listaInventario", listaInventario);
 
             //Enviamos la lista de clientes
             ClienteCRUD clienteCRUD = new ClienteCRUD();
-            List<Cliente> clientes = (List<Cliente>) clienteCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            List<Cliente> clientes = (List<Cliente>) clienteCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("clientes", clientes);
 
             RequestDispatcher view = request.getRequestDispatcher("moduloVenta/ventaPaquete/nuevoVentaPaquete.jsp");
@@ -280,7 +280,7 @@ public class VentaPaqueteController extends HttpServlet {
             //Enviamos la lista de inventario
             List<InventarioMaderaAserrada> listaInventario;
             InventarioMaderaAserradaCRUD inventarioMA = new InventarioMaderaAserradaCRUD();
-            listaInventario = (List<InventarioMaderaAserrada>) inventarioMA.listar((String) sesion.getAttribute("id_jefe"));
+            listaInventario = (List<InventarioMaderaAserrada>) inventarioMA.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("listaInventario", listaInventario);
 
             RequestDispatcher view = request.getRequestDispatcher("moduloVenta/ventaPaquete/actualizarVentaPaquete.jsp");

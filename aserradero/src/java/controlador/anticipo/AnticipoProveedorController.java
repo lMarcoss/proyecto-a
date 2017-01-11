@@ -294,7 +294,8 @@ public class AnticipoProveedorController extends HttpServlet {
         List<AnticipoProveedor> anticipoProveedores;
         AnticipoProveedorCRUD anticipoProveedorCrud = new AnticipoProveedorCRUD();
         try {
-            anticipoProveedores = (List<AnticipoProveedor>) anticipoProveedorCrud.listar((String) sesion.getAttribute("id_jefe"));
+            anticipoProveedores = (List<AnticipoProveedor>) anticipoProveedorCrud.listar(
+                    (String) sesion.getAttribute("id_jefe"),(String) sesion.getAttribute("rol"));
             mostrarAnticipos(request, response, anticipoProveedores, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -338,7 +339,8 @@ public class AnticipoProveedorController extends HttpServlet {
         String dato = request.getParameter("dato");
         AnticipoProveedorCRUD anticipoProveedorCRUD = new AnticipoProveedorCRUD();
         try {
-            anticipoProveedores = (List<AnticipoProveedor>) anticipoProveedorCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            anticipoProveedores = (List<AnticipoProveedor>) anticipoProveedorCRUD.buscar(
+                    nombre_campo, dato, (String) sesion.getAttribute("id_jefe"),(String) sesion.getAttribute("rol"));
             mostrarAnticipos(request, response, anticipoProveedores, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -352,7 +354,7 @@ public class AnticipoProveedorController extends HttpServlet {
         try {
             //Enviamos la lista de proveedores
             ProveedorCRUD proveedorCRUD = new ProveedorCRUD();
-            List<Proveedor> proveedores = (List<Proveedor>) proveedorCRUD.listar((String)sesion.getAttribute("id_jefe"));
+            List<Proveedor> proveedores = (List<Proveedor>) proveedorCRUD.listar((String)sesion.getAttribute("id_jefe"),(String)sesion.getAttribute("rol"));
             request.setAttribute("proveedores", proveedores);
 
             RequestDispatcher view = request.getRequestDispatcher("moduloAnticipo/anticipoProveedor/nuevoAnticipoProveedor.jsp");

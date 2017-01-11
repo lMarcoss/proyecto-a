@@ -170,7 +170,7 @@ public class LocalidadController extends HttpServlet {
         String dato = request.getParameter("dato");
         LocalidadCRUD localidadCRUD = new LocalidadCRUD();
         try {
-            localidades = (List<Localidad>) localidadCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            localidades = (List<Localidad>) localidadCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarLocalidades(request, response, localidades, action);
         } catch (Exception ex) {
             listarLocalidades(request, response, sesion, "error_buscar_campo");
@@ -208,7 +208,7 @@ public class LocalidadController extends HttpServlet {
         List<Localidad> listaLocalidades;
         LocalidadCRUD localidadCRUD = new LocalidadCRUD();
         try {
-            listaLocalidades = (List<Localidad>) localidadCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaLocalidades = (List<Localidad>) localidadCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarLocalidades(request, response, listaLocalidades, action);
         } catch (Exception ex) {
             System.out.println(ex);

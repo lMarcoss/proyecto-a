@@ -45,7 +45,7 @@ public class EmpleadoCRUD extends Conexion implements OperacionesCRUD {
     }
 
     @Override
-    public <T> List listar(String id_jefe) throws Exception {
+    public <T> List listar(String id_jefe, String rol) throws Exception {
         List<Empleado> empleados;
         try {
             this.abrirConexion();
@@ -139,7 +139,7 @@ public class EmpleadoCRUD extends Conexion implements OperacionesCRUD {
     }
 
     @Override
-    public <T> List buscar(String nombre_campo, String dato, String id_jefe) throws Exception {
+    public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<Empleado> empleados;
         try {
             this.abrirConexion();
@@ -193,7 +193,7 @@ public class EmpleadoCRUD extends Conexion implements OperacionesCRUD {
         List<Empleado> empleados;
         try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM PERSONAL_EMPLEADO WHERE rol = 'Administrador'")) {
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM PERSONAL_EMPLEADO WHERE rol = 'Administrador' AND id_empleado NOT IN (SELECT id_empleado FROM USUARIO)")) {
                 empleados = new ArrayList();
                 try (ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {
@@ -201,7 +201,7 @@ public class EmpleadoCRUD extends Conexion implements OperacionesCRUD {
                         empleados.add(empleado);
                     }
                 }
-                PreparedStatement st1 = this.conexion.prepareStatement("SELECT * FROM PERSONAL_EMPLEADO WHERE (rol = 'Empleado' OR rol = 'Vendedor') AND id_jefe = ?");
+                PreparedStatement st1 = this.conexion.prepareStatement("SELECT * FROM PERSONAL_EMPLEADO WHERE (rol = 'Empleado' OR rol = 'Vendedor') AND id_jefe = ? AND id_empleado NOT IN (SELECT id_empleado FROM USUARIO)");
                 st1.setString(1, id_jefe);
                 System.out.println("jefe: " + id_jefe);
                 try (ResultSet rs1 = st1.executeQuery()) {

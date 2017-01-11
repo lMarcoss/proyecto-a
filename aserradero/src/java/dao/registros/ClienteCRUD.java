@@ -33,7 +33,7 @@ public class ClienteCRUD extends Conexion implements OperacionesCRUD {
     }
 
     @Override
-    public <T> List listar(String id_jefe) throws Exception {
+    public <T> List listar(String id_jefe, String rol) throws Exception {
         List<Cliente> clientes;
         try {
             this.abrirConexion();
@@ -86,7 +86,7 @@ public class ClienteCRUD extends Conexion implements OperacionesCRUD {
     }
 
     @Override
-    public <T> List buscar(String nombre_campo, String dato, String id_jefe) throws Exception {
+    public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<Cliente> clientes;
         try {
             this.abrirConexion();

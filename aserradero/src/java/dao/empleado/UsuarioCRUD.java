@@ -76,12 +76,12 @@ public class UsuarioCRUD extends Conexion{
     public void actualizar(Usuario usuario) throws Exception{
         try{
             this.abrirConexion();
-            PreparedStatement st= this.conexion.prepareStatement("UPDATE USUARIO SET id_empleado = ?, contrasenia = SHA1(?), metodo = ?, email = ? WHERE nombre_usuario = ?");
-            st.setString(1, usuario.getId_empleado());
-            st.setString(2, usuario.getContrasenia());
-            st.setString(3, "sha1");
-            st.setString(4, usuario.getEmail());
-            st.setString(6, usuario.getNombre_usuario());
+            PreparedStatement st= this.conexion.prepareStatement("UPDATE USUARIO SET contrasenia = SHA1(?), metodo = ?, email = ? WHERE nombre_usuario = ? AND id_empleado = ?");
+            st.setString(1, usuario.getContrasenia());
+            st.setString(2, "sha1");
+            st.setString(3, usuario.getEmail());
+            st.setString(4, usuario.getNombre_usuario());
+            st.setString(5, usuario.getId_empleado());
             st.executeUpdate();
         }catch(Exception e){
             System.out.println(e);

@@ -8,6 +8,7 @@
 <%@page import="entidades.empleado.Administrador"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    HttpSession sesion = request.getSession(false);
     List <Administrador> administradores = (List<Administrador>) request.getAttribute("listaAdministradores");
     String mensaje = (String)request.getAttribute("mensaje");
 %>
@@ -19,7 +20,11 @@
     </head>
     <body>
         <!--menu-->
-        <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
+            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%}else{%>
+            <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%}%>
         
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>"
         

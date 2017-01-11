@@ -171,7 +171,7 @@ public class PagoPrestamoController extends HttpServlet {
         String dato = request.getParameter("dato");                 // Valor a buscar en el campo
         PagoPrestamoCRUD pagoPrestamoCRUD = new PagoPrestamoCRUD();
         try {
-            listaPagoPrestamo = (List<PagoPrestamo>) pagoPrestamoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            listaPagoPrestamo = (List<PagoPrestamo>) pagoPrestamoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarPagoPrestamos(request, response, listaPagoPrestamo, action);
         } catch (Exception ex) {
             listarPagoPrestamo(request, response, sesion, "error_buscar_campo");
@@ -209,7 +209,7 @@ public class PagoPrestamoController extends HttpServlet {
         List<PagoPrestamo> listaPagoPrestamos;
         PagoPrestamoCRUD pagoPrestamoCRUD = new PagoPrestamoCRUD();
         try {
-            listaPagoPrestamos = (List<PagoPrestamo>) pagoPrestamoCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaPagoPrestamos = (List<PagoPrestamo>) pagoPrestamoCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarPagoPrestamos(request, response, listaPagoPrestamos, action);
         } catch (Exception ex) {
             System.out.println(ex);

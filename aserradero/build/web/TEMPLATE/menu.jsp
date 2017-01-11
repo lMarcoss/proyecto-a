@@ -51,7 +51,7 @@
                                         <li><a href="/aserradero/VehiculoController?action=nuevo">Nuevo vehículo</a></li>
                                     </ul>
                                 </li>
-                                <li id="terrenos"><a href="/aserradero/TerrenoController?action=listar">Terrenos</a>
+                                <li id="terrenos"><a href="/aserradero/TerrenoController?action=listar">Terrenos</a><!--Solo administrador-->
                                     <ul class="dropdown-menu">
                                         <li><a href="/aserradero/TerrenoController?action=nuevo">Nuevo terreno</a></li>
                                     </ul>
@@ -62,23 +62,22 @@
                     </ul>
                 </li>
                 <li  id="empleados" class="submenu">
-                    <a href="#">Empleados</a>
+                    <a href="#">Empleados</a><!--Solo administrador-->
                     <ul class="dropdown-menu">
                         <li id="empleado"><a href="/aserradero/EmpleadoController?action=listar">Registros</a></li>
                         <li id="pago_empleado"><a href="/aserradero/PagoEmpleadoController?action=listar">Pago empleado</a></li>
                         <li id="administrador"><a href="/aserradero/AdministradorController?action=listar">Administradores</a></li>
+                        <li id="usuario"><a href="/aserradero/UsuarioController?action=listar">Usuarios</a></li>
                     </ul>
                 </li>
                 <li  id="compras" class="submenu">
                     <a href="#">Madera en rollo</a>
-                    <!--<a href="/aserradero/CompraController?action=listar">Entrada de madera</a>-->
                     <ul class="dropdown-menu">
-                        <li class="detalle_compra"><a href="/aserradero/EntradaMaderaRolloController?action=listar">Entrada</a></li>
-                        <li class="detalle_compra"><a href="/aserradero/SalidaMaderaRolloController?action=listar">Salida</a></li>
-                        <!--<li class="pagos_copra"><a href="/aserradero/PagoCompraController?action=listar">Pagos compra</a></li>-->
+                        <li class="entrada_madera_rollo"><a href="/aserradero/EntradaMaderaRolloController?action=listar">Entrada</a></li>
+                        <li class="salida_madera_rollo"><a href="/aserradero/SalidaMaderaRolloController?action=listar">Salida</a></li>
                         <li class="inventario_madera_entrada"><a href="/aserradero/InventarioMaderaRolloController?action=listar">Inventario</a></li>
                         <li class="costo_madera_entrada"><a href="/aserradero/ClasificacionMaderaRolloController?action=listar">Clasficación</a></li>
-                        <li class="costo_madera_entrada"><a href="/aserradero/PagoCompraController?action=listar">Pagos compra</a></li>
+                        <li class="pago_compra"><a href="/aserradero/PagoCompraController?action=listar">Pagos compra</a></li> <!--Solo administrador-->
                     </ul>
                 </li>
                 <li id="produccion" class="submenu">
@@ -103,17 +102,17 @@
                     <ul class="dropdown-menu">
                         <li  id="anticipo_proveedores"><a href="#">Proveedores</a>
                             <ul class="dropdown-menu">
-                                <li id="cuentas_por_cobrar"><a href="/aserradero/AnticipoProveedorController?action=listar">Anticipo Proveedores</a></li>
-                                <li id="cuentas_por_cobrar"><a href="/aserradero/CuentaPorCobrarController?action=listar_proveedores">Cuentas por cobrar proveedores</a></li>
-                                <li id="cuentas_por_pagar"><a href="/aserradero/CuentaPorPagarController?action=listar_proveedores">Cuentas por pagar proveedores</a></li>
+                                <li id="anticipo_proveedor"><a href="/aserradero/AnticipoProveedorController?action=listar">Anticipo Proveedores</a></li>
+                                <li id="cuentas_por_cobrar_p"><a href="/aserradero/CuentaPorCobrarController?action=listar_proveedores">Cuentas por cobrar proveedores</a></li>
+                                <li id="cuentas_por_pagar_p"><a href="/aserradero/CuentaPorPagarController?action=listar_proveedores">Cuentas por pagar proveedores</a></li><!--Solo administrador-->
                             </ul>
                         </li>
 
                         <li id="anticipo_clientes"><a href="#">Clientes</a>
                             <ul class="dropdown-menu">
-                                <li id="cuentas_por_cobrar"><a href="/aserradero/AnticipoClienteController?action=listar">Anticipo clientes</a></li>
-                                <li id="cuentas_por_cobrar"><a href="/aserradero/CuentaPorCobrarController?action=listar_clientes">Cuentas por cobrar clientes</a></li>
-                                <li id="cuentas_por_pagar"><a href="/aserradero/CuentaPorPagarController?action=listar_clientes">Cuentas por pagar clientes</a></li>
+                                <li id="anticipo_cliente"><a href="/aserradero/AnticipoClienteController?action=listar">Anticipo clientes</a></li>
+                                <li id="cuenta_por_cobrar_c"><a href="/aserradero/CuentaPorCobrarController?action=listar_clientes">Cuentas por cobrar clientes</a></li>
+                                <li id="cuentas_por_pagar_c"><a href="/aserradero/CuentaPorPagarController?action=listar_clientes">Cuentas por pagar clientes</a></li><!--Solo administrador-->
                             </ul>
                         </li>
                     </ul>
@@ -127,21 +126,17 @@
                     </ul>
                 </li>
                 <li  id="reportes" class="submenu">
-                    <a href="#">Préstamo</a>
+                    <a href="#">Préstamo</a><!--Solo administrador-->
                     <ul class="dropdown-menu">
-                        <!--<li class="reporte_compra"><a href="/aserradero/PrestamoController?action=listar">Detalles</a></li>-->
-                        <!--<li class="reporte_compra"><a href="/aserradero/PrestamoController?action=listar_total">Préstamo por persona</a></li>-->
-                        <!--<li class="reporte_compra"><a href="/aserradero/PagoPrestamoController?action=listar">Pago préstamo</a></li>-->
                         <li class="reporte_compra"><a href="/aserradero/PrestamoController?action=listar">Registros</a></li>
                         <li class="reporte_compra"><a href="/aserradero/PagoPrestamoController?action=listar">Pago préstamo</a></li>
                     </ul>
                 </li>
                 <li  id="reportes" class="submenu">
-                    <a href="#">Cuenta</a>
+                    <a href="#">Cuenta</a><!--Solo administrador-->
                     <ul class="dropdown-menu">
-                        <!--<li class="reporte_compra"><a href="/aserradero/BalanceCuentaController?action=listar">Cuenta inicial</a></li>-->
+                        <li class="reporte_compra"><a href="/aserradero/BalanceCuentaController?action=listar">Cuenta inicial</a></li>
                         <li class="reporte_compra"><a href="#">Cuenta inicial</a></li>
-                        <!--<li class="reporte_compra"><a href="/aserradero/BalanceCuentaController?action=listar">Balance cuenta</a></li>-->
                         <li class="reporte_compra"><a href="#">Balance cuenta</a></li>
                     </ul>
                 </li>

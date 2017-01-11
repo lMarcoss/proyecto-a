@@ -114,7 +114,7 @@
                                     <div class="form-group">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                         <label class="control-label">Fecha de nacimiento:</label>
-                                        <input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento" required="" maxlength="10" title="Es importante la fecha de nacimiento para asignar un identificador a la persona" onblur="crearIdPersona()"/>
+                                        <input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento" required="" maxlength="10" title="Es importante la fecha de nacimiento para asignar un identificador a la persona">
                                     </div>
                                     <div class="form-group">
                                         <i class="glyphicon glyphicon-phone"></i>

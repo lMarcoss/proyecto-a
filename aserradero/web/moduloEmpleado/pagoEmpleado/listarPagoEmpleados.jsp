@@ -7,6 +7,7 @@
 <%@page import="entidades.empleado.PagoEmpleado"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    HttpSession sesion = request.getSession(false);
     List <PagoEmpleado> pagoEmpleados = (List<PagoEmpleado>) request.getAttribute("listaPagoEmpleados");
     String mensaje=(String) request.getAttribute("mensaje");
 %>
@@ -18,7 +19,11 @@
     </head>
     <body>
         <!--menu-->
-        <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
+            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%}else{%>
+            <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%}%>
         
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>"
         
@@ -63,7 +68,7 @@
                                 +"<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona="+pagoEmpleado.getId_empleado()+"\">"+pagoEmpleado.getEmpleado()+"</a></td>"
                                 +"<td>"+pagoEmpleado.getMonto()+"</td>"
                                 +"<td>"+pagoEmpleado.getObservacion()+"</td>"
-                                +"<td><a href=\"/aserradero/PagoEmpleadoController?action=modificar&id_pago_empleado="+pagoEmpleado.getId_pago_empleado()+"\">Actualizar</a></td>"
+                                +"<td><a href=\"/aserradero/PagoEmpleadoController?action=modificar&id_pago_empleado="+pagoEmpleado.getId_pago_empleado()+"\">Modificar</a></td>"
                                 + "<td><a href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/PagoEmpleadoController?action=eliminar&id_pago_empleado="+pagoEmpleado.getId_pago_empleado()+"';};\">Eliminar</a></td>"
                             + "</tr>" );
                             i++;

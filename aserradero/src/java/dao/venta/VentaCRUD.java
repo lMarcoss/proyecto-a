@@ -49,11 +49,17 @@ public class VentaCRUD extends Conexion implements OperacionesCRUD {
     }
 
     @Override
-    public <T> List listar(String id_jefe) throws Exception {
+    public <T> List listar(String id_jefe, String rol) throws Exception {
         List<Venta> ventas;
+        String consulta;
+        if (rol.equals("Administrador")) {
+            consulta = "SELECT * FROM VISTA_VENTA WHERE id_jefe = ? ORDER BY fecha DESC,tipo_venta ASC";
+        } else {
+            consulta = "SELECT * FROM VISTA_VENTA WHERE id_jefe = ? AND fecha = CURDATE() ORDER BY fecha DESC,tipo_venta ASC";
+        }
         try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_VENTA WHERE id_jefe = ? ORDER BY estatus,tipo_venta")) {
+            try (PreparedStatement st = this.conexion.prepareStatement(consulta)) {
                 st.setString(1, id_jefe);
                 ventas = new ArrayList();
                 try (ResultSet rs = st.executeQuery()) {
@@ -188,11 +194,17 @@ public class VentaCRUD extends Conexion implements OperacionesCRUD {
     }
 
     @Override
-    public <T> List buscar(String nombre_campo, String dato, String id_jefe) throws Exception {
+    public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<Venta> ventas;
+        String consulta;
+        if (rol.equals("Administrador")) {
+            consulta = "SELECT * FROM VISTA_VENTA WHERE " + nombre_campo + " like ? AND id_jefe = ? ORDER BY fecha DESC,tipo_venta ASC";
+        } else {
+            consulta = "SELECT * FROM VISTA_VENTA WHERE " + nombre_campo + " like ? AND id_jefe = ? AND fecha = CURDATE() ORDER BY fecha DESC,tipo_venta ASC";
+        }
         try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_VENTA WHERE " + nombre_campo + " like ? AND id_jefe = ?")) {
+            try (PreparedStatement st = this.conexion.prepareStatement(consulta)) {
                 st.setString(1, "%" + dato + "%");
                 st.setString(2, id_jefe);
                 ventas = new ArrayList();

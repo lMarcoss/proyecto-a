@@ -168,7 +168,7 @@ public class AdministradorController extends HttpServlet {
             String nombre_campo = request.getParameter("nombre_campo");
             String dato = request.getParameter("dato");
             AdministradorCRUD administradorCRUD = new AdministradorCRUD();
-            administradores = (List<Administrador>) administradorCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            administradores = (List<Administrador>) administradorCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarListaAdministradores(request, response, administradores, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -208,7 +208,7 @@ public class AdministradorController extends HttpServlet {
         List<Administrador> administradores;
         AdministradorCRUD administradorCrud = new AdministradorCRUD();
         try {
-            administradores = (List<Administrador>) administradorCrud.listar((String) sesion.getAttribute("id_jefe"));
+            administradores = (List<Administrador>) administradorCrud.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarListaAdministradores(request, response, administradores, action);
         } catch (Exception ex) {
             System.out.println(ex);

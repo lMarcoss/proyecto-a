@@ -171,7 +171,7 @@ public class PrestamoController extends HttpServlet {
         String dato = request.getParameter("dato");                 // Valor a buscar en el campo
         PrestamoCRUD prestamoCRUD = new PrestamoCRUD();
         try {
-            listaPrestamo = (List<Prestamo>) prestamoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            listaPrestamo = (List<Prestamo>) prestamoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarPrestamos(request, response, listaPrestamo, action);
         } catch (Exception ex) {
             listarPrestamo(request, response, sesion, "error_buscar_campo");
@@ -195,7 +195,7 @@ public class PrestamoController extends HttpServlet {
         try {
             // enviamos la lista de personas que pueden ser prestadores
             PersonaCRUD personaCRUD = new PersonaCRUD();
-            List<Persona> personas = (List<Persona>) personaCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            List<Persona> personas = (List<Persona>) personaCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("personas", personas);
 
             RequestDispatcher view = request.getRequestDispatcher("moduloPrestamo/prestamo/nuevoPrestamo.jsp");
@@ -211,7 +211,7 @@ public class PrestamoController extends HttpServlet {
         List<Prestamo> listaPrestamos;
         PrestamoCRUD prestamoCRUD = new PrestamoCRUD();
         try {
-            listaPrestamos = (List<Prestamo>) prestamoCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaPrestamos = (List<Prestamo>) prestamoCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarPrestamos(request, response, listaPrestamos, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -226,7 +226,7 @@ public class PrestamoController extends HttpServlet {
         try {
             // enviamos la lista de personas que pueden ser prestadores
             PersonaCRUD personaCRUD = new PersonaCRUD();
-            List<Persona> personas = (List<Persona>) personaCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            List<Persona> personas = (List<Persona>) personaCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("personas", personas);
 
             Prestamo prestamo = (Prestamo) prestamoCRUD.modificar(prestamoEC);

@@ -583,9 +583,10 @@ INSERT INTO PERSONA (id_persona,nombre,apellido_paterno,apellido_materno,nombre_
 ("COXN20160915HOCRXX","Noe","Cortes","","Santa Cruz Monjas","Miahuatlan de porfirio diaz",'Oaxaca',"H","2016-09-15","1234567890"),
 ("MAXP20160916HOCRXD","Pedro","Martinez","","Santa Cruz Monjas","Miahuatlan de porfirio diaz",'Oaxaca',"H","2016-09-16","1234567890"),
 ("PAXA20160913HOCSXN","Antonio","Pascual","","Santa Cruz Monjas","Miahuatlan de porfirio diaz",'Oaxaca',"H","2016-09-13","1234567890"),
-("PEXF20160910HOCRXR","Francisco","Perez","","Santa Cruz Monjas","Miahuatlan de porfirio diaz",'Oaxaca',"H","2016-09-10","1234567890");
+("PEXF20160910HOCRXR","Francisco","Perez","","Santa Cruz Monjas","Miahuatlan de porfirio diaz",'Oaxaca',"H","2016-09-10","1234567890"),
+('COCR19990708HOCRRC', 'Ricardo', 'Cortes', 'Cruz', 'Xitla', 'Santa Cruz Xitla', 'Oaxaca', 'H', '1999-07-08', '9876543219');
 
-
+SELECT * FROM PERSONA;
 DROP VIEW IF EXISTS VISTA_MUNICIPIO;
 CREATE VIEW VISTA_MUNICIPIO AS
 SELECT 

@@ -176,7 +176,7 @@ public class PersonaController extends HttpServlet {
         String dato = request.getParameter("dato");
         PersonaCRUD personaCRUD = new PersonaCRUD();
         try {
-            listaPersonas = (List<Persona>) personaCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            listaPersonas = (List<Persona>) personaCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarPersonas(request, response, listaPersonas, action);
         } catch (Exception ex) {
             listarPersonas(request, response, sesion, "error_buscar_campo");
@@ -201,7 +201,7 @@ public class PersonaController extends HttpServlet {
         try {
             LocalidadCRUD localidadCRUD = new LocalidadCRUD();
             List<Localidad> localidades;
-            localidades = (List<Localidad>) localidadCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            localidades = (List<Localidad>) localidadCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("localidades", localidades);
             RequestDispatcher view = request.getRequestDispatcher("moduloRegistros/persona/nuevoPersona.jsp");
             view.forward(request, response);
@@ -216,7 +216,7 @@ public class PersonaController extends HttpServlet {
         List<Persona> listaPersonas;
         PersonaCRUD personaCRUD = new PersonaCRUD();
         try {
-            listaPersonas = (List<Persona>) personaCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaPersonas = (List<Persona>) personaCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarPersonas(request, response, listaPersonas, action);
         } catch (Exception ex) {
             System.out.println(ex);

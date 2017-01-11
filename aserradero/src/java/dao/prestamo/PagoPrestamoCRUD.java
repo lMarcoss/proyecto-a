@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author lmarcoss
  */
-public class PagoPrestamoCRUD extends Conexion implements  OperacionesCRUD{
+public class PagoPrestamoCRUD extends Conexion implements OperacionesCRUD {
 
     @Override
     public void registrar(Object objeto) throws Exception {
@@ -43,11 +43,17 @@ public class PagoPrestamoCRUD extends Conexion implements  OperacionesCRUD{
     }
 
     @Override
-    public <T> List listar(String id_jefe) throws Exception {
+    public <T> List listar(String id_jefe, String rol) throws Exception {
         List<PagoPrestamo> pagoPrestamos;
+        String consulta;
+        if (rol.equals("Administrador")) {
+            consulta = "SELECT * FROM VISTA_PAGO_PRESTAMO WHERE id_administrador = ? ORDER BY fecha DESC";
+        } else {
+            consulta = "SELECT * FROM VISTA_PAGO_PRESTAMO WHERE id_administrador = ? AND fecha = CURDATE() ORDER BY fecha DESC";
+        }
         try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_PAGO_PRESTAMO WHERE id_administrador = ?")) {
+            try (PreparedStatement st = this.conexion.prepareStatement(consulta)) {
                 st.setString(1, id_jefe);
                 pagoPrestamos = new ArrayList<>();
                 try (ResultSet rs = st.executeQuery()) {
@@ -144,11 +150,17 @@ public class PagoPrestamoCRUD extends Conexion implements  OperacionesCRUD{
     }
 
     @Override
-    public <T> List buscar(String nombre_campo, String dato, String id_jefe) throws Exception {
+    public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<PagoPrestamo> pagoPrestamos;
+        String consulta;
+        if (rol.equals("Administrador")) {
+            consulta = "SELECT * FROM VISTA_PAGO_PRESTAMO WHERE " + nombre_campo + " like ? AND id_administrador = ? ORDER BY fecha DESC";
+        } else {
+            consulta = "SELECT * FROM VISTA_PAGO_PRESTAMO WHERE " + nombre_campo + " like ? AND id_administrador = ? AND fecha = CURDATE() ORDER BY fecha DESC";
+        }
         try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_PAGO_PRESTAMO WHERE " + nombre_campo + " like ? AND id_administrador = ?")) {
+            try (PreparedStatement st = this.conexion.prepareStatement(consulta)) {
                 st.setString(1, "%" + dato + "%");
                 st.setString(2, id_jefe);
                 pagoPrestamos = new ArrayList<>();

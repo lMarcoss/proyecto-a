@@ -7,6 +7,10 @@
 <%@page import="entidades.empleado.Empleado"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    HttpSession sesion = request.getSession(false);
+    List <Empleado> empleados = (List<Empleado>) request.getAttribute("empleados");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,26 +19,29 @@
     </head>
     <body>
         <!--menu-->
-        <%@ include file="/TEMPLATE/menu.jsp" %>
-        
+        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
+            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%}else{%>
+            <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%}%>
+
         <!-- ******************* Formulario de registro-->
         <div>
             <form action="/aserradero/PagoEmpleadoController?action=insertar" method="post" id="formregistro">
                 <h3>Agregar pago empleado</h3>
                 <fieldset id="user-details">
                     <table>
-                         <tr>
+                        <tr>
                             <td style="padding-left: 10px;"><label>Fecha:</label></td>
                             <td style="padding-left: 10px;"><input type="date" name="fecha" required="" /></td>
                         </tr>
-       
+
                         <tr>
                             <td style="padding-left: 10px;"><label>empleado:</label></td>
                             <td style="padding-left: 10px;">
                                 <select name="id_empleado" required="" title="Si no existe el empleado que busca, primero agreguelo en la lista de empleados">
                                     <option></option>
                                     <%
-                                        List <Empleado> empleados = (List<Empleado>) request.getAttribute("empleados");
                                         for (Empleado empleado : empleados) {
                                             out.print("<option value='"+empleado.getId_empleado()+"'>"+empleado.getEmpleado()+"</option>");
                                         }
@@ -48,8 +55,8 @@
                                 <input name="monto" type="number" min='0.01' max='99999999.99' step=".01" required=""/>                             
                             </td>
                         </tr>
-                       
-                        
+
+
                         <tr>
                             <td style="padding-left: 10px;"><label>Observacion:</label></td>
                             <td style="padding-left: 10px;">
