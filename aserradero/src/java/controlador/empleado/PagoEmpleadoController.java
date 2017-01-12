@@ -173,7 +173,7 @@ public class PagoEmpleadoController extends HttpServlet {
         String dato = request.getParameter("dato");
         PagoEmpleadoCRUD empleadoCRUD = new PagoEmpleadoCRUD();
         try {
-            listaPagoEmpleados = (List<PagoEmpleado>) empleadoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            listaPagoEmpleados = (List<PagoEmpleado>) empleadoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarPagoEmpleados(request, response, listaPagoEmpleados, action);
         } catch (Exception ex) {
             listarPagoEmpleados(request, response, sesion, "error_buscar_campo");
@@ -198,7 +198,7 @@ public class PagoEmpleadoController extends HttpServlet {
         try {
             // Enviamos la lista de empleados
             EmpleadoCRUD empleadoCRUD = new EmpleadoCRUD();
-            List<Empleado> empleados = (List<Empleado>) empleadoCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            List<Empleado> empleados = (List<Empleado>) empleadoCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("empleados", empleados);
 
             RequestDispatcher view = request.getRequestDispatcher("moduloEmpleado/pagoEmpleado/nuevoPagoEmpleado.jsp");
@@ -214,7 +214,7 @@ public class PagoEmpleadoController extends HttpServlet {
         List<PagoEmpleado> listaPagoEmpleados;
         PagoEmpleadoCRUD empleadoCRUD = new PagoEmpleadoCRUD();
         try {
-            listaPagoEmpleados = (List<PagoEmpleado>) empleadoCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaPagoEmpleados = (List<PagoEmpleado>) empleadoCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarPagoEmpleados(request, response, listaPagoEmpleados, action);
         } catch (Exception ex) {
             System.out.println(ex);

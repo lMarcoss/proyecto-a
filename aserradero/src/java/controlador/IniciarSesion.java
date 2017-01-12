@@ -92,6 +92,7 @@ public class IniciarSesion extends HttpServlet {
                 HttpSession sesion = request.getSession(true);
                 sesion.setAttribute("nombre_usuario", usuario.getNombre_usuario());
                 sesion.setAttribute("id_empleado", usuario.getId_empleado());
+                sesion.setAttribute("empleado", usuario.getEmpleado());
                 sesion.setAttribute("id_jefe", usuario.getId_jefe());
                 sesion.setAttribute("rol", usuario.getRol());
                 sesion.setAttribute("estatus", usuario.getEstatus());

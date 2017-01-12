@@ -1,1 +1,14 @@
-/aserradero/dist/
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar -json-lib-2.4-jdk15.jar -gson-2.2.3.jar
+*.war
+*.ear
+#otros
+aserradero/dist/
+aserradero/build/
+aserradero/src/java/dao/Conexion.java
+

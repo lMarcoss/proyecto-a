@@ -154,7 +154,7 @@ public class PagoLuzController extends HttpServlet {
         List<PagoLuz> pagosluz;
         PagoLuzCRUD pagoLuzcrud = new PagoLuzCRUD();
         try {
-            pagosluz = (List<PagoLuz>) pagoLuzcrud.listar((String) sesion.getAttribute("id_jefe"));
+            pagosluz = (List<PagoLuz>) pagoLuzcrud.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarPagosRenta(request, response, pagosluz, sesion, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -194,7 +194,7 @@ public class PagoLuzController extends HttpServlet {
         String dato = request.getParameter("dato");
         PagoLuzCRUD pagoLuzCRUD = new PagoLuzCRUD();
         try {
-            pagosluz = (List<PagoLuz>) pagoLuzCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            pagosluz = (List<PagoLuz>) pagoLuzCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarPagosRenta(request, response, pagosluz, sesion, action);
         } catch (Exception ex) {
             System.out.println(ex);

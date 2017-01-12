@@ -13,31 +13,37 @@ import java.util.List;
  *
  * @author Marcos
  */
-public class AnticipoProveedorCRUD extends Conexion implements OperacionesCRUD{
+public class AnticipoProveedorCRUD extends Conexion implements OperacionesCRUD {
 
     @Override
     public void registrar(Object objeto) throws Exception {
         AnticipoProveedor anticipoProveedor = (AnticipoProveedor) objeto;
-        try{
+        try {
             this.abrirConexion();
             PreparedStatement st = this.conexion.prepareStatement(
-                        "INSERT INTO ANTICIPO_PROVEEDOR (fecha,id_proveedor,id_empleado,monto_anticipo) VALUES (?,?,?,?)");
+                    "INSERT INTO ANTICIPO_PROVEEDOR (fecha,id_proveedor,id_empleado,monto_anticipo) VALUES (?,?,?,?)");
             st = cargarObject(st, anticipoProveedor);
             st.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw e;
-        }finally{
+        } finally {
             this.cerrarConexion();
-        } 
+        }
     }
 
     @Override
-    public <T> List listar(String id_jefe) throws Exception {
+    public <T> List listar(String id_jefe, String rol) throws Exception {
         List<AnticipoProveedor> anticipoProveedores;
-        try{
+        String consulta;
+        if (rol.equals("Administrador")) {
+            consulta = "SELECT * FROM VISTA_ANTICIPO_PROVEEDOR WHERE id_jefe = ? ORDER BY fecha DESC";
+        } else {
+            consulta = "SELECT * FROM VISTA_ANTICIPO_PROVEEDOR WHERE id_jefe = ? AND fecha = CURDATE() ORDER BY fecha DESC";
+        }
+        try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_ANTICIPO_PROVEEDOR WHERE id_jefe = ? ORDER BY fecha DESC")) {
+            try (PreparedStatement st = this.conexion.prepareStatement(consulta)) {
                 st.setString(1, id_jefe);
                 anticipoProveedores = new ArrayList();
                 try (ResultSet rs = st.executeQuery()) {
@@ -46,16 +52,16 @@ public class AnticipoProveedorCRUD extends Conexion implements OperacionesCRUD{
                         anticipoProveedores.add(anticipoProveedor);
                     }
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 anticipoProveedores = null;
                 System.out.println(e);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw e;
-        }finally{
+        } finally {
             this.cerrarConexion();
-        } 
+        }
         return anticipoProveedores;
     }
 
@@ -64,31 +70,31 @@ public class AnticipoProveedorCRUD extends Conexion implements OperacionesCRUD{
         AnticipoProveedor anticipoProveedorM = (AnticipoProveedor) objeto;
         AnticipoProveedor anticipoProveedor = null;
         this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_ANTICIPO_PROVEEDOR WHERE id_anticipo_p=?")) {
-                st.setInt(1, anticipoProveedorM.getId_anticipo_p());
-            
-                try (ResultSet rs = st.executeQuery()) {
-                    while (rs.next()) {
-                        anticipoProveedor = (AnticipoProveedor) extraerObject(rs);
-                    }
+        try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_ANTICIPO_PROVEEDOR WHERE id_anticipo_p=?")) {
+            st.setInt(1, anticipoProveedorM.getId_anticipo_p());
+
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    anticipoProveedor = (AnticipoProveedor) extraerObject(rs);
                 }
             }
+        }
         return anticipoProveedor;
     }
 
     @Override
     public void actualizar(Object objeto) throws Exception {
         AnticipoProveedor anticipoProveedor = (AnticipoProveedor) objeto;
-        try{
+        try {
             this.abrirConexion();
-            PreparedStatement st= this.conexion.prepareStatement("UPDATE ANTICIPO_PROVEEDOR SET monto_anticipo = ? WHERE id_anticipo_p=?");
-            st.setBigDecimal(1,anticipoProveedor.getMonto_anticipo());
-            st.setInt(2,anticipoProveedor.getId_anticipo_p());
+            PreparedStatement st = this.conexion.prepareStatement("UPDATE ANTICIPO_PROVEEDOR SET monto_anticipo = ? WHERE id_anticipo_p=?");
+            st.setBigDecimal(1, anticipoProveedor.getMonto_anticipo());
+            st.setInt(2, anticipoProveedor.getId_anticipo_p());
             st.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw e;
-        }finally{
+        } finally {
             this.cerrarConexion();
         }
     }
@@ -96,26 +102,32 @@ public class AnticipoProveedorCRUD extends Conexion implements OperacionesCRUD{
     @Override
     public void eliminar(Object objeto) throws Exception {
         AnticipoProveedor anticipoProveedor = (AnticipoProveedor) objeto;
-        try{
+        try {
             this.abrirConexion();
-            PreparedStatement st= this.conexion.prepareStatement("DELETE FROM ANTICIPO_PROVEEDOR WHERE id_anticipo_p = ?");
-            st.setInt(1,anticipoProveedor.getId_anticipo_p());
+            PreparedStatement st = this.conexion.prepareStatement("DELETE FROM ANTICIPO_PROVEEDOR WHERE id_anticipo_p = ?");
+            st.setInt(1, anticipoProveedor.getId_anticipo_p());
             st.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw e;
-        }finally{
+        } finally {
             this.cerrarConexion();
         }
     }
 
     @Override
-    public <T> List buscar(String nombre_campo, String dato, String id_jefe) throws Exception {
+    public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<AnticipoProveedor> anticipoProveedores;
-        try{
+        String consulta;
+        if (rol.equals("Administrador")) {
+            consulta = "SELECT * FROM VISTA_ANTICIPO_PROVEEDOR WHERE " + nombre_campo + " like ? AND id_jefe = ? ORDER BY fecha DESC";
+        } else {
+            consulta = "SELECT * FROM VISTA_ANTICIPO_PROVEEDOR WHERE " + nombre_campo + " like ? AND id_jefe = ? AND fecha = CURDATE() ORDER BY fecha DESC";
+        }
+        try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_ANTICIPO_PROVEEDOR WHERE "+nombre_campo+" like ? AND id_jefe = ? ORDER BY fecha DESC")) {
-                st.setString(1, "%"+dato+"%");
+            try (PreparedStatement st = this.conexion.prepareStatement(consulta)) {
+                st.setString(1, "%" + dato + "%");
                 st.setString(2, id_jefe);
                 anticipoProveedores = new ArrayList();
                 try (ResultSet rs = st.executeQuery()) {
@@ -125,15 +137,15 @@ public class AnticipoProveedorCRUD extends Conexion implements OperacionesCRUD{
                     }
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw e;
-        }finally{
+        } finally {
             this.cerrarConexion();
         }
         return anticipoProveedores;
     }
-    
+
     @Override
     public Object extraerObject(ResultSet rs) throws SQLException {
         AnticipoProveedor anticipoProveedor = new AnticipoProveedor();
@@ -144,18 +156,18 @@ public class AnticipoProveedorCRUD extends Conexion implements OperacionesCRUD{
         anticipoProveedor.setId_empleado(rs.getString("id_empleado"));
         anticipoProveedor.setEmpleado(rs.getString("empleado"));
         anticipoProveedor.setMonto_anticipo(rs.getBigDecimal("monto_anticipo"));
-        
+
         return anticipoProveedor;
     }
 
     @Override
     public PreparedStatement cargarObject(PreparedStatement st, Object objeto) throws SQLException {
         AnticipoProveedor anticipoProveedor = (AnticipoProveedor) objeto;
-        st.setDate(1,anticipoProveedor.getFecha());
-        st.setString(2,anticipoProveedor.getId_proveedor());
-        st.setString(3,anticipoProveedor.getId_empleado());
-        st.setBigDecimal(4,anticipoProveedor.getMonto_anticipo());
+        st.setDate(1, anticipoProveedor.getFecha());
+        st.setString(2, anticipoProveedor.getId_proveedor());
+        st.setString(3, anticipoProveedor.getId_empleado());
+        st.setBigDecimal(4, anticipoProveedor.getMonto_anticipo());
         return st;
     }
-    
+
 }

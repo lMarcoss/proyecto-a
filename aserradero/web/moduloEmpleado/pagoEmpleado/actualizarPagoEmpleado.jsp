@@ -8,7 +8,7 @@
 <%@page import="entidades.empleado.PagoEmpleado"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-
+    HttpSession sesion = request.getSession(false);
     PagoEmpleado pagoEmpleado = (PagoEmpleado) request.getAttribute("pagoEmpleado");
 %>
 <!DOCTYPE html>
@@ -19,7 +19,11 @@
     </head>
     <body>
         <!--menu-->
-        <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
+            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%}else{%>
+            <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%}%>
 
         <!-- ******************* Formulario de registro-->
         <div>

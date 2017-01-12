@@ -156,7 +156,7 @@ public class OtroGastoController extends HttpServlet {
         List<OtroGasto> otrosGasto;
         OtroGastoCRUD otroGastocrud = new OtroGastoCRUD();
         try {
-            otrosGasto = (List<OtroGasto>) otroGastocrud.listar((String) sesion.getAttribute("id_jefe"));
+            otrosGasto = (List<OtroGasto>) otroGastocrud.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarOtrosGasto(request, response, otrosGasto, sesion, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -195,7 +195,7 @@ public class OtroGastoController extends HttpServlet {
         String dato = request.getParameter("dato");
         OtroGastoCRUD otrogastoCRUD = new OtroGastoCRUD();
         try {
-            otrosgastos = (List<OtroGasto>) otrogastoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            otrosgastos = (List<OtroGasto>) otrogastoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarOtrosGasto(request, response, otrosgastos, sesion, action);
         } catch (Exception ex) {
             System.out.println(ex);

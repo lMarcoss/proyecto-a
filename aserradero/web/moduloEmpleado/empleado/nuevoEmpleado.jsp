@@ -9,7 +9,8 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    List <Persona> personas = (List<Persona>) request.getAttribute("personas");
+    HttpSession sesion = request.getSession(false);
+    List<Persona> personas = (List<Persona>) request.getAttribute("personas");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,8 +21,16 @@
     </head>
     <body>
         <!--menu-->
-        <%@ include file="/TEMPLATE/menu.jsp" %>
-        
+        <%if (((String) sesion.getAttribute("rol")).equals("Administrador")) {%>
+        <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%} else {%>
+        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
+            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%}else{%>
+            <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%}%>
+        <%}%>
+
         <!-- ******************* Formulario de registro-->
         <div>
             <form action="/aserradero/EmpleadoController?action=insertar" method="post" id="formregistro">
@@ -30,18 +39,18 @@
                     <table>
                         <tr>
                             <td style="padding-left: 10px;"><label>Empleado:</label></td>
-                            <input type="hidden" name="id_empleado" value="" readonly=""> <!-- Se calcula en el crud-->
-                            <td style="padding-left: 10px;">
-                                <!-- Seleccionar persona que se va a asignar como empleado-->
-                                <select name="id_persona" required="" title="Si no existe la persona que busca, primero agreguelo en la lista de personas">
-                                    <option></option>
-                                    <%
-                                        for (Persona persona : personas) {
-                                            out.print("<option value='"+persona.getId_persona()+"'>"+persona.getNombre()+"</option>");
-                                        }
-                                    %>
-                                </select>
-                            </td>
+                        <input type="hidden" name="id_empleado" value="" readonly=""> <!-- Se calcula en el crud-->
+                        <td style="padding-left: 10px;">
+                            <!-- Seleccionar persona que se va a asignar como empleado-->
+                            <select name="id_persona" required="" title="Si no existe la persona que busca, primero agreguelo en la lista de personas">
+                                <option></option>
+                                <%
+                                    for (Persona persona : personas) {
+                                        out.print("<option value='" + persona.getId_persona() + "'>" + persona.getNombre() + "</option>");
+                                    }
+                                %>
+                            </select>
+                        </td>
                         </tr>
                         <tr>
                             <td style="padding-left: 10px;"><label>Rol:</label></td>
@@ -58,7 +67,6 @@
                             <td style="padding-left: 10px;"><label>Estatus</label></td>
                             <td>
                                 <select name="estatus" required="">
-                                    <option></option>
                                     <option value="Activo">Activo</option>
                                 </select>
                             </td>

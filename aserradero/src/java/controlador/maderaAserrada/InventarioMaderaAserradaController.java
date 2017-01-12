@@ -3,7 +3,6 @@ package controlador.maderaAserrada;
 import dao.maderaAserrada.InventarioMaderaAserradaCRUD;
 import entidades.maderaAserrada.InventarioMaderaAserrada;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -118,7 +117,7 @@ public class InventarioMaderaAserradaController extends HttpServlet {
         } else {
             InventarioMaderaAserradaCRUD inventarioMaderaAserradaCRUD = new InventarioMaderaAserradaCRUD();
             try {
-                inventarioMaderaAserrada = (List<InventarioMaderaAserrada>) inventarioMaderaAserradaCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+                inventarioMaderaAserrada = (List<InventarioMaderaAserrada>) inventarioMaderaAserradaCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
                 mostrarInventario(request, response, inventarioMaderaAserrada, null, sesion, action);
 
             } catch (Exception ex) {
@@ -148,10 +147,10 @@ public class InventarioMaderaAserradaController extends HttpServlet {
         InventarioMaderaAserrada inventarioTotal;
         InventarioMaderaAserradaCRUD inventarioMaderaAserradaCrud = new InventarioMaderaAserradaCRUD();
         try {
-            inventarioMaderaAserrada = (List<InventarioMaderaAserrada>) inventarioMaderaAserradaCrud.listar((String) sesion.getAttribute("id_jefe"));
-            if(!inventarioMaderaAserrada.isEmpty()){
+            inventarioMaderaAserrada = (List<InventarioMaderaAserrada>) inventarioMaderaAserradaCrud.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
+            if (!inventarioMaderaAserrada.isEmpty()) {
                 inventarioTotal = (InventarioMaderaAserrada) inventarioMaderaAserradaCrud.consultaTotalInventario((String) sesion.getAttribute("id_jefe"));
-            }else{
+            } else {
                 inventarioTotal = null;
             }
             mostrarInventario(request, response, inventarioMaderaAserrada, inventarioTotal, sesion, action);

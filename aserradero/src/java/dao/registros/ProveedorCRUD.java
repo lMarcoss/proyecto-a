@@ -42,7 +42,7 @@ public class ProveedorCRUD extends Conexion implements OperacionesCRUD {
     }
 
     @Override
-    public <T> List listar(String id_jefe) throws Exception {
+    public <T> List listar(String id_jefe, String rol) throws Exception {
         List<Proveedor> proveedores;
         try {
             this.abrirConexion();
@@ -106,7 +106,7 @@ public class ProveedorCRUD extends Conexion implements OperacionesCRUD {
     }
 
     @Override
-    public <T> List buscar(String nombre_campo, String dato, String id_jefe) throws Exception {
+    public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<Proveedor> proveedores;
         try {
             this.abrirConexion();

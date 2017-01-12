@@ -169,7 +169,7 @@ public class EmpleadoController extends HttpServlet {
         String dato = request.getParameter("dato");
         EmpleadoCRUD empleadoCRUD = new EmpleadoCRUD();
         try {
-            listaEmpleados = (List<Empleado>) empleadoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            listaEmpleados = (List<Empleado>) empleadoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarEmpleados(request, response, listaEmpleados, action);
         } catch (Exception ex) {
             listarEmpleados(request, response, sesion, "error_buscar_campo");
@@ -195,7 +195,7 @@ public class EmpleadoController extends HttpServlet {
             //Enviamos las personas a seleccionar para asignarlos como empleado
             PersonaCRUD personaCRUD = new PersonaCRUD();
             List<Persona> personas;
-            personas = (List<Persona>) personaCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            personas = (List<Persona>) personaCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("personas", personas);
 
             RequestDispatcher view = request.getRequestDispatcher("moduloEmpleado/empleado/nuevoEmpleado.jsp");
@@ -211,7 +211,7 @@ public class EmpleadoController extends HttpServlet {
         List<Empleado> listaEmpleados;
         EmpleadoCRUD empleadoCRUD = new EmpleadoCRUD();
         try {
-            listaEmpleados = (List<Empleado>) empleadoCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaEmpleados = (List<Empleado>) empleadoCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarEmpleados(request, response, listaEmpleados, action);
         } catch (Exception ex) {
             System.out.println(ex);

@@ -158,7 +158,7 @@ public class PagoRentaController extends HttpServlet {
         List<PagoRenta> pagosrenta;
         PagoRentaCRUD pagorentacrud = new PagoRentaCRUD();
         try {
-            pagosrenta = (List<PagoRenta>) pagorentacrud.listar((String) sesion.getAttribute("id_jefe"));
+            pagosrenta = (List<PagoRenta>) pagorentacrud.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarPagosRenta(request, response, pagosrenta, sesion, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -198,7 +198,7 @@ public class PagoRentaController extends HttpServlet {
         String dato = request.getParameter("dato");
         PagoRentaCRUD pagorentacrud = new PagoRentaCRUD();
         try {
-            pagosrenta = (List<PagoRenta>) pagorentacrud.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            pagosrenta = (List<PagoRenta>) pagorentacrud.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarPagosRenta(request, response, pagosrenta, sesion, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -211,7 +211,7 @@ public class PagoRentaController extends HttpServlet {
         try {
             EmpleadoCRUD empleadoCRUD = new EmpleadoCRUD();
             List<Empleado> empleados;
-            empleados = (List<Empleado>) empleadoCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            empleados = (List<Empleado>) empleadoCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("empleados", empleados);
             RequestDispatcher view = request.getRequestDispatcher("moduloGasto/pagoRenta/nuevoPagoRenta.jsp");
             view.forward(request, response);

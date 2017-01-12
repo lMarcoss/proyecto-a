@@ -28,10 +28,14 @@
     </head>
     <body>
         <!--menu-->
-        <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
+            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%}else{%>
+            <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%}%>
+        
         <%
-            String id_empleado = (String)sesion.getAttribute("id_empleado");
-            String id_jefe = (String)sesion.getAttribute("id_jefe");
+            String empleado = (String)sesion.getAttribute("empleado");
             String rol = (String)sesion.getAttribute("rol");
             String estatus = (String)sesion.getAttribute("estatus");
             if (rol.equals("Administrador") || rol.equals("Empleado") || rol.equals("Vendedor")) {
@@ -41,14 +45,11 @@
                <img src="/aserradero/dist/images/avatar.png" alt="" class="avatar">
                 <%
                     out.print("<span class='l1id'>Empleado: </span>");
-                    out.print("<span class='l2id'>"+id_empleado+"</span>");
-                    out.print("<span class='l1id'> Jefe: </span>");
-                    out.print("<span class='l2id'>"+id_jefe+"</span>");
+                    out.print("<span class='l2id'>"+empleado+"</span>");
                     out.print("<span class='l1rol'>Rol: </span>");
                     out.print("<span class='l2rol'>"+rol+"</span>");
-                    out.print("<span class='l1estatus'>Estatus: </span>");                    
-                    out.print("<span class='l2estatus'>"+estatus+"</span>");                    
-                    //out.print("<div class='logoestatus'></div>");
+                    out.print("<span class='l1estatus'>Estatus: </span>");
+                    out.print("<span class='l2estatus'>"+estatus+"</span>");
                     out.print("<div class='divisor'></div>");
                 }else{
                     System.out.println("Sólo Administrador, empleado y vendedor pueden iniciar sesión");

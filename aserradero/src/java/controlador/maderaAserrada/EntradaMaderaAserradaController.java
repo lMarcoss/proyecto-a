@@ -154,7 +154,7 @@ public class EntradaMaderaAserradaController extends HttpServlet {
         List<EntradaMaderaAserrada> listaMEAserrada;
         EntradaMaderaAserradaCRUD entradaMaderaAserradaCrud = new EntradaMaderaAserradaCRUD();
         try {
-            listaMEAserrada = (List<EntradaMaderaAserrada>) entradaMaderaAserradaCrud.listar((String)sesion.getAttribute("id_jefe"));
+            listaMEAserrada = (List<EntradaMaderaAserrada>) entradaMaderaAserradaCrud.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarEntradaMaderaAserrada(request, response, listaMEAserrada, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -193,7 +193,7 @@ public class EntradaMaderaAserradaController extends HttpServlet {
         String dato = request.getParameter("dato");
         EntradaMaderaAserradaCRUD entradaMaderaAserradaCRUD = new EntradaMaderaAserradaCRUD();
         try {
-            listaMEAserrada = (List<EntradaMaderaAserrada>) entradaMaderaAserradaCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            listaMEAserrada = (List<EntradaMaderaAserrada>) entradaMaderaAserradaCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarEntradaMaderaAserrada(request, response, listaMEAserrada, action);
         } catch (Exception ex) {
             listarEntradaMaderaAserrada(request, response, sesion, "error_buscar_campo");
@@ -205,7 +205,7 @@ public class EntradaMaderaAserradaController extends HttpServlet {
         try {
             //enviamos lista de maderaClasificación al jsp
             MaderaAserradaClasifCRUD maderaClasificacionCRUD = new MaderaAserradaClasifCRUD();
-            List<MaderaAserradaClasif> clasificaciones = (List<MaderaAserradaClasif>) maderaClasificacionCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            List<MaderaAserradaClasif> clasificaciones = (List<MaderaAserradaClasif>) maderaClasificacionCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("clasificaciones", clasificaciones);
 
             RequestDispatcher view = request.getRequestDispatcher("moduloMaderaAserrada/entradaMaderaAserrada/nuevoEntradaMaderaAserrada.jsp");

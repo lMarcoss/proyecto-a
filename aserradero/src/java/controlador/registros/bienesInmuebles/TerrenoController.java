@@ -172,7 +172,7 @@ public class TerrenoController extends HttpServlet {
         String dato = request.getParameter("dato");
         TerrenoCRUD terrenocrud = new TerrenoCRUD();
         try {
-            terrenos = (List<Terreno>) terrenocrud.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            terrenos = (List<Terreno>) terrenocrud.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarTerrenos(request, response, terrenos, action);
         } catch (Exception ex) {
             listarTerrenos(request, response, sesion, "error_buscar");
@@ -197,7 +197,7 @@ public class TerrenoController extends HttpServlet {
             LocalidadCRUD localidadCRUD = new LocalidadCRUD();
 
             List<Localidad> localidades;
-            localidades = (List<Localidad>) localidadCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            localidades = (List<Localidad>) localidadCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("localidades", localidades);
             RequestDispatcher view = request.getRequestDispatcher("moduloRegistros/bienesInmuebles/terreno/nuevoTerreno.jsp");
             view.forward(request, response);
@@ -212,7 +212,7 @@ public class TerrenoController extends HttpServlet {
         List<Terreno> listaTerrenos;
         TerrenoCRUD terrenoCRUD = new TerrenoCRUD();
         try {
-            listaTerrenos = (List<Terreno>) terrenoCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaTerrenos = (List<Terreno>) terrenoCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarTerrenos(request, response, listaTerrenos, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -227,11 +227,11 @@ public class TerrenoController extends HttpServlet {
         try {
             Terreno terreno = (Terreno) terrenocrud.modificar(terrenoEC);
             request.setAttribute("terreno", terreno);
-            
+
             LocalidadCRUD localidadCRUD = new LocalidadCRUD();
-            List<Localidad> localidades = localidadCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            List<Localidad> localidades = localidadCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("localidades", localidades);
-            
+
             RequestDispatcher view = request.getRequestDispatcher("moduloRegistros/bienesInmuebles/terreno/actualizarTerreno.jsp");
             view.forward(request, response);
         } catch (Exception ex) {

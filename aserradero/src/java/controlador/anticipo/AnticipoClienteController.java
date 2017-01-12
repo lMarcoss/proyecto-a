@@ -80,7 +80,8 @@ public class AnticipoClienteController extends HttpServlet {
         } else {
             try {
                 sesion.invalidate();
-            } catch (Exception e) {
+                response.sendRedirect("/aserradero/");
+            } catch (IOException e) {
                 System.out.println(e);
                 response.sendRedirect("/aserradero/");
             }
@@ -159,7 +160,8 @@ public class AnticipoClienteController extends HttpServlet {
         List<AnticipoCliente> anticipoClientes;
         AnticipoClienteCRUD anticipoClienteCrud = new AnticipoClienteCRUD();
         try {
-            anticipoClientes = (List<AnticipoCliente>) anticipoClienteCrud.listar((String) sesion.getAttribute("id_jefe"));
+            anticipoClientes = (List<AnticipoCliente>) anticipoClienteCrud.listar(
+                    (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarAnticipos(request, response, anticipoClientes, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -203,7 +205,8 @@ public class AnticipoClienteController extends HttpServlet {
         String dato = request.getParameter("dato");
         AnticipoClienteCRUD anticipoClienteCRUD = new AnticipoClienteCRUD();
         try {
-            anticipoClientes = (List<AnticipoCliente>) anticipoClienteCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            anticipoClientes = (List<AnticipoCliente>) anticipoClienteCRUD.buscar(
+                    nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarAnticipos(request, response, anticipoClientes, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -217,7 +220,7 @@ public class AnticipoClienteController extends HttpServlet {
         try {
             ClienteCRUD clienteCRUD = new ClienteCRUD();
             List<Cliente> clientes;
-            clientes = (List<Cliente>) clienteCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            clientes = (List<Cliente>) clienteCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("clientes", clientes);
 
             RequestDispatcher view = request.getRequestDispatcher("moduloAnticipo/anticipoCliente/nuevoAnticipoCliente.jsp");

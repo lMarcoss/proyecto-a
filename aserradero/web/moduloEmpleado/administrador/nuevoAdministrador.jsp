@@ -9,6 +9,7 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    HttpSession sesion = request.getSession(false);
     List <Persona> personas = (List<Persona>) request.getAttribute("personas");
 %>
 <!DOCTYPE html>
@@ -20,7 +21,11 @@
     </head>
     <body>
         <!--menu-->
-        <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
+            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%}else{%>
+            <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%}%>
         
         <!-- ******************* Formulario de registro-->
         <div>

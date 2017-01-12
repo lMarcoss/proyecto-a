@@ -1,4 +1,3 @@
-
 package dao.empleado;
 
 import dao.Conexion;
@@ -14,30 +13,36 @@ import java.util.List;
  *
  * @author Marcos
  */
-public class PagoEmpleadoCRUD extends Conexion implements OperacionesCRUD{
+public class PagoEmpleadoCRUD extends Conexion implements OperacionesCRUD {
 
     @Override
-    public void registrar(Object objeto) throws Exception{
+    public void registrar(Object objeto) throws Exception {
         PagoEmpleado pagoEmpleado = (PagoEmpleado) objeto;
-        try{
+        try {
             this.abrirConexion();
-            PreparedStatement st= this.conexion.prepareStatement("INSERT INTO PAGO_EMPLEADO (fecha,id_empleado,monto,observacion) VALUES (?,?,?,?)");
+            PreparedStatement st = this.conexion.prepareStatement("INSERT INTO PAGO_EMPLEADO (fecha,id_empleado,monto,observacion) VALUES (?,?,?,?)");
             st = cargarObject(st, pagoEmpleado);
             st.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw e;
-        }finally{
+        } finally {
             this.cerrarConexion();
-        } 
+        }
     }
 
     @Override
-    public <T> List listar(String id_jefe) throws Exception{
+    public <T> List listar(String id_jefe, String rol) throws Exception {
         List<PagoEmpleado> pagoEmpleadoes;
-        try{
+        String consulta;
+        if (rol.equals("Administrador")) {
+            consulta = "SELECT * FROM VISTA_PAGO_EMPLEADO WHERE id_jefe = ? ORDER BY fecha DESC";
+        } else {
+            consulta = "SELECT * FROM VISTA_PAGO_EMPLEADO WHERE id_jefe = ? AND fecha = CURDATE() ORDER BY fecha DESC";
+        }
+        try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_PAGO_EMPLEADO WHERE id_jefe = ?")) {
+            try (PreparedStatement st = this.conexion.prepareStatement(consulta)) {
                 st.setString(1, id_jefe);
                 pagoEmpleadoes = new ArrayList();
                 try (ResultSet rs = st.executeQuery()) {
@@ -46,76 +51,82 @@ public class PagoEmpleadoCRUD extends Conexion implements OperacionesCRUD{
                         pagoEmpleadoes.add(pagoEmpleado);
                     }
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 pagoEmpleadoes = null;
                 System.out.println(e);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw e;
-        }finally{
+        } finally {
             this.cerrarConexion();
-        } 
+        }
         return pagoEmpleadoes;
     }
 
     @Override
-    public Object modificar(Object objeto) throws Exception{
+    public Object modificar(Object objeto) throws Exception {
         PagoEmpleado pagoEmpleadoM = (PagoEmpleado) objeto;
         PagoEmpleado pagoEmpleado = null;
         this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_PAGO_EMPLEADO WHERE id_pago_empleado = ?")) {
-                st.setInt(1, pagoEmpleadoM.getId_pago_empleado());
-                try (ResultSet rs = st.executeQuery()) {
-                    while (rs.next()) {
-                        pagoEmpleado = (PagoEmpleado) extraerObject(rs);
-                    }
+        try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_PAGO_EMPLEADO WHERE id_pago_empleado = ?")) {
+            st.setInt(1, pagoEmpleadoM.getId_pago_empleado());
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    pagoEmpleado = (PagoEmpleado) extraerObject(rs);
                 }
             }
+        }
         return pagoEmpleado;
     }
 
     @Override
-    public void actualizar(Object objeto) throws Exception{
+    public void actualizar(Object objeto) throws Exception {
         PagoEmpleado pagoEmpleado = (PagoEmpleado) objeto;
-        try{
+        try {
             this.abrirConexion();
-            PreparedStatement st= this.conexion.prepareStatement("UPDATE PAGO_EMPLEADO SET monto = ?,observacion= ? WHERE id_pago_empleado = ?");
-            st.setBigDecimal(1,pagoEmpleado.getMonto());
-            st.setString(2,pagoEmpleado.getObservacion());
-            st.setInt(3,pagoEmpleado.getId_pago_empleado());
+            PreparedStatement st = this.conexion.prepareStatement("UPDATE PAGO_EMPLEADO SET monto = ?,observacion= ? WHERE id_pago_empleado = ?");
+            st.setBigDecimal(1, pagoEmpleado.getMonto());
+            st.setString(2, pagoEmpleado.getObservacion());
+            st.setInt(3, pagoEmpleado.getId_pago_empleado());
             st.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw e;
-        }finally{
+        } finally {
             this.cerrarConexion();
-        } 
+        }
     }
 
     @Override
-    public void eliminar(Object objeto) throws Exception{
+    public void eliminar(Object objeto) throws Exception {
         PagoEmpleado pagoEmpleado = (PagoEmpleado) objeto;
-        try{
+        try {
             this.abrirConexion();
-            PreparedStatement st= this.conexion.prepareStatement("DELETE FROM PAGO_EMPLEADO WHERE id_pago_empleado = ?");
-            st.setInt(1,pagoEmpleado.getId_pago_empleado());
+            PreparedStatement st = this.conexion.prepareStatement("DELETE FROM PAGO_EMPLEADO WHERE id_pago_empleado = ?");
+            st.setInt(1, pagoEmpleado.getId_pago_empleado());
             st.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw e;
-        }finally{
+        } finally {
             this.cerrarConexion();
-        } 
+        }
     }
 
     @Override
-    public <T> List buscar(String nombre_campo, String dato, String id_jefe) throws Exception{
+    public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<PagoEmpleado> pagoEmpleadoes;
-        try{
+        String consulta;
+        if (rol.equals("Administrador")) {
+            consulta = "SELECT * FROM VISTA_PAGO_EMPLEADO WHERE " + nombre_campo + " like ? AND id_jefe = ? ORDER BY fecha DESC";
+        } else {
+            consulta = "SELECT * FROM VISTA_PAGO_EMPLEADO WHERE " + nombre_campo + " like ? AND id_jefe = ? AND fecha = CURDATE() ORDER BY fecha DESC";
+        }
+        try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_PAGO_EMPLEADO WHERE "+nombre_campo+" like ? AND id_jefe = ?")) {
-                st.setString(1, "%"+dato+"%");
+            try (PreparedStatement st = this.conexion.prepareStatement(consulta)) {
+                st.setString(1, "%" + dato + "%");
                 st.setString(2, id_jefe);
                 pagoEmpleadoes = new ArrayList();
                 try (ResultSet rs = st.executeQuery()) {
@@ -125,10 +136,10 @@ public class PagoEmpleadoCRUD extends Conexion implements OperacionesCRUD{
                     }
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw e;
-        }finally{
+        } finally {
             this.cerrarConexion();
         }
         return pagoEmpleadoes;
@@ -149,12 +160,10 @@ public class PagoEmpleadoCRUD extends Conexion implements OperacionesCRUD{
     @Override
     public PreparedStatement cargarObject(PreparedStatement st, Object objecto) throws SQLException {
         PagoEmpleado pagoEmpleado = (PagoEmpleado) objecto;
-        st.setDate(1,pagoEmpleado.getFecha());    
-        st.setString(2,pagoEmpleado.getId_empleado());
-        st.setBigDecimal(3,pagoEmpleado.getMonto());
-        st.setString(4,pagoEmpleado.getObservacion());
+        st.setDate(1, pagoEmpleado.getFecha());
+        st.setString(2, pagoEmpleado.getId_empleado());
+        st.setBigDecimal(3, pagoEmpleado.getMonto());
+        st.setString(4, pagoEmpleado.getObservacion());
         return st;
     }
 }
-
-

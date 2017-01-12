@@ -34,7 +34,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Si un producto existe y no aparece en la lista, agréguelo.</h3>
+                            <h3 class="panel-title">Para agregar inventario de click en (Madera en rollo -> Entrada)</h3>
                         </div>
                         <div class="panel-body">
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">

@@ -168,7 +168,7 @@ public class ClasificacionMaderaRolloController extends HttpServlet {
         String dato = request.getParameter("dato");                 // Valor a buscar en el campo
         ClasificacionMaderaRolloCRUD clasificacionCRUD = new ClasificacionMaderaRolloCRUD();
         try {
-            listaClasificacion = (List<ClasificacionMaderaRollo>) clasificacionCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            listaClasificacion = (List<ClasificacionMaderaRollo>) clasificacionCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarClasificaciones(request, response, listaClasificacion, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -194,7 +194,7 @@ public class ClasificacionMaderaRolloController extends HttpServlet {
         try {
             // enviamos la lista de personas que pueden ser prestadores
             ProveedorCRUD proveedorCRUD = new ProveedorCRUD();
-            List<Proveedor> proveedores = (List<Proveedor>) proveedorCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            List<Proveedor> proveedores = (List<Proveedor>) proveedorCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("proveedores", proveedores);
 
             RequestDispatcher view = request.getRequestDispatcher("moduloMaderaRollo/clasificacionMaderaRollo/nuevoClasificacion.jsp");
@@ -210,7 +210,7 @@ public class ClasificacionMaderaRolloController extends HttpServlet {
         List<ClasificacionMaderaRollo> listaClasificacion;
         ClasificacionMaderaRolloCRUD clasificacionCRUD = new ClasificacionMaderaRolloCRUD();
         try {
-            listaClasificacion = (List<ClasificacionMaderaRollo>) clasificacionCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaClasificacion = (List<ClasificacionMaderaRollo>) clasificacionCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarClasificaciones(request, response, listaClasificacion, action);
         } catch (Exception ex) {
             System.out.println(ex);

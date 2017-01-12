@@ -78,7 +78,8 @@ public class UsuarioController extends HttpServlet {
         } else {
             try {
                 sesion.invalidate();
-            } catch (Exception e) {
+                response.sendRedirect("/aserradero/");
+            } catch (IOException e) {
                 System.out.println(e);
                 response.sendRedirect("/aserradero/");
             }

@@ -146,7 +146,7 @@ public class ProveedorController extends HttpServlet {
         String dato = request.getParameter("dato");
         ProveedorCRUD proveedorCRUD = new ProveedorCRUD();
         try {
-            listaProveedores = (List<Proveedor>) proveedorCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            listaProveedores = (List<Proveedor>) proveedorCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarProveedores(request, response, listaProveedores, action);
         } catch (Exception ex) {
             listarProveedores(request, response, sesion, "error_buscar_campo");
@@ -191,7 +191,7 @@ public class ProveedorController extends HttpServlet {
         List<Proveedor> listaProveedores;
         ProveedorCRUD proveedorCRUD = new ProveedorCRUD();
         try {
-            listaProveedores = (List<Proveedor>) proveedorCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaProveedores = (List<Proveedor>) proveedorCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarProveedores(request, response, listaProveedores, action);
         } catch (Exception ex) {
             System.out.println(ex);

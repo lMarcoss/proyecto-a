@@ -322,7 +322,7 @@ public class VentaController extends HttpServlet {
         String dato = request.getParameter("dato");
         VentaCRUD ventaCRUD = new VentaCRUD();
         try {
-            ventas = (List<Venta>) ventaCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            ventas = (List<Venta>) ventaCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("ventas", ventas);
             RequestDispatcher view = request.getRequestDispatcher("venta/ventas.jsp");
             view.forward(request, response);
@@ -337,7 +337,7 @@ public class VentaController extends HttpServlet {
         try {
             //Enviamos la lista de clientes
             ClienteCRUD clienteCRUD = new ClienteCRUD();
-            List<Cliente> clientes = (List<Cliente>) clienteCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            List<Cliente> clientes = (List<Cliente>) clienteCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("clientes", clientes);
 
             RequestDispatcher view = request.getRequestDispatcher("venta/nuevoVenta.jsp");
@@ -353,7 +353,7 @@ public class VentaController extends HttpServlet {
         List<Venta> ventas;
         VentaCRUD ventaCrud = new VentaCRUD();
         try {
-            ventas = (List<Venta>) ventaCrud.listar((String) sesion.getAttribute("id_jefe"));
+            ventas = (List<Venta>) ventaCrud.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             //Enviamos las listas al jsp
             request.setAttribute("ventas", ventas);
             //enviamos mensaje al jsp

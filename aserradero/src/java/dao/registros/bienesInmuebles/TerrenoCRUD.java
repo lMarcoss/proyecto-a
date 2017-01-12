@@ -33,7 +33,7 @@ public class TerrenoCRUD extends Conexion implements OperacionesCRUD {
     }
 
     @Override
-    public <T> List listar(String id_jefe) throws Exception {
+    public <T> List listar(String id_jefe, String rol) throws Exception {
         List<Terreno> terrenos;
         try {
             this.abrirConexion();
@@ -119,7 +119,7 @@ public class TerrenoCRUD extends Conexion implements OperacionesCRUD {
     }
 
     @Override
-    public <T> List buscar(String nombre_campo, String dato, String id_jefe) throws Exception {
+    public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<Terreno> terrenos;
         try {
             this.abrirConexion();
@@ -159,7 +159,7 @@ public class TerrenoCRUD extends Conexion implements OperacionesCRUD {
         terreno.setId_jefe(rs.getString("id_jefe"));
         return terreno;
     }
-        
+
     @Override
     public PreparedStatement cargarObject(PreparedStatement st, Object objeto) throws SQLException {
         Terreno terreno = (Terreno) objeto;

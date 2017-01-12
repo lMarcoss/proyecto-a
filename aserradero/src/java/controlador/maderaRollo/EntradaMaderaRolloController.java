@@ -151,9 +151,9 @@ public class EntradaMaderaRolloController extends HttpServlet {
         }
         entrada.setFecha(Date.valueOf(request.getParameter("fecha")));
         entrada.setId_proveedor(request.getParameter("id_proveedor"));
-        entrada.setId_empleado((String)sesion.getAttribute("id_empleado"));
-        System.out.println((String)sesion.getAttribute("id_empleado"));
-        entrada.setId_chofer(request.getParameter("id_chofer"));        
+        entrada.setId_empleado((String) sesion.getAttribute("id_empleado"));
+        System.out.println((String) sesion.getAttribute("id_empleado"));
+        entrada.setId_chofer(request.getParameter("id_chofer"));
         entrada.setNum_pieza_primario(Integer.valueOf(request.getParameter("num_pieza_primario")));
         entrada.setVolumen_primario(BigDecimal.valueOf((Double.valueOf(request.getParameter("volumen_primario")))));
         entrada.setNum_pieza_secundario(Integer.valueOf(request.getParameter("num_pieza_secundario")));
@@ -183,7 +183,7 @@ public class EntradaMaderaRolloController extends HttpServlet {
         String dato = request.getParameter("dato");
         EntradaMaderaRolloCRUD entradaMaderaRolloCRUD = new EntradaMaderaRolloCRUD();
         try {
-            entradas = (List<EntradaMaderaRollo>) entradaMaderaRolloCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
+            entradas = (List<EntradaMaderaRollo>) entradaMaderaRolloCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarEntradaMaderaRollo(request, response, entradas, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -209,7 +209,7 @@ public class EntradaMaderaRolloController extends HttpServlet {
         try {
             //enviamos la lista de proveedores
             ProveedorCRUD proveedorCRUD = new ProveedorCRUD();
-            List<Proveedor> proveedores = (List<Proveedor>) proveedorCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            List<Proveedor> proveedores = (List<Proveedor>) proveedorCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("proveedores", proveedores);
 
             //Enviamos la lista de choferes
@@ -233,7 +233,7 @@ public class EntradaMaderaRolloController extends HttpServlet {
         List<EntradaMaderaRollo> listaEntradaMaderaRollo;
         EntradaMaderaRolloCRUD entradaMaderaRolloCRUD = new EntradaMaderaRolloCRUD();
         try {
-            listaEntradaMaderaRollo = (List<EntradaMaderaRollo>) entradaMaderaRolloCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            listaEntradaMaderaRollo = (List<EntradaMaderaRollo>) entradaMaderaRolloCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarEntradaMaderaRollo(request, response, listaEntradaMaderaRollo, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -252,7 +252,7 @@ public class EntradaMaderaRolloController extends HttpServlet {
 
             //enviamos la lista de proveedores
             ProveedorCRUD proveedorCRUD = new ProveedorCRUD();
-            List<Proveedor> proveedores = (List<Proveedor>) proveedorCRUD.listar((String) sesion.getAttribute("id_jefe"));
+            List<Proveedor> proveedores = (List<Proveedor>) proveedorCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             request.setAttribute("proveedores", proveedores);
 
             //Enviamos la lista de choferes

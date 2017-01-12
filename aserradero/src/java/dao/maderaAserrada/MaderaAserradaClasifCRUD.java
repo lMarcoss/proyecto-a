@@ -50,7 +50,7 @@ public class MaderaAserradaClasifCRUD extends Conexion implements OperacionesCRU
     }
 
     @Override
-    public <T> List listar(String id_jefe) throws Exception {
+    public <T> List listar(String id_jefe, String rol) throws Exception {
         List<MaderaAserradaClasif> maderaClasificaciones;
         try {
             this.abrirConexion();
@@ -159,7 +159,7 @@ public class MaderaAserradaClasifCRUD extends Conexion implements OperacionesCRU
     }
 
     @Override
-    public <T> List buscar(String nombre_campo, String dato, String id_jefe) throws Exception {
+    public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<MaderaAserradaClasif> maderaClasificaciones = null;
         try {
             this.abrirConexion();
