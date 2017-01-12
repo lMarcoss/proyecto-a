@@ -9,6 +9,6 @@
 *.ear
 #otros
 /aserradero/dist/
-/Proyecto/aserradero/build/
+/aserradero/build/
 /aserradero/src/java/dao/Conexion.java
 
