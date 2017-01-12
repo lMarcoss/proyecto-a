@@ -12,16 +12,33 @@
 <% String mensaje = (String)request.getAttribute("mensaje"); %>
 <!DOCTYPE html>
 <html>
-    <head>        
+    <head>
         <%@ include file="/TEMPLATE/head.jsp" %>
         <title>Reporte de compras</title>
-    </head>   
+    </head>
     <body>
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"></h3>
+                        </div>
+                        <div class="panel-body">
+
+                        </div><!--panel-body-->
+                    </div><!--panel full-->
+                </div><!--col-md-12-->
+            </div><!--row-->
+        </div><!--container-->
         <!-- ************************** opción de búsqueda-->
         <div>
-            
+
         </div> <!-- Fin opción de búsqueda-->
         <!-- ************************* Resultado Consulta-->
 <!--        <div class="col-md-12">
@@ -36,7 +53,7 @@
                         <th>Piezas</th>
                         <th>Proveedor</th>
                         <th>Chofer</th>
-                        <th>Empleado</th>                        
+                        <th>Empleado</th>
                         <th>V. primario</th>
                         <th>V. secundario</th>
                         <th>V. terciario</th>
@@ -67,7 +84,7 @@
                         }
                     %>
                 </tbody>
-            </table>                
+            </table>
         </div><!-- Resultado Consulta-->
     </body>
 </html>

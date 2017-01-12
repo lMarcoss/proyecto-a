@@ -24,82 +24,91 @@
     <body>
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
-
-        <!-- ******************* Formulario de registro-->
-        <div>
-            <form action="/aserradero/EntradaMaderaRolloController?action=actualizar" method="post" id="formregistro">
-                <h3>Modificar entrada madera en rollo</h3>
-                <fieldset id="user-details">
-                    <table>
-                        <td style="padding-left: 10px;"><input type="hidden" name="id_entrada" value="<%=entrada.getId_entrada()%>"  readonly=""/></td>
-
-                        <tr>
-                            <td style="padding-left: 10px;"><label for="fecha">Fecha</label></td>
-                            <td style="padding-left: 10px;"><input type="date" name="fecha" value="<%=entrada.getFecha()%>"/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label for="id_proveedor">Proveedor</label></td>
-                            <td style="padding-left: 10px;">
-                                <select name="id_proveedor" required="" title="Si no existe el proveedor que busca, primero agreguelo en la lista de proveedores">
-                                    <%
-                                        for (Proveedor proveedor : proveedores) {
-                                            if (entrada.getId_proveedor().equals(proveedor.getId_proveedor())) {
-                                                out.print("<option selected=\"selected\" value='" + proveedor.getId_proveedor() + "'>" + proveedor.getProveedor() + "</option>");
-                                            } else {
-                                                out.print("<option value='" + proveedor.getId_proveedor() + "'>" + proveedor.getProveedor() + "</option>");
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Actualización de datos</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Actualice los campos necesarios y guarde los cambios</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="/aserradero/EntradaMaderaRolloController?action=actualizar" method="post" id="formregistro">
+                                <input type="hidden" name="id_entrada" value="<%=entrada.getId_entrada()%>"  readonly=""/>
+                                <div class="lado_derecho">
+                                    <div class="form-group">
+                                        <label class="control-label" for="fecha">Fecha</label>
+                                        <input type="date" class="form-control" name="fecha" value="<%=entrada.getFecha()%>"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="id_proveedor">Proveedor</label>
+                                        <select class="form-control" name="id_proveedor" required="" title="Si no existe el proveedor que busca, primero agreguelo en la lista de proveedores">
+                                            <%
+                                                for (Proveedor proveedor : proveedores) {
+                                                    if (entrada.getId_proveedor().equals(proveedor.getId_proveedor())) {
+                                                        out.print("<option selected=\"selected\" value='" + proveedor.getId_proveedor() + "'>" + proveedor.getProveedor() + "</option>");
+                                                    } else {
+                                                        out.print("<option value='" + proveedor.getId_proveedor() + "'>" + proveedor.getProveedor() + "</option>");
+                                                    }
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="id_chofer">Chofer</label>
+                                        <select class="form-control" name="id_chofer" required="" title="Si no existe el empleado que busca, primero agreguelo en la lista de empleados">
+                                        <%
+                                            for (Empleado chofer : choferes) {
+                                                if (entrada.getId_chofer().equals(chofer.getId_empleado())) {
+                                                    out.print("<option selected=\"selected\" value='" + chofer.getId_empleado() + "'>" + chofer.getEmpleado() + "</option>");
+                                                } else {
+                                                    out.print("<option value='" + chofer.getId_empleado() + "'>" + chofer.getEmpleado() + "</option>");
+                                                }
                                             }
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label for="id_chofer">Chofer</label></td>
-                            <td style="padding-left: 10px;">
-                                <select name="id_chofer" required="" title="Si no existe el empleado que busca, primero agreguelo en la lista de empleados">                                    
-                                    <%
-                                        for (Empleado chofer : choferes) {
-                                            if (entrada.getId_chofer().equals(chofer.getId_empleado())) {
-                                                out.print("<option selected=\"selected\" value='" + chofer.getId_empleado() + "'>" + chofer.getEmpleado() + "</option>");
-                                            } else {
-                                                out.print("<option value='" + chofer.getId_empleado() + "'>" + chofer.getEmpleado() + "</option>");
-                                            }
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label for="num_piezas">Num. piezas primario</label></td>
-                            <td style="padding-left: 10px;"><input type="number" name="num_pieza_primario" value="<%=entrada.getNum_pieza_primario()%>" min="0" required=""/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Volumen primario</label></td>
-                            <td style="padding-left: 10px;"><input type="number" name="volumen_primario" id="volumen" value="<%=entrada.getVolumen_primario()%>" step=".001" min="0.000" max="99999.999"  required=""/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label for="num_piezas">Num. piezas secundario</label></td>
-                            <td style="padding-left: 10px;"><input type="number" name="num_pieza_secundario" value="<%=entrada.getNum_pieza_secundario()%>" min="0" required=""/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Volumen secundario</label></td>
-                            <td style="padding-left: 10px;"><input type="number" name="volumen_secundario" id="volumen" value="<%=entrada.getVolumen_secundario()%>" step=".001" min="0.000" max="99999.999"  required=""/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label for="num_piezas">Num. piezas terciario</label></td>
-                            <td style="padding-left: 10px;"><input type="number" name="num_pieza_terciario" value="<%=entrada.getNum_pieza_terciario()%>" min="0" required=""/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Volumen terciario</label></td>
-                            <td style="padding-left: 10px;"><input type="number" name="volumen_terciario" id="volumen" value="<%=entrada.getVolumen_terciario()%>" step=".001" min="0.000" max="99999.999"  required=""/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><a href="/aserradero/EntradaMaderaRolloController?action=listar"><input type="button" value="Cancelar"/></a> </td>
-                            <td style="padding-left: 10px;"><input type="submit" value="Guardar"/></td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </form>
-        </div><!--Fin Formulario de registro-->
+                                        %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="num_piezas">Num. piezas primario</label>
+                                        <input type="number" class="form-control" name="num_pieza_primario" value="<%=entrada.getNum_pieza_primario()%>" min="0" required=""/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Volumen primario</label>
+                                        <input type="number" class="form-control" name="volumen_primario" id="volumen" value="<%=entrada.getVolumen_primario()%>" step=".001" min="0.000" max="99999.999" required=""/>
+                                    </div>
+                                </div>
+                                <div class="lado_izquierdo">
+                                    <div class="form-group">
+                                        <label class="control-label" for="num_piezas">Num. piezas secundario</label>
+                                        <input type="number" class="form-control" name="num_pieza_secundario" value="<%=entrada.getNum_pieza_secundario()%>" min="0" required=""/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Volumen secundario</label>
+                                        <input type="number" class="form-control" name="volumen_secundario" id="volumen" value="<%=entrada.getVolumen_secundario()%>" step=".001" min="0.000" max="99999.999" required=""/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="num_piezas">Num. piezas terciario</label>
+                                        <input type="number" class="form-control" name="num_pieza_terciario" value="<%=entrada.getNum_pieza_terciario()%>" min="0" required=""/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Volumen terciario</label>
+                                        <input type="number" class="form-control" name="volumen_terciario" id="volumen" value="<%=entrada.getVolumen_terciario()%>" step=".001" min="0.000" max="99999.999" required=""/>
+                                    </div>
+                                    <div class="form-group pull-right">
+                                        <a href="/aserradero/EntradaMaderaRolloController?action=listar"><input class="btn btn-warning" type="button" value="Cancelar"/></a>
+                                        <input type="submit" class="btn btn-success" value="Guardar"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </div><!--panel-body-->
+                    </div><!--panel full-->
+                </div><!--col-md-12-->
+            </div><!--row-->
+        </div><!--container-->
     </body>
 </html>

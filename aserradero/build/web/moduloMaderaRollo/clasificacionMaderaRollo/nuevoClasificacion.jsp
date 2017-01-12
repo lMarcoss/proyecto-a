@@ -20,46 +20,52 @@
     <body>
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
-
-        <!-- ******************* Formulario de registro-->
-        <form action="/aserradero/ClasificacionMaderaRolloController?action=insertar" method="POST">
-            <h3>Registrar clasificación y costo para un proveedor</h3>
-            <fieldset id="user-details">
-                <table>
-                    <tr>
-                        <td style="padding-left: 10px;"><label for="proveedor">Proveedor</label></td>
-                        <td style="padding-left: 10px;">
-                            <select name="id_proveedor">
-                                <option></option>
-                                <%
-                                    for (Proveedor proveedor : proveedores) {
-                                        out.print("<option value='"+proveedor.getId_proveedor()+"'>"+proveedor.getProveedor()+"</option>");
-                                    }
-                                %>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 10px;"><label for="clasificacion">Clasificación</label></td>
-                        <td style="padding-left: 10px;">
-                            <select name="clasificacion">
-                                <option value="Primario">Primario</option>
-                                <option value="Secundario">Secundario</option>
-                                <option value="Terciario">Terciario</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding-left: 10px;"><label for="costo">Costo</label></td>
-                        <td style="padding-left: 10px;"><input type="number" step=".01" name="costo" min="0.01" max="999.99" required=""/></td>
-                    </tr>                        
-                    <tr>
-                        <td style="padding-left: 10px;"><a href="/aserradero/ClasificacionMaderaRolloController?action=listar"><input type="button" value="Cancelar"/></a> </td>
-                        <td style="padding-left: 10px;"><input type="submit" value="Guardar"/></td>
-                    </tr>
-                </table>
-            </fieldset>
-        </form>
-    </div><!--Fin Formulario de registro-->
-</body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Registrar clasificación y costo para un proveedor</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Rellene los campos de manera correcta</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="/aserradero/ClasificacionMaderaRolloController?action=insertar" method="POST">
+                                <div class="form-group">
+                                    <label class="control-label" for="proveedor">Proveedor</label>
+                                    <select class="form-control" name="id_proveedor">
+                                        <option></option>
+                                        <%
+                                            for (Proveedor proveedor : proveedores) {
+                                                out.print("<option value='"+proveedor.getId_proveedor()+"'>"+proveedor.getProveedor()+"</option>");
+                                            }
+                                        %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="clasificacion">Clasificación</label>
+                                    <select class="form-control" name="clasificacion">
+                                        <option value="Primario">Primario</option>
+                                        <option value="Secundario">Secundario</option>
+                                        <option value="Terciario">Terciario</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="costo">Costo</label>
+                                    <input type="number" class="form-control" step=".01" name="costo" min="0.01" max="999.99" required=""/>
+                                </div>
+                                <div class="control-group pull-right">
+                                    <a href="/aserradero/ClasificacionMaderaRolloController?action=listar"><input class="btn btn-warning" type="button" value="Cancelar"/></a>
+                                    <input type="submit" class="btn btn-success" value="Guardar"/>
+                                </div>
+                            </form>
+                        </div><!--panel-body-->
+                    </div><!--panel full-->
+                </div><!--col-md-12-->
+            </div><!--row-->
+        </div><!--container-->
+    </body>
 </html>

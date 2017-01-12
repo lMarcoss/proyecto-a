@@ -27,7 +27,7 @@
     <body>
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
-        <div class="container" style="margin-top:60px;">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <h2 class="page-header">Registrar persona</h2>
@@ -60,10 +60,10 @@
                                     </div>
                                     <div class="form-group">
                                         <i class="glyphicon glyphicon-user"></i>
-                                        <label class="control-label">Apellido materno:</label>                                        
+                                        <label class="control-label">Apellido materno:</label>
                                         <input class="form-control" type="text" name="apellido_materno" id="apellido_materno" pattern="[A-Za-z].{2,}" title="Sólo letras aA-zZ, al menos 4 letras" maxlength="45"/>
                                     </div>
-                                    <div class="form-group">                                        
+                                    <div class="form-group">
                                         <label class="control-label">Dirección:</label>
                                         <input class="form-control" type="text" name="direccion" title="dirección" placeholder="ej. carr Oaxaca Puerto Ángel km 97" maxlength="60"/>
                                     </div>
@@ -92,7 +92,7 @@
                                         </select>
                                         <input type="hidden" name="nombre_municipio" id="nombre_municipio">
                                     </div>
-                                    <div class="form-group">                                        
+                                    <div class="form-group">
                                         <label class="control-label">Estado:</label>
                                         <select class="form-control" name="_estado" id="_estado" required="" disabled="">
                                             <option></option>

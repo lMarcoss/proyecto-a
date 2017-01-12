@@ -83,7 +83,7 @@
                                         + "<td>" + salida.getNum_pieza_total() + "</td>"
                                         + "<td>" + salida.getVolumen_total() + "</td>"
                                         + "<td>" + salida.getEmpleado() + "</td>"
-                                        + "<td><a href=\"/aserradero/SalidaMaderaRolloController?action=modificar&id_salida=" + salida.getId_salida() + "\">Modificar</a></td>"
+                                        + "<td><a class='btn btn-warning' href=\"/aserradero/SalidaMaderaRolloController?action=modificar&id_salida=" + salida.getId_salida() + "\">Modificar</a></td>"
                                         + "</tr>");
                                         i++;
                                     }

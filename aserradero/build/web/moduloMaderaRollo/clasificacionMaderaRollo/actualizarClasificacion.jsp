@@ -20,41 +20,45 @@
     <body>
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
-
-        <!-- ******************* Formulario de registro-->
-        <div>
-            <form action="/aserradero/ClasificacionMaderaRolloController?action=actualizar" method="post" id="formregistro">
-                <h3>Actualizar datos</h3>
-                <fieldset id="user-details">
-                    <table>
-                        <tr>
-                            <td style="padding-left: 10px;"><label for="proveedor">Proveedor</label></td>
-                            <td style="padding-left: 10px;">
-                                <select name="id_proveedor">
-                                    <option value="<%=clasificacion.getId_proveedor()%>"><%=clasificacion.getProveedor()%></option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label for="clasificacion">Clasificación</label></td>
-                            <td style="padding-left: 10px;">
-                                <select name="clasificacion">
-                                    <option value="<%=clasificacion.getClasificacion()%>"><%=clasificacion.getClasificacion()%></option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label for="costo">Costo</label></td>
-                            <td style="padding-left: 10px;"><input type="number" name="costo" step=".01" min="0.01" max="999999.99"  value="<%=clasificacion.getCosto()%>"/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><a href="/aserradero/ClasificacionMaderaRolloController?action=listar"><input type="button" value="Cancelar"/></a> </td>
-                            <!--<td><input type="submit" value="Registrar" class="submit"/> </td>-->
-                            <td style="padding-left: 10px;"><input type="submit" value="Guardar"/></td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </form>
-        </div><!--Fin Formulario de registro-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Actualizar datos</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Actualiza los datos necesarios yu guarda los cambios</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="/aserradero/ClasificacionMaderaRolloController?action=actualizar" method="post" id="formregistro">
+                                <div class="form-group">
+                                    <label class="control-label" for="proveedor">Proveedor</label>
+                                    <select class="form-control" name="id_proveedor">
+                                        <option value="<%=clasificacion.getId_proveedor()%>"><%=clasificacion.getProveedor()%></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="clasificacion">Clasificación</label>
+                                    <select class="form-control" name="clasificacion">
+                                        <option value="<%=clasificacion.getClasificacion()%>"><%=clasificacion.getClasificacion()%></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="costo">Costo</label>
+                                    <input type="number" class="form-control" name="costo" step=".01" min="0.01" max="999999.99"  value="<%=clasificacion.getCosto()%>"/>
+                                </div>
+                                <div class="form-group pull-right">
+                                    <a href="/aserradero/ClasificacionMaderaRolloController?action=listar"><input class="btn btn-warning" type="button" value="Cancelar"/></a>
+                                    <input type="submit" class="btn btn-success" value="Guardar"/>
+                                </div>
+                            </form>
+                        </div><!--panel-body-->
+                    </div><!--panel full-->
+                </div><!--col-md-12-->
+            </div><!--row-->
+        </div><!--container-->
     </body>
 </html>
