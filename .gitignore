@@ -4,7 +4,7 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar -json-lib-2.4-jdk15.jar -gson-2.2.3.jar
+*.jar #-json-lib-2.4-jdk15.jar -gson-2.2.3.jar
 *.war
 *.ear
 #otros
