@@ -21,7 +21,7 @@
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>">
-        <div class="container">
+        <div class="container" style="width: 100%;">
             <div class="row">
                 <div class="col-lg-12">
                     <h2>Listado de entrada de madera en rollos</h2>

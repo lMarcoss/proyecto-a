@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Listado de salida de madera en rollos</h2>
+                    <h2 class="page-header">Actualización de datos</h2>
                 </div>
             </div>
             <div class="row">
