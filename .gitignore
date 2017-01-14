@@ -4,11 +4,16 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar -json-lib-2.4-jdk15.jar -gson-2.2.3.jar
+*.jar #-json-lib-2.4-jdk15.jar -gson-2.2.3.jar
 *.war
 *.ear
 #otros
 aserradero/dist/
 aserradero/build/
+aserradero/nbproject/build-impl.xml
+aserradero/nbproject/genfiles.properties
+aserradero/nbproject/private/private.properties
+aserradero/nbproject/private/private.xml
+aserradero/nbproject/project.properties
+aserradero/nbproject/project.xml
 aserradero/src/java/dao/Conexion.java
-

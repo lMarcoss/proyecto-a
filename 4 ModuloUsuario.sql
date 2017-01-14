@@ -15,7 +15,7 @@ SELECT
     estatus
 FROM USUARIO,EMPLEADO
 WHERE USUARIO.id_empleado = EMPLEADO.id_empleado;
-select *from EMPLEADO;
+-- select *from EMPLEADO;
 INSERT INTO USUARIO VALUES
 ('MASL19931106HOCRNNMASL1993','admin',sha1('admin'),'sha1','hola'),
 ('COCR19990708HOCRRCMASL1993','richard',sha1('richard'),'sha1','hola'); -- Usuario richard contrasenia: richard

@@ -76,18 +76,6 @@ SELECT
 FROM PRESTAMO;
 
 
--- DROP VIEW IF EXISTS PRESTAMO_TOTAL_PERSONA;
--- CREATE VIEW PRESTAMO_TOTAL_PERSONA AS
--- SELECT 
--- 	id_administrador,
--- 	id_prestador,
---     prestador,
---     SUM(monto_prestamo) as monto_total,
---     SUM(interes_mensual) as interes_total
--- FROM VISTA_PRESTAMO
--- GROUP BY id_administrador, id_prestador, prestador;
-
-
 -- Submódulo pago préstamo-- Submódulo pago préstamo-- Submódulo pago préstamo-- Submódulo pago préstamo-- Submódulo pago préstamo-- Submódulo pago préstamo
 -- Submódulo pago préstamo-- Submódulo pago préstamo-- Submódulo pago préstamo-- Submódulo pago préstamo-- Submódulo pago préstamo-- Submódulo pago préstamo
 
@@ -107,11 +95,3 @@ SELECT
         ROUND((SELECT MONTO_A_PAGAR(PP.id_prestamo)),2) as monto_por_pagar
 FROM PAGO_PRESTAMO AS PP,PRESTAMO AS P WHERE PP.id_prestamo = P.id_prestamo;
 
-
--- DROP VIEW IF EXISTS VISTA_PRESTAMO_PAGADO;
--- CREATE VIEW VISTA_PRESTAMO_PAGADO AS
--- SELECT 
---     id_prestamo,
---     SUM(monto_pago) as monto_pagado
--- FROM PAGO_PRESTAMO
--- GROUP BY id_prestamo;
