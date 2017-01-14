@@ -29,12 +29,12 @@
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>">
         <div class="container" style="margin-top:60px;">
             <div class="row">
-                <div class="col-md-13">
+                <div class="col-md-12">
                     <h2 class="page-header">Lista de personas</h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-13">
+                <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">Si la persona que busca no aparece en el listado, agréguelo</h3>

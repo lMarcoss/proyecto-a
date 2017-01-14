@@ -27,14 +27,14 @@
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>" />
-        <div class="container" style="margin-top:60px;">
+        <div class="container" style="margin-top:10px;">
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">LISTADO DE CLIENTES</h1>
                 </div>
             </div>
             <div class="row">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">Si el cliente que busca no aparece, agréguelo</h3>
                     </div>
@@ -46,7 +46,7 @@
                                 </select>
                                 <input type="text" name="dato" placeholder="Escriba su búsqueda" class="input-busc">
                                 <input type="submit" value="Buscar" class="btn btn-success">
-                            </form>                            
+                            </form>
                         </div><!-- Fin formulario de búsqueda -->
                         <table id="tabla" class="display cell-border" cellspacing="0" width="100%"><!-- Tabla que muestra los resultados de la consulta a la base de datos-->
                             <thead>

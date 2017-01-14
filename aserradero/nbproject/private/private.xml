@@ -3,11 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/home/lmarcoss/workspaceNetbeans/p-aserradero/aserradero/web/moduloRegistros/persona/actualizarPersona.jsp</file>
             <file>file:/home/lmarcoss/workspaceNetbeans/p-aserradero/aserradero/web/moduloRegistros/persona/nuevoPersona.jsp</file>
             <file>file:/home/lmarcoss/workspaceNetbeans/p-aserradero/aserradero/src/java/dao/registros/PersonaCRUD.java</file>
             <file>file:/home/lmarcoss/workspaceNetbeans/p-aserradero/aserradero/src/java/controlador/registros/PersonaController.java</file>
             <file>file:/home/lmarcoss/workspaceNetbeans/p-aserradero/aserradero/web/js/persona/selector_estadoPersona.js</file>
+=======
+            <file>file:/home/rcortes/NetBeansProjects/Aserradero/proyecto-a/aserradero/web/inicio/inicio.jsp</file>
+            <file>file:/home/rcortes/NetBeansProjects/Aserradero/proyecto-a/aserradero/web/js/persona/id_persona.js</file>
+            <file>file:/home/rcortes/NetBeansProjects/Aserradero/proyecto-a/aserradero/src/java/controlador/venta/VentasAjaxController.java</file>
+            <file>file:/home/rcortes/NetBeansProjects/Aserradero/proyecto-a/aserradero/web/moduloRegistros/persona/nuevoPersona.jsp</file>
+>>>>>>> b762aa353a523a1d2d9091dba2839567dea9d489
         </group>
     </open-files>
 </project-private>

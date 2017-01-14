@@ -17,21 +17,22 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Iniciar sesión</title>
-        <link rel="stylesheet" href="/aserradero/css/style.css">
+        <link rel="stylesheet" href="/aserradero/dist/css/login.css">
         <script src="/aserradero/js/main.js"></script>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
     </head>
     <body>
         <div class="login">
-        <div class="login-triangle"></div>
-        <h2 class="login-header">Iniciar sesión</h2>
-        <form class="login-container" action="Iniciar" method="post" id="forminiciar">
-            <p><input type="text" name="nombre_usuario" placeholder="Nombre de usuario" id="nombre_usuario"></p>
-            <p><input type="password" name="contrasenia" placeholder="Contraseña" id="contrasenia"></p>
-            <p><input type="submit" value="Entrar" id="entrar"></p>
-            <p><a href="/aserradero/usuario/nuevoUsuario.jsp">Registrarme</a></p>
-        </form>
-    </div>
+            <div class="login_container">
+                <h1>Iniciar sesión</h1>
+                <form action="Iniciar" method="post" id="forminiciar">
+                    <p><input type="text" name="nombre_usuario" placeholder="Nombre de usuario" id="nombre_usuario"></p>
+                    <p><input type="password" name="contrasenia" placeholder="Contraseña" id="contrasenia"></p>
+                    <p><button type="submit" id="entrar">Entrar</button>
+                    <a href="/aserradero/usuario/nuevoUsuario.jsp">Registrarme</a>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
