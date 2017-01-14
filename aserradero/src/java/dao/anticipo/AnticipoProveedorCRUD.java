@@ -37,9 +37,9 @@ public class AnticipoProveedorCRUD extends Conexion implements OperacionesCRUD {
         List<AnticipoProveedor> anticipoProveedores;
         String consulta;
         if (rol.equals("Administrador")) {
-            consulta = "SELECT * FROM VISTA_ANTICIPO_PROVEEDOR WHERE id_jefe = ? ORDER BY fecha DESC";
+            consulta = "SELECT * FROM VISTA_ANTICIPO_PROVEEDOR WHERE id_jefe = ? ORDER BY fecha DESC, id_anticipo_P DESC";
         } else {
-            consulta = "SELECT * FROM VISTA_ANTICIPO_PROVEEDOR WHERE id_jefe = ? AND fecha = CURDATE() ORDER BY fecha DESC";
+            consulta = "SELECT * FROM VISTA_ANTICIPO_PROVEEDOR WHERE id_jefe = ? AND fecha = CURDATE() ORDER BY fecha DESC, id_anticipo_P DESC";
         }
         try {
             this.abrirConexion();

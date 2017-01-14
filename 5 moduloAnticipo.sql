@@ -70,7 +70,7 @@ BEGIN
     END IF;
 
     
-    RETURN (_monto_madera - _pago);
+    RETURN (- _monto_madera + _pago);
 END;//
 DELIMITER ;
 
@@ -104,7 +104,7 @@ SELECT
 	id_proveedor,
     proveedor,
     id_jefe,
-    ROUND(((SELECT C_ANTICIPO_PROVEEDOR(id_proveedor))-(SELECT C_MADERA_ENTRADA_ROLLO(id_proveedor))),2) AS monto
+    ROUND(((SELECT C_MADERA_ENTRADA_ROLLO(id_proveedor)) + (SELECT C_ANTICIPO_PROVEEDOR(id_proveedor)) ),2) AS monto
 FROM PERSONAL_PROVEEDOR;
 
 -- Cuentas por pagar a proveedores
@@ -126,7 +126,6 @@ SELECT
     id_jefe,
     ABS(monto) AS monto
 FROM CUENTAS_PROVEEDOR WHERE monto > 0;
-
 -- Submódulo cuentas por cobrar y pagar de clientes -- Submódulo cuentas por cobrar y pagar de clientes -- Submódulo cuentas por cobrar y pagar de clientes 
 -- Submódulo cuentas por cobrar y pagar de clientes -- Submódulo cuentas por cobrar y pagar de clientes -- Submódulo cuentas por cobrar y pagar de clientes 
 

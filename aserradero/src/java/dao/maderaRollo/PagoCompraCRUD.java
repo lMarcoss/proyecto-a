@@ -49,9 +49,9 @@ public class PagoCompraCRUD extends Conexion implements OperacionesCRUD {
         List<PagoCompra> pagoCompras;
         String consulta;
         if (rol.equals("Administrador")) {
-            consulta = "SELECT * FROM VISTA_PAGO_COMPRA WHERE id_administrador = ? ORDER BY fecha DESC";
+            consulta = "SELECT * FROM VISTA_PAGO_COMPRA WHERE id_administrador = ? ORDER BY fecha DESC, id_pago DESC";
         } else {
-            consulta = "SELECT * FROM VISTA_PAGO_COMPRA WHERE id_administrador = ? AND fecha = CURDATE() ORDER BY fecha DESC";
+            consulta = "SELECT * FROM VISTA_PAGO_COMPRA WHERE id_administrador = ? AND fecha = CURDATE() ORDER BY fecha DESC, id_pago DESC";
         }
         try {
             this.abrirConexion();
