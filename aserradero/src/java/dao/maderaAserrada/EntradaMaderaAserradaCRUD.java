@@ -116,9 +116,10 @@ public class EntradaMaderaAserradaCRUD extends Conexion implements OperacionesCR
         EntradaMaderaAserrada produccion = (EntradaMaderaAserrada) objeto;
         try {
             this.abrirConexion();
-            PreparedStatement st = this.conexion.prepareStatement("UPDATE ENTRADA_MADERA_ASERRADA SET num_piezas = ? WHERE id_entrada = ?");
-            st.setInt(1, produccion.getNum_piezas());
-            st.setInt(2, produccion.getId_entrada());
+            PreparedStatement st = this.conexion.prepareStatement("UPDATE ENTRADA_MADERA_ASERRADA SET fecha = ?, num_piezas = ? WHERE id_entrada = ?");
+            st.setDate(1, produccion.getFecha());
+            st.setInt(2, produccion.getNum_piezas());
+            st.setInt(3, produccion.getId_entrada());
             st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);

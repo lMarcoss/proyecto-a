@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">Es importante rellenar correctamente, ya que no se podrá modificar</div>
+                        <div class="panel-heading">Es importante rellenar correctamente</div>
                         <div class="panel-body">
                             <form action="/aserradero/PersonaController?action=insertar" method="post" id="formregistro" onsubmit="return validarPersona()">
                                 <div class="lado_derecho"><!-- Grupo derecho-->
@@ -45,23 +45,22 @@
                                         <input class="form-control" type="text" name="id_persona" id="id_persona" maxlength="18" placeholder="Escriba la CURP de la persona" />
                                     </div>
                                     <div class="form-group">
-                                        <!--<label class="control-label">Id_persona:</label>-->
                                         <input class="form-control" type="button" value="Crear un id para la persona" onclick="crearIdPersona()">
                                     </div>
                                     <div class="form-group">
                                         <i class="glyphicon glyphicon-user"></i>
                                         <label class="control-label">Nombre:</label>
-                                        <input class="form-control" type="text" name="nombre" id="nombre" pattern="[A-Za-z].{2,}" title="Sólo letras aA-zZ, al menos 3 letras" maxlength="45" required=""/>
+                                        <input class="form-control" type="text" name="nombre" id="nombre" maxlength="45" required=""/>
                                     </div>
                                     <div class="form-group">
                                         <i class="glyphicon glyphicon-user"></i>
                                         <label class="control-label">Apellido paterno:</label>
-                                        <input class="form-control" type="text" name="apellido_paterno" id="apellido_paterno" pattern="[A-Za-z].{2,}" title="Sólo letras aA-zZ, al menos 3 letras" maxlength="45" required=""/>
+                                        <input class="form-control" type="text" name="apellido_paterno" id="apellido_paterno" maxlength="45" required=""/>
                                     </div>
                                     <div class="form-group">
                                         <i class="glyphicon glyphicon-user"></i>
                                         <label class="control-label">Apellido materno:</label>
-                                        <input class="form-control" type="text" name="apellido_materno" id="apellido_materno" pattern="[A-Za-z].{2,}" title="Sólo letras aA-zZ, al menos 4 letras" maxlength="45"/>
+                                        <input class="form-control" type="text" name="apellido_materno" id="apellido_materno" maxlength="45"/>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Dirección:</label>
@@ -114,7 +113,7 @@
                                     <div class="form-group">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                         <label class="control-label">Fecha de nacimiento:</label>
-                                        <input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento" required="" maxlength="10" title="Es importante la fecha de nacimiento para asignar un identificador a la persona" onblur="crearIdPersona()"/>
+                                        <input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento" required="" maxlength="10" title="Es importante la fecha de nacimiento para asignar un identificador a la persona">
                                     </div>
                                     <div class="form-group">
                                         <i class="glyphicon glyphicon-phone"></i>

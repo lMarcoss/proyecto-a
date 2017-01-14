@@ -586,7 +586,7 @@ INSERT INTO PERSONA (id_persona,nombre,apellido_paterno,apellido_materno,nombre_
 ("PEXF20160910HOCRXR","Francisco","Perez","","Santa Cruz Monjas","Miahuatlan de porfirio diaz",'Oaxaca',"H","2016-09-10","1234567890"),
 ('COCR19990708HOCRRC', 'Ricardo', 'Cortes', 'Cruz', 'Xitla', 'Santa Cruz Xitla', 'Oaxaca', 'H', '1999-07-08', '9876543219');
 
-SELECT * FROM PERSONA;
+-- SELECT * FROM PERSONA;
 DROP VIEW IF EXISTS VISTA_MUNICIPIO;
 CREATE VIEW VISTA_MUNICIPIO AS
 SELECT 
@@ -678,8 +678,8 @@ BEGIN
 	INSERT INTO EMPLEADO VALUES (NEW.id_persona,NEW.id_persona,NEW.id_jefe,'Chofer','Activo');
 END;//
 DELIMITER ;
-SELECT * FROM EMPLEADO;
-SELECT * FROM PROVEEDOR;
+-- SELECT * FROM EMPLEADO;
+-- SELECT * FROM PROVEEDOR;
 DROP VIEW IF EXISTS VISTA_PERSONA;
 CREATE VIEW VISTA_PERSONA AS 
 SELECT 
@@ -712,3 +712,4 @@ SELECT
     (SELECT id_jefe FROM EMPLEADO WHERE id_empleado = TERRENO.id_empleado LIMIT 1) AS id_jefe
 FROM TERRENO
 ORDER BY nombre;
+
