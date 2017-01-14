@@ -58,16 +58,6 @@
                 </div><!--col-md-12-->
             </div><!--row-->
         </div><!--<div class="container">-->
-        <!--Formulario de registro-->
-        <div>
-
-                <h3>Modificar datos de madera aserrada</h3>
-                <fieldset id="user-details">
-                    <table>
-
-                    </table>
-                </fieldset>
-            </form>
-        </div><!--Fin Formulario de registro-->
+        <!--Formulario de registro-->        
     </body>
 </html>
