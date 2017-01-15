@@ -267,6 +267,51 @@ BEGIN
 END;//
 DELIMITER ;
 
+-- funcion para consultar $ total de anticipo de clientes
+DROP FUNCTION IF EXISTS C_T_ANTICIPO_CLIENTE;
+DELIMITER //
+CREATE FUNCTION C_T_ANTICIPO_CLIENTE(_id_administrador VARCHAR(30))
+RETURNS DECIMAL(20,2)
+BEGIN
+	DECLARE _anticipo DECIMAL(20,2);
+        
+    IF EXISTS (SELECT id_jefe FROM ANTICIPO_CLIENTE,CLIENTE WHERE ANTICIPO_CLIENTE.id_cliente = CLIENTE.id_cliente AND id_jefe = _id_administrador LIMIT 1) THEN 
+		SELECT 
+			SUM(monto_anticipo) INTO _anticipo
+        FROM ANTICIPO_CLIENTE,CLIENTE 
+        WHERE ANTICIPO_CLIENTE.id_cliente = CLIENTE.id_cliente AND id_jefe = _id_administrador
+        GROUP BY id_jefe;
+	ELSE -- No hay registros
+		SET _anticipo = 0;
+    END IF;
+        
+    RETURN (_anticipo);
+END;//
+DELIMITER ;
+
+-- funcion para consultar $ total de anticipo a proveedores
+DROP FUNCTION IF EXISTS C_T_ANTICIPO_PROVEEDOR;
+DELIMITER //
+CREATE FUNCTION C_T_ANTICIPO_PROVEEDOR(_id_administrador VARCHAR(30))
+RETURNS DECIMAL(20,2)
+BEGIN
+	DECLARE _anticipo DECIMAL(20,2);
+        
+    IF EXISTS (SELECT id_jefe FROM ANTICIPO_PROVEEDOR,PROVEEDOR WHERE ANTICIPO_PROVEEDOR.id_proveedor = PROVEEDOR.id_proveedor AND id_jefe = _id_administrador LIMIT 1) THEN 
+		SELECT 
+			SUM(monto_anticipo) INTO _anticipo
+        FROM ANTICIPO_PROVEEDOR,PROVEEDOR 
+        WHERE ANTICIPO_PROVEEDOR.id_proveedor = PROVEEDOR.id_proveedor AND id_jefe = _id_administrador
+        GROUP BY id_jefe;
+	ELSE -- No hay registros
+		SET _anticipo = 0;
+    END IF;
+        
+    RETURN (_anticipo);
+END;//
+DELIMITER ;
+
+SELECT * FROM ANTICIPO_PROVEEDOR,PROVEEDOR;
 DROP VIEW IF EXISTS BALANCE_CUENTA;
 CREATE VIEW BALANCE_CUENTA AS
 SELECT 
@@ -277,6 +322,8 @@ SELECT
     FORMAT((SELECT C_GASTOS(id_administrador)),2) as gastos,
     FORMAT((SELECT C_CUENTAS_POR_PAGAR(id_administrador)),2) as cuenta_por_pagar,
     FORMAT((SELECT C_CUENTAS_POR_COBRAR(id_administrador)),2) as cuenta_por_cobrar,
+    FORMAT((SELECT C_T_ANTICIPO_CLIENTE(id_administrador)),2) as anticipo_cliente, -- total de anticipo clientes
+    FORMAT((SELECT C_T_ANTICIPO_PROVEEDOR(id_administrador)),2) as anticipo_proveedor, -- total de anticipo proveedores
     FORMAT((SELECT C_PAGOS_COMPRA(id_administrador)),2) as pagos_compra,
     FORMAT((SELECT C_PAGOS_VENTA(id_administrador)),2) as venta_en_efectivo, -- cobro de venta: a la hora de venta
     FORMAT((SELECT C_PRESTAMOS(id_administrador)),2) as prestamo,
@@ -292,6 +339,8 @@ SELECT
     (SELECT C_PAGOS_EMPLEADO(id_administrador)) -
     (SELECT C_GASTOS(id_administrador)) -
      (SELECT C_CUENTAS_POR_PAGAR(id_administrador)) + 
+     (SELECT C_T_ANTICIPO_CLIENTE(id_administrador)) -
+     (SELECT C_T_ANTICIPO_PROVEEDOR(id_administrador)) -
     (SELECT C_CUENTAS_POR_COBRAR(id_administrador)) -
     (SELECT C_PAGOS_COMPRA(id_administrador)) +
     (SELECT C_PAGOS_VENTA(id_administrador)) -

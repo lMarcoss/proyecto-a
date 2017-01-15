@@ -15,7 +15,7 @@
 <html>
     <head>
         <%@ include file="/TEMPLATE/head.jsp" %>
-        <title>Maderas en rollo</title>
+        <title>Balance de cuenta</title>
     </head>
     <body>
         <!--menu-->
@@ -69,6 +69,14 @@
                                                     + "<td></td>"
                                                     + "<th style='text-align: left;'>Cuenta por cobrar</th>"
                                                     + "<td style='text-align: right;'> + " + balance.getCuenta_por_cobrar() + "</td>"
+                                                    + "</tr><tr>"
+                                                    + "<td></td>"
+                                                    + "<th style='text-align: left;'>Anticipo de clientes</th>"
+                                                    + "<td style='text-align: right;'> + " + balance.getAnticipo_cliente()+ "</td>"
+                                                    + "</tr><tr>"
+                                                    + "<td></td>"
+                                                    + "<th style='text-align: left;'>Anticipo a proveedores</th>"
+                                                    + "<td style='text-align: right;'> - " + balance.getAnticipo_proveedor()+ "</td>"
                                                     + "</tr><tr>"
                                                     + "<td></td>"
                                                     + "<th style='text-align: left;'>Préstamo</th>"

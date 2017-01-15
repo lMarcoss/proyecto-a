@@ -54,6 +54,8 @@ public class BalanceCuentaCRUD extends Conexion {
         balance.setGastos(rs.getString("gastos"));
         balance.setCuenta_por_pagar(rs.getString("cuenta_por_pagar"));
         balance.setCuenta_por_cobrar(rs.getString("cuenta_por_cobrar"));
+        balance.setAnticipo_proveedor(rs.getString("anticipo_proveedor"));
+        balance.setAnticipo_cliente(rs.getString("anticipo_cliente"));
         balance.setPagos_compra(rs.getString("pagos_compra"));
         balance.setVenta_en_efectivo(rs.getString("venta_en_efectivo"));
         balance.setPrestamo(rs.getString("prestamo"));
