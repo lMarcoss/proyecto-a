@@ -49,21 +49,25 @@ BEGIN
     DECLARE _volumen_total_old DECIMAL(15,3);
     
     -- Verificamos si existe los costos de clasificación madera entrada
+    -- : si existe consultamos costos nuevos
     IF NOT EXISTS (SELECT costo FROM CLASIFICACION_M_ROLLO WHERE clasificacion = 'Primario' AND id_proveedor = NEW.id_proveedor) THEN
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Clasificación primaria no existe';
-    END IF;
-    IF NOT EXISTS (SELECT costo FROM CLASIFICACION_M_ROLLO WHERE clasificacion = 'Secundario' AND id_proveedor = NEW.id_proveedor) THEN
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Clasificación secundaria no existe';
-    END IF;
-    IF NOT EXISTS (SELECT costo FROM CLASIFICACION_M_ROLLO WHERE clasificacion = 'Terciario' AND id_proveedor = NEW.id_proveedor) THEN
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Clasificación terciaria no existe';
+        SET _costo_primario = OLD.costo_primario;
+	ELSE -- EXISTE
+		SELECT costo INTO _costo_primario FROM CLASIFICACION_M_ROLLO WHERE clasificacion = 'Primario' AND id_proveedor = NEW.id_proveedor;
     END IF;
     
-	-- consultamos los costos de cada tipo de volumen;
-    SELECT costo INTO _costo_primario FROM CLASIFICACION_M_ROLLO WHERE clasificacion = 'Primario' AND id_proveedor = NEW.id_proveedor;
-    SELECT costo INTO _costo_secundario FROM CLASIFICACION_M_ROLLO WHERE clasificacion = 'Secundario' AND id_proveedor = NEW.id_proveedor;
-    SELECT costo INTO _costo_terciario FROM CLASIFICACION_M_ROLLO WHERE clasificacion = 'Terciario' AND id_proveedor = NEW.id_proveedor;
-	
+    IF NOT EXISTS (SELECT costo FROM CLASIFICACION_M_ROLLO WHERE clasificacion = 'Secundario' AND id_proveedor = NEW.id_proveedor) THEN
+		SET _costo_secundario = OLD.costo_secundario;
+	ELSE -- EXISTE
+		SELECT costo INTO _costo_secundario FROM CLASIFICACION_M_ROLLO WHERE clasificacion = 'Secundario' AND id_proveedor = NEW.id_proveedor;
+    END IF;
+    
+    IF NOT EXISTS (SELECT costo FROM CLASIFICACION_M_ROLLO WHERE clasificacion = 'Terciario' AND id_proveedor = NEW.id_proveedor) THEN
+		SET _costo_terciario = OLD.costo_terciario;
+	ELSE -- EXISTE
+		SELECT costo INTO _costo_terciario FROM CLASIFICACION_M_ROLLO WHERE clasificacion = 'Terciario' AND id_proveedor = NEW.id_proveedor;
+    END IF;
+    	
     -- actualizamos los costo de volumen madera en cada EntradaMadera
     SET NEW.costo_primario = _costo_primario;
     SET NEW.costo_secundario = _costo_secundario;

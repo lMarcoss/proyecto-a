@@ -48,9 +48,9 @@ public class EntradaMaderaAserradaCRUD extends Conexion implements OperacionesCR
         List<EntradaMaderaAserrada> produccionMaderas;
         String consulta;
         if (rol.equals("Administrador")) {
-            consulta = "SELECT * FROM V_ENTRADA_M_ASERRADA WHERE id_administrador = ? ORDER BY fecha DESC";
+            consulta = "SELECT * FROM V_ENTRADA_M_ASERRADA WHERE id_administrador = ? ORDER BY id_entrada DESC";
         } else {
-            consulta = "SELECT * FROM V_ENTRADA_M_ASERRADA WHERE id_administrador = ? AND fecha = CURDATE() ORDER BY fecha DESC";
+            consulta = "SELECT * FROM V_ENTRADA_M_ASERRADA WHERE id_administrador = ? AND fecha = CURDATE() ORDER BY id_entrada DESC";
         }
         try {
             this.abrirConexion();

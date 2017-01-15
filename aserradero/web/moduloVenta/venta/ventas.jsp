@@ -4,7 +4,7 @@
     Author     : lmarcoss
 --%>
 
-<%@page import="entidades.Venta"%>
+<%@page import="entidades.venta.Venta"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
@@ -69,12 +69,8 @@
                             +"<td>"+venta.getId_venta()+"</td>"
                             +"<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona="+venta.getId_cliente()+"\">"+venta.getId_cliente()+"</a></td>"
                             +"<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona="+venta.getId_empleado()+"\">"+venta.getId_empleado()+"</a></td>"
-                            +"<td>"+venta.getEstatus()+"</td>"
                             +"<td>"+venta.getTipo_venta()+"</td>"
-                            +"<td>"+venta.getTipo_pago()+"</td>"
-                            +"<td><a href=\"/aserradero/VentaController?action=ver_ticket&id_venta="+venta.getId_venta()+"&id_cliente="+venta.getId_cliente()+"&tipo_venta="+venta.getTipo_venta()+"&tipo_ticket=costo\">ticketCosto</a></td>"
-                            +"<td><a href=\"/aserradero/VentaController?action=ver_ticket&id_venta="+venta.getId_venta()+"&id_cliente="+venta.getId_cliente()+"&tipo_venta="+venta.getTipo_venta()+"&tipo_ticket=sin_costo\">ticketSinCosto</a></td>"
-                            +"<td><a href=\"/aserradero/VentaController?action=cobrar_venta&id_venta="+venta.getId_venta()+"&id_cliente="+venta.getId_cliente()+"&estatus="+venta.getEstatus()+"&tipo_venta="+venta.getTipo_venta()+"\">Cobrar venta</a></td>"
+                            + "<td><a href=\"/aserradero/VentaController?action=modificar&id_venta=" + venta.getId_venta() + "&tipo_venta=Mayoreo\">Modificar pago</a></td>"
                             + "<td><a href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/VentaController?action=eliminar&id_venta="+venta.getId_venta()+"';};\">Eliminar</a></td>"
                         + "</tr>" );
                         i++;

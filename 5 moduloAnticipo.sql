@@ -23,14 +23,15 @@ FROM ANTICIPO_CLIENTE AS A;
 -- vista de anticipo proveedores
 DROP VIEW IF EXISTS VISTA_ANTICIPO_PROVEEDOR;
 CREATE VIEW VISTA_ANTICIPO_PROVEEDOR AS
-SELECT id_anticipo_P,
-		fecha,
-        id_proveedor,
-        (SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE PERSONA.id_persona = SUBSTRING(ANTICIPO_PROVEEDOR.id_proveedor,1,18)) as proveedor,
-        id_empleado,
-        (SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE PERSONA.id_persona = SUBSTRING(ANTICIPO_PROVEEDOR.id_empleado,1,18)) as empleado,
-        (SELECT id_jefe FROM EMPLEADO WHERE id_empleado = ANTICIPO_PROVEEDOR.id_empleado) as id_jefe,
-        monto_anticipo
+SELECT 
+	id_anticipo_p,
+	fecha,
+	id_proveedor,
+	(SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE PERSONA.id_persona = SUBSTRING(ANTICIPO_PROVEEDOR.id_proveedor,1,18)) as proveedor,
+	id_empleado,
+	(SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE PERSONA.id_persona = SUBSTRING(ANTICIPO_PROVEEDOR.id_empleado,1,18)) as empleado,
+	(SELECT id_jefe FROM EMPLEADO WHERE id_empleado = ANTICIPO_PROVEEDOR.id_empleado) as id_jefe,
+	monto_anticipo
 FROM ANTICIPO_PROVEEDOR;
 
 -- Submódulo cuenta por cobrar y pagar a proveedores -- Submódulo cuenta por cobrar y pagar a proveedores-- Submódulo cuenta por cobrar y pagar a proveedores
@@ -70,7 +71,7 @@ BEGIN
     END IF;
 
     
-    RETURN (_monto_madera - _pago);
+    RETURN (- _monto_madera + _pago);
 END;//
 DELIMITER ;
 
@@ -104,7 +105,7 @@ SELECT
 	id_proveedor,
     proveedor,
     id_jefe,
-    ROUND(((SELECT C_ANTICIPO_PROVEEDOR(id_proveedor))-(SELECT C_MADERA_ENTRADA_ROLLO(id_proveedor))),2) AS monto
+    ROUND(((SELECT C_MADERA_ENTRADA_ROLLO(id_proveedor)) + (SELECT C_ANTICIPO_PROVEEDOR(id_proveedor)) ),2) AS monto
 FROM PERSONAL_PROVEEDOR;
 
 -- Cuentas por pagar a proveedores
@@ -126,7 +127,6 @@ SELECT
     id_jefe,
     ABS(monto) AS monto
 FROM CUENTAS_PROVEEDOR WHERE monto > 0;
-
 -- Submódulo cuentas por cobrar y pagar de clientes -- Submódulo cuentas por cobrar y pagar de clientes -- Submódulo cuentas por cobrar y pagar de clientes 
 -- Submódulo cuentas por cobrar y pagar de clientes -- Submódulo cuentas por cobrar y pagar de clientes -- Submódulo cuentas por cobrar y pagar de clientes 
 

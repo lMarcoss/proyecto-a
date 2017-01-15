@@ -58,9 +58,9 @@ public class EntradaMaderaRolloCRUD extends Conexion implements OperacionesCRUD 
         List<EntradaMaderaRollo> entradas = null;
         String consulta;
         if (rol.equals("Administrador")) {
-            consulta = "SELECT * FROM VISTA_ENTRADA_M_ROLLO WHERE id_jefe = ? ORDER BY fecha desc";
+            consulta = "SELECT * FROM VISTA_ENTRADA_M_ROLLO WHERE id_jefe = ? ORDER BY fecha DESC, id_entrada DESC";
         } else {
-            consulta = "SELECT * FROM VISTA_ENTRADA_M_ROLLO WHERE id_jefe = ? AND fecha = CURDATE() ORDER BY fecha desc";
+            consulta = "SELECT * FROM VISTA_ENTRADA_M_ROLLO WHERE id_jefe = ? AND fecha = CURDATE() ORDER BY fecha DESC, id_entrada DESC";
         }
         try {
             this.abrirConexion();
