@@ -19,33 +19,41 @@
     </head>
     <body>
         <!--menu-->
-        <%@ include file="/TEMPLATE/menu.jsp" %>
-        
-        <!-- ******************* Formulario de registro-->
-        <div>
-            <form action="/aserradero/PagoLuzController?action=insertar" method="post" id="formregistro">
-                <h3>Agregar pago</h3>
-                <fieldset id="user-details">
-                    <table>
-                        <tr>
-                            <td style="padding-left: 10px;"><label for="fecha">Fecha:</label></td>
-                            <td style="padding-left: 10px;"><input type="date" name="fecha" required="" value="<%=fecha%>"/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Monto:</label></td>
-                            <td style="padding-left: 10px;"><input type="number" step="0.01" min="0.01" max="999999.99" name="monto" required="" /></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label for="observacion">Observación:</label></td>
-                            <td style="padding-left: 10px;"><input type="text" name="observacion" maxlength="249"/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><a href="/aserradero/PagoLuzController?action=listar"><input type="button" value="Cancelar"/></a> </td>
-                            <td style="padding-left: 10px;"><input type="submit" value="Guardar"/></td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </form>
-        </div><!--Fin Formulario de registro-->
+        <%@ include file="/TEMPLATE/menu.jsp" %> <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Nuevo registro</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Rellene los campos de manera correcta</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="/aserradero/PagoLuzController?action=insertar" method="post" id="formregistro">
+                                <div class="form-group">
+                                    <label class="control-label"  for="fecha">Fecha:</label>
+                                    <input type="date" class="form-control" name="fecha" required="" value="<%=fecha%>"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" >Monto:</label>
+                                    <input type="number" class="form-control" step="0.01" min="0.01" max="999999.99" name="monto" required="" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"  for="observacion">Observación:</label>
+                                    <input type="text" class="form-control" name="observacion" maxlength="249"/>
+                                </div>
+                                <div class="form-group">
+                                    <a href="/aserradero/PagoLuzController?action=listar"><input type="button" class="btn btn-warning" value="Cancelar"/></a>
+                                    <input type="submit" class="btn btn-success" value="Guardar"/>
+                                </div>
+                            </form>
+                        </div><!--panel body-->
+                    </div><!--panel-->
+                </div><!--col-md-12-->
+            </div><!--row-->
+        </div><!--<div class="container">-->
     </body>
 </html>
