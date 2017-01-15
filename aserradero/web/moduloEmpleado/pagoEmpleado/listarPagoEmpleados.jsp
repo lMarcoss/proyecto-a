@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : pagoEmpleados
     Created on : 29/09/2016, 08:02:31 AM
     Author     : Marcos
@@ -24,60 +24,70 @@
         <%}else{%>
             <%@ include file="/TEMPLATE/menu.jsp" %>
         <%}%>
-        
-        <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>"
-        
-        <!-- ************************** opción de búsqueda-->
-        <div>
-            <form method="POST" action="/aserradero/PagoEmpleadoController?action=buscar">
-                <table class="table-condensed">
-                    <tr>
-                        <td>
-                            <select name="nombre_campo" >
-                            <option value="fecha">Fecha</option>
-                            <option value="empleado">Empleado</option>
-                            <option value="monto">Monto</option>
-                            <option value="observacion">Observación</option>
-                        </select>
-                        </td>
-                        <td><input type="text" name="dato" placeholder="Escriba su búsqueda"></td>
-                        <td colspan="2"><input type="submit" value="Buscar"></td>
-                    </tr>
-                </table>
-            </form>
-        </div> <!-- Fin opción de búsqueda-->
-        
-        <!-- ************************* Resultado Consulta-->
-        <div>
-            <table class="table-condensed">
-                    <tr>
-                        <th>N°</th>
-                        <th>Fecha</th>
-                        <th>Empleado</th>
-                        <th>Monto</th>
-                        <th>Observacion</th>
-                        <th> </th>
-                        <th> </th>
-                    </tr>
-                    <%
-                        int i=0;
-                        for (PagoEmpleado pagoEmpleado : pagoEmpleados) {
-                            out.print("<tr>"
-                                +"<td>"+(i+1)+"</td>"
-                                +"<td>"+pagoEmpleado.getFecha()+"</td>"    
-                                +"<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona="+pagoEmpleado.getId_empleado()+"\">"+pagoEmpleado.getEmpleado()+"</a></td>"
-                                +"<td>"+pagoEmpleado.getMonto()+"</td>"
-                                +"<td>"+pagoEmpleado.getObservacion()+"</td>"
-                                +"<td><a href=\"/aserradero/PagoEmpleadoController?action=modificar&id_pago_empleado="+pagoEmpleado.getId_pago_empleado()+"\">Modificar</a></td>"
-                                + "<td><a href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/PagoEmpleadoController?action=eliminar&id_pago_empleado="+pagoEmpleado.getId_pago_empleado()+"';};\">Eliminar</a></td>"
-                            + "</tr>" );
-                            i++;
-                        }
-                    %>
-            </table>
-            <div>
-                <input type="button" value="Agregar pago empleado" onClick=" window.location.href='/aserradero/PagoEmpleadoController?action=nuevo' ">
+
+        <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Registros de pagos a empleados</h2>
+                </div>
             </div>
-        </div><!-- Resultado Consulta-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Si el registro  que busaca no aparece, agreguelo</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-busc">
+                                <form method="POST" action="/aserradero/PagoEmpleadoController?action=buscar">
+                                    <select name="nombre_campo" class="input-busc" >
+                                        <option value="fecha">Fecha</option>
+                                        <option value="empleado">Empleado</option>
+                                        <option value="monto">Monto</option>
+                                        <option value="observacion">Observación</option>
+                                    </select>
+                                    <input type="text" class="input-busc" name="dato" placeholder="Escriba su búsqueda"></td>
+                                    <input type="submit" class="btn btn-success" value="Buscar">
+                                </form>
+                            </div>
+                            <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>N°</th>
+                                        <th>Fecha</th>
+                                        <th>Empleado</th>
+                                        <th>Monto</th>
+                                        <th>Observacion</th>
+                                        <th> </th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        int i=0;
+                                        for (PagoEmpleado pagoEmpleado : pagoEmpleados) {
+                                            out.print("<tr>"
+                                                +"<td>"+(i+1)+"</td>"
+                                                +"<td>"+pagoEmpleado.getFecha()+"</td>"
+                                                +"<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona="+pagoEmpleado.getId_empleado()+"\">"+pagoEmpleado.getEmpleado()+"</a></td>"
+                                                +"<td>"+pagoEmpleado.getMonto()+"</td>"
+                                                +"<td>"+pagoEmpleado.getObservacion()+"</td>"
+                                                +"<td><a class='btn btn-warning' href=\"/aserradero/PagoEmpleadoController?action=modificar&id_pago_empleado="+pagoEmpleado.getId_pago_empleado()+"\">Modificar</a></td>"
+                                                + "<td><a class='btn-danger btn' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/PagoEmpleadoController?action=eliminar&id_pago_empleado="+pagoEmpleado.getId_pago_empleado()+"';};\">Eliminar</a></td>"
+                                            + "</tr>" );
+                                            i++;
+                                        }
+                                    %>
+                                </tbody>
+                            </table>
+                            <div class="agregar-element">
+                                <input type="button" class="btn btn-primary" value="Agregar pago empleado" onClick=" window.location.href='/aserradero/PagoEmpleadoController?action=nuevo' ">
+                            </div>
+                        </div><!--panel body-->
+                    </div><!--panel-->
+                </div><!--col-md-12-->
+            </div><!--row-->
+        </div><!--<div class="container">-->
     </body>
 </html>

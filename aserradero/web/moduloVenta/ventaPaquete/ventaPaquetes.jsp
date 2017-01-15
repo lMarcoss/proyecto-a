@@ -28,7 +28,7 @@
             <table>
                 <tr>
                     <td>
-                        <select name="nombre_campo" >
+                        <select name="nombre_campo" class="input-busc" >
                             <option value="fecha">Fecha</option>
                             <option value="id_venta">Id_venta</option>
                             <option value="cliente">Cliente</option>
@@ -37,8 +37,8 @@
                             <option value="empleado">Registró</option>
                         </select>
                     </td>
-                    <td><input type="search" name="dato" placeholder="Escriba su búsqueda"></td>
-                    <td colspan="2"><input type="submit" value="Buscar"></td>
+                    <input type="search" name="dato" placeholder="Escriba su búsqueda" class="input-busc">
+                    <input type="submit" value="Buscar" class="btn btn-success"></td>
                 </tr>
             </table>
         </form>

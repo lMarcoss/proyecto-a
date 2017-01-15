@@ -28,7 +28,7 @@
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>">
-        <div class="container" style="margin-top:60px;">
+        <div class="container" >
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">Listado de vehículos</h1>
@@ -40,7 +40,7 @@
                         <h3 class="panel-title">Si el vehículo no aparece, agréguelo</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="form-group form-busc" >
+                        <div class="form-busc" >
                             <form method="POST" action="/aserradero/VehiculoController?action=buscar" >
                                 <select name="nombre_campo" class="input-busc">
                                     <option value="matricula">Matrícula</option>
@@ -86,7 +86,7 @@
                                         +"<td>"+vehiculo.getModelo()+"</td>"
                                         +"<td>"+vehiculo.getCosto()+"</td>"
                                         +"<td>"+vehiculo.getEmpleado()+"</td>"
-                                        +"<td><a class=\"btn btn-info\" href=\"/aserradero/VehiculoController?action=modificar&id_vehiculo="+vehiculo.getId_vehiculo()+"\">Modificar</a></td>"
+                                        +"<td><a class=\"btn btn-warning\" href=\"/aserradero/VehiculoController?action=modificar&id_vehiculo="+vehiculo.getId_vehiculo()+"\">Modificar</a></td>"
                                         + "<td><a class=\"btn btn-danger\" href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/VehiculoController?action=eliminar&id_vehiculo="+vehiculo.getId_vehiculo()+"';};\">Eliminar</a></td>"
                                     + "</tr>" );
                                     i++;

@@ -31,7 +31,7 @@
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
         <script src="/aserradero/js/terreno/selector_estadoTerreno.js"></script>
-        <div class="container" style="margin-top: 60px;">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <h2>REGISTRO DE UN NUEVO VEHÍCULO</h2>
