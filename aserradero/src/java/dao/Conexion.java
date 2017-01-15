@@ -18,7 +18,7 @@ public class Conexion {
     
     // base de datos credenciales
     private final String USER = "root";
-    private final String PASSWORD = "root";
+    private final String PASSWORD = "Ricardo03m*";
     
     public void abrirConexion() throws Exception{
         try{
