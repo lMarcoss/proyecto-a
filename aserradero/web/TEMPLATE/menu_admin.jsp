@@ -137,7 +137,7 @@
                     <ul class="dropdown-menu">
                         <!--<li class="reporte_compra"><a href="/aserradero/BalanceCuentaController?action=listar">Cuenta inicial</a></li>-->
                         <li class="reporte_compra"><a href="#">Cuenta inicial</a></li>
-                        <li class="reporte_compra"><a href="#">Balance cuenta</a></li>
+                        <li class="reporte_compra"><a href="/aserradero/BalanceCuentaController?action=listar">Balance cuenta</a></li>
                     </ul>
                 </li>
                 <li class="cta"><a href="/aserradero/Iniciar?action=cerrar_sesion">Salir</a></li>

@@ -148,6 +148,10 @@
         <servlet-name>TerrenoController</servlet-name>
         <servlet-class>controlador.registros.bienesInmuebles.TerrenoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BalanceCuentaController</servlet-name>
+        <servlet-class>controlador.cuenta.BalanceCuentaController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/Iniciar</url-pattern>
@@ -291,6 +295,10 @@
     <servlet-mapping>
         <servlet-name>TerrenoController</servlet-name>
         <url-pattern>/TerrenoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BalanceCuentaController</servlet-name>
+        <url-pattern>/BalanceCuentaController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
