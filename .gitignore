@@ -10,7 +10,7 @@
 #otros
 /aserradero/dist/
 /aserradero/build/
-/aserradero/src/java/dao/Conexion.java
+aserradero/src/java/dao/Conexion.java
 /aserradero/nbproject/build-impl.xml
 /aserradero/nbproject/genfiles.properties
 /aserradero/nbproject/private/private.properties
