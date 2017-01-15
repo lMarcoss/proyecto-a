@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : prestamos
     Created on : 06-nov-2016, 0:57:20
     Author     : lmarcoss
@@ -54,8 +54,6 @@
                                     <input type="submit" class="btn btn-success" value="Buscar">
                                 </form>
                             </div>
-
-
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                 <th>N°</th>
@@ -82,8 +80,8 @@
                                                     + "<td>" + prestamo.getMonto_por_pagar() + "</td>"
                                                     + "<td>" + prestamo.getInteres() + "%" + "</td>"
                                                     + "<td>" + prestamo.getInteres_mesual() + "</td>"
-                                                    + "<td><a href=\"/aserradero/PrestamoController?action=modificar&id_prestamo=" + prestamo.getId_prestamo() + "\">Modificar</a></td>"
-                                                    + "<td><a href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/PrestamoController?action=eliminar&id_prestamo=" + prestamo.getId_prestamo() + "';};\">Eliminar</a></td>"
+                                                    + "<td><a class='btn btn-warning' href=\"/aserradero/PrestamoController?action=modificar&id_prestamo=" + prestamo.getId_prestamo() + "\">Modificar</a></td>"
+                                                    + "<td><a class='btn btn-danger' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/PrestamoController?action=eliminar&id_prestamo=" + prestamo.getId_prestamo() + "';};\">Eliminar</a></td>"
                                                     + "</tr>");
                                             i++;
                                         }
