@@ -87,6 +87,7 @@ public class VentaCRUD extends Conexion implements OperacionesCRUD {
         venta.setId_venta(rs.getString("id_venta"));
         venta.setFecha(rs.getDate("fecha"));
         venta.setId_cliente(rs.getString("id_cliente"));
+        venta.setCliente(rs.getString("cliente"));
         venta.setId_empleado(rs.getString("id_empleado"));
         venta.setEstatus(rs.getString("estatus"));
         venta.setTipo_venta(rs.getString("tipo_venta"));
@@ -160,37 +161,17 @@ public class VentaCRUD extends Conexion implements OperacionesCRUD {
     @Override
     public void eliminar(Object objeto) throws Exception {
         Venta venta = (Venta) objeto;
-        if (!ventaPagado(venta)) {
-            try {
-                this.abrirConexion();
-                PreparedStatement st = this.conexion.prepareStatement("DELETE FROM VENTA WHERE id_venta = ?");
-                st.setString(1, venta.getId_venta());
-                st.executeUpdate();
-            } catch (Exception e) {
-                System.out.println(e);
-                throw e;
-            } finally {
-                this.cerrarConexion();
-            }
+        try {
+            this.abrirConexion();
+            PreparedStatement st = this.conexion.prepareStatement("DELETE FROM VENTA WHERE id_venta = ?");
+            st.setString(1, venta.getId_venta());
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
         }
-
-    }
-
-    public boolean ventaPagado(Venta venta) throws Exception {
-        boolean pagado = false;
-        this.abrirConexion();
-        try (PreparedStatement st = this.conexion.prepareStatement("SELECT id_venta FROM VENTA WHERE id_venta = ? AND id_cliente = ? AND estatus = ?")) {
-            st.setString(1, venta.id_venta);
-            st.setString(2, venta.id_cliente);
-            st.setString(3, "Pagado");
-            try (ResultSet rs = st.executeQuery()) {
-                while (rs.next()) {
-                    pagado = true;
-                    System.out.println("La venta está pagada en el CRUD");
-                }
-            }
-        }
-        return pagado;
     }
 
     @Override
@@ -575,15 +556,6 @@ public class VentaCRUD extends Conexion implements OperacionesCRUD {
             this.cerrarConexion();
         }
         return monto;
-    }
-
-    public void CuentaPorCobrar(Venta venta) {
-        System.out.println(venta.getId_venta());
-        System.out.println(venta.getId_cliente());
-        System.out.println(venta.getId_empleado());
-        System.out.println(venta.getTipo_venta());
-        System.out.println(venta.getFecha());
-        System.out.println(venta.getEstatus());
     }
 
     public Venta consultarVenta(String id_venta) throws Exception {

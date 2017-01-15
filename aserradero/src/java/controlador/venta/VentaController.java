@@ -89,8 +89,19 @@ public class VentaController extends HttpServlet {
                     case "ticket_sin_costo":
                         ticketSinCosto(request, sesion, response);
                         break;
-                    case "eliminar": // sólo para id's que no aparecen en algún tipo de venta
-                        eliminarVenta(request, sesion, response);
+                    /**
+                     *********Ventas que no aparecen en ventaMayoreo,
+                     * VentaPaquete o VentaExtra *********************
+                     */
+                    case "listar_venta": // sólo para id's que no aparecen en algún tipo de venta
+                        // listar Venta Para Eliminar
+                        listarVentaPEliminar(request, sesion, response);
+                        break;
+                    case "eliminar_venta": // sólo para id's que no aparecen en algún tipo de venta
+                        eliminarVentaPEliminar(request, sesion, response);
+                        break;
+                    case "modificar_venta": // sólo para id's que no aparecen en algún tipo de venta
+                        modificarVentaPEliminar(request, sesion, response);
                         break;
                 }
             } else {
@@ -603,7 +614,33 @@ public class VentaController extends HttpServlet {
         view.forward(request, response);
     }
 
-    private void eliminarVenta(HttpServletRequest request, HttpSession sesion, HttpServletResponse response) {
-        String id_venta = request.getParameter("id_venta");
+    private void listarVentaPEliminar(HttpServletRequest request, HttpSession sesion, HttpServletResponse response) throws Exception {
+        try {
+            VentaCRUD ventaCRUD = new VentaCRUD();
+            List<Venta> listaVentas = (List<Venta>) ventaCRUD.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
+            request.setAttribute("listaVentas", listaVentas);
+            RequestDispatcher view = request.getRequestDispatcher("moduloVenta/venta/ventas.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(VentaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
+    private void eliminarVentaPEliminar(HttpServletRequest request, HttpSession sesion, HttpServletResponse response) throws IOException {
+        try {
+            Venta venta = new Venta();
+            venta.setId_venta(request.getParameter("id_venta"));;
+            VentaCRUD ventaCRUD = new VentaCRUD();
+            ventaCRUD.eliminar(venta);
+            response.sendRedirect("/aserradero/VentaController?action=listar_venta");
+        } catch (Exception ex) {
+            response.sendRedirect("/aserradero/VentaController?action=listar_venta");
+            Logger.getLogger(VentaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void modificarVentaPEliminar(HttpServletRequest request, HttpSession sesion, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
