@@ -335,16 +335,19 @@ DROP VIEW IF EXISTS CUENTA_TOTAL;
 CREATE VIEW CUENTA_TOTAL AS 
 SELECT 
 	id_administrador,
-    FORMAT(( cuenta_inicial + (SELECT VALOR_INMUEBLES(id_administrador) -
+    FORMAT(( cuenta_inicial + 
+    (SELECT VALOR_INMUEBLES(id_administrador) +
+    (SELECT C_INVENTARIO_M_ROLLO(id_administrador))+
+    (SELECT C_INVENTARIO_M_ASERRADA(id_administrador)) +
+    (SELECT C_PAGOS_VENTA(id_administrador)) +
+    (SELECT C_CUENTAS_POR_COBRAR(id_administrador)) +
+    (SELECT C_T_ANTICIPO_CLIENTE(id_administrador)) -
+    (SELECT C_T_ANTICIPO_PROVEEDOR(id_administrador)) -
+    (SELECT C_PRESTAMOS(id_administrador)) -
     (SELECT C_PAGOS_EMPLEADO(id_administrador)) -
     (SELECT C_GASTOS(id_administrador)) -
-     (SELECT C_CUENTAS_POR_PAGAR(id_administrador)) + 
-     (SELECT C_T_ANTICIPO_CLIENTE(id_administrador)) -
-     (SELECT C_T_ANTICIPO_PROVEEDOR(id_administrador)) -
-    (SELECT C_CUENTAS_POR_COBRAR(id_administrador)) -
-    (SELECT C_PAGOS_COMPRA(id_administrador)) +
-    (SELECT C_PAGOS_VENTA(id_administrador)) -
-    (SELECT C_PRESTAMOS(id_administrador)) +
-    (SELECT C_INVENTARIO_M_ROLLO(id_administrador))+
-    (SELECT C_INVENTARIO_M_ASERRADA(id_administrador)))),2) AS cuenta_total
+	(SELECT C_CUENTAS_POR_PAGAR(id_administrador)) -
+    (SELECT C_PAGOS_COMPRA(id_administrador)))),2) AS cuenta_total
 FROM ADMINISTRADOR;
+
+SELECT * FROM BALANCE_CUENTA;
