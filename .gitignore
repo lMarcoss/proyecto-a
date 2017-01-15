@@ -8,8 +8,8 @@
 *.war
 *.ear
 #otros
-aserradero/dist/
-aserradero/build/
+/aserradero/dist/
+/aserradero/build/
 aserradero/nbproject/build-impl.xml
 aserradero/nbproject/genfiles.properties
 aserradero/nbproject/private/private.properties

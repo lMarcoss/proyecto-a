@@ -80,7 +80,7 @@
                                         }
                                         if (inventarioTotal != null) {
                                             out.print("<tr>"
-                                                    + "<td></td>"
+                                                    + "<td>"+(i+1)+"</td>"
                                                     + "<td><b>Total</b></td>"
                                                     + "<td><b>" + inventarioTotal.getNum_piezas()+ "</b></td>"
                                                     + "<td></td>"
