@@ -89,6 +89,9 @@ public class VentaController extends HttpServlet {
                     case "ticket_sin_costo":
                         ticketSinCosto(request, sesion, response);
                         break;
+                    case "eliminar": // sólo para id's que no aparecen en algún tipo de venta
+                        eliminarVenta(request, sesion, response);
+                        break;
                 }
             } else {
                 try {
@@ -598,5 +601,9 @@ public class VentaController extends HttpServlet {
         request.setAttribute("id_venta", venta.getId_venta());
         RequestDispatcher view = request.getRequestDispatcher("moduloVenta/venta/ticketVentaExtra.jsp");
         view.forward(request, response);
+    }
+
+    private void eliminarVenta(HttpServletRequest request, HttpSession sesion, HttpServletResponse response) {
+        String id_venta = request.getParameter("id_venta");
     }
 }

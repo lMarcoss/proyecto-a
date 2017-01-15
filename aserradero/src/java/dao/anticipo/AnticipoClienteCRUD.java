@@ -37,9 +37,9 @@ public class AnticipoClienteCRUD extends Conexion implements OperacionesCRUD{
         List<AnticipoCliente> anticipoClientes;
         String consulta;
         if(rol.equals("Administrador")){
-            consulta = "SELECT * FROM VISTA_ANTICIPO_CLIENTE WHERE id_jefe = ? ORDER BY fecha DESC";
+            consulta = "SELECT * FROM VISTA_ANTICIPO_CLIENTE WHERE id_jefe = ? ORDER BY id_anticipo_c DESC";
         }else{
-            consulta = "SELECT * FROM VISTA_ANTICIPO_CLIENTE WHERE id_jefe = ? AND fecha = CURDATE() ORDER BY fecha DESC";
+            consulta = "SELECT * FROM VISTA_ANTICIPO_CLIENTE WHERE id_jefe = ? AND fecha = CURDATE() ORDER BY id_anticipo_c DESC";
         }
         try{
             this.abrirConexion();

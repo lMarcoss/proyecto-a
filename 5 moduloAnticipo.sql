@@ -23,14 +23,15 @@ FROM ANTICIPO_CLIENTE AS A;
 -- vista de anticipo proveedores
 DROP VIEW IF EXISTS VISTA_ANTICIPO_PROVEEDOR;
 CREATE VIEW VISTA_ANTICIPO_PROVEEDOR AS
-SELECT id_anticipo_P,
-		fecha,
-        id_proveedor,
-        (SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE PERSONA.id_persona = SUBSTRING(ANTICIPO_PROVEEDOR.id_proveedor,1,18)) as proveedor,
-        id_empleado,
-        (SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE PERSONA.id_persona = SUBSTRING(ANTICIPO_PROVEEDOR.id_empleado,1,18)) as empleado,
-        (SELECT id_jefe FROM EMPLEADO WHERE id_empleado = ANTICIPO_PROVEEDOR.id_empleado) as id_jefe,
-        monto_anticipo
+SELECT 
+	id_anticipo_p,
+	fecha,
+	id_proveedor,
+	(SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE PERSONA.id_persona = SUBSTRING(ANTICIPO_PROVEEDOR.id_proveedor,1,18)) as proveedor,
+	id_empleado,
+	(SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE PERSONA.id_persona = SUBSTRING(ANTICIPO_PROVEEDOR.id_empleado,1,18)) as empleado,
+	(SELECT id_jefe FROM EMPLEADO WHERE id_empleado = ANTICIPO_PROVEEDOR.id_empleado) as id_jefe,
+	monto_anticipo
 FROM ANTICIPO_PROVEEDOR;
 
 -- Submódulo cuenta por cobrar y pagar a proveedores -- Submódulo cuenta por cobrar y pagar a proveedores-- Submódulo cuenta por cobrar y pagar a proveedores
