@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : cuentaPorCobrarProveedores
     Created on : 27/12/2016, 06:07:36 PM
     Author     : lmarcoss
@@ -19,45 +19,53 @@
     <body>
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
-
-
-        <!-- ************************** opción de búsqueda-->
-        <form method="POST" action="/aserradero/CuentaPorCobrarController?action=buscar_proveedor" >
-            <table class="table-condensed">
-                <tr>
-                    <td>
-                        <select name="nombre_campo" >
-                            <option value="proveedor">Proveedor</option>
-                            <option value="monto">Monto</option>
-                        </select>
-                    </td>
-                    <td><input type="text" name="dato" placeholder="Escriba su búsqueda"></td>
-                    <td colspan="2"><input type="submit" value="Buscar"></td>
-                </tr>
-            </table>
-        </form>
-    </div> <!-- Fin opción de búsqueda-->
-
-    <!-- ************************* Resultado Consulta-->
-    <div>
-        <table class="table-condensed">
-            <tr>
-                <th>N°</th>
-                <th>Proveedor</th>
-                <th>Monto </th>
-            </tr>
-            <%
-                int i = 0;
-                for (CuentaPorCobrar cuentaPorCobrar : cuentaPorCobrares) {
-                    out.print("<tr>"
-                            + "<td>" + (i + 1) + "</td>"
-                            + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + cuentaPorCobrar.getId_persona().substring(0, 18) + "\">" + cuentaPorCobrar.getPersona() + "</a></td>"
-                            + "<td>" + cuentaPorCobrar.getMonto() + "</td>"
-                            + "</tr>");
-                    i++;
-                }
-            %>
-        </table>
-    </div><!-- Resultado Consulta-->
-</body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Cuentas por cobrar a proveedores</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Listado de cuentas por cobrar a proveedores</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-busc">
+                                <select name="nombre_campo" class="input-busc">
+                                    <option value="proveedor">Proveedor</option>
+                                    <option value="monto">Monto</option>
+                                </select>
+                                <input type="text" name="dato" class="input-busc" placeholder="Escriba su búsqueda">
+                                <input type="submit" value="Buscar" class="btn btn-success" >
+                            </div>
+                            <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>N°</th>
+                                        <th>Proveedor</th>
+                                        <th>Monto </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        int i = 0;
+                                        for (CuentaPorCobrar cuentaPorCobrar : cuentaPorCobrares) {
+                                            out.print("<tr>"
+                                                    + "<td>" + (i + 1) + "</td>"
+                                                    + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + cuentaPorCobrar.getId_persona().substring(0, 18) + "\">" + cuentaPorCobrar.getPersona() + "</a></td>"
+                                                    + "<td>" + cuentaPorCobrar.getMonto() + "</td>"
+                                                    + "</tr>");
+                                            i++;
+                                        }
+                                    %>
+                                </tbody>
+                            </table>
+                        </div><!--panel body-->
+                    </div><!--panel-->
+                </div><!--col-md-12-->
+            </div><!--row-->
+        </div><!--<div class="container">-->
+    </body>
 </html>
