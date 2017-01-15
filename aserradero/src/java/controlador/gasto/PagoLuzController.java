@@ -144,7 +144,7 @@ public class PagoLuzController extends HttpServlet {
             pagoLuz.setId_pago_luz(request.getParameter("id_pago_luz"));
         }
         pagoLuz.setFecha(request.getParameter("fecha"));
-        pagoLuz.setId_empleado((String) sesion.getAttribute("id_jefe"));
+        pagoLuz.setId_empleado((String) sesion.getAttribute("id_empleado"));
         pagoLuz.setMonto(BigDecimal.valueOf((Double.valueOf(request.getParameter("monto")))));
         pagoLuz.setObservacion(request.getParameter("observacion"));
         return pagoLuz;
