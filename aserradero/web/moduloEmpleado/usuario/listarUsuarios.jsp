@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : usuarios
     Created on : 15-sep-2016, 19:23:13
     Author     : lmarcoss
@@ -27,53 +27,65 @@
         <%}%>
 
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>" >
-
-        <!-- ************************** opción de búsqueda-->
-        <div>
-            <form method="POST" action="/aserradero/UsuarioController?action=buscar">
-                <table>
-                    <tr>
-                        <td>
-                            <select name="nombre_campo" >
-                                <option value="id_empleado">Id empleado</option>
-                                <option value="nombre_usuario">Nombre de usuario</option>
-                                <option value="email">Email</option>
-                            </select>
-                        </td>
-                        <td><input type="text" name="dato" placeholder="Escriba su búsqueda"></td>
-                        <td colspan="2"><input type="submit" value="Buscar"></td>
-                    </tr>
-                </table>
-            </form>
-        </div> <!-- Fin opción de búsqueda-->
-
-        <!-- ************************* Resultado Consulta-->
-        <div>
-            <table class="table-condensed">
-                <tr>
-                    <th>N°</th>
-                    <th>Empleado</th>
-                    <th>Nombre de usuario</th>
-                    <th>Email</th>
-                </tr>
-                <%
-                    int i = 0;
-                    for (Usuario usuario : usuarios) {
-                        out.print("<tr>"
-                                + "<td>" + (i + 1) + "</td>"
-                                + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + usuario.getId_empleado() + "\">" + usuario.getEmpleado() + "</a></td>"
-                                + "<td>" + usuario.getNombre_usuario() + "</td>"
-                                + "<td>" + usuario.getEmail() + "</td>"
-                                + "<td><a href=\"/aserradero/UsuarioController?action=modificar&nombre_usuario=" + usuario.getNombre_usuario() + "\">Cambiar contraseña</a></td>"
-                                + "<td><a href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/UsuarioController?action=eliminar&nombre_usuario=" + usuario.getNombre_usuario() + "';};\">Eliminar</a></td>"
-                                + "</tr>");
-                        i++;
-                    }
-                %>
-            </table>
-            <div>
-                <input type="button" value="Agregar usuario" onClick=" window.location.href = '/aserradero/UsuarioController?action=nuevo'">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Usuarios</h2>
+                </div>
             </div>
-        </div><!-- Resultado Consulta-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Si el usuario que busca no aparece, agréguelo</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-busc">
+                                <form method="POST" action="/aserradero/UsuarioController?action=buscar">
+                                    <select name="nombre_campo" class="input-busc" >
+                                        <option value="id_empleado">Id empleado</option>
+                                        <option value="nombre_usuario">Nombre de usuario</option>
+                                        <option value="email">Email</option>
+                                    </select>
+                                    <input type="text" class="input-busc" name="dato" placeholder="Escriba su búsqueda">
+                                    <input type="submit" class="btn btn-success" value="Buscar">
+                                </form>
+                            </div>
+                            <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>N°</th>
+                                        <th>Empleado</th>
+                                        <th>Nombre de usuario</th>
+                                        <th>Email</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        int i = 0;
+                                        for (Usuario usuario : usuarios) {
+                                            out.print("<tr>"
+                                                    + "<td>" + (i + 1) + "</td>"
+                                                    + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + usuario.getId_empleado() + "\">" + usuario.getEmpleado() + "</a></td>"
+                                                    + "<td>" + usuario.getNombre_usuario() + "</td>"
+                                                    + "<td>" + usuario.getEmail() + "</td>"
+                                                    + "<td><a class='btn btn-primary' href=\"/aserradero/UsuarioController?action=modificar&nombre_usuario=" + usuario.getNombre_usuario() + "\">Cambiar contraseña</a></td>"
+                                                    + "<td><a class='btn btn-danger' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/UsuarioController?action=eliminar&nombre_usuario=" + usuario.getNombre_usuario() + "';};\">Eliminar</a></td>"
+                                                    + "</tr>");
+                                            i++;
+                                        }
+                                    %>
+                                </tbody>
+                            </table>
+                            <div class="agregar-element">
+                                <input type="button" class="btn btn-primary" value="Agregar usuario" onClick=" window.location.href = '/aserradero/UsuarioController?action=nuevo'">
+                            </div>
+                        </div><!--panel body-->
+                    </div><!--panel-->
+                </div><!--col-md-12-->
+            </div><!--row-->
+        </div><!--<div class="container">-->
     </body>
 </html>

@@ -27,7 +27,7 @@
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>">
-        <div class="container" style="margin-top:60px;">
+        <div class="container" >
             <div class="row">
                 <div class="col-md-12">
                     <h2 class="page-header">LISTADO DE LOCALICADES</h2>
@@ -40,7 +40,7 @@
                         <h3 class="panel-title">Si la persona que busca no aparece en el listado, agréguelo</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="form-group form-busc" >
+                        <div class="form-busc" >
                             <form method="POST" action="/aserradero/LocalidadController?action=buscar">
                                 <select name="nombre_campo" class="input-busc">
                                     <option value="nombre_localidad">Localidad</option>

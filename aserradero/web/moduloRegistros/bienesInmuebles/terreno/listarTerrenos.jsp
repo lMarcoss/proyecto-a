@@ -28,10 +28,10 @@
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>">
-        <div class="container" style="margin-top:60px;">
+        <div class="container" >
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-header">Listado de terrenos</h1>
+                    <h2 class="page-header">Listado de terrenos</h2>
                 </div>
             </div>
             <div class="row">
@@ -40,7 +40,7 @@
                         <h3 class="panel-title">Si el terreno no aparece, agréguelo</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="form-group form-busc" >
+                        <div class="form-busc" >
                             <form method="POST" action="/aserradero/TerrenoController?action=buscar" >
                                 <select name="nombre_campo" class="input-busc">
                                     <option value="nombre">Nombre</option>
@@ -81,7 +81,7 @@
                                         +"<td>"+terreno.getNombre_localidad()+", "+terreno.getNombre_municipio()+"</td>"
                                         +"<td>"+terreno.getValor_estimado()+"</td>"
                                         +"<td>"+terreno.getEmpleado()+"</td>"
-                                        +"<td><a class=\"btn btn-info\" href=\"/aserradero/TerrenoController?action=modificar&id_terreno="+terreno.getId_terreno()+"\">Modificar</a></td>"
+                                        +"<td><a class=\"btn btn-warning\" href=\"/aserradero/TerrenoController?action=modificar&id_terreno="+terreno.getId_terreno()+"\">Modificar</a></td>"
                                         + "<td><a class=\"btn btn-danger\" href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/TerrenoController?action=eliminar&id_terreno="+terreno.getId_terreno()+"';};\">Eliminar</a></td>"
                                     + "</tr>" );
                                     i++;

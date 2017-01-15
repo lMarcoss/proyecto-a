@@ -29,7 +29,7 @@
         <%}%>
         <%}%>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>" >
-        <div class="container" style="margin-top: 60px;">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <h2>LISTADO DE EMPLEADOS</h2>

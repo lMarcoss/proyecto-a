@@ -39,7 +39,7 @@
                         <h3 class="panel-title">Si el cliente que busca no aparece, agréguelo</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="form-group form-busc" ><!-- Formulario para realizar búsquedas en la base de datos -->
+                        <div class="form-busc" ><!-- Formulario para realizar búsquedas en la base de datos -->
                             <form method="POST" action="/aserradero/ClienteController?action=buscar">
                                 <select name="nombre_campo" class="input-busc">
                                     <option value="cliente">Cliente</option>

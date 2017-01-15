@@ -23,7 +23,7 @@
     <body>
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
-        <div class="container" style="margin-top: 60px;">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <h2>Registrar proveedor</h2>

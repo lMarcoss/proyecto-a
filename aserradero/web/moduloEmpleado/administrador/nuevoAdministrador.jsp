@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : nuevoAdministrador
     Created on : 16-oct-2016, 23:48:46
     Author     : lmarcoss
@@ -26,51 +26,53 @@
         <%}else{%>
             <%@ include file="/TEMPLATE/menu.jsp" %>
         <%}%>
-        
-        <!-- ******************* Formulario de registro-->
-        <div>
-            <form action="/aserradero/EmpleadoController?action=insertar" method="post" id="formregistro">
-                <h3>Registrar administrador</h3>
-                <fieldset id="user-details">
-                    <table>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Administrador:</label></td>
-                            <input type="hidden" name="id_empleado" value="" readonly=""> <!--Se calcula en el CRUD-->
-                            <td style="padding-left: 10px;">
-                                <!-- Seleccionar persona que se va a asignar como empleado-->
-                                <select name="id_persona" required="" title="Si no existe la persona que busca, primero agreguelo en la lista de personas">
-                                    <option></option>
-                                    <%
-                                        for (Persona persona : personas) {
-                                            out.print("<option value='"+persona.getId_persona()+"'>"+persona.getNombre()+"</option>");
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Rol:</label></td>
-                            <td style="padding-left: 10px;">
-                                <select name="rol" required="">
-                                    <option value="Administrador">Administrador</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Estatus</label></td>
-                            <td>
-                                <select name="estatus" required="">
-                                    <option value="Activo">Activo</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><a href="/aserradero/AdministradorController?action=listar"><input type="button" value="Cancelar"/></a> </td>
-                            <td style="padding-left: 10px;"><input type="submit" value="Guardar"/></td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </form>
-        </div><!--Fin Formulario de registro-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Nuevo administrador</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Rellene los campos de manera correcta</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="/aserradero/EmpleadoController?action=insertar" method="post" id="formregistro">
+                                <div class="form-group">
+                                    <label class="control-label">Administrador:</label>
+                                    <input type="hidden" name="id_empleado" value="" readonly=""> <!--Se calcula en el CRUD-->
+                                    <!-- Seleccionar persona que se va a asignar como empleado-->
+                                    <select class="form-control" name="id_persona" required="" title="Si no existe la persona que busca, primero agreguelo en la lista de personas">
+                                        <option></option>
+                                        <%
+                                            for (Persona persona : personas) {
+                                                out.print("<option value='"+persona.getId_persona()+"'>"+persona.getNombre()+"</option>");
+                                            }
+                                        %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Rol:</label>
+                                    <select class="form-control" name="rol" required="">
+                                        <option value="Administrador">Administrador</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Estatus</label>
+                                    <select class="form-control" name="estatus" required="">
+                                        <option value="Activo">Activo</option>
+                                    </select>
+                                <div class="form-group">
+                                    <a href="/aserradero/AdministradorController?action=listar"><input type="button" class="btn btn-warning" value="Cancelar"/></a>
+                                    <input type="submit" class="btn btn-success" value="Guardar"/>
+                                </div>
+                            </form>
+                        </div><!--panel body-->
+                    </div><!--panel-->
+                </div><!--col-md-12-->
+            </div><!--row-->
+        </div><!--<div class="container">-->
     </body>
 </html>

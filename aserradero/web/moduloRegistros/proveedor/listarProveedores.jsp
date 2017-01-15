@@ -27,7 +27,7 @@
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>">
-        <div class="container" style="margin-top:60px;">
+        <div class="container" >
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">Lista de proveedores</h1>
@@ -40,7 +40,7 @@
                             <h3 class="panel-title">Si el vehículo no aparece, agréguelo</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-group form-busc" ><!-- Formulario para realizar búsquedas en la base de datos -->
+                            <div class="form-busc" ><!-- Formulario para realizar búsquedas en la base de datos -->
                                 <form method="POST" action="/aserradero/ProveedorController?action=buscar">
                                     <select name="nombre_campo" class="input-busc">
                                         <option value="proveedor">Proveedor</option>

@@ -27,7 +27,7 @@
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>">
-        <div class="container" style="margin-top:60px;">
+        <div class="container" >
             <div class="row">
                 <div class="col-md-12">
                     <h2 class="page-header">Lista de personas</h2>
@@ -78,7 +78,7 @@
                                                     + "<td>" + persona.getSexo() + "</td>"
                                                     + "<td>" + persona.getFecha_nacimiento() + "</td>"
                                                     + "<td>" + persona.getTelefono() + "</td>"
-                                                    + "<td><a class='btn btn-info' href=\"/aserradero/PersonaController?action=modificar&id_persona=" + persona.getId_persona() + "\">Modificar</a></td>"
+                                                    + "<td><a class='btn btn-warning' href=\"/aserradero/PersonaController?action=modificar&id_persona=" + persona.getId_persona() + "\">Modificar</a></td>"
                                                     + "<td><a class='btn btn-danger' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/PersonaController?action=eliminar&id_persona=" + persona.getId_persona() + "';};\">Eliminar</a></td>" + "</tr>");
                                             i++;
                                         }%>
