@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : actualizarVenta
     Created on : 21-sep-2016, 21:48:48
     Author     : lmarcoss
@@ -33,54 +33,66 @@
     <body>
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Actualizar datos de ventas</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Actualice los campos necesarios y guarde los cambios</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="/aserradero/VentaController?action=actualizar" method="post" id="formregistro">
+                                <div class="lado_derecho">
+                                    <div class="form-group">
+                                        <label>Fecha:</label>
+                                        <input type="date" class="form-control" name="fecha" value="<%=venta.getFecha()%>" min="1920-01-01" required="" readonly=""/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Id venta:</label>
+                                        <input type="text" class="form-control" name="id_venta" value="<%=venta.getId_venta()%>" readonly=""/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Cliente</label>
+                                        <select class="form-control" name="id_cliente" id="id_cliente">
+                                            <option selected="" value="<%=venta.getId_cliente()%>"><%=venta.getCliente()%></option>
+                                        </select>
+                                    </div>
+                                    <input type="hidden" name="id_empleado" id="id_empleado" value="<%=venta.getId_empleado()%>" readonly="">
+                                    <div class="form-group">
+                                        <label>Monto total venta: </label>
+                                        <input type="number" class="form-control" step="0.01" name="monto" id="monto" value="<%=venta.getMonto()%>" readonly="">
+                                    </div>
+                                </div>
+                                <div class="lado_izquierdo">
+                                    <input type="hidden" step="0.01" name="pago_anterior" id="pago_anterior" value="<%=venta.getPago()%>" readonly="">
+                                    <div class="form-group">
+                                        <label>Pago en efectivo:</label>
+                                        <input type="number" class="form-control" name="pago" id="pago" step="0.01" value="<%=venta.getPago()%>" min="0" max="<%=mayor%>" required="" onclick="actualizarPagoVenta()">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tipo venta:</label>
+                                        <select class="form-control" name="tipo_venta" id="tipo_venta">
+                                            <option selected="" value="<%=venta.getTipo_venta()%>"><%=venta.getTipo_venta()%></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <a href="/aserradero/Venta<%=venta.getTipo_venta()%>Controller?action=listar"><input type="button" class="btn btn-warning" value="Cancelar"/></a>
+                                        <input type="submit" class="btn btn-success" value="Guardar"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </div><!--panel body-->
+                    </div><!--panel-->
+                </div><!--col-md-12-->
+            </div><!--row-->
+        </div><!--<div class="container">-->
         <div>
-            <form action="/aserradero/VentaController?action=actualizar" method="post" id="formregistro">
-                <h3>Actualizar datos venta</h3>
-                <fieldset id="user-details">
-                    <table>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Fecha:</label></td>
-                            <td style="padding-left: 10px;"><input type="date" name="fecha" value="<%=venta.getFecha()%>" min="1920-01-01" required="" readonly=""/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Id venta:</label></td>
-                            <td style="padding-left: 10px;"><input type="text" name="id_venta" value="<%=venta.getId_venta()%>" readonly=""/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Cliente</label></td>
-                            <td style="padding-left: 10px;">
-                                <select name="id_cliente" id="id_cliente">
-                                    <option selected="" value="<%=venta.getId_cliente()%>"><%=venta.getCliente()%></option>
-                                </select>
-                        </tr>
-                        <input type="hidden" name="id_empleado" id="id_empleado" value="<%=venta.getId_empleado()%>" readonly="">
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Monto total venta: </label></td>
-                            <td style="padding-left: 10px;">
-                                <input type="number" step="0.01" name="monto" id="monto" value="<%=venta.getMonto()%>" readonly="">
-                            </td>
-                        </tr>
-                        <input type="hidden" step="0.01" name="pago_anterior" id="pago_anterior" value="<%=venta.getPago()%>" readonly="">
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Pago en efectivo:</label></td>
-                            <td style="padding-left: 10px;">
-                                <input type="number" name="pago" id="pago" step="0.01" value="<%=venta.getPago()%>" min="0" max="<%=mayor%>" required="" onclick="actualizarPagoVenta()">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Tipo venta:</label></td>
-                            <td style="padding-left: 10px;">
-                                <select name="tipo_venta" id="tipo_venta">
-                                    <option selected="" value="<%=venta.getTipo_venta()%>"><%=venta.getTipo_venta()%></option>
-                                </select>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><a href="/aserradero/Venta<%=venta.getTipo_venta()%>Controller?action=listar"><input type="button" value="Cancelar"/></a> </td>
-                            <td style="padding-left: 10px;"><input type="submit" value="Guardar"/></td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </form>
+
         </div><!--Fin Formulario de registro-->
     </body>
 </html>
