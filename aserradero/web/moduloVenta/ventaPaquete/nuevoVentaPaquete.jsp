@@ -34,11 +34,11 @@
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
         <!--formulario de registro-->
-        <div id="page-wrapper" style="margin-top: 30px;">
+        <div class="container" >
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Registrar venta por paquete</h1>
+                        <h2 class="page-header">Registrar venta por paquete</h2>
                     </div>
                 </div>
                 <div class="col-md-12">

@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : actualizarVentaExtra
     Created on : 21-sep-2016, 23:43:54
     Author     : lmarcoss
@@ -19,35 +19,44 @@
     <body>
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
-        
-        <div>
-            <form action="/aserradero/VentaExtraController?action=actualizar" method="post" id="formregistro">
-                <h3>Actualizar venta extra</h3>
-                <fieldset id="user-details">
-                    <table>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Id venta:</label></td>
-                            <td style="padding-left: 10px;"><input type="text" name="id_venta" value="<%=ventaExtra.getId_venta()%>" required="" readonly=""/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Tipo:</label></td>
-                            <td style="padding-left: 10px;"><input type="text" name="tipo" value="<%=ventaExtra.getTipo()%>" readonly=""/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Monto</label></td>
-                            <td style="padding-left: 10px;"><input type="number" step="0.01" name="monto" value="<%=ventaExtra.getMonto()%>" required="" min="0.01" max="99999999.99"/></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><label>Observación:</label></td>
-                            <td style="padding-left: 10px;"><textarea name="observacion" required=""><%=ventaExtra.getObservacion()%></textarea></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 10px;"><a href="/aserradero/VentaExtraController?action=detalle&id_venta=<%=ventaExtra.getId_venta()%>"><input type="button" value="Cancelar"/></a> </td>
-                            <td style="padding-left: 10px;"><input type="submit" value="Guardar"/></td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </form>
-        </div><!--Fin Formulario de registro-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Actulizar venta Extra</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Actualice los datos necesarios y guarde los cambios</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="/aserradero/VentaExtraController?action=actualizar" method="post" id="formregistro">
+                                <div class="form-group">
+                                    <label class="control-label">Id venta:</label></td>
+                                    <input type="text" class="form-control" name="id_venta" value="<%=ventaExtra.getId_venta()%>" required="" readonly=""/></td>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Tipo:</label></td>
+                                    <input type="text" class="form-control" name="tipo" value="<%=ventaExtra.getTipo()%>" readonly=""/></td>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Monto</label></td>
+                                    <input class="form-control" type="number" step="0.01" name="monto" value="<%=ventaExtra.getMonto()%>" required="" min="0.01" max="99999999.99"/></td>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Observación:</label></td>
+                                    <textarea name="observacion" class="form-control" required=""><%=ventaExtra.getObservacion()%></textarea></td>
+                                </div>
+                                <div class="form-group">
+                                    <a href="/aserradero/VentaExtraController?action=detalle&id_venta=<%=ventaExtra.getId_venta()%>"><input type="button" class="btn btn-warning" value="Cancelar"/></a> </td>
+                                    <input type="submit" class="btn btn-success" value="Guardar"/>
+                                </div>
+                        </div><!--panel body-->
+                    </div><!--panel-->
+                </div><!--col-md-12-->
+            </div><!--row-->
+        </div><!--<div class="container">-->
     </body>
 </html>

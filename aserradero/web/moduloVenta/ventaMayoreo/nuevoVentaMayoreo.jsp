@@ -35,11 +35,11 @@
     <body>
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
-        <div id="page-wrapper" style="margin-top: 30px;">
+        <div class="container" >
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Registrar venta por mayoreo</h1>
+                        <h2 class="page-header">Registrar venta por mayoreo</h2>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -83,7 +83,7 @@
                                     <div class="col-md-2">
                                         <br>
                                         <input type="submit" class="btn btn-block btn-success margen-boton" value="Guardar venta"/>
-                                    </div>  
+                                    </div>
                                     <div class="form-group pull-right col-md-2"><!-- agrupar inputs -->
                                         <br>
                                         <a href="/aserradero/VentaMayoreoController?action=listar"><input class="btn btn-block btn-warning" type="button" value="Cancelar"/></a>

@@ -27,10 +27,10 @@
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>" />
-        <div class="container" style="margin-top:10px;">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-header">LISTADO DE CLIENTES</h1>
+                    <h2 class="page-header">LISTADO DE CLIENTES</h2>
                 </div>
             </div>
             <div class="row">

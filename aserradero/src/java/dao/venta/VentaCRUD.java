@@ -53,9 +53,9 @@ public class VentaCRUD extends Conexion implements OperacionesCRUD {
         List<Venta> ventas;
         String consulta;
         if (rol.equals("Administrador")) {
-            consulta = "SELECT * FROM VISTA_VENTA WHERE id_jefe = ? ORDER BY fecha DESC,tipo_venta ASC";
+            consulta = "SELECT * FROM VISTA_VENTA_ELIMINAR WHERE id_jefe = ? ORDER BY fecha DESC,tipo_venta ASC";
         } else {
-            consulta = "SELECT * FROM VISTA_VENTA WHERE id_jefe = ? AND fecha = CURDATE() ORDER BY fecha DESC,tipo_venta ASC";
+            consulta = "SELECT * FROM VISTA_VENTA_ELIMINAR WHERE id_jefe = ? AND fecha = CURDATE() ORDER BY fecha DESC,tipo_venta ASC";
         }
         try {
             this.abrirConexion();

@@ -14,6 +14,21 @@ SELECT
     tipo_venta,
     pago
 FROM VENTA
+ORDER BY fecha DESC;
+
+DROP VIEW IF EXISTS VISTA_VENTA_ELIMINAR;
+CREATE VIEW VISTA_VENTA_ELIMINAR AS
+SELECT
+	id_venta,
+    fecha,
+    id_cliente,
+    (SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE id_persona = SUBSTRING(id_cliente,1,18) LIMIT 1) AS cliente,
+    id_empleado,
+    (SELECT id_jefe FROM EMPLEADO where id_empleado = VENTA.id_empleado LIMIT 1) as id_jefe,
+    estatus,
+    tipo_venta,
+    pago
+FROM VENTA
 WHERE id_venta NOT IN (SELECT id_venta FROM VENTA_PAQUETE)
 	AND id_venta NOT IN (SELECT id_venta FROM VENTA_MAYOREO)
     AND id_venta NOT IN (SELECT id_venta FROM VENTA_EXTRA)

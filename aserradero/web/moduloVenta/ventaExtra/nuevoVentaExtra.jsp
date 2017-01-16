@@ -32,11 +32,11 @@
     <body>
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
-        <div id="page-wrapper">
+        <div class="container">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">REGISTRO DE VENTAS EXTRAS</h1>
+                        <h2 class="page-header">REGISTRO DE VENTAS EXTRAS</h2>
                     </div>
                 </div>
                 <div class="col-md-12">
