@@ -35,7 +35,7 @@
                                     <input type="date" class="form-control" name="fecha" value="<%=pagorenta.getFecha()%>" required=""/>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label"  for="nombre_persona">Nombre</label>
+                                    <label class="control-label"  for="nombre_persona">Nombre persona que recibe el pago</label>
                                     <input type="text" class="form-control" name="nombre_persona" value="<%=pagorenta.getNombre_persona()%>" maxlength="49" required=""/>
                                 </div>
                                 <div class="form-group">

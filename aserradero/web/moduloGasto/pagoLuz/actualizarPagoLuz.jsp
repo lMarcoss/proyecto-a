@@ -33,7 +33,7 @@ s<%--
                                 <input type="hidden" name="id_pago_luz" value="<%= pagoluz.getId_pago_luz()%>"  readonly="" title="No puedes cambiar esto" >
                                 <div class="form-group">
                                     <label class="control-label"  for="fecha">Fecha</label>
-                                    <input type="date" class="form-control" name="fecha" required="" value="<%=pagoluz.getFecha()%>" readonly="">
+                                    <input type="date" class="form-control" name="fecha" required="" value="<%=pagoluz.getFecha()%>">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" >Empleado</label>

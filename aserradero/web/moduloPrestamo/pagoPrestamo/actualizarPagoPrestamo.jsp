@@ -44,7 +44,7 @@
 
                                 <div class="form-group">
                                     <label class="control-label">Fecha</label>
-                                    <input type="date" class="form-control"  name="fecha" value="<%=pagoPrestamo.getFecha()%>" readonly="">
+                                    <input type="date" class="form-control"  name="fecha" value="<%=pagoPrestamo.getFecha()%>">
                                 </div>
 
                                 <div class="form-group">
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Monto pago:</label>
-                                    <input type="number" class="form-control"  step="0.01" name="monto_pago" id="monto_pago" value="<%=pagoPrestamo.getMonto_pago()%>" min="0.01" max="" required="">
+                                    <input type="number" class="form-control"  step="0.01" name="monto_pago" id="monto_pago" value="<%=pagoPrestamo.getMonto_pago()%>" min="0.00" max="" required="">
                                 </div>
                                 <div class="form-group">
                                     <a href="/aserradero/PagoPrestamoController?action=listar"><input type="button" value="Cancelar" class="btn btn-warning"/></a>

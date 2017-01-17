@@ -35,7 +35,7 @@
                             <h3 class="panel-title">Listado de ventas por paquete</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc">
+<!--                            <div class="form-busc">
                                 <form method="POST" action="/aserradero/VentaPaqueteController?action=buscar">
                                     <select name="nombre_campo" class="input-busc" >
                                         <option value="fecha">Fecha</option>
@@ -48,7 +48,7 @@
                                     <input type="search" name="dato" placeholder="Escriba su búsqueda" class="input-busc">
                                     <input type="submit" value="Buscar" class="btn btn-success">
                                 </form>
-                            </div>
+                            </div>-->
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>

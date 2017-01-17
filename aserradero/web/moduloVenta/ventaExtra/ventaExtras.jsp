@@ -34,21 +34,21 @@
                             <h3 class="panel-title">Listado de ventas extras realizadas</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc">
-                                <form method="POST" action="/aserradero/VentaExtraController?action=buscar">
-                                    <select name="nombre_campo" class="input-busc" >
-                                        <option value="fecha">Fecha</option>
-                                        <option value="id_venta">Id_venta</option>
-                                        <option value="cliente">Cliente</option>
-                                        <option value="monto">Monto</option>
-                                        <option value="pago">Pago en efectivo</option>
-                                        <option value="observacion">Observacion</option>
-                                        <option value="empleado">Registró</option>
-                                    </select>
-                                    <input type="search" name="dato" placeholder="Escriba su búsqueda" class="input-busc">
-                                    <input type="submit" value="Buscar" class="btn btn-success">
-                                </form>
-                            </div>
+    <!--                            <div class="form-busc">
+                                    <form method="POST" action="/aserradero/VentaExtraController?action=buscar">
+                                        <select name="nombre_campo" class="input-busc" >
+                                            <option value="fecha">Fecha</option>
+                                            <option value="id_venta">Id_venta</option>
+                                            <option value="cliente">Cliente</option>
+                                            <option value="monto">Monto</option>
+                                            <option value="pago">Pago en efectivo</option>
+                                            <option value="observacion">Observacion</option>
+                                            <option value="empleado">Registró</option>
+                                        </select>
+                                        <input type="search" name="dato" placeholder="Escriba su búsqueda" class="input-busc">
+                                        <input type="submit" value="Buscar" class="btn btn-success">
+                                    </form>
+                                </div>-->
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>

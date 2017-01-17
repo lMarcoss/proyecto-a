@@ -63,7 +63,7 @@
                                                     + "<td style='text-align: right;'> + " + balance.getInventario_m_aserrada() + "</td>"
                                                     + "</tr><tr>"
                                                     + "<td></td>"
-                                                    + "<th style='text-align: left;'>Cobro de ventas</th>"
+                                                    + "<th style='text-align: left;'>Pagos venta</th>"
                                                     + "<td style='text-align: right;'> + " + balance.getVenta_en_efectivo() + "</td>"
                                                     + "</tr><tr>"
                                                     + "<td></td>"

@@ -17,5 +17,8 @@ FROM USUARIO,EMPLEADO
 WHERE USUARIO.id_empleado = EMPLEADO.id_empleado;
 -- select *from EMPLEADO;
 INSERT INTO USUARIO VALUES
+('PAXA20160913HOCSXNPAXA2016','Antonio Cortes Hernandez',sha1('Eufrosina H A'),'sha1',''),
 ('MASL19931106HOCRNNMASL1993','admin',sha1('admin'),'sha1','hola'),
 ('COCR19990708HOCRRCMASL1993','richard',sha1('richard'),'sha1','hola'); -- Usuario richard contrasenia: richard
+
+SELECT * FROM EMPLEADO;

@@ -40,7 +40,7 @@
                                 <input type="hidden" name="id_prestamo" value="<%=prestamo.getId_prestamo()%>"readonly="" required="">
                                 <div class="form-group">
                                     <label class="control-label">Fecha:</label>
-                                    <input type="date" class="form-control"  name="fecha" id="fecha" value="<%=prestamo.getFecha()%>" required="" maxlength="10" readonly="">
+                                    <input type="date" class="form-control"  name="fecha" id="fecha" value="<%=prestamo.getFecha()%>" required="" maxlength="10">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Persona:</label>
@@ -66,11 +66,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Monto:</label>
-                                    <input type="number" class="form-control"  name="monto_prestamo" value="<%=prestamo.getMonto_prestamo()%>" step="0.01" min="0.01" max="99999999.99"  required="">
+                                    <input type="number" class="form-control"  name="monto_prestamo" value="<%=prestamo.getMonto_prestamo()%>" step="0.01" min="0.00" max="99999999.99"  required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">% de interés mensual:</label>
-                                    <input type="number" class="form-control"  name="interes" value="<%=prestamo.getInteres()%>" step="1" min="1" max="100"  required="">
+                                    <input type="number" class="form-control"  name="interes" value="<%=prestamo.getInteres()%>" step="1" min="0" max="100"  required="">
                                 </div>
                                 <div class="form-group">
                                     <a href="/aserradero/PrestamoController?action=listar"><input type="button" value="Cancelar" class="btn btn-warning"/></a>

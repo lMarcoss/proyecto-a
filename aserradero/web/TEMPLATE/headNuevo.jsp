@@ -13,6 +13,6 @@
 -->
 <script src="/aserradero/js/selectorCostoMaderas.js"></script>
 
-<script languaje="javascript" type="text/javascript"> 
+<!--<script languaje="javascript" type="text/javascript"> 
     window.history.go(1); 
-</script> 
+</script> -->

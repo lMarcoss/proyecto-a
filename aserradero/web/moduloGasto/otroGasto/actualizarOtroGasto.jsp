@@ -34,7 +34,7 @@
                                 <input type="hidden" name="id_gasto" value="<%= otrogasto.getId_gasto()%>"  readonly="" required="">
                                 <div class="form-group">
                                     <label class="control-label" >Fecha</label>
-                                    <input type="date" class="form-control" name="fecha" value="<%=otrogasto.getFecha()%>" readonly="">
+                                    <input type="date" class="form-control" name="fecha" value="<%=otrogasto.getFecha()%>">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"  for="nombre_gasto">Nombre gasto</label>

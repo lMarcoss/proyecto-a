@@ -35,7 +35,7 @@ String mensaje = (String) request.getAttribute("mensaje");
                             <h3 class="panel-title">Lista de ventas realizadas por mayoreo</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc">
+<!--                            <div class="form-busc">
                                 <form method="POST" action="/aserradero/VentaMayoreoController?action=buscar">
                                     <select name="nombre_campo" class="input-busc" >
                                         <option value="fecha">Fecha</option>
@@ -47,7 +47,7 @@ String mensaje = (String) request.getAttribute("mensaje");
                                     <input type="search" name="dato" placeholder="Escriba su búsqueda" class="input-busc">
                                         <input type="submit" value="Buscar" class="btn btn-success"></td>
                                     </form>
-                                </div>
+                                </div>-->
                                 <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>

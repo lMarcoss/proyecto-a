@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="costo">Costo</label>
-                                    <input type="number" class="form-control" step=".01" name="costo" min="0.01" max="999.99" required=""/>
+                                    <input type="number" class="form-control" step=".01" name="costo" min="0.01" max="9999.99" required=""/>
                                 </div>
                                 <div class="control-group pull-right">
                                     <a href="/aserradero/ClasificacionMaderaRolloController?action=listar"><input class="btn btn-warning" type="button" value="Cancelar"/></a>
