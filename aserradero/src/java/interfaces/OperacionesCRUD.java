@@ -24,8 +24,4 @@ public interface OperacionesCRUD{
     public void actualizar(Object objeto) throws Exception;
     public void eliminar(Object objeto) throws Exception;
     
-    //Método genérico: Puede devolver una lista de cualquier tipo de objeto
-    public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception;
-    
-    
 }

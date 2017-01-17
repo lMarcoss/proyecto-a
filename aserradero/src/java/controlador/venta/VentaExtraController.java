@@ -58,9 +58,6 @@ public class VentaExtraController extends HttpServlet {
                 case "actualizar":
                     actualizarVentaExtra(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscar(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -197,23 +194,6 @@ public class VentaExtraController extends HttpServlet {
             view.forward(request, response);
         } catch (Exception ex) {
             System.out.println(ex);
-            Logger.getLogger(VentaExtraController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void buscar(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<VentaExtra> ventaExtras;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        VentaExtraCRUD ventaExtraCRUD = new VentaExtraCRUD();
-        try {
-            ventaExtras = (List<VentaExtra>) ventaExtraCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
-            request.setAttribute("ventaExtras", ventaExtras);
-            RequestDispatcher view = request.getRequestDispatcher("moduloVenta/ventaExtra/ventaExtras.jsp");
-            view.forward(request, response);
-        } catch (Exception ex) {
-            System.out.println(ex);
-            listarVentaExtras(request, response, sesion, "error_buscar_campo");
             Logger.getLogger(VentaExtraController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

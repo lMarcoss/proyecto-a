@@ -32,19 +32,6 @@
                             <h3 class="panel-title">Listado de pagos de compras</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc">
-                                <form method="POST" action="/aserradero/PagoCompraController?action=buscar">
-                                    <select class="input-busc" name="nombre_campo" >
-                                        <option value="fecha">Fecha</option>
-                                        <option value="proveedor">Proveedor</option>
-                                        <option value="monto_pago">Monto pagado</option>
-                                        <option value="monto_por_pagar">Cuenta por pagar</option>
-                                        <option value="monto_por_cobrar">Cuenta por cobrar</option>
-                                    </select>
-                                    <input type="text" class="input-busc" name="dato" placeholder="Escriba su búsqueda">
-                                    <td colspan="2"><input type="submit" class="btn btn-success" value="Buscar">
-                                </form>
-                            </div>
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -64,16 +51,16 @@
                                         int i = 0;
                                         for (PagoCompra pago : listaPagoCompra) {
                                             out.print("<tr>"
-                                            + "<td>" + (i + 1) + "</td>"
-                                            + "<td>" + pago.getFecha() + "</td>"
-                                            + "<td>" + pago.getProveedor() + "</td>"
-                                            + "<td>" + pago.getMonto_pago() + "</td>"
-                                            + "<td>" + pago.getMonto_por_pagar() + "</td>"
-                                            + "<td>" + pago.getMonto_por_cobrar()+ "</td>"
-                                            + "<td><a class='btn btn-primary' href=\"/aserradero/PagoCompraController?action=detalle&id_pago=" + pago.getId_pago() + "&id_proveedor="+pago.getId_proveedor()+"\">Detalle</a></td>"
-                                            + "<td><a class='btn btn-warning' href=\"/aserradero/PagoCompraController?action=modificar&id_pago=" + pago.getId_pago() + "\">Modificar</a></td>"
-                                            + "<td><a class='btn btn-success' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/PagoCompraController?action=eliminar&id_pago=" + pago.getId_pago() + "';};\">Eliminar</a></td>"
-                                            + "</tr>");
+                                                    + "<td>" + (i + 1) + "</td>"
+                                                    + "<td>" + pago.getFecha() + "</td>"
+                                                    + "<td>" + pago.getProveedor() + "</td>"
+                                                    + "<td>" + pago.getMonto_pago() + "</td>"
+                                                    + "<td>" + pago.getMonto_por_pagar() + "</td>"
+                                                    + "<td>" + pago.getMonto_por_cobrar() + "</td>"
+                                                    + "<td><a class='btn btn-primary' href=\"/aserradero/PagoCompraController?action=detalle&id_pago=" + pago.getId_pago() + "&id_proveedor=" + pago.getId_proveedor() + "\">Detalle</a></td>"
+                                                    + "<td><a class='btn btn-warning' href=\"/aserradero/PagoCompraController?action=modificar&id_pago=" + pago.getId_pago() + "\">Modificar</a></td>"
+                                                    + "<td><a class='btn btn-success' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/PagoCompraController?action=eliminar&id_pago=" + pago.getId_pago() + "';};\">Eliminar</a></td>"
+                                                    + "</tr>");
                                             i++;
                                         }
                                     %>
@@ -87,9 +74,5 @@
                 </div><!--col-md-12-->
             </div><!--row-->
         </div><!--<div class="container">-->
-
-        <div>            
-            
-        </div><!-- Resultado Consulta-->
     </body>
 </html>

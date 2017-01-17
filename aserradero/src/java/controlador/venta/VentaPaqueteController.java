@@ -59,9 +59,6 @@ public class VentaPaqueteController extends HttpServlet {
                 case "actualizar":
                     actualizarVentaPaquete(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscar(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -216,21 +213,6 @@ public class VentaPaqueteController extends HttpServlet {
             view.forward(request, response);
         } catch (Exception ex) {
             System.out.println(ex);
-            Logger.getLogger(VentaPaqueteController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void buscar(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<Venta> ventaPaquetes;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        VentaPaqueteCRUD ventaPaqueteCRUD = new VentaPaqueteCRUD();
-        try {
-            ventaPaquetes = (List<Venta>) ventaPaqueteCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
-            mostrarVentas(request, response, ventaPaquetes, sesion, action);
-        } catch (Exception ex) {
-            System.out.println(ex);
-            listarVentaPaquetes(request, response, sesion, "error_buscar_campo");
             Logger.getLogger(VentaPaqueteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

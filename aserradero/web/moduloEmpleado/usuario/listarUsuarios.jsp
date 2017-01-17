@@ -20,10 +20,10 @@
     </head>
     <body>
         <!--menu-->
-        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
-            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
-        <%}else{%>
-            <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%if (((String) sesion.getAttribute("rol")).equals("Administrador")) {%>
+        <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%} else {%>
+        <%@ include file="/TEMPLATE/menu.jsp" %>
         <%}%>
 
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>" >
@@ -40,17 +40,6 @@
                             <h3 class="panel-title">Si el usuario que busca no aparece, agréguelo</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc">
-                                <form method="POST" action="/aserradero/UsuarioController?action=buscar">
-                                    <select name="nombre_campo" class="input-busc" >
-                                        <option value="id_empleado">Id empleado</option>
-                                        <option value="nombre_usuario">Nombre de usuario</option>
-                                        <option value="email">Email</option>
-                                    </select>
-                                    <input type="text" class="input-busc" name="dato" placeholder="Escriba su búsqueda">
-                                    <input type="submit" class="btn btn-success" value="Buscar">
-                                </form>
-                            </div>
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>

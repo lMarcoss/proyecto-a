@@ -32,19 +32,6 @@
                             <h3 class="panel-title">Si el registro que busca no aparece, agréguelo</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc">
-                                <form method="POST" action="/aserradero/OtroGastoController?action=buscar">
-                                    <select name="nombre_campo" class="input-busc">
-                                        <option value="fecha">Fecha</option>
-                                        <option value="nombre_gasto">Nombre de gasto</option>
-                                        <option value="monto">Monto</option>
-                                        <option value="observacion">Observación</option>
-                                        <option value="empleado">Registró</option>
-                                    </select>
-                                    <input type="text" name="dato" class="input-busc" placeholder="Escriba su búsqueda">
-                                    <input type="submit" value="Buscar" class="btn btn-success">
-                                </form>
-                            </div>
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -89,25 +76,25 @@
         <!-- ************************** opción de búsqueda-->
         <div>
 
-                <table>
-                    <tr>
-                        <td>
+            <table>
+                <tr>
+                    <td>
 
-                        </td>
-                        <td></td>
-                        <td colspan="2"></td>
-                    </tr>
-                </table>
-            </form>
-        </div> <!-- Fin opción de búsqueda-->
-
-        <!-- ************************* Resultado Consulta-->
-        <div>
-            <table class="table-condensed">
-
-
+                    </td>
+                    <td></td>
+                    <td colspan="2"></td>
+                </tr>
             </table>
+        </form>
+    </div> <!-- Fin opción de búsqueda-->
 
-        </div><!-- Resultado Consulta-->
-    </body>
+    <!-- ************************* Resultado Consulta-->
+    <div>
+        <table class="table-condensed">
+
+
+        </table>
+
+    </div><!-- Resultado Consulta-->
+</body>
 </html>

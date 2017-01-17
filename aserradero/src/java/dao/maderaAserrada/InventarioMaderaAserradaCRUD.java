@@ -54,7 +54,6 @@ public class InventarioMaderaAserradaCRUD extends Conexion implements Operacione
 
     }
 
-    @Override
     public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<InventarioMaderaAserrada> inventarioMaderaProducciones = null;
         try {

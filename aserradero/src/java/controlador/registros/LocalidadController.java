@@ -55,9 +55,6 @@ public class LocalidadController extends HttpServlet {
                 case "actualizar":
                     actualizarLocalidad(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscar(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -160,20 +157,6 @@ public class LocalidadController extends HttpServlet {
             listarLocalidades(request, response, sesion, action);
         } catch (Exception ex) {
             listarLocalidades(request, response, sesion, "error_actualizar");
-            Logger.getLogger(LocalidadController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void buscar(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<Localidad> localidades;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        LocalidadCRUD localidadCRUD = new LocalidadCRUD();
-        try {
-            localidades = (List<Localidad>) localidadCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
-            mostrarLocalidades(request, response, localidades, action);
-        } catch (Exception ex) {
-            listarLocalidades(request, response, sesion, "error_buscar_campo");
             Logger.getLogger(LocalidadController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

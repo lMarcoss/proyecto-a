@@ -9,8 +9,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     HttpSession sesion = request.getSession(false);
-    List <Administrador> administradores = (List<Administrador>) request.getAttribute("listaAdministradores");
-    String mensaje = (String)request.getAttribute("mensaje");
+    List<Administrador> administradores = (List<Administrador>) request.getAttribute("listaAdministradores");
+    String mensaje = (String) request.getAttribute("mensaje");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,10 +20,10 @@
     </head>
     <body>
         <!--menu-->
-        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
-            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
-        <%}else{%>
-            <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%if (((String) sesion.getAttribute("rol")).equals("Administrador")) {%>
+        <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%} else {%>
+        <%@ include file="/TEMPLATE/menu.jsp" %>
         <%}%>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>">
         <div class="container">
@@ -39,16 +39,6 @@
                             <h3 class="panel-title">Listado de administradores del sistema</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc">
-                                <form method="POST" action="/aserradero/AdministradorController?action=buscar">
-                                    <select name="nombre_campo" class="input-busc" >
-                                        <option value="administrador">Administrador</option>
-                                        <option value="cuenta_inicial">Cuenta inicial</option>
-                                    </select>
-                                    <input type="text" class="input-busc" name="dato" placeholder="Escriba su búsqueda">
-                                    <input type="submit" class="btn btn-success" value="Buscar">
-                                </form>
-                            </div>
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -60,22 +50,22 @@
                                 </thead>
                                 <tbody>
                                     <%
-                                        int i=0;
+                                        int i = 0;
                                         for (Administrador administrador : administradores) {
                                             out.print("<tr>"
-                                                +"<td>"+(i+1)+"</td>"
-                                                +"<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona="+administrador.getId_administrador()+"\">"+administrador.getNombre()+"</a></td>"
-                                                +"<td>"+administrador.getCuenta_inicial()+"</td>"
-                                                +"<td><a class='btn btn-warning' href=\"/aserradero/AdministradorController?action=modificar&id_administrador="+administrador.getId_administrador()+"\">Modificar cuenta</a></td>"
-                //                                + "<td><a href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/AdministradorController?action=eliminar&id_administrador="+administrador.getId_administrador()+"';};\">Eliminar</a></td>"
-                                            + "</tr>" );
+                                                    + "<td>" + (i + 1) + "</td>"
+                                                    + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + administrador.getId_administrador() + "\">" + administrador.getNombre() + "</a></td>"
+                                                    + "<td>" + administrador.getCuenta_inicial() + "</td>"
+                                                    + "<td><a class='btn btn-warning' href=\"/aserradero/AdministradorController?action=modificar&id_administrador=" + administrador.getId_administrador() + "\">Modificar cuenta</a></td>"
+                                                    //                                + "<td><a href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/AdministradorController?action=eliminar&id_administrador="+administrador.getId_administrador()+"';};\">Eliminar</a></td>"
+                                                    + "</tr>");
                                             i++;
                                         }
                                     %>
                                 </tbody>
                             </table>
                             <div class="agregar-element">
-                                <input type="button" class="btn btn-primary" value="Nuevo administrador" onClick=" window.location.href='/aserradero/AdministradorController?action=nuevo' ">
+                                <input type="button" class="btn btn-primary" value="Nuevo administrador" onClick=" window.location.href = '/aserradero/AdministradorController?action=nuevo'">
                             </div>
                         </div><!--panel body-->
                     </div><!--panel-->

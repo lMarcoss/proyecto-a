@@ -40,20 +40,6 @@
                             <h3 class="panel-title">Si la persona que busca no aparece en el listado, agréguelo</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-group form-busc">
-                                <form method="POST" action="/aserradero/PersonaController?action=buscar" class="form-horizontal navbar-form">
-                                    <select name="nombre_campo" class="input-busc">
-                                        <option value="nombre">Nombre</option>
-                                        <option value="localidad">Localidad</option>
-                                        <option value="direccion">Dirección</option>
-                                        <option value="sexo">Sexo</option>
-                                        <option value="fecha_nacimiento">Fecha de nacimiento</option>
-                                        <option value="telefono">Telefono</option>
-                                    </select>
-                                    <input type="text" name="dato" placeholder="Escriba su búsqueda" class="input-busc">
-                                    <input type="submit" value="Buscar" class="btn btn-success">
-                                </form>
-                            </div>
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -73,7 +59,7 @@
                                         for (Persona persona : personas) {
                                             out.print("<tr>" + "<td>" + (i + 1)
                                                     + "<td>" + persona.getNombre() + "</td>"
-                                                    + "<td><a href=\"/aserradero/LocalidadController?action=buscar_localidad&nombre_localidad=" + persona.getNombre_localidad()+ "\">" + persona.getNombre_localidad()+ "</a></td>"
+                                                    + "<td><a href=\"/aserradero/LocalidadController?action=buscar_localidad&nombre_localidad=" + persona.getNombre_localidad() + "\">" + persona.getNombre_localidad() + "</a></td>"
                                                     + "<td>" + persona.getDireccion() + "</td>"
                                                     + "<td>" + persona.getSexo() + "</td>"
                                                     + "<td>" + persona.getFecha_nacimiento() + "</td>"

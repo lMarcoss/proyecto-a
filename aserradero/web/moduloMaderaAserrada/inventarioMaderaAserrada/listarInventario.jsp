@@ -37,20 +37,6 @@
                             <h3 class="panel-title">Registros de inventario</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc">
-                                <form method="POST" action="/aserradero/InventarioMaderaAserradaController?action=buscar">
-                                    <select name="nombre_campo" class="input-busc">
-                                        <option value="id_madera">Id madera</option>
-                                        <option value="num_piezas">Piezas</option>
-                                        <option value="volumen">Vol unitario</option>
-                                        <option value="volumen_total">Volumen total</option>
-                                        <option value="costo_por_volumen">Costo volumen</option>
-                                        <option value="costo_total">Costo total</option>
-                                    </select>
-                                    <input type="text" name="dato" placeholder="Escriba su búsqueda" class="input-busc">
-                                    <input type="submit" value="Buscar" class="btn btn-success">
-                                </form>
-                            </div>
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -80,11 +66,11 @@
                                         }
                                         if (inventarioTotal != null) {
                                             out.print("<tr>"
-                                                    + "<td>"+(i+1)+"</td>"
+                                                    + "<td>" + (i + 1) + "</td>"
                                                     + "<td><b>Total</b></td>"
-                                                    + "<td><b>" + inventarioTotal.getNum_piezas()+ "</b></td>"
+                                                    + "<td><b>" + inventarioTotal.getNum_piezas() + "</b></td>"
                                                     + "<td></td>"
-                                                    + "<td><b>" + inventarioTotal.getVolumen_total()+ "</b></td>"
+                                                    + "<td><b>" + inventarioTotal.getVolumen_total() + "</b></td>"
                                                     + "<td></td>"
                                                     + "<td><b>" + inventarioTotal.getCosto_total() + "</b></td>"
                                                     + "</tr>");

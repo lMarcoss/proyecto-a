@@ -54,9 +54,6 @@ public class VehiculoController extends HttpServlet {
                 case "actualizar":
                     actualizarVehiculo(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscar(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -160,20 +157,6 @@ public class VehiculoController extends HttpServlet {
             response.sendRedirect("/aserradero/VehiculoController?action=listar");
         } catch (Exception ex) {
             listarVehiculos(request, response, sesion, "error_actualizar");
-            Logger.getLogger(VehiculoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void buscar(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<Vehiculo> vehiculos;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        VehiculoCRUD vehiculocrud = new VehiculoCRUD();
-        try {
-            vehiculos = (List<Vehiculo>) vehiculocrud.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
-            mostrarVehiculos(request, response, vehiculos, action);
-        } catch (Exception ex) {
-            listarVehiculos(request, response, sesion, "error_buscar");
             Logger.getLogger(VehiculoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

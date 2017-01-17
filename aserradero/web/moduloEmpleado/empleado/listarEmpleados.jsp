@@ -22,10 +22,10 @@
         <%if (((String) sesion.getAttribute("rol")).equals("Administrador")) {%>
         <%@ include file="/TEMPLATE/menu_admin.jsp" %>
         <%} else {%>
-        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
-            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
-        <%}else{%>
-            <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%if (((String) sesion.getAttribute("rol")).equals("Administrador")) {%>
+        <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%} else {%>
+        <%@ include file="/TEMPLATE/menu.jsp" %>
         <%}%>
         <%}%>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>" >
@@ -42,18 +42,6 @@
                             <h3 class="panel-title">Empleados actuales de la empresa</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc" ><!-- Formulario para realizar búsquedas en la base de datos -->
-                                <form method="POST" action="/aserradero/EmpleadoController?action=buscar" >
-                                    <select class="input-busc" name="nombre_campo" >
-                                        <option value="empleado">Empleado</option>
-                                        <option value="roll">Roll</option>
-                                        <option value="estatus">Status</option>
-                                        <option value="jefe">Jefe</option>
-                                    </select>
-                                    <input type="text" class="input-busc" name="dato" placeholder="Escriba su búsqueda">
-                                    <input type="submit" class="btn btn-success" value="Buscar">
-                                </form>
-                            </div><!-- Fin formulario de búsqueda -->
                             <table id="tabla" class="display cell-border" cellspacing="0" style="width: 100%;"><!-- Tabla que muestra los resultados de la consulta a la base de datos-->
                                 <thead>
                                     <tr>

@@ -53,9 +53,6 @@ public class MunicipioController extends HttpServlet {
                 case "actualizar":
                     actualizarMunicipio(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscar(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -159,20 +156,6 @@ public class MunicipioController extends HttpServlet {
         }
     }
 
-    private void buscar(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<Municipio> municipios;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        MunicipioCRUD municipioCRUD = new MunicipioCRUD();
-        try {
-            municipios = (List<Municipio>) municipioCRUD.buscar(nombre_campo, dato);
-            mostrarMunicipios(request, response, municipios, action);
-        } catch (Exception ex) {
-            listarMunicipios(request, response, sesion, "error_buscar");
-            Logger.getLogger(MunicipioController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     private void mostrarMunicipios(HttpServletRequest request, HttpServletResponse response, List<Municipio> listaMunicipios, String action) {
         request.setAttribute("mensaje", action);
         request.setAttribute("listaMunicipios", listaMunicipios);
@@ -240,7 +223,7 @@ public class MunicipioController extends HttpServlet {
             MunicipioCRUD municipioCRUDCrud = new MunicipioCRUD();
             String nombre_municipio = request.getParameter("nombre_municipio");
             String estado = request.getParameter("estado");
-            municipios = (List<Municipio>) municipioCRUDCrud.buscarMunicipio(nombre_municipio,estado);
+            municipios = (List<Municipio>) municipioCRUDCrud.buscarMunicipio(nombre_municipio, estado);
             mostrarMunicipios(request, response, municipios, action);
         } catch (Exception ex) {
             System.out.println(ex);

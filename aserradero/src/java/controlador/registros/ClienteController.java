@@ -52,9 +52,6 @@ public class ClienteController extends HttpServlet {
                 case "insertar":
                     registrarCliente(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscarCliente(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -140,21 +137,6 @@ public class ClienteController extends HttpServlet {
         cliente.setId_persona(request.getParameter("id_persona"));
         cliente.setId_jefe((String) sesion.getAttribute("id_jefe"));
         return cliente;
-    }
-
-    private void buscarCliente(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<Cliente> listaClientes;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        ClienteCRUD clienteCRUD = new ClienteCRUD();
-        try {
-            listaClientes = (List<Cliente>) clienteCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
-            mostrarClientes(request, response, listaClientes, action);
-        } catch (Exception ex) {
-            listarClientes(request, response, sesion, "error_buscar_campo");
-            System.out.println(ex);
-            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     private void mostrarClientes(HttpServletRequest request, HttpServletResponse response, List<Cliente> listaClientes, String action) {
