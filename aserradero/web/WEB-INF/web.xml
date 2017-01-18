@@ -152,6 +152,10 @@
         <servlet-name>BalanceCuentaController</servlet-name>
         <servlet-class>controlador.cuenta.BalanceCuentaController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>generadorpdfticket</servlet-name>
+        <servlet-class>controlador.generadorticket.generadorpdfticket</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/Iniciar</url-pattern>
@@ -299,6 +303,10 @@
     <servlet-mapping>
         <servlet-name>BalanceCuentaController</servlet-name>
         <url-pattern>/BalanceCuentaController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>generadorpdfticket</servlet-name>
+        <url-pattern>/generadorpdfticket</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
