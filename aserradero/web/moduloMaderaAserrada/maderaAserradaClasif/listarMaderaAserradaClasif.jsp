@@ -8,8 +8,8 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    List <MaderaAserradaClasif> listaMaderaAserradaClasif = (List<MaderaAserradaClasif>) request.getAttribute("listaMaderaAserradaClasif");
-    String mensaje = (String)request.getAttribute("mensaje");
+    List<MaderaAserradaClasif> listaMaderaAserradaClasif = (List<MaderaAserradaClasif>) request.getAttribute("listaMaderaAserradaClasif");
+    String mensaje = (String) request.getAttribute("mensaje");
 %>
 <!DOCTYPE html>
 <html>
@@ -35,19 +35,6 @@
                         </div>
                         <div class="panel-body">
                             <form method="POST" action="/aserradero/MaderaAserradaClasifController?action=buscar">
-                                <div class="form-busc">
-                                    <select class="input-busc" name="nombre_campo" >
-                                        <option value="id_madera">madera</option>
-                                        <option value="greso_f">Grueso</option>
-                                        <option value="ancho_f">Ancho</option>
-                                        <option value="largo_f">Largo</option>
-                                        <option value="volumen">Volumen unitario</option>
-                                        <option value="costo_por_volumen">Costo por volumen</option>
-                                        <option value="empleado">Registró</option>
-                                    </select>
-                                    <input type="text" class="input-busc" name="dato" placeholder="Escriba su búsqueda">
-                                    <input type="submit" class="btn btn-success" value="Buscar">
-                                </div>
                                 <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
@@ -65,27 +52,27 @@
                                     </thead>
                                     <tbody>
                                         <%
-                                            int i=0;
+                                            int i = 0;
                                             for (MaderaAserradaClasif maderaClasificacion : listaMaderaAserradaClasif) {
                                                 out.print("<tr>"
-                                                    +"<td>"+(i+1)+"</td>"
-                                                    +"<td>"+maderaClasificacion.getId_madera()+"</td>"
-                                                    +"<td>"+maderaClasificacion.getGrueso_f()+"</td>"
-                                                    +"<td>"+maderaClasificacion.getAncho_f()+"</td>"
-                                                    +"<td>"+maderaClasificacion.getLargo_f()+"</td>"
-                                                    +"<td>"+maderaClasificacion.getVolumen()+"</td>"
-                                                    +"<td>"+maderaClasificacion.getCosto_por_volumen()+"</td>"
-                                                    +"<td>"+maderaClasificacion.getEmpleado()+"</td>"
-                                                    +"<td><a class='btn btn-warning' href=\"/aserradero/MaderaAserradaClasifController?action=modificar&id_madera="+maderaClasificacion.getId_madera()+"\">Modificar</a></td>"
-                                                    + "<td><a class='btn btn-danger' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/MaderaAserradaClasifController?action=eliminar&id_madera="+maderaClasificacion.getId_madera()+"';};\">Eliminar</a></td>"
-                                                + "</tr>" );
+                                                        + "<td>" + (i + 1) + "</td>"
+                                                        + "<td>" + maderaClasificacion.getId_madera() + "</td>"
+                                                        + "<td>" + maderaClasificacion.getGrueso_f() + "</td>"
+                                                        + "<td>" + maderaClasificacion.getAncho_f() + "</td>"
+                                                        + "<td>" + maderaClasificacion.getLargo_f() + "</td>"
+                                                        + "<td>" + maderaClasificacion.getVolumen() + "</td>"
+                                                        + "<td>" + maderaClasificacion.getCosto_por_volumen() + "</td>"
+                                                        + "<td>" + maderaClasificacion.getEmpleado() + "</td>"
+                                                        + "<td><a class='btn btn-warning' href=\"/aserradero/MaderaAserradaClasifController?action=modificar&id_madera=" + maderaClasificacion.getId_madera() + "\">Modificar</a></td>"
+                                                        + "<td><a class='btn btn-danger' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/MaderaAserradaClasifController?action=eliminar&id_madera=" + maderaClasificacion.getId_madera() + "';};\">Eliminar</a></td>"
+                                                        + "</tr>");
                                                 i++;
                                             }
                                         %>
                                     </tbody>
                                 </table>
                                 <div class="agregar_element">
-                                    <input type="button" class="btn btn-primary" value="Registrar clasificación" onClick=" window.location.href='/aserradero/MaderaAserradaClasifController?action=nuevo' ">
+                                    <input type="button" class="btn btn-primary" value="Registrar clasificación" onClick=" window.location.href = '/aserradero/MaderaAserradaClasifController?action=nuevo'">
                                 </div>
                             </form>
                         </div><!--panel body-->

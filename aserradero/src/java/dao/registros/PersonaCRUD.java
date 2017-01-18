@@ -165,7 +165,6 @@ public class PersonaCRUD extends Conexion implements OperacionesCRUD {
         }
     }
 
-    @Override
     public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<Persona> personas;
         try {

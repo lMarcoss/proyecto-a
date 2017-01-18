@@ -55,9 +55,6 @@ public class UsuarioController extends HttpServlet {
                 case "actualizar":
                     actualizarUsuario(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscarUsuario(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -156,20 +153,6 @@ public class UsuarioController extends HttpServlet {
             response.sendRedirect("/aserradero/UsuarioController?action=listar");
         } catch (Exception ex) {
             listarUsuarios(request, response, sesion, "error_actualizar");
-            Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void buscarUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<Usuario> usuarios;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        UsuarioCRUD usuarioCRUD = new UsuarioCRUD();
-        try {
-            usuarios = (List<Usuario>) usuarioCRUD.buscar(nombre_campo, dato);
-            mostrarUsuarios(request, response, usuarios, action);
-        } catch (Exception ex) {
-            listarUsuarios(request, response, sesion, "error_buscar_campo");
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

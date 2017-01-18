@@ -32,18 +32,6 @@
                             <h3 class="panel-title">Registro de todos los pagos de préstamos</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc">
-                                <form method="POST" action="/aserradero/PagoPrestamoController?action=buscar">
-                                    <select name="nombre_campo" class="input-busc" >
-                                        <option value="fecha">Fecha</option>
-                                        <option value="prestador">Prestador</option>
-                                        <option value="monto_pagado">Monto pagado</option>
-                                        <option value="empleado">Registró</option>
-                                    </select>
-                                    <input type="text" name="dato" class="input-busc" placeholder="Escriba su búsqueda"></td>
-                                    <input type="submit" value="Buscar">
-                                </form>
-                            </div>
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>

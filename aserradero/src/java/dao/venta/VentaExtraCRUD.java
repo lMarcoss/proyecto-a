@@ -193,7 +193,6 @@ public class VentaExtraCRUD extends Conexion implements OperacionesCRUD {
         return pagado;
     }
 
-    @Override
     public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<VentaExtra> ventaExtras;
         String consulta;

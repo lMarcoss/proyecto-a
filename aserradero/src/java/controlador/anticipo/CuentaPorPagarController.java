@@ -47,13 +47,7 @@ public class CuentaPorPagarController extends HttpServlet {
                  * *************** Respuestas a métodos POST
                  * *********************
                  */
-                case "buscar_proveedor": // buscar cuentas por pagar a proveedores
-                    buscarProveedores(request, response, sesion, "proveedor");
-                    break;
-                case "buscar_cliente": // buscar cuentas por pagar a proveedores
-                    buscarClientes(request, response, sesion, "cliente");
 
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -117,39 +111,10 @@ public class CuentaPorPagarController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void buscarProveedores(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String tabla) {
-        List<CuentaPorPagar> cuentaPorPagares;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        CuentaPorPagarCRUD cuentaPorPagarCRUD = new CuentaPorPagarCRUD();
-        try {
-            cuentaPorPagares = (List<CuentaPorPagar>) cuentaPorPagarCRUD.buscarCPProveedor(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
-            mostrarCPPagarProveedores(request, response, cuentaPorPagares);
-        } catch (Exception ex) {
-            listarCuentaPorPagaresProveedor(request, response, sesion);
-            System.out.println(ex);
-            Logger.getLogger(CuentaPorPagarController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     private void mostrarCPPagarProveedores(HttpServletRequest request, HttpServletResponse response, List<CuentaPorPagar> cuentaPorPagares) throws IOException, ServletException {
         request.setAttribute("cuentaPorPagares", cuentaPorPagares);
         RequestDispatcher view = request.getRequestDispatcher("moduloAnticipo/cuentaPorPagar/cuentaPorPagarProveedores.jsp");
         view.forward(request, response);
-    }
-
-    private void buscarClientes(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String tabla) {
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        CuentaPorPagarCRUD cuentaPorPagarCRUD = new CuentaPorPagarCRUD();
-        try {
-            List<CuentaPorPagar> cuentaPorPagares = (List<CuentaPorPagar>) cuentaPorPagarCRUD.buscarCPCliente(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"));
-            mostrarCPPagarClientes(request, response, cuentaPorPagares);
-        } catch (Exception ex) {
-            System.out.println(ex);
-            listarCuentaPorPagaresCliente(request, response, sesion);
-            Logger.getLogger(CuentaPorPagarController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     private void mostrarCPPagarClientes(HttpServletRequest request, HttpServletResponse response, List<CuentaPorPagar> cuentaPorPagares) throws IOException, ServletException {

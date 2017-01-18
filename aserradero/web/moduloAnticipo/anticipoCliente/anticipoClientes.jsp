@@ -22,8 +22,8 @@
     </head>
     <body>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>">
-       <%@ include file="/TEMPLATE/menu.jsp" %>
-       <div class="container">
+        <%@ include file="/TEMPLATE/menu.jsp" %>
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <h2>Anticipos de cliente</h2>
@@ -36,24 +36,16 @@
                             <h3 class="panel-title">Listado de anticipos de clientes</h3>
                         </div>
                         <div class="panel-body">
-                            <form method="POST" action="/aserradero/AnticipoClienteController?action=buscar">
-                                <select name="nombre_campo" class="input-busc" >
-                                    <option value="fecha">Fecha</option>
-                                    <option value="cliente">Cliente</option>
-                                    <option value="monto_anticipo">Monto anticipo</option>
-                                    <option value="empleado">Registró</option>
-                                </select>
-                                <input type="search" name="dato" placeholder="Escriba su búsqueda" class="input-busc">
-                                <input type="submit" value="Buscar" class="btn btn-success" >
-                            </form>
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
-                                    <th>N°</th>
-                                    <th>Fecha</th>
-                                    <th>Cliente</th>
-                                    <th>Monto anticipo </th>
-                                    <th>Registró</th>
-                                    <th> </th>
+                                    <tr>
+                                        <th>N°</th>
+                                        <th>Fecha</th>
+                                        <th>Cliente</th>
+                                        <th>Monto anticipo </th>
+                                        <th>Registró</th>
+                                        <th> </th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <%

@@ -56,9 +56,6 @@ public class AdministradorController extends HttpServlet {
                 case "actualizar":
                     actualizarAdministrador(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscarAdministrador(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -157,20 +154,6 @@ public class AdministradorController extends HttpServlet {
             response.sendRedirect("/aserradero/AdministradorController?action=listar");
         } catch (Exception ex) {
             listarAdministradores(request, response, sesion, "error_actualizar");
-            System.out.println(ex);
-            Logger.getLogger(AdministradorController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void buscarAdministrador(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        try {
-            List<Administrador> administradores;
-            String nombre_campo = request.getParameter("nombre_campo");
-            String dato = request.getParameter("dato");
-            AdministradorCRUD administradorCRUD = new AdministradorCRUD();
-            administradores = (List<Administrador>) administradorCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
-            mostrarListaAdministradores(request, response, administradores, action);
-        } catch (Exception ex) {
             System.out.println(ex);
             Logger.getLogger(AdministradorController.class.getName()).log(Level.SEVERE, null, ex);
         }

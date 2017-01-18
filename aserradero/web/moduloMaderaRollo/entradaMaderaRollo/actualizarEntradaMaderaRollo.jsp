@@ -79,7 +79,7 @@
 
                                     <div class="form-group">
                                         <label class="control-label">Volumen primario</label>
-                                        <input type="number" class="form-control" name="volumen_primario" id="volumen" value="<%=entrada.getVolumen_primario()%>" step=".001" min="0.000" max="99999.999" required=""/>
+                                        <input type="number" class="form-control" name="volumen_primario" id="volumen" value="<%=entrada.getVolumen_primario()%>" step=".001" min="0.000" max="999999.999" required=""/>
                                     </div>
                                 </div>
                                 <div class="lado_izquierdo">
@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Volumen secundario</label>
-                                        <input type="number" class="form-control" name="volumen_secundario" id="volumen" value="<%=entrada.getVolumen_secundario()%>" step=".001" min="0.000" max="99999.999" required=""/>
+                                        <input type="number" class="form-control" name="volumen_secundario" id="volumen" value="<%=entrada.getVolumen_secundario()%>" step=".001" min="0.000" max="999999.999" required=""/>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="num_piezas">Num. piezas terciario</label>
@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Volumen terciario</label>
-                                        <input type="number" class="form-control" name="volumen_terciario" id="volumen" value="<%=entrada.getVolumen_terciario()%>" step=".001" min="0.000" max="99999.999" required=""/>
+                                        <input type="number" class="form-control" name="volumen_terciario" id="volumen" value="<%=entrada.getVolumen_terciario()%>" step=".001" min="0.000" max="999999.999" required=""/>
                                     </div>
                                     <div class="form-group pull-right">
                                         <a href="/aserradero/EntradaMaderaRolloController?action=listar"><input class="btn btn-warning" type="button" value="Cancelar"/></a>

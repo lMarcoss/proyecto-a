@@ -36,7 +36,7 @@
                                 <input type="hidden" name="id_entrada" value="<%=entrada.getId_entrada()%>" readonly=""/>
                                 <div class="form-group">
                                     <label class="control-label">Fecha:</label>
-                                    <input class="form-control" type="date" name="fecha" value="<%=entrada.getFecha()%>" readonly="" required=""/>
+                                    <input class="form-control" type="date" name="fecha" value="<%=entrada.getFecha()%>" required=""/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Madera:</label>

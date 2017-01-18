@@ -42,18 +42,6 @@
                             <h3 class="panel-title">Lista de todos los préstamos realizados</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-group form-busc">
-                                <form method="POST" action="/aserradero/PrestamoController?action=buscar">
-                                    <select class="input-busc" name="nombre_campo">
-                                        <option value="fecha">Fecha</option>
-                                        <option value="persona">Persona</option>
-                                        <option value="monto">Monto</option>
-                                        <option value="interes">% de interés</option>
-                                    </select>
-                                    <input type="text" class="input-busc" name="dato" placeholder="Escriba su búsqueda">
-                                    <input type="submit" class="btn btn-success" value="Buscar">
-                                </form>
-                            </div>
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                 <th>N°</th>

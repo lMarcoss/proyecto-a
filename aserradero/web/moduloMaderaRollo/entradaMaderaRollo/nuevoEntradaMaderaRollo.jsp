@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Volumen primario</label>
-                                        <input class="form-control" type="number" name="volumen_primario" id="volumen" step=".001" min="0.000" max="99999.999"  required="" />
+                                        <input class="form-control" type="number" name="volumen_primario" id="volumen" step=".001" min="0.000" max="999999.999"  required="" />
                                     </div>
                                 </div>
                                 <div class="lado_izquierdo"><!-- Grupo izquierdo-->
@@ -80,7 +80,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Volumen secundario</label>
-                                        <input class="form-control" type="number" name="volumen_secundario" id="volumen" step=".001" min="0.000" max="99999.999"  required=""/>
+                                        <input class="form-control" type="number" name="volumen_secundario" id="volumen" step=".001" min="0.000" max="999999.999"  required=""/>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Num. piezas terciario</label>
@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Volumen terciario</label>
-                                        <input class="form-control" type="number" name="volumen_terciario" id="volumen" step=".001" min="0.000" max="99999.999"  required=""/>
+                                        <input class="form-control" type="number" name="volumen_terciario" id="volumen" step=".001" min="0.000" max="999999.999"  required=""/>
                                     </div>
                                     <div class="form-group">
                                         <a href="/aserradero/EntradaMaderaRolloController?action=listar"><input class="btn btn-warning" type="button" value="Cancelar"/></a>

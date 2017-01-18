@@ -21,9 +21,9 @@
 <script src="/aserradero/js/validarFormulario.js"></script>
 <!--<script src="/aserradero/js/selectorCostoMaderas.js"></script>-->
 <script src="/aserradero/js/mensajeError.js"></script>
-<script languaje="javascript" type="text/javascript">
+<!--<script languaje="javascript" type="text/javascript">
     window.history.go(1);
-</script>
+</script>-->
 <!-- Scripts para creación de tabla con jquery --Ricardo-->
 <script src="/aserradero/js/Ricardo/js/jquery.dataTables.min.js"></script><!-- Para el funcionamiento de la tabla dinámica -->
 <link rel="stylesheet" href="/aserradero/js/Ricardo/js/jquery.dataTables.css"><!-- Complementos adicionales de diseño de la tabla-->

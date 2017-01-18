@@ -52,9 +52,6 @@ public class ProveedorController extends HttpServlet {
                 case "insertar":
                     registrarProveedor(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscarProveedor(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -138,21 +135,6 @@ public class ProveedorController extends HttpServlet {
         proveedor.setId_persona(request.getParameter("id_persona"));
         proveedor.setId_jefe((String) sesion.getAttribute("id_jefe"));
         return proveedor;
-    }
-
-    private void buscarProveedor(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<Proveedor> listaProveedores;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        ProveedorCRUD proveedorCRUD = new ProveedorCRUD();
-        try {
-            listaProveedores = (List<Proveedor>) proveedorCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
-            mostrarProveedores(request, response, listaProveedores, action);
-        } catch (Exception ex) {
-            listarProveedores(request, response, sesion, "error_buscar_campo");
-            System.out.println(ex);
-            Logger.getLogger(ProveedorController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     private void mostrarProveedores(HttpServletRequest request, HttpServletResponse response, List<Proveedor> listaProveedores, String action) {

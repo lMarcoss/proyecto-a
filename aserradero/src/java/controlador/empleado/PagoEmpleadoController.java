@@ -57,9 +57,6 @@ public class PagoEmpleadoController extends HttpServlet {
                 case "actualizar":
                     actualizarPagoEmpleado(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscarPagoEmpleado(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -162,21 +159,6 @@ public class PagoEmpleadoController extends HttpServlet {
             response.sendRedirect("/aserradero/PagoEmpleadoController?action=listar");
         } catch (Exception ex) {
             listarPagoEmpleados(request, response, sesion, action);
-            System.out.println(ex);
-            Logger.getLogger(PagoEmpleadoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void buscarPagoEmpleado(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<PagoEmpleado> listaPagoEmpleados;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        PagoEmpleadoCRUD empleadoCRUD = new PagoEmpleadoCRUD();
-        try {
-            listaPagoEmpleados = (List<PagoEmpleado>) empleadoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
-            mostrarPagoEmpleados(request, response, listaPagoEmpleados, action);
-        } catch (Exception ex) {
-            listarPagoEmpleados(request, response, sesion, "error_buscar_campo");
             System.out.println(ex);
             Logger.getLogger(PagoEmpleadoController.class.getName()).log(Level.SEVERE, null, ex);
         }

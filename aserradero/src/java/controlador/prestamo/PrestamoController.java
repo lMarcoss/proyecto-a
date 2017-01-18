@@ -57,9 +57,6 @@ public class PrestamoController extends HttpServlet {
                 case "actualizar":
                     actualizarPrestamo(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscarPrestamo(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -161,20 +158,6 @@ public class PrestamoController extends HttpServlet {
             response.sendRedirect("/aserradero/PrestamoController?action=listar");
         } catch (Exception ex) {
             listarPrestamo(request, response, sesion, "error_actualizar");
-            Logger.getLogger(PrestamoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void buscarPrestamo(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<Prestamo> listaPrestamo;
-        String nombre_campo = request.getParameter("nombre_campo"); //Nombre del campo asociado a la búsqueda
-        String dato = request.getParameter("dato");                 // Valor a buscar en el campo
-        PrestamoCRUD prestamoCRUD = new PrestamoCRUD();
-        try {
-            listaPrestamo = (List<Prestamo>) prestamoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
-            mostrarPrestamos(request, response, listaPrestamo, action);
-        } catch (Exception ex) {
-            listarPrestamo(request, response, sesion, "error_buscar_campo");
             Logger.getLogger(PrestamoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

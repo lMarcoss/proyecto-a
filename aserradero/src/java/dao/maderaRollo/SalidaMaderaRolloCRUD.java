@@ -145,7 +145,6 @@ public class SalidaMaderaRolloCRUD extends Conexion implements OperacionesCRUD {
     public void eliminar(Object objeto) throws Exception {
     }
 
-    @Override
     public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<SalidaMaderaRollo> salidas;
         String consulta;

@@ -59,9 +59,6 @@ public class VentaMayoreoController extends HttpServlet {
                 case "actualizar":
                     actualizarVentaMayoreo(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscar(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -162,7 +159,7 @@ public class VentaMayoreoController extends HttpServlet {
         List<Venta> listaVentas;
         VentaMayoreoCRUD ventaMayoreoCrud = new VentaMayoreoCRUD();
         try {
-            listaVentas = (List<Venta>) ventaMayoreoCrud.listar((String) sesion.getAttribute("id_jefe"),(String) sesion.getAttribute("rol"));
+            listaVentas = (List<Venta>) ventaMayoreoCrud.listar((String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
             mostrarVentas(request, response, listaVentas, sesion, action);
         } catch (Exception ex) {
             System.out.println(ex);
@@ -209,23 +206,6 @@ public class VentaMayoreoController extends HttpServlet {
             view.forward(request, response);
         } catch (Exception ex) {
             System.out.println(ex);
-            Logger.getLogger(VentaMayoreoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void buscar(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<VentaMayoreo> ventaMayoreos;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        VentaMayoreoCRUD ventaMayoreoCRUD = new VentaMayoreoCRUD();
-        try {
-            ventaMayoreos = (List<VentaMayoreo>) ventaMayoreoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
-            request.setAttribute("ventaMayoreos", ventaMayoreos);
-            RequestDispatcher view = request.getRequestDispatcher("moduloVenta/ventaMayoreo/ventaMayoreos.jsp");
-            view.forward(request, response);
-        } catch (Exception ex) {
-            System.out.println(ex);
-            listarVentaMayoreos(request, response, sesion, "error_buscar_campo");
             Logger.getLogger(VentaMayoreoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

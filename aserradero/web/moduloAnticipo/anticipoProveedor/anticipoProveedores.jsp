@@ -35,26 +35,16 @@
                             <h3 class="panel-title">Si el registro que busca no aparece, agregélo</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc">
-                                <form method="POST" action="/aserradero/AnticipoProveedorController?action=buscar">
-                                    <select name="nombre_campo" class="input-busc">
-                                        <option value="fecha">Fecha</option>
-                                        <option value="proveedor">Proveedor</option>
-                                        <option value="monto_anticipo">Monto anticipo</option>
-                                        <option value="empleado">Registró</option>
-                                    </select>
-                                    <input type="text" class="input-busc" name="dato" placeholder="Escriba su búsqueda">
-                                    <input type="submit" value="Buscar" class="btn btn-success">
-                                </form>
-                            </div>
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
-                                    <th>N°</th>
-                                    <th>Fecha</th>
-                                    <th>Proveedor</th>
-                                    <th>Monto anticipo </th>
-                                    <th>Registró</th>
-                                    <th> </th>
+                                    <tr>
+                                        <th>N°</th>
+                                        <th>Fecha</th>
+                                        <th>Proveedor</th>
+                                        <th>Monto anticipo </th>
+                                        <th>Registró</th>
+                                        <th> </th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <%

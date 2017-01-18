@@ -56,9 +56,6 @@ public class TerrenoController extends HttpServlet {
                 case "actualizar":
                     actualizarTerreno(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscar(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -162,20 +159,6 @@ public class TerrenoController extends HttpServlet {
             response.sendRedirect("/aserradero/TerrenoController?action=listar");
         } catch (Exception ex) {
             listarTerrenos(request, response, sesion, "error_actualizar");
-            Logger.getLogger(TerrenoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void buscar(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<Terreno> terrenos;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        TerrenoCRUD terrenocrud = new TerrenoCRUD();
-        try {
-            terrenos = (List<Terreno>) terrenocrud.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
-            mostrarTerrenos(request, response, terrenos, action);
-        } catch (Exception ex) {
-            listarTerrenos(request, response, sesion, "error_buscar");
             Logger.getLogger(TerrenoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

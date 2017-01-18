@@ -145,7 +145,6 @@ public class EntradaMaderaAserradaCRUD extends Conexion implements OperacionesCR
         }
     }
 
-    @Override
     public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<EntradaMaderaAserrada> produccionMaderas = null;
         String consulta;

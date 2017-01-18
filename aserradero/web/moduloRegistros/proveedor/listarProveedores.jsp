@@ -40,15 +40,6 @@
                             <h3 class="panel-title">Si el vehículo no aparece, agréguelo</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc" ><!-- Formulario para realizar búsquedas en la base de datos -->
-                                <form method="POST" action="/aserradero/ProveedorController?action=buscar">
-                                    <select name="nombre_campo" class="input-busc">
-                                        <option value="proveedor">Proveedor</option>
-                                    </select>
-                                    <input type="text" name="dato" placeholder="Escriba su búsqueda" class="input-busc">
-                                    <input type="submit" value="Buscar" class="btn btn-success">
-                                </form>
-                            </div><!-- Fin formulario de búsqueda -->
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>

@@ -32,14 +32,6 @@
                             <h3 class="panel-title">Listado de cuentas por cobrar a proveedores</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc">
-                                <select name="nombre_campo" class="input-busc">
-                                    <option value="proveedor">Proveedor</option>
-                                    <option value="monto">Monto</option>
-                                </select>
-                                <input type="text" name="dato" class="input-busc" placeholder="Escriba su búsqueda">
-                                <input type="submit" value="Buscar" class="btn btn-success" >
-                            </div>
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>

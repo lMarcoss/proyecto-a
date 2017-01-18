@@ -54,9 +54,9 @@ public class VentaMayoreoCRUD extends Conexion implements OperacionesCRUD {
     public <T> List listar(String id_jefe, String rol) throws Exception {
         List<Venta> listaVentas;
         String consulta;
-        if(rol.equals("Administrador")){
+        if (rol.equals("Administrador")) {
             consulta = "SELECT * FROM VISTA_VENTA_MAYOREO WHERE id_jefe = ? ORDER BY fecha DESC";
-        }else{
+        } else {
             consulta = "SELECT * FROM VISTA_VENTA_MAYOREO WHERE id_jefe = ? AND fecha = CURDATE() ORDER BY fecha DESC";
         }
         try {
@@ -199,13 +199,12 @@ public class VentaMayoreoCRUD extends Conexion implements OperacionesCRUD {
 
     }
 
-    @Override
     public <T> List buscar(String nombre_campo, String dato, String id_jefe, String rol) throws Exception {
         List<VentaMayoreo> ventaMayoreos;
         String consulta;
-        if(rol.equals("Administrador")){
+        if (rol.equals("Administrador")) {
             consulta = "SELECT * FROM VENTA_MAYOREO WHERE " + nombre_campo + " like ? AND id_administrador = ? ORDER BY fecha DESC";
-        }else{
+        } else {
             consulta = "SELECT * FROM VENTA_MAYOREO WHERE " + nombre_campo + " like ? AND id_administrador = ? AND fecha = CURDATE() ORDER BY fecha DESC";
         }
         try {

@@ -56,9 +56,6 @@ public class PersonaController extends HttpServlet {
                 case "actualizar":
                     actualizarPersona(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscar(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -166,21 +163,6 @@ public class PersonaController extends HttpServlet {
             listarPersonas(request, response, sesion, action);
         } catch (Exception ex) {
             listarPersonas(request, response, sesion, "error_actualizar");
-            Logger.getLogger(PersonaController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void buscar(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<Persona> listaPersonas;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        PersonaCRUD personaCRUD = new PersonaCRUD();
-        try {
-            listaPersonas = (List<Persona>) personaCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
-            mostrarPersonas(request, response, listaPersonas, action);
-        } catch (Exception ex) {
-            listarPersonas(request, response, sesion, "error_buscar_campo");
-            System.out.println(ex);
             Logger.getLogger(PersonaController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

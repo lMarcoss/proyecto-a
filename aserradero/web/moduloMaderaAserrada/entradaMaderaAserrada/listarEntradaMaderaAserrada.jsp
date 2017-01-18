@@ -6,8 +6,8 @@
 <%@page import="entidades.maderaAserrada.EntradaMaderaAserrada"%>
 <%@page import="java.util.List"%>
 <%
-    List <EntradaMaderaAserrada> listaMEAserrada = (List<EntradaMaderaAserrada>) request.getAttribute("listaEntradaMaderaAserrada");
-    String mensaje = (String)request.getAttribute("mensaje");
+    List<EntradaMaderaAserrada> listaMEAserrada = (List<EntradaMaderaAserrada>) request.getAttribute("listaEntradaMaderaAserrada");
+    String mensaje = (String) request.getAttribute("mensaje");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -33,18 +33,6 @@
                             <h3 class="panel-title">Listado de las maderas producidas</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-busc">
-                                <form method="POST" action="/aserradero/EntradaMaderaAserradaController?action=buscar">
-                                    <select class="input-busc" name="nombre_campo" >
-                                        <option value="fecha">Fecha</option>
-                                        <option value="id_madera">Id madera</option>
-                                        <option value="num_piezas">Número de piezas</option>
-                                        <option value="empleado">Registró</option>
-                                    </select>
-                                    <input type="search" class="input-busc" name="dato" placeholder="Escriba su búsqueda">
-                                    <input type="submit" class="btn btn-success" value="Buscar">
-                                </form>
-                            </div>
                             <table id="tabla" class="display cell-border" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -59,38 +47,29 @@
                                 </thead>
                                 <tbody>
                                     <%
-                                        int i=0;
+                                        int i = 0;
                                         for (EntradaMaderaAserrada maderaAserrada : listaMEAserrada) {
                                             out.print("<tr>"
-                                                +"<td>"+(i+1)+"</td>"
-                                                +"<td>"+maderaAserrada.getFecha()+"</td>"
-                                                +"<td>"+maderaAserrada.getId_madera()+"</td>"
-                                                +"<td>"+maderaAserrada.getNum_piezas()+"</td>"
-                                                +"<td>"+maderaAserrada.getEmpleado()+"</td>"
-                                                +"<td><a class='btn btn-warning' href=\"/aserradero/EntradaMaderaAserradaController?action=modificar&id_entrada="+maderaAserrada.getId_entrada()+"\">Modificar</a></td>"
-                                                + "<td><a class='btn btn-danger' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/EntradaMaderaAserradaController?action=eliminar&id_entrada="+maderaAserrada.getId_entrada()+"';};\">Eliminar</a></td>"
-                                            + "</tr>" );
+                                                    + "<td>" + (i + 1) + "</td>"
+                                                    + "<td>" + maderaAserrada.getFecha() + "</td>"
+                                                    + "<td>" + maderaAserrada.getId_madera() + "</td>"
+                                                    + "<td>" + maderaAserrada.getNum_piezas() + "</td>"
+                                                    + "<td>" + maderaAserrada.getEmpleado() + "</td>"
+                                                    + "<td><a class='btn btn-warning' href=\"/aserradero/EntradaMaderaAserradaController?action=modificar&id_entrada=" + maderaAserrada.getId_entrada() + "\">Modificar</a></td>"
+                                                    + "<td><a class='btn btn-danger' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/EntradaMaderaAserradaController?action=eliminar&id_entrada=" + maderaAserrada.getId_entrada() + "';};\">Eliminar</a></td>"
+                                                    + "</tr>");
                                             i++;
                                         }
                                     %>
                                 </tbody>
                             </table>
                             <div class="agregar_element">
-                                <input type="button" class="btn btn-primary" value="Agregar entrada" onClick=" window.location.href='/aserradero/EntradaMaderaAserradaController?action=nuevo' ">
+                                <input type="button" class="btn btn-primary" value="Agregar entrada" onClick=" window.location.href = '/aserradero/EntradaMaderaAserradaController?action=nuevo'">
                             </div>
                         </div><!--panel body-->
                     </div><!--panel-->
                 </div><!--col-md-12-->
             </div><!--row-->
         </div><!--<div class="container">-->
-
-        <!-- ************************* Resultado Consulta-->
-        <div>
-            <table class="table-condensed">
-
-
-            </table>
-
-        </div><!-- Resultado Consulta-->
     </body>
 </html>

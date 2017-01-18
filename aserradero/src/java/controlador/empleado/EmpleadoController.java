@@ -55,9 +55,6 @@ public class EmpleadoController extends HttpServlet {
                 case "actualizar":
                     actualizarEmpleado(request, response, sesion, action);
                     break;
-                case "buscar":
-                    buscarEmpleado(request, response, sesion, action);
-                    break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
@@ -158,21 +155,6 @@ public class EmpleadoController extends HttpServlet {
             response.sendRedirect("/aserradero/EmpleadoController?action=listar");
         } catch (Exception ex) {
             listarEmpleados(request, response, sesion, "error_actualizar");
-            System.out.println(ex);
-            Logger.getLogger(EmpleadoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void buscarEmpleado(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        List<Empleado> listaEmpleados;
-        String nombre_campo = request.getParameter("nombre_campo");
-        String dato = request.getParameter("dato");
-        EmpleadoCRUD empleadoCRUD = new EmpleadoCRUD();
-        try {
-            listaEmpleados = (List<Empleado>) empleadoCRUD.buscar(nombre_campo, dato, (String) sesion.getAttribute("id_jefe"), (String) sesion.getAttribute("rol"));
-            mostrarEmpleados(request, response, listaEmpleados, action);
-        } catch (Exception ex) {
-            listarEmpleados(request, response, sesion, "error_buscar_campo");
             System.out.println(ex);
             Logger.getLogger(EmpleadoController.class.getName()).log(Level.SEVERE, null, ex);
         }
