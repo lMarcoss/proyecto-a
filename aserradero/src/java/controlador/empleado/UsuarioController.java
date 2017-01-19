@@ -2,8 +2,12 @@ package controlador.empleado;
 
 import dao.empleado.UsuarioCRUD;
 import dao.empleado.EmpleadoCRUD;
+import dao.registros.LocalidadCRUD;
+import dao.registros.MunicipioCRUD;
 import entidades.empleado.Empleado;
 import entidades.empleado.Usuario;
+import entidades.registros.Localidad;
+import entidades.registros.Municipio;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -31,57 +35,76 @@ public class UsuarioController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");// Forzar a usar codificación UTF-8 iso-8859-1
 
-        // Sesiones
-        HttpSession sesion = request.getSession(false);
-        String nombre_usuario = (String) sesion.getAttribute("nombre_usuario");
-        String rol = (String) sesion.getAttribute("rol");
-        if (nombre_usuario.equals("")) {
-            response.sendRedirect("/aserradero/");
-        } else if (rol.equals("Administrador")) {
-            //Acción a realizar
-            String action = request.getParameter("action");
+        String action = request.getParameter("action");//Acción a realizar
+
+        if ((action.equals("insertar_primer_registro") || action.equals("nuevo_primer_registro")) && !existeUsuario()) {
+            //Registro inicial al sistema
             switch (action) {
                 /**
                  * *************** Respuestas a métodos POST
                  * *********************
                  */
-                case "insertar":
-                    registrarUsuario(request, response, sesion, action);
-                    break;
-                case "actualizar":
-                    actualizarUsuario(request, response, sesion, action);
+                case "insertar_primer_registro":
+                    registrarUsuario(request, response, null, action);
                     break;
                 /**
                  * *************** Respuestas a métodos GET
                  * *********************
                  */
-                case "nuevo":
-                    prepararNuevoUsuario(request, response, sesion);
-                    break;
-                case "listar":
-                    listarUsuarios(request, response, sesion, action);
-                    break;
-                case "modificar":
-                    modificarUsuario(request, response, sesion, action);
-                    break;
-                case "eliminar":
-                    eliminarUsuario(request, response, sesion, action);
+                case "nuevo_primer_registro":
+                    prepararRegistroInicial(request, response);
                     break;
             }
+
         } else {
             try {
-                sesion.invalidate();
-                response.sendRedirect("/aserradero/");
-            } catch (IOException e) {
+                HttpSession sesion = request.getSession(false);
+                String nombre_usuario = (String) sesion.getAttribute("nombre_usuario");
+                String rol = (String) sesion.getAttribute("rol");
+                if (nombre_usuario.equals("")) {
+                    response.sendRedirect("/aserradero/");
+                } else if (rol.equals("Administrador")) {
+                    switch (action) {
+                        /**
+                         * *************** Respuestas a métodos POST
+                         * *********************
+                         */
+                        case "insertar":
+                            registrarUsuario(request, response, sesion, action);
+                            break;
+                        case "actualizar":
+                            actualizarUsuario(request, response, sesion, action);
+                            break;
+                        /**
+                         * *************** Respuestas a métodos GET
+                         * *********************
+                         */
+                        case "nuevo":
+                            prepararNuevoUsuario(request, response, sesion, true);
+                            break;
+                        case "listar":
+                            listarUsuarios(request, response, sesion, action);
+                            break;
+                        case "modificar":
+                            modificarUsuario(request, response, sesion, action);
+                            break;
+                        case "eliminar":
+                            eliminarUsuario(request, response, sesion, action);
+                            break;
+                    }
+                } else {
+                    response.sendRedirect("/aserradero/");
+                }
+            } catch (Exception e) {
                 System.out.println(e);
                 response.sendRedirect("/aserradero/");
             }
-            response.sendRedirect("/aserradero/");
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -96,7 +119,12 @@ public class UsuarioController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        }
     }
 
     /**
@@ -110,7 +138,11 @@ public class UsuarioController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -141,7 +173,6 @@ public class UsuarioController extends HttpServlet {
         usuario.setId_empleado(request.getParameter("id_empleado"));
         usuario.setNombre_usuario(request.getParameter("nombre_usuario"));
         usuario.setContrasenia(request.getParameter("contrasenia"));
-        usuario.setEmail(request.getParameter("email"));
         return usuario;
     }
 
@@ -157,7 +188,8 @@ public class UsuarioController extends HttpServlet {
         }
     }
 
-    private void prepararNuevoUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession sesion) {
+    private void prepararNuevoUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, boolean existeUsuario) throws Exception {
+
         EmpleadoCRUD empleadoCRUD = new EmpleadoCRUD();
         try {
             List<Empleado> empleados = (List<Empleado>) empleadoCRUD.empleadosParaUsuario((String) sesion.getAttribute("id_jefe"));
@@ -168,6 +200,7 @@ public class UsuarioController extends HttpServlet {
             listarUsuarios(request, response, sesion, "error_nuevo");
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     //Mostrar lista de usuarios
@@ -223,4 +256,33 @@ public class UsuarioController extends HttpServlet {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private boolean existeUsuario() throws Exception {
+        UsuarioCRUD usuarioCRUD = new UsuarioCRUD();
+        return usuarioCRUD.existeUsuario();
+    }
+
+    private void prepararRegistroInicial(HttpServletRequest request, HttpServletResponse response) throws ServletException, Exception {
+        /*
+        * Si no existe usuario: Registramos un municipio, localidad, datos personales, y el usuario a registrar va a ser un administrador
+         */
+        try {
+            //Municipios existentes
+            MunicipioCRUD municipioCRUD = new MunicipioCRUD();
+            List<Municipio> listaMunicipios = (List<Municipio>) municipioCRUD.listar();
+            //Localidades existentes
+            LocalidadCRUD localidadCRUD = new LocalidadCRUD();
+            List<Localidad> listaLocalidades = localidadCRUD.listar(null, null);
+
+            //Enviamos las listas
+            request.setAttribute("listaMunicipios", listaMunicipios);
+            request.setAttribute("listaLocalidades", listaLocalidades);
+            RequestDispatcher view = request.getRequestDispatcher("moduloEmpleado/usuario/primer_usuario.jsp");
+            view.forward(request, response);
+        } catch (IOException ex) {
+            System.out.println("no se puede registrar nuevo registro inicial");
+            Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

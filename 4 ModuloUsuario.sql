@@ -5,8 +5,6 @@ CREATE VIEW VISTA_USUARIO AS
 SELECT 
 	nombre_usuario,
     contrasenia,
-    metodo,
-    email,
     EMPLEADO.id_empleado AS id_empleado,
     id_persona,
     (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE EMPLEADO.id_persona = id_persona LIMIT 1) as empleado,
@@ -15,10 +13,8 @@ SELECT
     estatus
 FROM USUARIO,EMPLEADO
 WHERE USUARIO.id_empleado = EMPLEADO.id_empleado;
--- select *from EMPLEADO;
-INSERT INTO USUARIO VALUES
-('PAXA20160913HOCSXNPAXA2016','Antonio Cortes Hernandez',sha1('Eufrosina H A'),'sha1',''),
-('MASL19931106HOCRNNMASL1993','admin',sha1('admin'),'sha1','hola'),
-('COCR19990708HOCRRCMASL1993','richard',sha1('richard'),'sha1','hola'); -- Usuario richard contrasenia: richard
 
-SELECT * FROM EMPLEADO;
+-- INSERT INTO USUARIO VALUES
+-- ('COHA820724HOCRNN02COHA8207','Antonio',concat('^4%m@C*',sha2('&%c#L+=antonio$|2A',224),'!T>A0')),
+-- ('VALLADARESELVIA123COCR1999','Elvia',concat('^4%m@C*',sha2('&%c#L+=elvia$|2A',224),'!T>A0')),
+-- ('COCR19990708HOCRRCCOHA8207','richard',concat('^4%m@C*',sha2('&%c#L+=richard$|2A',224),'!T>A0'));-- Usuario richard contrasenia: richard

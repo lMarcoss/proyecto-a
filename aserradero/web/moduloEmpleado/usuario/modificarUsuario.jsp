@@ -20,10 +20,10 @@
     </head>
     <body>
         <!--menu-->
-        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
-            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
-        <%}else{%>
-            <%@ include file="/TEMPLATE/menu.jsp" %>
+        <%if (((String) sesion.getAttribute("rol")).equals("Administrador")) {%>
+        <%@ include file="/TEMPLATE/menu_admin.jsp" %>
+        <%} else {%>
+        <%@ include file="/TEMPLATE/menu.jsp" %>
         <%}%>
         <div class="container">
             <div class="row">
@@ -52,10 +52,6 @@
                                 <div class="form-group">
                                     <label for="password">Contraseña</label>
                                     <input class="form-control" type="password" name="contrasenia"  maxlength="20" required=""  placeholder="Escriba una nueva contraseña" title="Click en cancelar para no cambiar contraseña" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Email:</label>
-                                    <input class="form-control" type="email" name="email" value="<%=usuario.getEmail()%>" maxlength="50"/>
                                 </div>
                                 <div class="form-group">
                                     <a href="/aserradero/UsuarioController?action=listar"><input type="button" class="btn btn-warning" value="Cancelar"/></a>

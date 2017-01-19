@@ -62,8 +62,6 @@ CREATE TABLE USUARIO(
 	id_empleado 		VARCHAR(26) NOT NULL,
 	nombre_usuario 		VARCHAR(255),
     contrasenia			varchar(255) NOT NULL,
-	metodo 				ENUM('sha1'),
-    email				VARCHAR(50),
     PRIMARY KEY(nombre_usuario),
     FOREIGN KEY (id_empleado) REFERENCES EMPLEADO (id_empleado) ON UPDATE CASCADE)ENGINE=InnoDB;
 

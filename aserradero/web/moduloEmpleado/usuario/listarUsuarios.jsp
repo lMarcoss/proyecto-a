@@ -46,7 +46,6 @@
                                         <th>N°</th>
                                         <th>Empleado</th>
                                         <th>Nombre de usuario</th>
-                                        <th>Email</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -59,7 +58,6 @@
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + usuario.getId_empleado() + "\">" + usuario.getEmpleado() + "</a></td>"
                                                     + "<td>" + usuario.getNombre_usuario() + "</td>"
-                                                    + "<td>" + usuario.getEmail() + "</td>"
                                                     + "<td><a class='btn btn-primary' href=\"/aserradero/UsuarioController?action=modificar&nombre_usuario=" + usuario.getNombre_usuario() + "\">Cambiar contraseña</a></td>"
                                                     + "<td><a class='btn btn-danger' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/UsuarioController?action=eliminar&nombre_usuario=" + usuario.getNombre_usuario() + "';};\">Eliminar</a></td>"
                                                     + "</tr>");

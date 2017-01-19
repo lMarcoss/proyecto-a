@@ -10,145 +10,164 @@ import java.util.List;
 
 /**
  *
- * @author lmarcoss
+ * @author lmarcoss password = "4@*" + usuario.contrasenia + "&#+"; // Clave de
+ * Seguridad para contraseña
  */
-public class UsuarioCRUD extends Conexion{
-       
-    public void registrar(Usuario usuario) throws Exception{
-        try{
+public class UsuarioCRUD extends Conexion {
+
+    private final String clave1 = "^4%m@C*";
+    private final String clave2 = "&%c#L+=";
+    private final String clave3 = "$|2A";
+    private final String clave4 = "!T>A0";
+
+    // ('COHA820724HOCRNN02COHA8207','Antonio',concat('$|2A',sha2('^4%m@C*antonio&%c#L+=',224),'!T!A0'));
+    public void registrar(Usuario usuario) throws Exception {
+        try {
             this.abrirConexion();
-                PreparedStatement st= this.conexion.prepareStatement(
-                        "INSERT INTO USUARIO (id_empleado,nombre_usuario,contrasenia,metodo,email) VALUES (?,?,SHA1(?),?,?)");
-            st.setString(1,usuario.id_empleado);
-            st.setString(2,usuario.nombre_usuario);
-            st.setString(3,usuario.contrasenia);
-            st.setString(4,"sha1");
-            st.setString(5,usuario.email);
+            PreparedStatement st = this.conexion.prepareStatement(
+                    "INSERT INTO USUARIO (id_empleado,nombre_usuario,contrasenia) VALUES (?,?,concat(?,sha2(concat(?,?,?),224),?))");
+            st.setString(1, usuario.id_empleado);
+            st.setString(2, usuario.getNombre_usuario());
+            st.setString(3, clave1);
+            st.setString(4, clave2);
+            st.setString(5, usuario.getContrasenia());
+            st.setString(6, clave3);
+            st.setString(7, clave4);
             st.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw e;
-        }finally{
+        } finally {
             this.cerrarConexion();
-        } 
+        }
     }
-    
+
     public List<Usuario> listar(String id_jefe) throws Exception {
         List<Usuario> usuarios;
-        try{
+        try {
             this.abrirConexion();
             try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_USUARIO WHERE (rol = 'Administrador' OR rol = 'Empleado' OR rol = 'Vendedor') AND id_jefe = ?")) {
                 st.setString(1, id_jefe);
                 usuarios = new ArrayList();
                 try (ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {
-                        Usuario usuario = extraerUsuario(rs,"");
+                        Usuario usuario = extraerUsuario(rs, "");
                         usuarios.add(usuario);
                     }
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 usuarios = null;
                 System.out.println(e);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw e;
-        }finally{
-            this.cerrarConexion();
-        } 
-        return usuarios;
-    }
-    
-    public Usuario modificar(Usuario usuarioM) throws Exception{
-        Usuario usuario = null;
-        this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_USUARIO WHERE nombre_usuario = ?")) {
-                st.setString(1, usuarioM.getNombre_usuario());
-                try (ResultSet rs = st.executeQuery()) {
-                    while (rs.next()) {
-                        usuario = extraerUsuario(rs,"");
-                    }
-                }
-            }
-        return usuario;
-    }
-    
-    public void actualizar(Usuario usuario) throws Exception{
-        try{
-            this.abrirConexion();
-            PreparedStatement st= this.conexion.prepareStatement("UPDATE USUARIO SET contrasenia = SHA1(?), metodo = ?, email = ? WHERE nombre_usuario = ? AND id_empleado = ?");
-            st.setString(1, usuario.getContrasenia());
-            st.setString(2, "sha1");
-            st.setString(3, usuario.getEmail());
-            st.setString(4, usuario.getNombre_usuario());
-            st.setString(5, usuario.getId_empleado());
-            st.executeUpdate();
-        }catch(Exception e){
-            System.out.println(e);
-            throw e;
-        }finally{
-            this.cerrarConexion();
-        } 
-    }
-    
-    public void eliminar(Usuario usuario) throws Exception{
-        try{
-            this.abrirConexion();
-            PreparedStatement st= this.conexion.prepareStatement("DELETE FROM USUARIO WHERE nombre_usuario = ?");
-            st.setString(1,usuario.nombre_usuario);
-            st.executeUpdate();
-        }catch(Exception e){
-            System.out.println(e);
-            throw e;
-        }finally{
-            this.cerrarConexion();
-        } 
-    }
-    
-    //Buscar por campo y regresar todos los coincidentes
-    public List<Usuario> buscar(String nombre_campo,String dato) throws Exception{
-        List<Usuario> usuarios;
-        try{
-            this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM USUARIO WHERE "+nombre_campo+" like ?")) {
-                st.setString(1, "%"+dato+"%");
-                usuarios = new ArrayList();
-                try (ResultSet rs = st.executeQuery()) {
-                    while (rs.next()) {
-                        Usuario usuario = extraerUsuario(rs,"");
-                        usuarios.add(usuario);
-                    }
-                }
-            }
-        }catch(Exception e){
-            System.out.println(e);
-            throw e;
-        }finally{
+        } finally {
             this.cerrarConexion();
         }
         return usuarios;
     }
-    
-    public Usuario validarUsuario(String nombre_usuario, String contrasenia) throws Exception{
-        Usuario user = null;
-        try{
+
+    public Usuario modificar(Usuario usuarioM) throws Exception {
+        Usuario usuario = null;
+        this.abrirConexion();
+        try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_USUARIO WHERE nombre_usuario = ?")) {
+            st.setString(1, usuarioM.getNombre_usuario());
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    usuario = extraerUsuario(rs, "");
+                }
+            }
+        }
+        return usuario;
+    }
+
+    public void actualizar(Usuario usuario) throws Exception {
+        try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT  * FROM VISTA_USUARIO WHERE nombre_usuario = ? AND contrasenia = (SELECT SHA1(?)) AND estatus = ? AND (rol = 'Administrador' OR rol = 'Empleado' OR rol = 'Vendedor')")) {
-                st.setString(1,nombre_usuario);
-                st.setString(2,contrasenia);
-                st.setString(3,"Activo");
+            PreparedStatement st = this.conexion.prepareStatement("UPDATE USUARIO SET contrasenia = concat(?,sha2(concat(?,?,?),224),?) WHERE nombre_usuario = ? AND id_empleado = ?");
+            st.setString(1, clave1);
+            st.setString(2, clave2);
+            st.setString(3, usuario.getContrasenia());
+            st.setString(4, clave3);
+            st.setString(5, clave4);
+            st.setString(6, usuario.getNombre_usuario());
+            st.setString(7, usuario.getId_empleado());
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
+    }
+
+    public void eliminar(Usuario usuario) throws Exception {
+        try {
+            this.abrirConexion();
+            PreparedStatement st = this.conexion.prepareStatement("DELETE FROM USUARIO WHERE nombre_usuario = ?");
+            st.setString(1, usuario.nombre_usuario);
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
+    }
+
+    //Buscar por campo y regresar todos los coincidentes
+    public List<Usuario> buscar(String nombre_campo, String dato) throws Exception {
+        List<Usuario> usuarios;
+        try {
+            this.abrirConexion();
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM USUARIO WHERE " + nombre_campo + " like ?")) {
+                st.setString(1, "%" + dato + "%");
+                usuarios = new ArrayList();
                 try (ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {
-                        user = extraerUsuario(rs,"validar");
+                        Usuario usuario = extraerUsuario(rs, "");
+                        usuarios.add(usuario);
                     }
-                }catch(Exception e){
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
+        return usuarios;
+    }
+
+    public Usuario validarUsuario(String nombre_usuario, String contrasenia) throws Exception {
+        String consulta = "SELECT  * FROM VISTA_USUARIO "
+                + "WHERE nombre_usuario = ?"
+                + "AND estatus = ? "
+                + "AND contrasenia = CONCAT(?,sha2(concat(?,?,?),224),?) AND (rol = 'Administrador' OR rol = 'Empleado' OR rol = 'Vendedor')";
+        Usuario user = null;
+        try {
+            this.abrirConexion();
+            try (PreparedStatement st = this.conexion.prepareStatement(consulta)) {
+                st.setString(1, nombre_usuario);
+                st.setString(2, "Activo");
+                st.setString(3, clave1);
+                st.setString(4, clave2);
+                st.setString(5, contrasenia);
+                st.setString(6, clave3);
+                st.setString(7, clave4);
+                try (ResultSet rs = st.executeQuery()) {
+                    while (rs.next()) {
+                        user = extraerUsuario(rs, "validar");
+                    }
+                } catch (Exception e) {
                     System.out.println(e);
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw e;
-        }finally{
+        } finally {
             this.cerrarConexion();
         }
         return user;
@@ -157,7 +176,7 @@ public class UsuarioCRUD extends Conexion{
     private Usuario extraerUsuario(ResultSet rs, String action) throws SQLException {
         Usuario usuario = new Usuario();
         usuario.setNombre_usuario(rs.getString("nombre_usuario"));
-        if(action.equals("validar")){
+        if (action.equals("validar")) {
             usuario.setContrasenia(rs.getString("contrasenia"));
         }
         usuario.setId_empleado(rs.getString("id_empleado"));
@@ -165,8 +184,30 @@ public class UsuarioCRUD extends Conexion{
         usuario.setId_jefe(rs.getString("id_jefe"));
         usuario.setRol(rs.getString("rol"));
         usuario.setEstatus(rs.getString("estatus"));
-        usuario.setEmail(rs.getString("email"));
         return usuario;
     }
-    
+
+    public boolean existeUsuario() throws Exception {
+        boolean existe = false;
+        try {
+            this.abrirConexion();
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM USUARIO, EMPLEADO WHERE USUARIO.id_empleado = EMPLEADO.id_empleado AND estatus = ? AND rol = 'Administrador'")) {
+                st.setString(1, "Activo");
+                try (ResultSet rs = st.executeQuery()) {
+                    while (rs.next()) {
+                        existe = true;
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
+        return existe;
+    }
+
 }

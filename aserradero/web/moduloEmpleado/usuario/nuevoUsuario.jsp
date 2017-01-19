@@ -9,8 +9,7 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    HttpSession sesion = request.getSession(false);
-    List <Empleado> empleados = (List<Empleado>) request.getAttribute("empleados");
+    List<Empleado> empleados = (List<Empleado>) request.getAttribute("empleados");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,11 +19,7 @@
     </head>
     <body>
         <!--menu-->
-        <%if(((String)sesion.getAttribute("rol")).equals("Administrador")){%>
-            <%@ include file="/TEMPLATE/menu_admin.jsp" %>
-        <%}else{%>
-            <%@ include file="/TEMPLATE/menu.jsp" %>
-        <%}%>
+        <%@ include file="/TEMPLATE/menu.jsp" %>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -45,7 +40,7 @@
                                         <option></option>
                                         <%
                                             for (Empleado empleado : empleados) {
-                                                out.print("<option value='"+empleado.getId_empleado()+"'>"+empleado.getRol()+": "+empleado.getEmpleado()+"</option>");
+                                                out.print("<option value='" + empleado.getId_empleado() + "'>" + empleado.getRol() + ": " + empleado.getEmpleado() + "</option>");
                                             }
                                         %>
                                     </select>
@@ -59,12 +54,7 @@
                                     <input class="form-control" type="password" name="contrasenia" maxlength="20" required=""/>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Email:</label>
-                                    <input class="form-control" type="email" name="email" maxlength="50"/>
-                                </div>
-                                <div class="form-group">
                                     <a href="/aserradero/UsuarioController?action=listar"><input type="button" class="btn btn-warning" value="Cancelar"/></a>
-                                    <!--<input type="submit" value="Registrar" class="submit"/> -->
                                     <input type="submit" class="btn btn-success" value="Guardar"/>
                                 </div>
                             </form>
