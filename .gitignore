@@ -7,8 +7,11 @@
 *.jar -json-lib-2.4-jdk15.jar -gson-2.2.3.jar
 *.war
 *.ear
+*.properties 
+!project.properties
+*.xml
+!project.xml
 
-#otros
 aserradero/dist/
 aserradero/build/
 aserradero/nbproject/
