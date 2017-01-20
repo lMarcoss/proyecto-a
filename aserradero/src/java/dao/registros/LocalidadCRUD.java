@@ -150,12 +150,14 @@ public class LocalidadCRUD extends Conexion implements OperacionesCRUD {
         return localidades;
     }
 
-    public List<Localidad> buscarLocalidad(String nombre_localidad) throws Exception {
-        List<Localidad> localidades;
+    public List<Localidad> buscarLocalidad(String nombre_localidad, String nombre_municipio, String estado) throws Exception {
+        List<Localidad> localidades = null;
         try {
             this.abrirConexion();
-            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_LOCALIDAD WHERE nombre_localidad = ?")) {
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_LOCALIDAD WHERE nombre_localidad = ? AND nombre_municipio = ? AND estado = ?")) {
                 st.setString(1, nombre_localidad);
+                st.setString(2, nombre_municipio);
+                st.setString(3, estado);
                 localidades = new ArrayList();
                 try (ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {
@@ -171,5 +173,28 @@ public class LocalidadCRUD extends Conexion implements OperacionesCRUD {
             this.cerrarConexion();
         }
         return localidades;
+    }
+
+    public boolean existeLocalidad(String nombre_localidad, String nombre_municipio, String estado) throws Exception {
+        boolean existe = false;
+        try {
+            this.abrirConexion();
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM LOCALIDAD WHERE nombre_localidad = ? AND nombre_municipio = ? AND estado = ?")) {
+                st.setString(1, nombre_localidad);
+                st.setString(2, nombre_municipio);
+                st.setString(3, estado);
+                try (ResultSet rs = st.executeQuery()) {
+                    while (rs.next()) {
+                        existe = true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
+        return existe;
     }
 }

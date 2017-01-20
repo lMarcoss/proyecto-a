@@ -4,11 +4,14 @@ import dao.empleado.UsuarioCRUD;
 import dao.empleado.EmpleadoCRUD;
 import dao.registros.LocalidadCRUD;
 import dao.registros.MunicipioCRUD;
+import dao.registros.PersonaCRUD;
 import entidades.empleado.Empleado;
 import entidades.empleado.Usuario;
 import entidades.registros.Localidad;
 import entidades.registros.Municipio;
+import entidades.registros.Persona;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,7 +52,7 @@ public class UsuarioController extends HttpServlet {
                  * *********************
                  */
                 case "insertar_primer_registro":
-                    registrarUsuario(request, response, null, action);
+                    registrarUsuarioPrimerRegistro(request, response, action);
                     break;
                 /**
                  * *************** Respuestas a métodos GET
@@ -156,7 +159,7 @@ public class UsuarioController extends HttpServlet {
     }// </editor-fold>
 
     private void registrarUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        Usuario usuario = extraerUsuarioForm(request);
+        Usuario usuario = extraerUsuarioForm(request, action);
         UsuarioCRUD usuarioCRUD = new UsuarioCRUD();
         try {
             usuarioCRUD.registrar(usuario);
@@ -168,16 +171,20 @@ public class UsuarioController extends HttpServlet {
     }
 
     // Extraer datos del formulario
-    private Usuario extraerUsuarioForm(HttpServletRequest request) {
+    private Usuario extraerUsuarioForm(HttpServletRequest request, String action) {
         Usuario usuario = new Usuario();
-        usuario.setId_empleado(request.getParameter("id_empleado"));
+        if (action.equals("primer_registro")) {
+            usuario.setId_empleado("registro_inicial");
+        } else {
+            usuario.setId_empleado(request.getParameter("id_empleado"));
+        }
         usuario.setNombre_usuario(request.getParameter("nombre_usuario"));
         usuario.setContrasenia(request.getParameter("contrasenia"));
         return usuario;
     }
 
     private void actualizarUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
-        Usuario usuario = extraerUsuarioForm(request);
+        Usuario usuario = extraerUsuarioForm(request, action);
         UsuarioCRUD usuarioCRUD = new UsuarioCRUD();
         try {
             usuarioCRUD.actualizar(usuario);
@@ -285,4 +292,91 @@ public class UsuarioController extends HttpServlet {
         }
     }
 
+    private void registrarUsuarioPrimerRegistro(HttpServletRequest request, HttpServletResponse response, String action) throws IOException {
+        //Extraemos datos del formulario
+        Municipio municipio = extraerMunicipioForm(request);
+        Localidad localidad = extraerLocalidadForm(request);
+        Persona persona = extraerPersonaForm(request);
+        Empleado empleado = extraerEmpleadoForm(request);
+        Usuario usuario = extraerUsuarioForm(request, "primer_registro");
+        try {
+            //Insertamos datos en la BD si no existe
+            MunicipioCRUD municipioCRUD = new MunicipioCRUD();
+            if (municipioCRUD.buscarMunicipio(municipio.getNombre_municipio(), municipio.getEstado()) == null) {
+                municipioCRUD.registrar(municipio);
+            }
+
+            LocalidadCRUD localidadCRUD = new LocalidadCRUD();
+            if (!localidadCRUD.existeLocalidad(localidad.getNombre_localidad(), localidad.getNombre_municipio(), localidad.getEstado())) {
+                localidadCRUD.registrar(localidad);
+                System.out.println("insertado localidad");
+            } else {
+                System.out.println("no insertado localidad");
+            }
+
+            PersonaCRUD personaCRUD = new PersonaCRUD();
+            if (!personaCRUD.existePersona(persona.getId_persona())) {
+                personaCRUD.registrar(persona);
+                System.out.println("Persona registrado");
+            }
+
+            EmpleadoCRUD empleadoCRUD = new EmpleadoCRUD();
+            UsuarioCRUD usuarioCRUD = new UsuarioCRUD();
+            if (!empleadoCRUD.buscarEmpleado(persona.getId_persona(), persona.getId_persona(), "Administrador")) {
+                empleadoCRUD.registrar(empleado);
+                usuarioCRUD.registrar(usuario);
+            }
+            response.sendRedirect("/aserradero/");
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("/aserradero/");
+        }
+
+    }
+
+    private Persona extraerPersonaForm(HttpServletRequest request) {
+        Persona persona = new Persona();
+        persona.setId_persona(request.getParameter("id_persona"));
+        persona.setNombre(request.getParameter("nombre"));
+        persona.setApellido_paterno(request.getParameter("apellido_paterno"));
+        persona.setApellido_materno(request.getParameter("apellido_materno"));
+        persona.setNombre_localidad(request.getParameter("nombre_localidad"));
+        persona.setNombre_municipio(request.getParameter("nombre_municipio"));
+        persona.setEstado(request.getParameter("estado"));
+        persona.setDireccion(request.getParameter("direccion"));
+        persona.setSexo(request.getParameter("sexo"));
+        persona.setFecha_nacimiento(Date.valueOf(request.getParameter(("fecha_nacimiento"))));
+        persona.setTelefono(request.getParameter("telefono"));
+        return persona;
+    }
+
+    //Extraer datos de municipio en el formulario HTML
+    private Municipio extraerMunicipioForm(HttpServletRequest request) {
+        Municipio municipio = new Municipio();
+        municipio.setNombre_municipio(request.getParameter("nombre_municipio"));
+        municipio.setEstado(request.getParameter("estado"));
+        municipio.setTelefono("");
+        return municipio;
+    }
+
+    //Extraer datos de localidad en el formulario HTML
+    private Localidad extraerLocalidadForm(HttpServletRequest request) {
+        Localidad localidad = new Localidad();
+        localidad.setNombre_localidad(request.getParameter("nombre_localidad"));
+        localidad.setNombre_municipio(request.getParameter("nombre_municipio"));
+        localidad.setEstado(request.getParameter("estado"));
+        localidad.setTelefono_localidad("");
+        return localidad;
+    }
+
+    private Empleado extraerEmpleadoForm(HttpServletRequest request) {
+        Empleado empleado = new Empleado();
+        empleado.setId_persona(request.getParameter("id_persona"));
+        empleado.setId_empleado(request.getParameter("id_persona"));
+        empleado.setId_jefe(request.getParameter("id_persona"));
+        empleado.setRol("Administrador");
+        empleado.setEstatus("Activo");
+        return empleado;
+
+    }
 }

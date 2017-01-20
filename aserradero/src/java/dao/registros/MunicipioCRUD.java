@@ -131,7 +131,7 @@ public class MunicipioCRUD extends Conexion{
     }
 
     public List<Municipio> buscarMunicipio(String nombre_municipio,String estado)throws Exception{
-        List<Municipio> municipios;
+        List<Municipio> municipios = null;
         try{
             this.abrirConexion();
             try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_MUNICIPIO WHERE nombre_municipio = ? AND estado = ?")) {

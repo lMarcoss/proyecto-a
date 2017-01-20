@@ -189,7 +189,7 @@ public class PersonaCRUD extends Conexion implements OperacionesCRUD {
     }
 
     public List<Persona> buscarPorId(String id_persona) throws Exception {
-        List<Persona> personas;
+        List<Persona> personas = null;
         try {
             this.abrirConexion();
             try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM VISTA_PERSONA WHERE id_persona = ?")) {
@@ -254,4 +254,24 @@ public class PersonaCRUD extends Conexion implements OperacionesCRUD {
         return personas;
     }
 
+    public boolean existePersona(String id_persona) throws Exception {
+        boolean existe = false;
+        try {
+            this.abrirConexion();
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM PERSONA WHERE id_persona = ?")) {
+                st.setString(1, id_persona);
+                try (ResultSet rs = st.executeQuery()) {
+                    while (rs.next()) {
+                        existe = true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
+        return existe;
+    }
 }
