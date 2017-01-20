@@ -10,6 +10,7 @@
 *.properties 
 !project.properties
 *.xml
+!web.xml
 !project.xml
 
 aserradero/dist/
