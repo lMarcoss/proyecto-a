@@ -8,7 +8,7 @@
 *.war
 *.ear
 #otros
-/aserradero/dist/
-/aserradero/build/
-/aserradero/nbproject/
-/aserradero/src/java/dao/Conexion.java
+aserradero/dist/
+aserradero/build/
+aserradero/nbproject/
+aserradero/src/java/dao/Conexion.java
