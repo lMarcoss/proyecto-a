@@ -79,7 +79,6 @@ public class EmpleadoCRUD extends Conexion implements OperacionesCRUD {
         empleado.setId_persona(rs.getString("id_persona"));
         empleado.setEmpleado(rs.getString("empleado"));
         empleado.setId_jefe(rs.getString("id_jefe"));
-        empleado.setJefe(rs.getString("jefe"));
         empleado.setRol(rs.getString("rol"));
         empleado.setEstatus(rs.getString("estatus"));
         return empleado;

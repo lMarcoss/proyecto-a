@@ -34,35 +34,33 @@ DELIMITER ;
 DROP VIEW IF EXISTS PERSONAL_ADMINISTRADOR;
 CREATE VIEW PERSONAL_ADMINISTRADOR AS
 SELECT 
-		id_administrador, 
-		(SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE id_persona = SUBSTRING(id_administrador,1,18) LIMIT 1)as nombre,
-        cuenta_inicial
-FROM ADMINISTRADOR;
+	id_empleado AS id_administrador,
+    CONCAT(nombre,' ', apellido_paterno, ' ',apellido_materno) AS nombre,
+    (SELECT cuenta_inicial FROM ADMINISTRADOR WHERE id_administrador = id_empleado) AS cuenta_inicial
+FROM EMPLEADO AS E,PERSONA AS P 
+WHERE E.id_persona = P.id_persona AND rol = 'Administrador';
 
 -- lista de empleados
 DROP VIEW IF EXISTS PERSONAL_EMPLEADO;
 CREATE VIEW PERSONAL_EMPLEADO AS
-SELECT id_empleado,
-		id_persona,
-        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) as nombre FROM PERSONA WHERE PERSONA.id_persona = EMPLEADO.id_persona LIMIT 1) as empleado,
-        id_jefe,
-        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) as nombre FROM PERSONA WHERE id_persona = SUBSTRING(id_jefe,1,18) LIMIT 1) as jefe, 
-        rol,estatus 
-FROM EMPLEADO;
+SELECT 
+	E.id_persona AS id_persona,
+    CONCAT(nombre,' ', apellido_paterno, ' ',apellido_materno) as empleado,
+    E.id_jefe AS id_jefe,
+    rol,
+    estatus
+FROM EMPLEADO AS E,PERSONA AS P WHERE E.id_persona = P.id_persona;
 
 -- Lista de pago a empleados
 DROP VIEW IF EXISTS VISTA_PAGO_EMPLEADO;
-CREATE VIEW VISTA_PAGO_EMPLEADO AS 
-SELECT id_pago_empleado,
-		fecha,
-        EMPLEADO.id_empleado AS id_empleado,
-        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) as nombre FROM PERSONA WHERE id_persona = EMPLEADO.id_persona LIMIT 1)as empleado,
-        EMPLEADO.id_jefe AS id_jefe,
-        monto,
-        observacion 
-FROM PAGO_EMPLEADO,EMPLEADO WHERE PAGO_EMPLEADO.id_empleado = EMPLEADO.id_empleado;
-
--- INSERT INTO EMPLEADO VALUES
--- ('COHA820724HOCRNN02','COHA820724HOCRNN02','COHA820724HOCRNN02','Administrador','Activo'),
--- ('COCR19990708HOCRRC', 'COCR19990708HOCRRC', 'COCR19990708HOCRRCCOCR1999', 'Empleado', 'Activo');
-
+CREATE VIEW VISTA_PAGO_EMPLEADO AS
+SELECT
+	id_pago_empleado,
+    fecha,
+    E.id_empleado AS id_empleado,
+    CONCAT(nombre,' ', apellido_paterno, ' ',apellido_materno) as empleado,
+    E.id_jefe AS id_jefe,
+    monto,
+    observacion
+FROM PAGO_EMPLEADO AS PG, EMPLEADO AS E, PERSONA AS P
+WHERE PG.id_empleado = E.id_empleado AND E.id_persona = P.id_persona;

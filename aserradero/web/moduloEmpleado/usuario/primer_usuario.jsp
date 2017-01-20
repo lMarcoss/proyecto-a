@@ -204,9 +204,7 @@
                                             </a>
                                         </div>
                                     </div>
-
                                 </div>
-
                             </form>
                         </div>
                     </div><!-- Panel principal-->

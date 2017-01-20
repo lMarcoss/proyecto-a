@@ -75,7 +75,6 @@ public class ProveedorCRUD extends Conexion implements OperacionesCRUD {
         proveedor.setId_persona(rs.getString("id_persona"));
         proveedor.setProveedor(rs.getString("proveedor"));
         proveedor.setId_jefe(rs.getString("id_jefe"));
-        proveedor.setJefe(rs.getString("jefe"));
         return proveedor;
     }
 

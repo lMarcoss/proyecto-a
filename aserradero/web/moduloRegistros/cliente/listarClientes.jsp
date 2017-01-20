@@ -44,7 +44,6 @@
                                 <tr>
                                     <th>N°</th>
                                     <th>Cliente</th>
-                                    <th>Jefe</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -55,7 +54,6 @@
                                         out.print("<tr>"
                                                 + "<td>" + (i + 1) + "</td>"
                                                 + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + cliente.getId_cliente() + "\">" + cliente.getCliente() + "</a></td>"
-                                                + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + cliente.getId_jefe() + "\">" + cliente.getJefe() + "</a></td>"
                                                 + "<td><a class=\"btn btn-danger\" href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/ClienteController?action=eliminar&id_cliente=" + cliente.getId_cliente() + "';};\">Eliminar</a></td>"
                                                 + "</tr>");
                                         i++;

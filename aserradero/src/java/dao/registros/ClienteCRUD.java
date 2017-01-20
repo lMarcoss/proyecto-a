@@ -116,7 +116,6 @@ public class ClienteCRUD extends Conexion implements OperacionesCRUD {
         cliente.setId_persona(rs.getString("id_persona"));
         cliente.setCliente(rs.getString("cliente"));
         cliente.setId_jefe(rs.getString("id_jefe"));
-        cliente.setJefe(rs.getString("jefe"));
         return cliente;
     }
 

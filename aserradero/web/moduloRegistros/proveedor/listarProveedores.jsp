@@ -45,7 +45,6 @@
                                     <tr>
                                         <th>N°</th>
                                         <th>Proveedor</th>
-                                        <th>Jefe</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -56,7 +55,6 @@
                                             out.print("<tr>"
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + proveedor.getId_proveedor() + "\">" + proveedor.getProveedor() + "</a></td>"
-                                                    + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + proveedor.getId_jefe() + "\">" + proveedor.getJefe() + "</a></td>"
                                                     + "<td><a class=\"btn btn-danger\" href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/ProveedorController?action=eliminar&id_proveedor=" + proveedor.getId_proveedor() + "';};\">Eliminar</a></td>"
                                                     + "</tr>");
                                             i++;

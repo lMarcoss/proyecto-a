@@ -1,6 +1,5 @@
 Use aserradero;
 
--- SELECT * FROM PERSONA;
 DROP VIEW IF EXISTS VISTA_MUNICIPIO;
 CREATE VIEW VISTA_MUNICIPIO AS
 SELECT 
@@ -23,45 +22,45 @@ ORDER BY nombre_localidad;
 -- lista a todo el personal Cliente id_cliente y nombre completo, id_jefe y nombre completo
 DROP VIEW IF EXISTS PERSONAL_CLIENTE;
 CREATE VIEW PERSONAL_CLIENTE AS
-SELECT id_cliente,
-		id_persona,
-        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE PERSONA.id_persona = CLIENTE.id_persona) as cliente,
-        id_jefe,
-        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) as nombre FROM PERSONA WHERE id_persona = SUBSTRING(id_jefe,1,18)) as jefe
-	FROM CLIENTE,ADMINISTRADOR 
-	WHERE CLIENTE.id_jefe = id_administrador
-    ORDER BY cliente;
--- SELECT * FROM PERSONAL_CLIENTE;
+SELECT
+	id_cliente,
+	C.id_persona AS id_persona,
+    CONCAT(nombre,' ', apellido_paterno, ' ',apellido_materno) as cliente,
+    id_jefe
+FROM CLIENTE AS C,PERSONA AS P
+WHERE C.id_persona = P.id_persona
+ORDER BY cliente;
 
 -- lista a todo el personal Proveedor id_proveedor y nombre completo, id_jefe y nombre completo
 DROP VIEW IF EXISTS PERSONAL_PROVEEDOR;
 CREATE VIEW PERSONAL_PROVEEDOR AS 
-SELECT id_proveedor,
-		id_persona,
-        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE id_persona = PROVEEDOR.id_persona) as proveedor,
-		id_jefe,
-        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) as nombre FROM PERSONA WHERE id_persona = SUBSTRING(id_jefe,1,18)) as jefe
-FROM PROVEEDOR,ADMINISTRADOR 
-WHERE PROVEEDOR.id_jefe = id_administrador
+SELECT
+	id_proveedor,
+    PR.id_persona AS id_persona,
+    CONCAT(nombre,' ', apellido_paterno, ' ',apellido_materno) as proveedor,
+    id_jefe
+FROM PROVEEDOR AS PR,PERSONA AS P
+WHERE PR.id_persona = P.id_persona
 ORDER BY proveedor;
--- SELECT * FROM PERSONAL_PROVEEDOR;
 
 -- lista de vehículos con nombre completo del empleado
 DROP VIEW IF EXISTS VISTA_VEHICULO;
 CREATE VIEW VISTA_VEHICULO AS
-SELECT id_vehiculo, 
-		matricula, 
-        tipo, 
-        color, 
-        carga_admitida, 
-        motor, 
-        modelo, 
-        costo, 
-        VEHICULO.id_empleado, 
-        (select concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM EMPLEADO,PERSONA where EMPLEADO.id_persona = PERSONA.id_persona and EMPLEADO.id_empleado = VEHICULO.id_empleado) as empleado, 
-        (select id_jefe FROM EMPLEADO,ADMINISTRADOR WHERE EMPLEADO.id_jefe = ADMINISTRADOR.id_administrador and EMPLEADO.id_empleado = VEHICULO.id_empleado) as id_jefe
-	FROM VEHICULO;
--- SELECT * FROM VISTA_VEHICULO;
+SELECT 
+	id_vehiculo, 
+	matricula, 
+	tipo, 
+	color, 
+	carga_admitida, 
+	motor, 
+	modelo, 
+	costo, 
+	V.id_empleado, 
+	CONCAT(nombre,' ', apellido_paterno, ' ',apellido_materno) as empleado,
+	id_jefe
+FROM VEHICULO AS V,EMPLEADO AS E, PERSONA AS P
+WHERE V.id_empleado = E.id_empleado AND E.id_persona = P.id_persona
+ORDER BY matricula;
 
 -- Disparador para crear id_cliente
 DROP TRIGGER IF EXISTS CLIENTE;
@@ -114,20 +113,19 @@ DROP VIEW IF EXISTS VISTA_TERRENO;
 CREATE VIEW VISTA_TERRENO AS 
 SELECT 
 	id_terreno,
-    nombre,
+    T.nombre AS nombre,
     dimension,
-    direccion,
-    nombre_localidad,
-    nombre_municipio,
-    estado,
+    T.direccion AS direccion,
+    T.nombre_localidad AS nombre_localidad,
+    T.nombre_municipio AS nombre_municipio,
+    T.estado AS estado,
     valor_estimado,
-    id_empleado,
-    (SELECT CONCAT(nombre, ' ', apellido_paterno, ' ', apellido_materno) FROM PERSONA WHERE id_persona = SUBSTRING(id_empleado,1,18) LIMIT 1) AS empleado,
-    (SELECT id_jefe FROM EMPLEADO WHERE id_empleado = TERRENO.id_empleado LIMIT 1) AS id_jefe
-FROM TERRENO
+    T.id_empleado AS id_empleado,
+    CONCAT(P.nombre,' ', P.apellido_paterno, ' ',P.apellido_materno) as empleado,
+    id_jefe
+FROM TERRENO AS T,EMPLEADO AS E, PERSONA AS P
+WHERE T.id_empleado = E.id_empleado AND E.id_persona = P.id_persona
 ORDER BY nombre;
-
-
 
 -- Insertamos datos
 INSERT INTO MUNICIPIO VALUES
@@ -818,8 +816,8 @@ INSERT INTO LOCALIDAD (nombre_localidad,nombre_municipio,estado,telefono) VALUES
 ("El Ranchito","Miahuatlán de Porfirio Díaz",'Oaxaca',""),
 ("Las Cazuarinas [Barrio]","Miahuatlán de Porfirio Díaz",'Oaxaca',"");
 
-INSERT INTO LOCALIDAD (nombre_localidad,nombre_municipio,estado,telefono) VALUES 
-('Xitla', 'Santa Cruz Xitla', 'Oaxaca','4435628711');
+-- INSERT INTO LOCALIDAD (nombre_localidad,nombre_municipio,estado,telefono) VALUES 
+-- ('Xitla', 'Santa Cruz Xitla', 'Oaxaca','4435628711');
 
 -- INSERT INTO PERSONA (id_persona,nombre,apellido_paterno,apellido_materno,nombre_localidad,nombre_municipio,estado,sexo,fecha_nacimiento,telefono) VALUES 
 -- ('COHA820724HOCRNN02', 'Antonio', 'Cortés', 'Hernández', 'Los Pocitos', 'Miahuatlan de porfirio diaz', 'Oaxaca', 'H', '1982-07-24', ''),
