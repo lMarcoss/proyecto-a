@@ -45,6 +45,7 @@ DROP VIEW IF EXISTS PERSONAL_EMPLEADO;
 CREATE VIEW PERSONAL_EMPLEADO AS
 SELECT 
 	E.id_empleado AS id_empleado,
+    E.id_persona AS id_persona,
     CONCAT(nombre,' ', apellido_paterno, ' ',apellido_materno) as empleado,
     E.id_jefe AS id_jefe,
     rol,
