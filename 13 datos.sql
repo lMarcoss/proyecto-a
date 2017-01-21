@@ -15,3 +15,4 @@ INSERT INTO USUARIO (id_empleado, nombre_usuario, contrasenia) VALUES
 ('COHA820724HOCRNN02COHA8207','Antonio',concat('^4%m@C*',sha2('&%c#L+=antonio$|2A',224),'!T>A0')),
 ('VALLADARESELVIA123COHA8207','Elvia',concat('^4%m@C*',sha2('&%c#L+=elvia$|2A',224),'!T>A0')),
 ('COCR19990708HOCRRCCOHA8207','richard',concat('^4%m@C*',sha2('&%c#L+=richard$|2A',224),'!T>A0'));-- Usuario richard contrasenia: richard
+
