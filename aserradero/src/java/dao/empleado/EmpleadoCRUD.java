@@ -21,7 +21,7 @@ public class EmpleadoCRUD extends Conexion implements OperacionesCRUD {
         try {
             this.abrirConexion();
             PreparedStatement st = this.conexion.prepareStatement(
-                    "INSERT INTO EMPLEADO (id_empleado,id_persona,id_jefe,rol,estatus) VALUES (?,?,?,?,?)");
+                    "INSERT INTO EMPLEADO (id_empleado,id_persona,id_jefe,rol,estatus,cuenta_inicial) VALUES (?,?,?,?,?,?)");
             st = cargarObject(st, empleado);
             st.executeUpdate();
         } catch (Exception e) {
@@ -41,6 +41,7 @@ public class EmpleadoCRUD extends Conexion implements OperacionesCRUD {
         st.setString(3, empleado.getId_jefe());
         st.setString(4, empleado.getRol());
         st.setString(5, empleado.getEstatus());
+        st.setBigDecimal(6, empleado.getCuenta_inicial());
         return st;
     }
 
@@ -81,6 +82,7 @@ public class EmpleadoCRUD extends Conexion implements OperacionesCRUD {
         empleado.setId_jefe(rs.getString("id_jefe"));
         empleado.setRol(rs.getString("rol"));
         empleado.setEstatus(rs.getString("estatus"));
+        empleado.setCuenta_inicial(rs.getBigDecimal("cuenta_inicial"));
         return empleado;
     }
 

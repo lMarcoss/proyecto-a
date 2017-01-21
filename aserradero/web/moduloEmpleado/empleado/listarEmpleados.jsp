@@ -8,7 +8,6 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    HttpSession sesion = request.getSession(false);
     List<Empleado> empleados = (List<Empleado>) request.getAttribute("listaEmpleados");
     String mensaje = (String) request.getAttribute("mensaje");
 %>
@@ -19,15 +18,7 @@
         <title>Empleados</title>
     </head>
     <body>
-        <%if (((String) sesion.getAttribute("rol")).equals("Administrador")) {%>
-        <%@ include file="/TEMPLATE/menu_admin.jsp" %>
-        <%} else {%>
-        <%if (((String) sesion.getAttribute("rol")).equals("Administrador")) {%>
-        <%@ include file="/TEMPLATE/menu_admin.jsp" %>
-        <%} else {%>
         <%@ include file="/TEMPLATE/menu.jsp" %>
-        <%}%>
-        <%}%>
         <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>" >
         <div class="container">
             <div class="row">
@@ -62,6 +53,7 @@
                                                     + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + empleado.getId_empleado() + "\">" + empleado.getEmpleado() + "</a></td>"
                                                     + "<td>" + empleado.getRol() + "</td>"
                                                     + "<td>" + empleado.getEstatus() + "</td>"
+                                                    + "<td>" + empleado.getCuenta_inicial()+ "</td>"
                                                     + "<td><a  class='btn btn-warning' href=\"/aserradero/EmpleadoController?action=modificar&id_empleado=" + empleado.getId_empleado() + "&rol=" + empleado.getRol() + "\">Modificar</a></td>"
                                                     + "<td><a class='btn btn-danger' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/EmpleadoController?action=eliminar&id_empleado=" + empleado.getId_empleado() + "&rol=" + empleado.getRol() + "';};\">Eliminar</a></td>"
                                                     + "</tr>");

@@ -30,7 +30,7 @@
                     <p><input type="text" name="nombre_usuario" placeholder="Nombre de usuario" id="nombre_usuario"></p>
                     <p><input type="password" name="contrasenia" placeholder="Contraseña" id="contrasenia"></p>
                     <p><button type="submit" id="entrar">Entrar</button>
-                        <a href="/aserradero/UsuarioController?action=nuevo_primer_registro">Registro inicial</a>
+                        <!--<a href="/aserradero/UsuarioController?action=nuevo_primer_registro">Registro inicial</a>-->
                 </form>
             </div>
         </div>

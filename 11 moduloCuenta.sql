@@ -313,8 +313,8 @@ DELIMITER ;
 
 DROP VIEW IF EXISTS BALANCE_CUENTA;
 CREATE VIEW BALANCE_CUENTA AS
-SELECT 
-	id_administrador,
+SELECT
+	id_jefe as id_administrador,
     FORMAT(cuenta_inicial,2) as cuenta_inicial,
     FORMAT((SELECT VALOR_INMUEBLES(id_administrador)),2) as bienes_inmuebles,
     FORMAT((SELECT C_PAGOS_EMPLEADO(id_administrador)),2) as pago_empleado,
@@ -328,12 +328,12 @@ SELECT
     FORMAT((SELECT C_PRESTAMOS(id_administrador)),2) as prestamo,
     FORMAT((SELECT C_INVENTARIO_M_ROLLO(id_administrador)),2) as inventario_m_rollo,
     FORMAT((SELECT C_INVENTARIO_M_ASERRADA(id_administrador)),2) as inventario_m_aserrada
-FROM ADMINISTRADOR;
+FROM EMPLEADO WHERE rol = 'Administrador';
 
 DROP VIEW IF EXISTS CUENTA_TOTAL;
 CREATE VIEW CUENTA_TOTAL AS 
 SELECT 
-	id_administrador,
+	id_jefe  as id_administrador,
     FORMAT(( cuenta_inicial + 
     (SELECT VALOR_INMUEBLES(id_administrador) +
     (SELECT C_INVENTARIO_M_ROLLO(id_administrador))+
@@ -347,5 +347,4 @@ SELECT
     (SELECT C_GASTOS(id_administrador)) -
 	(SELECT C_CUENTAS_POR_PAGAR(id_administrador)) -
     (SELECT C_PAGOS_COMPRA(id_administrador)))),2) AS cuenta_total
-FROM ADMINISTRADOR;
-
+FROM EMPLEADO WHERE rol = 'Administrador';

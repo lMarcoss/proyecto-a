@@ -5,6 +5,7 @@ import dao.registros.PersonaCRUD;
 import entidades.empleado.Empleado;
 import entidades.registros.Persona;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -143,6 +144,7 @@ public class EmpleadoController extends HttpServlet {
         empleado.setId_jefe((String) sesion.getAttribute("id_jefe"));//Para empleado Administrador no aplica al insertar: el trigger de la BD lo modifica al insertar
         empleado.setRol(request.getParameter("rol"));
         empleado.setEstatus(request.getParameter("estatus"));
+        empleado.setCuenta_inicial(BigDecimal.valueOf(Double.valueOf("0")));
         return empleado;
     }
 

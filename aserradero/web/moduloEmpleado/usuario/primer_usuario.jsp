@@ -119,6 +119,7 @@
                                             <input type="text" class="form-control" name="nombre_localidad" id="nombre_localidad"  maxlength="59" placeholder="Escribe solo nombre de localidad o selecciona de la lista si aparece -->" required=""/>
                                         </div>    
                                     </div>
+
                                     <div class="lado_izquierdo"><!-- Grupo Izquierdo -->
                                         <div class="form-group">
                                             <label class="control-label">Lista de localidades:</label>

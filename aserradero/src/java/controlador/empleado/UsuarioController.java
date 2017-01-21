@@ -44,69 +44,69 @@ public class UsuarioController extends HttpServlet {
 
         String action = request.getParameter("action");//Acción a realizar
 
-        if ((action.equals("insertar_primer_registro") || action.equals("nuevo_primer_registro")) && !existeUsuario()) {
-            //Registro inicial al sistema
-            switch (action) {
-                /**
-                 * *************** Respuestas a métodos POST
-                 * *********************
-                 */
-                case "insertar_primer_registro":
-                    registrarUsuarioPrimerRegistro(request, response, action);
-                    break;
-                /**
-                 * *************** Respuestas a métodos GET
-                 * *********************
-                 */
-                case "nuevo_primer_registro":
-                    prepararRegistroInicial(request, response);
-                    break;
-            }
-
-        } else {
-            try {
-                HttpSession sesion = request.getSession(false);
-                String nombre_usuario = (String) sesion.getAttribute("nombre_usuario");
-                String rol = (String) sesion.getAttribute("rol");
-                if (nombre_usuario.equals("")) {
-                    response.sendRedirect("/aserradero/");
-                } else if (rol.equals("Administrador")) {
-                    switch (action) {
-                        /**
-                         * *************** Respuestas a métodos POST
-                         * *********************
-                         */
-                        case "insertar":
-                            registrarUsuario(request, response, sesion, action);
-                            break;
-                        case "actualizar":
-                            actualizarUsuario(request, response, sesion, action);
-                            break;
-                        /**
-                         * *************** Respuestas a métodos GET
-                         * *********************
-                         */
-                        case "nuevo":
-                            prepararNuevoUsuario(request, response, sesion, true);
-                            break;
-                        case "listar":
-                            listarUsuarios(request, response, sesion, action);
-                            break;
-                        case "modificar":
-                            modificarUsuario(request, response, sesion, action);
-                            break;
-                        case "eliminar":
-                            eliminarUsuario(request, response, sesion, action);
-                            break;
-                    }
-                } else {
-                    response.sendRedirect("/aserradero/");
+//        if ((action.equals("insertar_primer_registro") || action.equals("nuevo_primer_registro")) && !existeUsuario()) {
+//            //Registro inicial al sistema
+////            switch (action) {
+////                /**
+////                 * *************** Respuestas a métodos POST
+////                 * *********************
+////                 */
+////                case "insertar_primer_registro":
+////                    registrarUsuarioPrimerRegistro(request, response, action);
+////                    break;
+////                /**
+////                 * *************** Respuestas a métodos GET
+////                 * *********************
+////                 */
+////                case "nuevo_primer_registro":
+////                    prepararRegistroInicial(request, response);
+////                    break;
+////            }
+//
+//        } else {
+        try {
+            HttpSession sesion = request.getSession(false);
+            String nombre_usuario = (String) sesion.getAttribute("nombre_usuario");
+            String rol = (String) sesion.getAttribute("rol");
+            if (nombre_usuario.equals("")) {
+                response.sendRedirect("/aserradero/");
+            } else if (rol.equals("Administrador")) {
+                switch (action) {
+                    /**
+                     * *************** Respuestas a métodos POST
+                     * *********************
+                     */
+                    case "insertar":
+                        registrarUsuario(request, response, sesion, action);
+                        break;
+                    case "actualizar":
+                        actualizarUsuario(request, response, sesion, action);
+                        break;
+                    /**
+                     * *************** Respuestas a métodos GET
+                     * *********************
+                     */
+                    case "nuevo":
+                        prepararNuevoUsuario(request, response, sesion, true);
+                        break;
+                    case "listar":
+                        listarUsuarios(request, response, sesion, action);
+                        break;
+                    case "modificar":
+                        modificarUsuario(request, response, sesion, action);
+                        break;
+                    case "eliminar":
+                        eliminarUsuario(request, response, sesion, action);
+                        break;
                 }
-            } catch (Exception e) {
-                System.out.println(e);
+            } else {
                 response.sendRedirect("/aserradero/");
             }
+        } catch (Exception e) {
+            System.out.println(e);
+            response.sendRedirect("/aserradero/");
         }
+//        }
 
     }
 
@@ -324,8 +324,9 @@ public class UsuarioController extends HttpServlet {
             UsuarioCRUD usuarioCRUD = new UsuarioCRUD();
             if (!empleadoCRUD.buscarEmpleado(persona.getId_persona(), persona.getId_persona(), "Administrador")) {
                 empleadoCRUD.registrar(empleado);
-                usuarioCRUD.registrar(usuario);
             }
+
+            usuarioCRUD.registrar(usuario);
             response.sendRedirect("/aserradero/");
         } catch (Exception ex) {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
