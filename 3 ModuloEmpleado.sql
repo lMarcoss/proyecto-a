@@ -12,23 +12,25 @@ BEGIN
         -- Actualizamos el id_empleado y el id_jefe
         SET NEW.id_jefe = id_administrador;
         SET NEW.id_empleado = id_administrador;
+        SET NEW.cuenta_inicial = 0;
 	ELSE 
 		SET NEW.id_empleado = CONCAT(NEW.id_empleado,SUBSTRING(NEW.id_jefe,1,8));
+        SET NEW.cuenta_inicial = 0;
     END IF;
 END;//
 DELIMITER ;
 
 -- Insertar administrador con cuenta inicial 0, en la tabla Administrador 
-DROP TRIGGER IF EXISTS EMPLEADO_ADMIN;
-DELIMITER //
-CREATE TRIGGER EMPLEADO_ADMIN AFTER INSERT ON EMPLEADO
-FOR EACH ROW
-BEGIN
-	IF(NEW.rol = 'Administrador')THEN
-        INSERT INTO ADMINISTRADOR (id_administrador,cuenta_inicial) VALUES(NEW.id_jefe,0.00);
-    END IF;
-END;//
-DELIMITER ;
+-- DROP TRIGGER IF EXISTS EMPLEADO_ADMIN;
+-- DELIMITER //
+-- CREATE TRIGGER EMPLEADO_ADMIN AFTER INSERT ON EMPLEADO
+-- FOR EACH ROW
+-- BEGIN
+-- 	IF(NEW.rol = 'Administrador')THEN
+--         INSERT INTO ADMINISTRADOR (id_administrador,cuenta_inicial) VALUES(NEW.id_jefe,0.00);
+--     END IF;
+-- END;//
+-- DELIMITER ;
 
 -- lista de administradores
 DROP VIEW IF EXISTS PERSONAL_ADMINISTRADOR;
@@ -36,7 +38,7 @@ CREATE VIEW PERSONAL_ADMINISTRADOR AS
 SELECT 
 	id_empleado AS id_administrador,
     CONCAT(nombre,' ', apellido_paterno, ' ',apellido_materno) AS nombre,
-    (SELECT cuenta_inicial FROM ADMINISTRADOR WHERE id_administrador = id_empleado) AS cuenta_inicial
+    cuenta_inicial
 FROM EMPLEADO AS E,PERSONA AS P 
 WHERE E.id_persona = P.id_persona AND rol = 'Administrador';
 

@@ -9,13 +9,14 @@ CREATE VIEW VISTA_ANTICIPO_CLIENTE AS
 SELECT
 	id_anticipo_c,
     fecha,
-    id_cliente,
-    (SELECT CONCAT(nombre, ' ', apellido_paterno, ' ', apellido_materno) FROM PERSONA WHERE id_persona = SUBSTRING(A.id_cliente,1,18) LIMIT 1) AS cliente,
-    id_empleado,
-    (SELECT CONCAT(nombre, ' ', apellido_paterno, ' ', apellido_materno) FROM PERSONA WHERE id_persona = SUBSTRING(A.id_empleado,1,18) LIMIT 1) AS empleado,
+    AC.id_cliente AS id_cliente,
+    CONCAT(PC.nombre,' ', PC.apellido_paterno, ' ',PC.apellido_materno) as cliente,
+    AC.id_empleado AS id_empleado,
+    CONCAT(PE.nombre,' ', PE.apellido_paterno, ' ',PE.apellido_materno) as empleado,
     monto_anticipo,
-    (SELECT id_jefe FROM EMPLEADO WHERE id_empleado = A.id_empleado LIMIT 1) AS id_jefe
-FROM ANTICIPO_CLIENTE AS A;
+    C.id_jefe
+FROM ANTICIPO_CLIENTE AS AC,CLIENTE AS C,PERSONA AS PC, EMPLEADO AS E, PERSONA AS PE
+WHERE AC.id_cliente = C.id_cliente AND C.id_persona = PC.id_persona AND AC.id_empleado = E.id_empleado AND E.id_persona = PE.id_persona;
 
 -- Submódulo Anticipo proveedor-- Submódulo Anticipo proveedor-- Submódulo Anticipo proveedor
 -- Submódulo Anticipo proveedor-- Submódulo Anticipo proveedor-- Submódulo Anticipo proveedor
@@ -26,13 +27,14 @@ CREATE VIEW VISTA_ANTICIPO_PROVEEDOR AS
 SELECT 
 	id_anticipo_p,
 	fecha,
-	id_proveedor,
-	(SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE PERSONA.id_persona = SUBSTRING(ANTICIPO_PROVEEDOR.id_proveedor,1,18)) as proveedor,
-	id_empleado,
-	(SELECT concat (nombre,' ',apellido_paterno,' ',apellido_materno) FROM PERSONA WHERE PERSONA.id_persona = SUBSTRING(ANTICIPO_PROVEEDOR.id_empleado,1,18)) as empleado,
-	(SELECT id_jefe FROM EMPLEADO WHERE id_empleado = ANTICIPO_PROVEEDOR.id_empleado) as id_jefe,
-	monto_anticipo
-FROM ANTICIPO_PROVEEDOR;
+	AP.id_proveedor AS id_proveedor,
+	CONCAT(PP.nombre,' ', PP.apellido_paterno, ' ',PP.apellido_materno) AS proveedor,
+	AP.id_empleado,
+	CONCAT(PE.nombre,' ', PE.apellido_paterno, ' ',PE.apellido_materno) as empleado,
+    monto_anticipo,
+	PR.id_jefe
+FROM ANTICIPO_PROVEEDOR AS AP,PROVEEDOR AS PR,PERSONA AS PP, EMPLEADO AS E, PERSONA AS PE
+WHERE AP.id_proveedor = PR.id_proveedor AND PR.id_persona = PP.id_persona AND AP.id_empleado = E.id_empleado AND E.id_persona = PE.id_persona;
 
 -- Submódulo cuenta por cobrar y pagar a proveedores -- Submódulo cuenta por cobrar y pagar a proveedores-- Submódulo cuenta por cobrar y pagar a proveedores
 -- Submódulo cuenta por cobrar y pagar a proveedores -- Submódulo cuenta por cobrar y pagar a proveedores-- Submódulo cuenta por cobrar y pagar a proveedores
@@ -242,4 +244,3 @@ SELECT
     id_jefe,
     ABS(monto) AS monto
 FROM CUENTAS_CLIENTE WHERE monto > 0;
-

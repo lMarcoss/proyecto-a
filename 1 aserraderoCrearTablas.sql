@@ -37,17 +37,12 @@ CREATE TABLE EMPLEADO(
 	id_empleado 	VARCHAR(26) NOT NULL,
     id_persona		CHAR(18) NOT NULL,
     id_jefe 		VARCHAR(26) NOT NULL,
-	rol				ENUM('Administrador','Empleado','Vendedor','Chofer'),	
+	rol				ENUM('Administrador','Empleado','Vendedor','Chofer'),
 	estatus			ENUM('Activo','Inactivo'),
+    cuenta_inicial 	DECIMAL(15,2), -- Sólo para administrador
 	PRIMARY KEY (id_empleado,id_jefe,rol),
 	FOREIGN KEY (id_persona) REFERENCES PERSONA (id_persona) ON UPDATE CASCADE,
     FOREIGN KEY (id_jefe) REFERENCES EMPLEADO (id_empleado) ON DELETE CASCADE ON UPDATE CASCADE)ENGINE=InnoDB;
-
-CREATE TABLE ADMINISTRADOR(
-	id_administrador	VARCHAR(26) NOT NULL,
-    cuenta_inicial 		DECIMAL(15,2),
-	PRIMARY KEY (id_administrador),
-	FOREIGN KEY (id_administrador) REFERENCES EMPLEADO (id_empleado) ON DELETE CASCADE ON UPDATE CASCADE)ENGINE=InnoDB;
 
 CREATE	TABLE PAGO_EMPLEADO(
 	id_pago_empleado INT NOT NULL AUTO_INCREMENT,
@@ -64,16 +59,15 @@ CREATE TABLE USUARIO(
     contrasenia			varchar(255) NOT NULL,
     PRIMARY KEY(nombre_usuario),
     FOREIGN KEY (id_empleado) REFERENCES EMPLEADO (id_empleado) ON UPDATE CASCADE)ENGINE=InnoDB;
-
--- entrada
+    
 CREATE TABLE PROVEEDOR(
-	id_proveedor 	VARCHAR(26) NOT NULL,
-	id_persona 		VARCHAR(18) NOT NULL,
-	id_jefe			VARCHAR(26) NOT NULL,
-	PRIMARY KEY (id_proveedor,id_jefe),
+	id_proveedor 	CHAR(26) NOT NULL,
+    id_persona 		CHAR(18) NOT NULL,
+	id_jefe			CHAR(26),
+	PRIMARY KEY(id_proveedor,id_jefe),
 	FOREIGN KEY (id_persona) REFERENCES PERSONA (id_persona) ON UPDATE CASCADE,
-	FOREIGN KEY (id_jefe) REFERENCES ADMINISTRADOR (id_administrador) ON UPDATE CASCADE)ENGINE=InnoDB;
-
+	FOREIGN KEY (id_jefe) REFERENCES EMPLEADO (id_empleado) ON UPDATE CASCADE)ENGINE=InnoDB;
+    
 -- Clasificación madera en rollo por cada proveedor
 CREATE TABLE CLASIFICACION_M_ROLLO(
     id_proveedor		VARCHAR(26) NOT NULL,
@@ -143,7 +137,7 @@ CREATE TABLE MADERA_ASERRADA_CLASIF(
 	volumen					DECIMAL(15,3),
     costo_por_volumen		DECIMAL(15,2),
 	primary key(id_administrador,id_madera),
-    FOREIGN KEY (id_administrador) REFERENCES ADMINISTRADOR (id_administrador) ON UPDATE CASCADE,
+    FOREIGN KEY (id_administrador) REFERENCES EMPLEADO (id_empleado) ON UPDATE CASCADE,
     FOREIGN KEY (id_empleado) REFERENCES EMPLEADO (id_empleado) ON UPDATE CASCADE)ENGINE=InnoDB;
 
 -- producción
@@ -164,7 +158,7 @@ CREATE TABLE CLIENTE(
 	id_jefe		CHAR(26),
 	PRIMARY KEY(id_cliente,id_jefe),
 	FOREIGN KEY (id_persona) REFERENCES PERSONA (id_persona) ON UPDATE CASCADE,
-	FOREIGN KEY (id_jefe) REFERENCES ADMINISTRADOR (id_administrador) ON UPDATE CASCADE)ENGINE=InnoDB;
+	FOREIGN KEY (id_jefe) REFERENCES EMPLEADO (id_empleado) ON UPDATE CASCADE)ENGINE=InnoDB;
 
 CREATE TABLE VENTA(
 	id_venta 	VARCHAR(30),
@@ -287,7 +281,6 @@ CREATE TABLE PRESTAMO(
 	PRIMARY KEY(id_prestamo, id_prestador),
     FOREIGN KEY (id_empleado) REFERENCES EMPLEADO (id_empleado) ON UPDATE CASCADE)ENGINE=InnoDB;
 
-    
 CREATE TABLE TERRENO(
 	id_terreno			INT NOT NULL AUTO_INCREMENT,
 	nombre 				VARCHAR(100),
