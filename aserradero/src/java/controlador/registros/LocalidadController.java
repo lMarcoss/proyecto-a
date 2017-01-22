@@ -144,7 +144,6 @@ public class LocalidadController extends HttpServlet {
         localidad.setNombre_localidad(request.getParameter("nombre_localidad"));
         localidad.setNombre_municipio(request.getParameter("nombre_municipio"));
         localidad.setEstado(request.getParameter("estado"));
-        System.out.println("Estado:" + localidad.getEstado());
         localidad.setTelefono_localidad(request.getParameter("telefono"));
         return localidad;
     }
@@ -235,7 +234,9 @@ public class LocalidadController extends HttpServlet {
             List<Localidad> localidad;
             LocalidadCRUD localidadCRUD = new LocalidadCRUD();
             String nombre_localidad = request.getParameter("nombre_localidad");
-            localidad = (List<Localidad>) localidadCRUD.buscarLocalidad(nombre_localidad);
+            String nombre_municipio = request.getParameter("nombre_municipio");
+            String estado = request.getParameter("estado");
+            localidad = (List<Localidad>) localidadCRUD.buscarLocalidad(nombre_localidad, nombre_municipio, estado);
             mostrarLocalidades(request, response, localidad, action);
         } catch (Exception ex) {
             System.out.println(ex);

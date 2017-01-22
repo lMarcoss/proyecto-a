@@ -19,9 +19,12 @@ public interface OperacionesCRUD{
     public abstract <T> List listar(String id_jefe,String rol) throws Exception;
     public Object extraerObject(ResultSet rs) throws SQLException;
     
-    //Devuelve un objeto del tipo de objeto que recibe: Objeto genérico
-    public Object modificar(Object objeto) throws Exception;
+    /*Objeto genérico*/
+    //Objeto a modificar: registro
+    public Object modificar(Object objeto) throws Exception; 
+    // Actualizar un objeto: registro
     public void actualizar(Object objeto) throws Exception;
+    //Eliminar objeto: registro
     public void eliminar(Object objeto) throws Exception;
     
 }

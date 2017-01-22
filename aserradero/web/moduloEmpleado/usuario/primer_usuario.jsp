@@ -116,7 +116,7 @@
                                     <div class="lado_derecho"><!-- Grupo derecho-->
                                         <div class="form-group">
                                             <label class="control-label">Nombre de la localidad:</label>
-                                            <input type="text" class="form-control" name="nombre_localidad" id="nombre_localidad"  maxlength="59" placeholder="Escribe nombre localidad o selecciona de la lista si aparece -->" required=""/>
+                                            <input type="text" class="form-control" name="nombre_localidad" id="nombre_localidad"  maxlength="59" placeholder="Escribe solo nombre de localidad o selecciona de la lista si aparece -->" required=""/>
                                         </div>    
                                     </div>
                                     <div class="lado_izquierdo"><!-- Grupo Izquierdo -->

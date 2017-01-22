@@ -221,4 +221,30 @@ public class EmpleadoCRUD extends Conexion implements OperacionesCRUD {
         }
         return empleados;
     }
+
+    public boolean buscarEmpleado(String id_empleado, String id_jefe, String rol) throws Exception {
+        boolean existe = false;
+        try {
+            this.abrirConexion();
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM EMPLEADO WHERE id_empleado = ? AND id_jefe = ? AND rol = ?")) {
+                st.setString(1, id_empleado);
+                st.setString(2, id_jefe);
+                st.setString(3, rol);
+                try (ResultSet rs = st.executeQuery()) {
+                    while (rs.next()) {
+                        existe = true;
+                    }
+                }
+            } catch (Exception e) {
+                existe = false;
+                System.out.println(e);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
+        return existe;
+    }
 }
