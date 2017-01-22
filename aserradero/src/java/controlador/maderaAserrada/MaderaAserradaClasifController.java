@@ -143,6 +143,9 @@ public class MaderaAserradaClasifController extends HttpServlet {
         mAClasif.setId_administrador((String) sesion.getAttribute("id_jefe"));
         mAClasif.setId_empleado((String) sesion.getAttribute("id_empleado"));
         mAClasif.setId_madera(request.getParameter("id_madera"));
+        if(action.equals("actualizar")){
+            mAClasif.setId_madera_nuevo(request.getParameter("id_madera_nuevo"));
+        }
         mAClasif.setGrueso(BigDecimal.valueOf((Double.valueOf(request.getParameter("grueso")))));
         mAClasif.setGrueso_f(request.getParameter("grueso_f"));
         mAClasif.setAncho(BigDecimal.valueOf((Double.valueOf(request.getParameter("ancho")))));

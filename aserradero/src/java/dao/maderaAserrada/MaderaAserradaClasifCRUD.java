@@ -121,17 +121,18 @@ public class MaderaAserradaClasifCRUD extends Conexion implements OperacionesCRU
         MaderaAserradaClasif maderaClasificacion = (MaderaAserradaClasif) objeto;
         try {
             this.abrirConexion();
-            PreparedStatement st = this.conexion.prepareStatement("UPDATE MADERA_ASERRADA_CLASIF SET grueso = ?, grueso_f = ?, ancho = ?, ancho_f = ?, largo = ?, largo_f = ?, volumen = ?, costo_por_volumen = ? WHERE id_administrador = ? AND id_madera= ?");
-            st.setBigDecimal(1, maderaClasificacion.getGrueso());
-            st.setString(2, maderaClasificacion.getGrueso_f());
-            st.setBigDecimal(3, maderaClasificacion.getAncho());
-            st.setString(4, maderaClasificacion.getAncho_f());
-            st.setBigDecimal(5, maderaClasificacion.getLargo());
-            st.setString(6, maderaClasificacion.getLargo_f());
-            st.setBigDecimal(7, maderaClasificacion.getVolumen());
-            st.setBigDecimal(8, maderaClasificacion.getCosto_por_volumen());
-            st.setString(9, maderaClasificacion.getId_administrador());
-            st.setString(10, maderaClasificacion.getId_madera());
+            PreparedStatement st = this.conexion.prepareStatement("UPDATE MADERA_ASERRADA_CLASIF SET id_madera = ?, grueso = ?, grueso_f = ?, ancho = ?, ancho_f = ?, largo = ?, largo_f = ?, volumen = ?, costo_por_volumen = ? WHERE id_administrador = ? AND id_madera= ?");
+            st.setString(1, maderaClasificacion.getId_madera_nuevo());
+            st.setBigDecimal(2, maderaClasificacion.getGrueso());
+            st.setString(3, maderaClasificacion.getGrueso_f());
+            st.setBigDecimal(4, maderaClasificacion.getAncho());
+            st.setString(5, maderaClasificacion.getAncho_f());
+            st.setBigDecimal(6, maderaClasificacion.getLargo());
+            st.setString(7, maderaClasificacion.getLargo_f());
+            st.setBigDecimal(8, maderaClasificacion.getVolumen());
+            st.setBigDecimal(9, maderaClasificacion.getCosto_por_volumen());
+            st.setString(10, maderaClasificacion.getId_administrador());
+            st.setString(11, maderaClasificacion.getId_madera());
             st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);

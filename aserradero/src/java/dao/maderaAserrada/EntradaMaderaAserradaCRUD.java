@@ -179,4 +179,67 @@ public class EntradaMaderaAserradaCRUD extends Conexion implements OperacionesCR
         return produccionMaderas;
     }
 
+    public <T> List listarEntradaHoy(String id_jefe) throws Exception {
+        List<EntradaMaderaAserrada> produccionMaderas;
+        String consulta = "SELECT * FROM ENTRADA_MADERA_ASERRADA_HOY WHERE id_administrador = ?";
+        try {
+            this.abrirConexion();
+            try (PreparedStatement st = this.conexion.prepareStatement(consulta)) {
+                st.setString(1, id_jefe);
+                produccionMaderas = new ArrayList();
+                try (ResultSet rs = st.executeQuery()) {
+                    while (rs.next()) {
+                        EntradaMaderaAserrada produccionMadera = (EntradaMaderaAserrada) extraerEntradaHoy(rs);
+                        produccionMaderas.add(produccionMadera);
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            } catch (Exception e) {
+                produccionMaderas = null;
+                System.out.println(e);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
+        return produccionMaderas;
+    }
+
+    private EntradaMaderaAserrada extraerEntradaHoy(ResultSet rs) throws SQLException {
+        EntradaMaderaAserrada produccionMadera = new EntradaMaderaAserrada();
+        produccionMadera.setId_madera(rs.getString("id_madera"));
+        produccionMadera.setNum_piezas(rs.getInt("num_piezas"));
+        return produccionMadera;
+    }
+
+    public EntradaMaderaAserrada entradaTotalHoy(String id_jefe) throws Exception {
+        EntradaMaderaAserrada entrada = new EntradaMaderaAserrada();
+        String consulta = "SELECT SUM(num_piezas) as num_piezas FROM V_ENTRADA_M_ASERRADA WHERE id_administrador = ? AND fecha = CURDATE();";
+        try {
+            this.abrirConexion();
+            try (PreparedStatement st = this.conexion.prepareStatement(consulta)) {
+                st.setString(1, id_jefe);
+                try (ResultSet rs = st.executeQuery()) {
+                    while (rs.next()) {
+                        entrada.setNum_piezas(rs.getInt("num_piezas"));
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            } catch (Exception e) {
+                entrada = null;
+                System.out.println(e);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
+        return entrada;
+    }
+
 }

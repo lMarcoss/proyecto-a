@@ -14,6 +14,7 @@
     <head>
         <%@ include file="/TEMPLATE/head.jsp" %>
         <title>Actualizar</title>
+        <script src="/aserradero/js/maderaAserradaClasif/selectorCaracteristicasClasifMA.js"></script>
     </head>
     <body>
         <!--menu-->
@@ -35,34 +36,81 @@
                                 <div class="lado_derecho">
                                     <div class="form-group">
                                         <label class="control-label">Madera:</label>
-                                        <input type="text" class="form-control" name="id_madera" value="<%=maderaClasificacion.getId_madera()%>" title="sólo lectura" required="" readonly="">
+                                        <input type="hidden" class="form-control" name="id_madera" value="<%=maderaClasificacion.getId_madera()%>" required="" readonly="">
+                                        <input type="text" class="form-control" name="id_madera_nuevo" value="<%=maderaClasificacion.getId_madera()%>" required="">
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Grueso:</label>
-                                        <input type="number" class="form-control" name="grueso" id="grueso" step=".01" min="0.01" max="9999.99" value="<%=maderaClasificacion.getGrueso()%>"  title="Sólo números" required="" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Grueso (fracción o pulgada):</label>
-                                        <input type="text" class="form-control" name="grueso_f" id="grueso_f" value="<%=maderaClasificacion.getGrueso_f()%>" maxlength="10" required="" placeholder='3 1/2 o "9"' title="Tal y como se mostrará en el ticket">
+                                        <select class="form-control" name="grueso_f" id="grueso_f" required="" onblur="seleccionarGrueso()">
+                                            <option></option>
+                                            <%if (maderaClasificacion.getGrueso_f().equals("3/4")) {%>
+                                            <option selected="" value="3/4">3/4</option>
+                                            <%} else {%>
+                                            <option selected="" value="3/4">3/4</option><%}%>
+
+                                            <%if (maderaClasificacion.getGrueso_f().equals("3 1/2")) {%>
+                                            <option selected="" value="3 1/2">3 1/2</option>
+                                            <%} else {%>
+                                            <option value="3 1/2">3 1/2</option><%}%>
+
+                                            <%if (maderaClasificacion.getGrueso_f().equals("1 3/4")) {%>
+                                            <option value="1 3/4">1 3/4</option>
+                                            <%} else {%>
+                                            <option value="1 3/4">1 3/4</option><%}%>
+
+                                            <%if (maderaClasificacion.getGrueso_f().equals("1 1/2")) {%>
+                                            <option value="1 1/2">1 1/2</option>
+                                            <%} else {%>
+                                            <option value="1 1/2">1 1/2</option><%}%>
+                                        </select>
+                                        <input name="grueso" id="grueso" type="hidden" value="<%=maderaClasificacion.getGrueso()%>">
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Ancho:</label>
-                                        <input type="number" class="form-control"  name="ancho" step=".01" min="0.01" max="9999.99" id="ancho" value="<%=maderaClasificacion.getAncho()%>" title="Sólo números" required="" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Ancho (fracción o pulgada):</label>
-                                        <input type="text" class="form-control" name="ancho_f" id="ancho_f" value="<%=maderaClasificacion.getAncho_f()%>" maxlength="10" required="" placeholder='3 1/2, "9" o 9' title="Tal y como se mostrará en el ticket">
+                                        <select class="form-control" name="ancho_f" id="ancho_f" required="" onblur="seleccionarAncho()">
+                                            <option></option>
+                                            <%if (maderaClasificacion.getAncho_f().equals("12")) {%>
+                                            <option selected="" value="12">12</option>
+                                            <%} else {%>
+                                            <option selected="" value="12">12</option><%}%>
+
+                                            <%if (maderaClasificacion.getAncho_f().equals("10")) {%>
+                                            <option selected="" value="10">10</option>
+                                            <%} else {%>
+                                            <option selected="" value="10">10</option><%}%>
+
+                                            <%if (maderaClasificacion.getAncho_f().equals("8")) {%>
+                                            <option selected="" value="8">8</option>
+                                            <%} else {%>
+                                            <option selected="" value="8">8</option><%}%>
+
+                                            <%if (maderaClasificacion.getAncho_f().equals("6")) {%>
+                                            <option selected="" value="6">6</option>
+                                            <%} else {%>
+                                            <option selected="" value="6">6</option><%}%>
+
+                                            <%if (maderaClasificacion.getAncho_f().equals("4")) {%>
+                                            <option selected="" value="4">4</option>
+                                            <%} else {%>
+                                            <option selected="" value="4">4</option><%}%>
+
+                                            <%if (maderaClasificacion.getAncho_f().equals("3 1/2")) {%>
+                                            <option selected="" value="3 1/2">3 1/2</option>
+                                            <%} else {%>
+                                            <option selected="" value="3 1/2">3 1/2</option><%}%>
+                                        </select>
+                                        <input type="hidden" name="ancho" id="ancho" value="<%=maderaClasificacion.getAncho()%>">
                                     </div>
                                 </div>
                                 <div class="lado_izquierdo">
                                     <div class="form-group">
                                         <label class="control-label">Largo:</label>
-                                        <input type="number" class="form-control" name="largo" id="largo" step=".01" min="0.01" max="9999.99" value="<%=maderaClasificacion.getLargo()%>" title="Sólo números" required="" >
+                                        <select class="form-control" name="largo_f" id="largo_f">
+                                            <option value="<%=maderaClasificacion.getLargo_f()%>"><%=maderaClasificacion.getLargo_f()%></option>
+                                        </select>
+                                        <input type="hidden"  name="largo" id="largo" value="<%=maderaClasificacion.getLargo()%>" >
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Largo (fracción o pulgada):</label>
-                                        <input type="text" class="form-control" name="largo_f" id="largo_f" value="<%=maderaClasificacion.getLargo_f()%>" maxlength="10" required="" placeholder='3 1/2, "9" o 9' title="Tal y como se mostrará en el ticket">
-                                    </div>
+
                                     <div class="form-group">
                                         <label class="control-label">Costo por volumen</label>
                                         <input type="number" class="form-control" name="costo_por_volumen" step=".01" min="0.01" max="99999.99" value="<%=maderaClasificacion.getCosto_por_volumen()%>" title="Sólo números" required="" />

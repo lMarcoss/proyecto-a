@@ -74,7 +74,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="num_piezas">Num. piezas primario</label>
-                                        <input type="number" class="form-control" name="num_pieza_primario" value="<%=entrada.getNum_pieza_primario()%>" min="0" required=""/>
+                                        <input type="number" class="form-control" name="num_pieza_primario" value="<%=entrada.getNum_pieza_primario()%>" min="0" max="99" required=""/>
                                     </div>
 
                                     <div class="form-group">
@@ -85,7 +85,7 @@
                                 <div class="lado_izquierdo">
                                     <div class="form-group">
                                         <label class="control-label" for="num_piezas">Num. piezas secundario</label>
-                                        <input type="number" class="form-control" name="num_pieza_secundario" value="<%=entrada.getNum_pieza_secundario()%>" min="0" required=""/>
+                                        <input type="number" class="form-control" name="num_pieza_secundario" value="<%=entrada.getNum_pieza_secundario()%>" min="0" max="999" required=""/>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Volumen secundario</label>
@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="num_piezas">Num. piezas terciario</label>
-                                        <input type="number" class="form-control" name="num_pieza_terciario" value="<%=entrada.getNum_pieza_terciario()%>" min="0" required=""/>
+                                        <input type="number" class="form-control" name="num_pieza_terciario" value="<%=entrada.getNum_pieza_terciario()%>" min="0" max="999" required=""/>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Volumen terciario</label>

@@ -278,4 +278,8 @@ public class EntradaMaderaRolloCRUD extends Conexion implements OperacionesCRUD 
         return entrada;
     }
 
+    public List<EntradaMaderaRollo> listarEntradaHoy(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

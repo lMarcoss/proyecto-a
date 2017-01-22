@@ -83,7 +83,11 @@
                 <li id="produccion" class="submenu">
                     <a href="#">Madera aserrada</a>
                     <ul class="dropdown-menu">
-                        <li id="produccion_madera"><a href="/aserradero/EntradaMaderaAserradaController?action=listar">Entrada</a></li>
+                        <li id="produccion_madera"><a href="/aserradero/EntradaMaderaAserradaController?action=listar">Entrada</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/aserradero/EntradaMaderaAserradaController?action=resumen_hoy">Resumen hoy</a></li>
+                            </ul>
+                        </li>
                         <li id="inventario_produccion"><a href="/aserradero/InventarioMaderaAserradaController?action=listar">Inventario</a></li>
                         <li id="clasificacion_madera"><a href="/aserradero/MaderaAserradaClasifController?action=listar">Clasificación</a></li>
                     </ul>
@@ -135,8 +139,8 @@
                 <li  id="reportes" class="submenu">
                     <a href="#">Cuenta</a><!--Solo administrador-->
                     <ul class="dropdown-menu">
-                        <li class="reporte_compra"><a href="/aserradero/BalanceCuentaController?action=listar">Cuenta inicial</a></li>
-                        <li class="reporte_compra"><a href="#">Cuenta inicial</a></li>
+                        <!--<li class="reporte_compra"><a href="/aserradero/BalanceCuentaController?action=listar">Cuenta inicial</a></li>-->
+                        <!--<li class="reporte_compra"><a href="#">Cuenta inicial</a></li>-->
                         <li class="reporte_compra"><a href="/aserradero/BalanceCuentaController?action=listar">Balance cuenta</a></li>
                     </ul>
                 </li>

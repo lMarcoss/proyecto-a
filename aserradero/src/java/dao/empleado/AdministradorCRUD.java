@@ -17,19 +17,19 @@ public class AdministradorCRUD extends Conexion implements OperacionesCRUD {
 
     @Override
     public void registrar(Object objeto) throws Exception {
-        Administrador administrador = (Administrador) objeto;
-        try {
-            this.abrirConexion();
-            PreparedStatement st = this.conexion.prepareStatement(
-                    "INSERT INTO ADMINISTRADOR (id_administrador, cuenta_inicial) VALUES (?, ?)");
-            st = cargarObject(st, administrador);
-            st.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e);
-            throw e;
-        } finally {
-            this.cerrarConexion();
-        }
+//        Administrador administrador = (Administrador) objeto;
+//        try {
+//            this.abrirConexion();
+//            PreparedStatement st = this.conexion.prepareStatement(
+//                    "INSERT INTO ADMINISTRADOR (id_administrador, cuenta_inicial) VALUES (?, ?)");
+//            st = cargarObject(st, administrador);
+//            st.executeUpdate();
+//        } catch (Exception e) {
+//            System.out.println(e);
+//            throw e;
+//        } finally {
+//            this.cerrarConexion();
+//        }
     }
 
     @Override
@@ -92,9 +92,11 @@ public class AdministradorCRUD extends Conexion implements OperacionesCRUD {
         Administrador administrador = (Administrador) objeto;
         try {
             this.abrirConexion();
-            PreparedStatement st = this.conexion.prepareStatement("UPDATE ADMINISTRADOR SET cuenta_inicial = ? WHERE id_administrador = ?");
+            PreparedStatement st = this.conexion.prepareStatement("UPDATE EMPLEADO SET cuenta_inicial = ? WHERE id_empleado = ? AND id_jefe = ? AND rol = ?");
             st.setBigDecimal(1, administrador.getCuenta_inicial());
             st.setString(2, administrador.getId_administrador());
+            st.setString(3, administrador.getId_administrador());
+            st.setString(4, "Administrador");
             st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);

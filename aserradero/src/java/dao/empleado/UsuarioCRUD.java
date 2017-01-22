@@ -15,24 +15,20 @@ import java.util.List;
  */
 public class UsuarioCRUD extends Conexion {
 
-    private final String clave1 = "^4%m@C*";
-    private final String clave2 = "&%c#L+=";
-    private final String clave3 = "$|2A";
-    private final String clave4 = "!T>A0";
+    private final String clave1 = "^4%m@C*&%c#L+=";
+    private final String clave2 = "$|2A!T>A0";
 
     // ('COHA820724HOCRNN02COHA8207','Antonio',concat('$|2A',sha2('^4%m@C*antonio&%c#L+=',224),'!T!A0'));
     public void registrar(Usuario usuario) throws Exception {
         try {
             this.abrirConexion();
             PreparedStatement st = this.conexion.prepareStatement(
-                    "INSERT INTO USUARIO (id_empleado,nombre_usuario,contrasenia) VALUES (?,?,concat(?,sha2(concat(?,?,?),224),?))");
+                    "INSERT INTO USUARIO (id_empleado,nombre_usuario,contrasenia) VALUES (?,?,sha2(concat(?,?,?),224))");
             st.setString(1, usuario.id_empleado);
             st.setString(2, usuario.getNombre_usuario());
             st.setString(3, clave1);
-            st.setString(4, clave2);
-            st.setString(5, usuario.getContrasenia());
-            st.setString(6, clave3);
-            st.setString(7, clave4);
+            st.setString(4, usuario.getContrasenia());
+            st.setString(5, clave2);
             st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -85,14 +81,12 @@ public class UsuarioCRUD extends Conexion {
     public void actualizar(Usuario usuario) throws Exception {
         try {
             this.abrirConexion();
-            PreparedStatement st = this.conexion.prepareStatement("UPDATE USUARIO SET contrasenia = concat(?,sha2(concat(?,?,?),224),?) WHERE nombre_usuario = ? AND id_empleado = ?");
+            PreparedStatement st = this.conexion.prepareStatement("UPDATE USUARIO SET contrasenia = sha2(concat(?,?,?),224) WHERE nombre_usuario = ? AND id_empleado = ?");
             st.setString(1, clave1);
-            st.setString(2, clave2);
-            st.setString(3, usuario.getContrasenia());
-            st.setString(4, clave3);
-            st.setString(5, clave4);
-            st.setString(6, usuario.getNombre_usuario());
-            st.setString(7, usuario.getId_empleado());
+            st.setString(2, usuario.getContrasenia());
+            st.setString(3, clave2);
+            st.setString(4, usuario.getNombre_usuario());
+            st.setString(5, usuario.getId_empleado());
             st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -144,7 +138,7 @@ public class UsuarioCRUD extends Conexion {
         String consulta = "SELECT  * FROM VISTA_USUARIO "
                 + "WHERE nombre_usuario = ?"
                 + "AND estatus = ? "
-                + "AND contrasenia = CONCAT(?,sha2(concat(?,?,?),224),?) AND (rol = 'Administrador' OR rol = 'Empleado' OR rol = 'Vendedor')";
+                + "AND contrasenia = sha2(concat(?,?,?),224) AND (rol = 'Administrador' OR rol = 'Empleado' OR rol = 'Vendedor')";
         Usuario user = null;
         try {
             this.abrirConexion();
@@ -152,10 +146,8 @@ public class UsuarioCRUD extends Conexion {
                 st.setString(1, nombre_usuario);
                 st.setString(2, "Activo");
                 st.setString(3, clave1);
-                st.setString(4, clave2);
-                st.setString(5, contrasenia);
-                st.setString(6, clave3);
-                st.setString(7, clave4);
+                st.setString(4, contrasenia);
+                st.setString(5, clave2);
                 try (ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {
                         user = extraerUsuario(rs, "validar");

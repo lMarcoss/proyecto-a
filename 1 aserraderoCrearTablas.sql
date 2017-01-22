@@ -127,7 +127,7 @@ CREATE TABLE PAGO_COMPRA(
 CREATE TABLE MADERA_ASERRADA_CLASIF(
 	id_administrador 		VARCHAR(26) NOT NULL,
 	id_empleado		 		VARCHAR(26) NOT NULL,
-	id_madera				VARCHAR(20) NOT NULL,
+	id_madera				VARCHAR(30) NOT NULL,
 	grueso					DECIMAL(8,2),
     grueso_f				VARCHAR(15),
 	ancho					DECIMAL(8,2),
@@ -144,7 +144,7 @@ CREATE TABLE MADERA_ASERRADA_CLASIF(
 CREATE TABLE ENTRADA_MADERA_ASERRADA(
 	id_entrada			INT NOT NULL AUTO_INCREMENT,
 	fecha 				DATE,
- 	id_madera    		VARCHAR(20) NOT NULL,
+ 	id_madera    		VARCHAR(30) NOT NULL,
  	num_piezas 			INT,
     id_empleado 		VARCHAR(26) NOT NULL,
     id_administrador 	VARCHAR(26) NOT NULL,
@@ -175,7 +175,7 @@ CREATE TABLE VENTA(
 CREATE TABLE VENTA_MAYOREO(
 	id_administrador		VARCHAR(26) NOT NULL,
 	id_venta 				VARCHAR(30),
-	id_madera 				VARCHAR(20),
+	id_madera 				VARCHAR(30),
 	num_piezas				INT,
 	volumen 				DECIMAL(8,3),
 	monto					DECIMAL(15,2),
@@ -188,7 +188,7 @@ CREATE TABLE VENTA_PAQUETE(
 	id_administrador		VARCHAR(26) NOT NULL,
 	id_venta 				VARCHAR(30),
 	numero_paquete			INT,
-	id_madera 				VARCHAR(20),
+	id_madera 				VARCHAR(30),
 	num_piezas				INT,
 	volumen 				DECIMAL(15,3),
 	monto					DECIMAL(15,2),

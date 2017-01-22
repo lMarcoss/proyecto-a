@@ -67,3 +67,6 @@ SELECT
     observacion
 FROM PAGO_EMPLEADO AS PG, EMPLEADO AS E, PERSONA AS P
 WHERE PG.id_empleado = E.id_empleado AND E.id_persona = P.id_persona;
+
+INSERT INTO EMPLEADO (id_empleado,id_persona,id_jefe,rol,estatus) VALUES
+('COHA820724HOCRNN02','COHA820724HOCRNN02','COHA820724HOCRNN02','Administrador','Activo');

@@ -27,3 +27,6 @@ SELECT
     estatus
 FROM USUARIO AS U,EMPLEADO AS E,PERSONA AS P
 WHERE U.id_empleado = E.id_empleado AND E.id_persona = P.id_persona;
+
+INSERT INTO USUARIO (id_empleado, nombre_usuario, contrasenia) VALUES
+('COHA820724HOCRNN02COHA8207','Antonio',concat(sha2('^4%m@C*&%c#L+=antonio$|2A!T>A0',224)));
