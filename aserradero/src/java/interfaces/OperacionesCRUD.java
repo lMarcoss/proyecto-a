@@ -27,4 +27,5 @@ public interface OperacionesCRUD{
     //Eliminar objeto: registro
     public void eliminar(Object objeto) throws Exception;
     
+    
 }
