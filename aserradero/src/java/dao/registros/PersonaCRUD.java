@@ -223,7 +223,7 @@ public class PersonaCRUD extends Conexion implements OperacionesCRUD {
                 consulta = "SELECT * FROM VISTA_PERSONA WHERE id_persona NOT IN (SELECT id_persona FROM PROVEEDOR WHERE id_jefe = ?)";
                 break;
             case "administrador":// Personas para nuevo administrador
-                consulta = "SELECT * FROM VISTA_PERSONA WHERE id_persona NOT IN (SELECT SUBSTRING(id_administrador,1,18) FROM ADMINISTRADOR)";
+                consulta = "SELECT * FROM VISTA_PERSONA WHERE id_persona NOT IN (SELECT id_persona FROM EMPLEADO WHERE rol = 'Administrador');";
                 break;
         }
         //Ejecutamos la consulta

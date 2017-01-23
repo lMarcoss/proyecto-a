@@ -1,0 +1,13 @@
+source 1 aserraderoCrearTablas.sql
+source 2 ModuloRegistros.sql
+source 3 ModuloEmpleado.sql
+source 4 ModuloUsuario.sql
+source 5 moduloAnticipo.sql
+source 6 moduloMaderaRollo.sql
+source 7 moduloMaderaAserrada.sql
+source 8 moduloVentas.sql
+source 9 moduloGastos.sql
+source 10 moduloPrestamo.sql
+source 11 moduloCuenta.sql
+source 12 moduloReporteDiario.sql
+source 13 datos.sql

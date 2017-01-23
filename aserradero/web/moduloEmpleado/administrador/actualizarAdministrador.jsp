@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Cuenta incial</label>
-                                    <input class="form-control" name="cuenta_inicial" type="number" value="<%=administrador.getCuenta_inicial()%>" min='0.01' max='99999999.99' step=".01"/>
+                                    <input class="form-control" name="cuenta_inicial" type="number" value="<%=administrador.getCuenta_inicial()%>" min='0.00' max='99999999.99' step=".01"/>
                                 </div>
                                 <div class="form-group">
                                     <a href="/aserradero/AdministradorController?action=listar"><input type="button" class="btn btn-warning" value="Cancelar"/></a>

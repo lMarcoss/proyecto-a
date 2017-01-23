@@ -75,6 +75,9 @@ public class EntradaMaderaAserradaController extends HttpServlet {
                 case "eliminar":
                     eliminarEntradaMaderaAserrada(request, response, sesion, action);
                     break;
+                case "resumen_hoy":
+                    listarResumenHoy(request, response, sesion, action);
+                    break;
             }
         } else {
             try {
@@ -246,5 +249,20 @@ public class EntradaMaderaAserradaController extends HttpServlet {
             listarEntradaMaderaAserrada(request, response, sesion, "error_eliminar");
             Logger.getLogger(EntradaMaderaAserradaController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void listarResumenHoy(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
+        try {
+            EntradaMaderaAserradaCRUD entradaCRUD = new EntradaMaderaAserradaCRUD();
+            List<EntradaMaderaAserrada> listaMEAserrada = (List<EntradaMaderaAserrada>) entradaCRUD.listarEntradaHoy((String) sesion.getAttribute("id_jefe"));
+            EntradaMaderaAserrada entradaTotalHoy = entradaCRUD.entradaTotalHoy((String) sesion.getAttribute("id_jefe"));
+            request.setAttribute("listaEntradaMaderaAserrada", listaMEAserrada);
+            request.setAttribute("entradaTotal", entradaTotalHoy);
+            RequestDispatcher view = request.getRequestDispatcher("moduloMaderaAserrada/entradaMaderaAserrada/resumenHoy.jsp");
+            view.forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(EntradaMaderaAserradaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

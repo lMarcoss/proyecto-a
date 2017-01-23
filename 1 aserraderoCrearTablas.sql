@@ -83,13 +83,13 @@ CREATE TABLE ENTRADA_M_ROLLO( -- entrada_madera
     id_proveedor			CHAR(26) NOT NULL,
     id_chofer				CHAR(26) NOT NULL,
 	id_empleado 			CHAR(26) NOT NULL,
-	num_pieza_primario		INT(3),
+	num_pieza_primario		INT,
     volumen_primario		DECIMAL(15,3),	-- cantidad de volumen primaria
     costo_primario			DECIMAL(15,2),	-- costo volumen primario
-    num_pieza_secundario	INT(3),
+    num_pieza_secundario	INT,
     volumen_secundario		DECIMAL(15,3),	-- cantidad de volumen primaria
     costo_secundario		DECIMAL(15,2),	-- cantidad de volumen primaria
-    num_pieza_terciario		INT(3),
+    num_pieza_terciario		INT,
     volumen_terciario		DECIMAL(15,3),
     costo_terciario			DECIMAL(15,2),	-- cantidad de volumen primaria
     id_pago					INT(9) default 0, -- 0 para entradas no pagadas: Se le asigna: insertar un pago cada que se inserta entrada madera, con el campo Pago = "Pagado", "Sin pagar"
@@ -103,11 +103,11 @@ CREATE TABLE SALIDA_M_ROLLO( -- entrada_madera
 	id_salida	 			INT NOT NULL AUTO_INCREMENT,
 	fecha 					DATE,
 	id_empleado 			CHAR(26) NOT NULL,
-    num_pieza_primario		INT(3),
+    num_pieza_primario		INT,
     volumen_primario		DECIMAL(15,3),	-- cantidad de volumen primaria
-    num_pieza_secundario	INT(3),
+    num_pieza_secundario	INT,
     volumen_secundario		DECIMAL(15,3),	-- cantidad de volumen primaria
-    num_pieza_terciario		INT(3),
+    num_pieza_terciario		INT,
     volumen_terciario		DECIMAL(15,3),
 	PRIMARY KEY (id_salida),
 	FOREIGN KEY (id_empleado) REFERENCES EMPLEADO (id_empleado) ON UPDATE CASCADE)ENGINE=InnoDB;
@@ -127,7 +127,7 @@ CREATE TABLE PAGO_COMPRA(
 CREATE TABLE MADERA_ASERRADA_CLASIF(
 	id_administrador 		VARCHAR(26) NOT NULL,
 	id_empleado		 		VARCHAR(26) NOT NULL,
-	id_madera				VARCHAR(20) NOT NULL,
+	id_madera				VARCHAR(30) NOT NULL,
 	grueso					DECIMAL(8,2),
     grueso_f				VARCHAR(15),
 	ancho					DECIMAL(8,2),
@@ -144,7 +144,7 @@ CREATE TABLE MADERA_ASERRADA_CLASIF(
 CREATE TABLE ENTRADA_MADERA_ASERRADA(
 	id_entrada			INT NOT NULL AUTO_INCREMENT,
 	fecha 				DATE,
- 	id_madera    		VARCHAR(20) NOT NULL,
+ 	id_madera    		VARCHAR(30) NOT NULL,
  	num_piezas 			INT,
     id_empleado 		VARCHAR(26) NOT NULL,
     id_administrador 	VARCHAR(26) NOT NULL,
@@ -175,7 +175,7 @@ CREATE TABLE VENTA(
 CREATE TABLE VENTA_MAYOREO(
 	id_administrador		VARCHAR(26) NOT NULL,
 	id_venta 				VARCHAR(30),
-	id_madera 				VARCHAR(20),
+	id_madera 				VARCHAR(30),
 	num_piezas				INT,
 	volumen 				DECIMAL(8,3),
 	monto					DECIMAL(15,2),
@@ -188,7 +188,7 @@ CREATE TABLE VENTA_PAQUETE(
 	id_administrador		VARCHAR(26) NOT NULL,
 	id_venta 				VARCHAR(30),
 	numero_paquete			INT,
-	id_madera 				VARCHAR(20),
+	id_madera 				VARCHAR(30),
 	num_piezas				INT,
 	volumen 				DECIMAL(15,3),
 	monto					DECIMAL(15,2),

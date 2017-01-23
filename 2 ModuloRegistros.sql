@@ -816,6 +816,8 @@ INSERT INTO LOCALIDAD (nombre_localidad,nombre_municipio,estado,telefono) VALUES
 ("El Ranchito","Miahuatlán de Porfirio Díaz",'Oaxaca',""),
 ("Las Cazuarinas [Barrio]","Miahuatlán de Porfirio Díaz",'Oaxaca',"");
 
+INSERT INTO PERSONA (id_persona,nombre,apellido_paterno,apellido_materno,nombre_localidad,nombre_municipio,estado,sexo,fecha_nacimiento,telefono) VALUES 
+('COHA820724HOCRNN02', 'Antonio', 'Cortés', 'Hernández', 'Los Pocitos', 'Miahuatlan de porfirio diaz', 'Oaxaca', 'H', '1982-07-24', '');
 -- INSERT INTO LOCALIDAD (nombre_localidad,nombre_municipio,estado,telefono) VALUES 
 -- ('Xitla', 'Santa Cruz Xitla', 'Oaxaca','4435628711');
 

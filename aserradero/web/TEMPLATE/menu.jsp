@@ -7,10 +7,10 @@
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
             <!--<a class="navbar-brand">Aserradero</a>-->
         </div>
@@ -58,7 +58,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
                     </ul>
                 </li>
                 <li  id="empleados" class="submenu">
@@ -73,7 +73,11 @@
                 <li  id="compras" class="submenu">
                     <a href="#">Madera en rollo</a>
                     <ul class="dropdown-menu">
-                        <li class="entrada_madera_rollo"><a href="/aserradero/EntradaMaderaRolloController?action=listar">Entrada</a></li>
+                        <li class="entrada_madera_rollo"><a href="/aserradero/EntradaMaderaRolloController?action=listar">Entrada</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/aserradero/EntradaMaderaRolloController?action=resumen_hoy">Resumen hoy</a></li>
+                            </ul>
+                        </li>
                         <li class="salida_madera_rollo"><a href="/aserradero/SalidaMaderaRolloController?action=listar">Salida</a></li>
                         <li class="inventario_madera_entrada"><a href="/aserradero/InventarioMaderaRolloController?action=listar">Inventario</a></li>
                         <li class="costo_madera_entrada"><a href="/aserradero/ClasificacionMaderaRolloController?action=listar">Clasficación</a></li>
@@ -83,7 +87,11 @@
                 <li id="produccion" class="submenu">
                     <a href="#">Madera aserrada</a>
                     <ul class="dropdown-menu">
-                        <li id="produccion_madera"><a href="/aserradero/EntradaMaderaAserradaController?action=listar">Entrada</a></li>
+                        <li id="produccion_madera"><a href="/aserradero/EntradaMaderaAserradaController?action=listar">Entrada</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/aserradero/EntradaMaderaAserradaController?action=resumen_hoy">Resumen hoy</a></li>
+                            </ul>
+                        </li>
                         <li id="inventario_produccion"><a href="/aserradero/InventarioMaderaAserradaController?action=listar">Inventario</a></li>
                         <li id="clasificacion_madera"><a href="/aserradero/MaderaAserradaClasifController?action=listar">Clasificación</a></li>
                     </ul>
@@ -135,21 +143,21 @@
                 <li  id="reportes" class="submenu">
                     <a href="#">Cuenta</a><!--Solo administrador-->
                     <ul class="dropdown-menu">
-                        <li class="reporte_compra"><a href="/aserradero/BalanceCuentaController?action=listar">Cuenta inicial</a></li>
-                        <li class="reporte_compra"><a href="#">Cuenta inicial</a></li>
+                        <!--<li class="reporte_compra"><a href="/aserradero/BalanceCuentaController?action=listar">Cuenta inicial</a></li>-->
+                        <!--<li class="reporte_compra"><a href="#">Cuenta inicial</a></li>-->
                         <li class="reporte_compra"><a href="/aserradero/BalanceCuentaController?action=listar">Balance cuenta</a></li>
                     </ul>
                 </li>
                 <li class="cta"><a href="/aserradero/Iniciar?action=cerrar_sesion">Salir</a></li>
-                </ul>
-            </div>
+            </ul>
         </div>
     </div>
-            <br>
-            <br>
-            <br>
-    <!-- SmartMenus jQuery plugin -->
-    <script type="text/javascript" src="/aserradero/dist/js_css_menu/jquery.smartmenus.js"></script>
+</div>
+<br>
+<br>
+<br>
+<!-- SmartMenus jQuery plugin -->
+<script type="text/javascript" src="/aserradero/dist/js_css_menu/jquery.smartmenus.js"></script>
 
-    <!-- SmartMenus jQuery Bootstrap Addon -->
-    <script type="text/javascript" src="/aserradero/dist/js_css_menu/jquery.smartmenus.bootstrap.js"></script>
+<!-- SmartMenus jQuery Bootstrap Addon -->
+<script type="text/javascript" src="/aserradero/dist/js_css_menu/jquery.smartmenus.bootstrap.js"></script>

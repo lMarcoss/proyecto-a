@@ -13,6 +13,7 @@ public class MaderaAserradaClasif {
     private String id_empleado;
     private String empleado;
     private String id_madera;
+    private String id_madera_nuevo;//Para guardar nuevo valor de id_madera
     private BigDecimal grueso;
     private String grueso_f;
     private BigDecimal ancho;
@@ -25,11 +26,12 @@ public class MaderaAserradaClasif {
     public MaderaAserradaClasif() {
     }
 
-    public MaderaAserradaClasif(String id_administrador, String id_empleado, String empleado, String id_madera, BigDecimal grueso, String grueso_f, BigDecimal ancho, String ancho_f, BigDecimal largo, String largo_f, BigDecimal volumen, BigDecimal costo_por_volumen) {
+    public MaderaAserradaClasif(String id_administrador, String id_empleado, String empleado, String id_madera, String id_madera_nuevo, BigDecimal grueso, String grueso_f, BigDecimal ancho, String ancho_f, BigDecimal largo, String largo_f, BigDecimal volumen, BigDecimal costo_por_volumen) {
         this.id_administrador = id_administrador;
         this.id_empleado = id_empleado;
         this.empleado = empleado;
         this.id_madera = id_madera;
+        this.id_madera_nuevo = id_madera_nuevo;
         this.grueso = grueso;
         this.grueso_f = grueso_f;
         this.ancho = ancho;
@@ -88,6 +90,10 @@ public class MaderaAserradaClasif {
         this.costo_por_volumen = costo_por_volumen;
     }
 
+    public void setId_madera_nuevo(String id_madera_nuevo) {
+        this.id_madera_nuevo = id_madera_nuevo;
+    }
+
     public String getId_administrador() {
         return id_administrador;
     }
@@ -134,6 +140,10 @@ public class MaderaAserradaClasif {
 
     public BigDecimal getCosto_por_volumen() {
         return costo_por_volumen;
+    }
+
+    public String getId_madera_nuevo() {
+        return id_madera_nuevo;
     }
 
 }

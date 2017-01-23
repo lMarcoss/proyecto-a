@@ -10,6 +10,7 @@
     <head>
         <%@ include file="/TEMPLATE/head.jsp" %>
         <title>Nuevo</title>
+        <script src="/aserradero/js/maderaAserradaClasif/selectorCaracteristicasClasifMA.js"></script>
     </head>
     <body>
         <!--menu-->
@@ -31,34 +32,43 @@
                                 <div class="lado_derecho">
                                     <div class="form-group">
                                         <label class="control-label">Madera:</label>
-                                        <input type="text" class="form-control" name="id_madera" pattern="[A-Za-z].{3,}[A-Za-z0-9]" title="Al menos cinco letras al principio" required="" />
+                                        <input type="text" class="form-control" name="id_madera" title="Al menos cinco letras al principio" required="" maxlength="29"/>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Grueso:</label>
-                                        <input type="number" class="form-control" name="grueso" id="grueso" step=".01" min="0.01" max="9999.99"  title="Sólo números" required="" onblur="calcularVolumen()"/>
+                                        <select class="form-control" name="grueso_f" id="grueso_f" required="" onblur="seleccionarGrueso()">
+                                            <option></option>
+                                            <option value="3/4">3/4</option>
+                                            <option value="3 1/2">3 1/2</option>
+                                            <option value="1 3/4">1 3/4</option>
+                                            <option value="1 1/2">1 1/2</option>
+                                        </select>
+                                        <input name="grueso" id="grueso" type="hidden">
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Grueso (fracción o pulgada):</label>
-                                        <input type="text" class="form-control" name="grueso_f" id="grueso_f" maxlength="10" required="" placeholder='3 1/2 o "9"' title="Tal y como se mostrará en el ticket">
-                                    </div>
+
                                     <div class="form-group">
                                         <label class="control-label">Ancho:</label>
-                                        <input type="number" class="form-control"  name="ancho" id="ancho" step=".01" min="0.01" max="9999.99" title="Sólo números" required="" onblur="calcularVolumen()"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Ancho (fracción o pulgada):</label>
-                                        <input type="text" class="form-control" name="ancho_f" id="ancho_f" maxlength="10" required="" placeholder='3 1/2, "9" o 9' title="Tal y como se mostrará en el ticket">
+                                        <select class="form-control" name="ancho_f" id="ancho_f" required="" onblur="seleccionarAncho()">
+                                            <option></option>
+                                            <option value="12">12</option>
+                                            <option value="10">10</option>
+                                            <option value="8">8</option>
+                                            <option value="6">6</option>
+                                            <option value="4">4</option>
+                                            <option value="3 1/2">3 1/2</option>
+                                        </select>
+                                        <input name="ancho" id="ancho" type="hidden">
                                     </div>
                                 </div>
                                 <div class="lado_izquierdo">
                                     <div class="form-group">
                                         <label class="control-label">Largo:</label>
-                                        <input type="number" class="form-control" name="largo" id="largo" step=".01" min="0.01" max="9999.99" title="Sólo números" required="" onblur="calcularVolumen()"/>
+                                        <select class="form-control" name="largo_f" id="largo_f" required="">
+                                            <option value="8 1/4">8 1/4</option>
+                                        </select>
+                                        <input name="largo" id="largo" type="hidden" value="8.25">
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Largo (fracción o pulgada):</label>
-                                        <input type="text" class="form-control" name="largo_f" id="largo_f" maxlength="10" required="" placeholder='3 1/2, "9" o 9' title="Tal y como se mostrará en el ticket">
-                                    </div>
+
                                     <div class="form-group">
                                         <label class="control-label">Costo por volumen</label>
                                         <input type="number" class="form-control" name="costo_por_volumen" id="costo_por_volumen" step=".01" min="0.01" max="999.99" title="Sólo números" required="" />

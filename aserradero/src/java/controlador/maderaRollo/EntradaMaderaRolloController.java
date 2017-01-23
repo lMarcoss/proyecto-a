@@ -79,6 +79,9 @@ public class EntradaMaderaRolloController extends HttpServlet {
                 case "eliminar":
                     eliminarEntradaMaderaRollo(request, sesion, response);
                     break;
+                case "resumen_hoy":
+                    listarResumenHoy(request, response, sesion, action);
+                    break;
             }
         } else {
             try {
@@ -155,11 +158,11 @@ public class EntradaMaderaRolloController extends HttpServlet {
         System.out.println((String) sesion.getAttribute("id_empleado"));
         entrada.setId_chofer(request.getParameter("id_chofer"));
         entrada.setNum_pieza_primario(Integer.valueOf(request.getParameter("num_pieza_primario")));
-        entrada.setVolumen_primario(BigDecimal.valueOf((Double.valueOf(request.getParameter("volumen_primario")))));
+        entrada.setVolumen_primario(BigDecimal.valueOf((Double.valueOf(request.getParameter("volumen_primario").replace(",","")))));
         entrada.setNum_pieza_secundario(Integer.valueOf(request.getParameter("num_pieza_secundario")));
-        entrada.setVolumen_secundario(BigDecimal.valueOf((Double.valueOf(request.getParameter("volumen_secundario")))));
+        entrada.setVolumen_secundario(BigDecimal.valueOf((Double.valueOf(request.getParameter("volumen_secundario").replace(",","")))));
         entrada.setNum_pieza_terciario(Integer.valueOf(request.getParameter("num_pieza_terciario")));
-        entrada.setVolumen_terciario(BigDecimal.valueOf((Double.valueOf(request.getParameter("volumen_terciario")))));
+        entrada.setVolumen_terciario(BigDecimal.valueOf((Double.valueOf(request.getParameter("volumen_terciario").replace(",","")))));
         return entrada;
     }
 
@@ -282,5 +285,27 @@ public class EntradaMaderaRolloController extends HttpServlet {
             listarEntradaMaderaRollo(request, response, sesion, "error_eliminar");
             Logger.getLogger(EntradaMaderaRolloController.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+
+    private void listarResumenHoy(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
+        try {
+            EntradaMaderaRolloCRUD entradaCRUD = new EntradaMaderaRolloCRUD();
+            List<EntradaMaderaRollo> listaEntrada = null;
+            EntradaMaderaRollo entradaTotalHoy = null;
+            try {
+                listaEntrada = (List<EntradaMaderaRollo>) entradaCRUD.listarEntradaHoy((String) sesion.getAttribute("id_jefe"));
+                entradaTotalHoy = entradaCRUD.entradaTotalHoy((String) sesion.getAttribute("id_jefe"));
+            } catch (Exception ex) {
+                Logger.getLogger(EntradaMaderaRolloController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            request.setAttribute("listaEntrada", listaEntrada);
+            request.setAttribute("entradaTotal", entradaTotalHoy);
+            RequestDispatcher view = request.getRequestDispatcher("moduloMaderaRollo/entradaMaderaRollo/resumenHoy.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(EntradaMaderaRolloController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

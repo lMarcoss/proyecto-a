@@ -3,6 +3,7 @@ package dao.maderaRollo;
 import dao.Conexion;
 import entidades.maderaRollo.EntradaMaderaRollo;
 import interfaces.OperacionesCRUD;
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -275,6 +276,63 @@ public class EntradaMaderaRolloCRUD extends Conexion implements OperacionesCRUD 
         entrada.setNum_pieza_total(rs.getInt("num_pieza_total"));
         entrada.setVolumen_total(rs.getBigDecimal("volumen_total"));
         entrada.setCosto_total(rs.getBigDecimal("costo_total"));
+        return entrada;
+    }
+
+    public List<EntradaMaderaRollo> listarEntradaHoy(String id_jefe) throws Exception {
+        List<EntradaMaderaRollo> listaEntrada = null;
+        try {
+            this.abrirConexion();
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT * FROM ENTRADA_MADERA_ROLLO_HOY WHERE id_jefe = ?")) {
+                st.setString(1, id_jefe);
+                listaEntrada = new ArrayList<>();
+                try (ResultSet rs = st.executeQuery()) {
+                    while (rs.next()) {
+                        EntradaMaderaRollo entrada = (EntradaMaderaRollo) extraerTotalEntradaHoy(rs);
+                        listaEntrada.add(entrada);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
+        return listaEntrada;
+    }
+
+    private EntradaMaderaRollo extraerTotalEntradaHoy(ResultSet rs) throws SQLException {
+        EntradaMaderaRollo entrada = new EntradaMaderaRollo();
+        entrada.setNum_pieza_primario(rs.getInt("num_pieza_primario"));
+        entrada.setVolumen_primario(rs.getBigDecimal("volumen_primario"));
+        entrada.setNum_pieza_secundario(rs.getInt("num_pieza_secundario"));
+        entrada.setVolumen_secundario(rs.getBigDecimal("volumen_secundario"));
+        entrada.setNum_pieza_terciario(rs.getInt("num_pieza_terciario"));
+        entrada.setVolumen_terciario(rs.getBigDecimal("volumen_terciario"));
+        return entrada;
+    }
+
+    public EntradaMaderaRollo entradaTotalHoy(String id_jefe) throws Exception {
+        EntradaMaderaRollo entrada = null;
+        try {
+            this.abrirConexion();
+            try (PreparedStatement st = this.conexion.prepareStatement("SELECT SUM((num_pieza_primario + num_pieza_secundario + num_pieza_terciario)) AS num_piezas_total, SUM((volumen_primario + volumen_secundario+ volumen_terciario)) AS volumen_total  FROM ENTRADA_MADERA_ROLLO_HOY WHERE id_jefe = ?")) {
+                st.setString(1, id_jefe);
+                try (ResultSet rs = st.executeQuery()) {
+                    while (rs.next()) {
+                        entrada = new EntradaMaderaRollo();
+                        entrada.setNum_pieza_total(rs.getInt("num_piezas_total"));
+                        entrada.setVolumen_total(rs.getBigDecimal("volumen_total"));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
         return entrada;
     }
 
