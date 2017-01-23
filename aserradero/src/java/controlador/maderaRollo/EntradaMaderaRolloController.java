@@ -286,16 +286,24 @@ public class EntradaMaderaRolloController extends HttpServlet {
             Logger.getLogger(EntradaMaderaRolloController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
     private void listarResumenHoy(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
         try {
             EntradaMaderaRolloCRUD entradaCRUD = new EntradaMaderaRolloCRUD();
-            List<EntradaMaderaRollo> listaEntrada = (List<EntradaMaderaRollo>) entradaCRUD.listarEntradaHoy((String) sesion.getAttribute("id_jefe"));
-//            EntradaMaderaAserrada entradaTotalHoy = entradaCRUD.entradaTotalHoy((String) sesion.getAttribute("id_jefe"));
+            List<EntradaMaderaRollo> listaEntrada = null;
+            EntradaMaderaRollo entradaTotalHoy = null;
+            try {
+                listaEntrada = (List<EntradaMaderaRollo>) entradaCRUD.listarEntradaHoy((String) sesion.getAttribute("id_jefe"));
+                entradaTotalHoy = entradaCRUD.entradaTotalHoy((String) sesion.getAttribute("id_jefe"));
+            } catch (Exception ex) {
+                Logger.getLogger(EntradaMaderaRolloController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             request.setAttribute("listaEntrada", listaEntrada);
-//            request.setAttribute("entradaTotal", entradaTotalHoy);
+            request.setAttribute("entradaTotal", entradaTotalHoy);
             RequestDispatcher view = request.getRequestDispatcher("moduloMaderaRollo/entradaMaderaRollo/resumenHoy.jsp");
             view.forward(request, response);
-        } catch (Exception ex) {
+        } catch (ServletException | IOException ex) {
             Logger.getLogger(EntradaMaderaRolloController.class.getName()).log(Level.SEVERE, null, ex);
         }
 

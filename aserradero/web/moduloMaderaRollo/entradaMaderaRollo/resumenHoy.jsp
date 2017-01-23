@@ -1,25 +1,26 @@
 <%-- 
     Document   : resumenHoy
-    Created on : 22/01/2017, 01:53:45 AM
-    Author     : lmarcoss
+    Created on : Jan 22, 2017, 12:46:20 PM
+    Author     : marcos
 --%>
 
-<%@page import="entidades.maderaRollo.InventarioMaderaRollo"%>
+<%@page import="entidades.maderaRollo.EntradaMaderaRollo"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    List<InventarioMaderaRollo> listaEntrada = (List<InventarioMaderaRollo>) request.getAttribute("listaEntrada");
+    List<EntradaMaderaRollo> listaEntrada = (List<EntradaMaderaRollo>) request.getAttribute("listaEntrada");
+    EntradaMaderaRollo entradaTotal = (EntradaMaderaRollo) request.getAttribute("entradaTotal");
 %>
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Entradas hoy</title>
         <%@ include file="/TEMPLATE/head.jsp" %>
-        <title>Maderas en rollo</title>
     </head>
     <body>
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
-        <% if (!listaEntrada.isEmpty()) {%>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -39,37 +40,27 @@
                                         <th>Clasificación</th>
                                         <th>piezas</th>
                                         <th>Volúmen</th>
-                                        <th>Costo por volumen</th>
-                                        <th>Costo total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <%
-                                        for (InventarioMaderaRollo inventario : listaEntrada) {
+                                        for (EntradaMaderaRollo inventario : listaEntrada) {
                                             out.print("<tr>"
                                                     + "<td>Primario</td>"
                                                     + "<td>" + inventario.getNum_pieza_primario() + "</td>"
                                                     + "<td>" + inventario.getVolumen_primario() + "</td>"
-                                                    + "<td>" + inventario.getCosto_primario() + "</td>"
-                                                    + "<td><b>" + inventario.getCosto_total_primario() + "</b></td>"
                                                     + "</tr><tr>"
                                                     + "<td>Secundario</td>"
                                                     + "<td>" + inventario.getNum_pieza_secundario() + "</td>"
                                                     + "<td>" + inventario.getVolumen_secundario() + "</td>"
-                                                    + "<td>" + inventario.getCosto_secundario() + "</td>"
-                                                    + "<td><b>" + inventario.getCosto_total_secundario() + "</b></td>"
                                                     + "</tr><tr>"
                                                     + "<td>Terciario</td>"
                                                     + "<td>" + inventario.getNum_pieza_terciario() + "</td>"
                                                     + "<td>" + inventario.getVolumen_terciario() + "</td>"
-                                                    + "<td>" + inventario.getCosto_terciario() + "</td>"
-                                                    + "<td><b>" + inventario.getCosto_total_terciario() + "</b></td>"
                                                     + "</tr><tr>"
                                                     + "<td>Total</td>"
-                                                    + "<td><b>" + inventario.getNum_pieza_total() + "</b></td>"
-                                                    + "<td><b>" + inventario.getVolumen_total() + "</b></td>"
-                                                    + "<td></td>"
-                                                    + "<td><b>" + inventario.getCosto_total() + "</b></td>"
+                                                    + "<td><b>" + entradaTotal.getNum_pieza_total() + "</b></td>"
+                                                    + "<td><b>" + entradaTotal.getVolumen_total() + "</b></td>"
                                                     + "</tr>");
                                         }
                                     %>
@@ -79,9 +70,6 @@
                     </div>
                 </div>
             </div>
-        </div>    
-        <%} else {%>
-        <h3 style="color: red;">No hay inventario</h3>
-        <%}%>
+        </div>  
     </body>
 </html>
