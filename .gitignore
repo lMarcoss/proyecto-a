@@ -7,13 +7,12 @@
 *.jar -json-lib-2.4-jdk15.jar -gson-2.2.3.jar
 *.war
 *.ear
-*.properties 
-!project.properties
-*.xml
-!web.xml
-!project.xml
 
 aserradero/dist/
 aserradero/build/
 aserradero/nbproject/
 aserradero/src/java/dao/Conexion.java
+aserradero/nbproject/private/private.properties
+aserradero/nbproject/private/private.xml
+aserradero/nbproject/project.properties
+
