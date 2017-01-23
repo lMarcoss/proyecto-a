@@ -83,13 +83,13 @@ CREATE TABLE ENTRADA_M_ROLLO( -- entrada_madera
     id_proveedor			CHAR(26) NOT NULL,
     id_chofer				CHAR(26) NOT NULL,
 	id_empleado 			CHAR(26) NOT NULL,
-	num_pieza_primario		INT(3),
+	num_pieza_primario		INT,
     volumen_primario		DECIMAL(15,3),	-- cantidad de volumen primaria
     costo_primario			DECIMAL(15,2),	-- costo volumen primario
-    num_pieza_secundario	INT(3),
+    num_pieza_secundario	INT,
     volumen_secundario		DECIMAL(15,3),	-- cantidad de volumen primaria
     costo_secundario		DECIMAL(15,2),	-- cantidad de volumen primaria
-    num_pieza_terciario		INT(3),
+    num_pieza_terciario		INT,
     volumen_terciario		DECIMAL(15,3),
     costo_terciario			DECIMAL(15,2),	-- cantidad de volumen primaria
     id_pago					INT(9) default 0, -- 0 para entradas no pagadas: Se le asigna: insertar un pago cada que se inserta entrada madera, con el campo Pago = "Pagado", "Sin pagar"
@@ -103,11 +103,11 @@ CREATE TABLE SALIDA_M_ROLLO( -- entrada_madera
 	id_salida	 			INT NOT NULL AUTO_INCREMENT,
 	fecha 					DATE,
 	id_empleado 			CHAR(26) NOT NULL,
-    num_pieza_primario		INT(3),
+    num_pieza_primario		INT,
     volumen_primario		DECIMAL(15,3),	-- cantidad de volumen primaria
-    num_pieza_secundario	INT(3),
+    num_pieza_secundario	INT,
     volumen_secundario		DECIMAL(15,3),	-- cantidad de volumen primaria
-    num_pieza_terciario		INT(3),
+    num_pieza_terciario		INT,
     volumen_terciario		DECIMAL(15,3),
 	PRIMARY KEY (id_salida),
 	FOREIGN KEY (id_empleado) REFERENCES EMPLEADO (id_empleado) ON UPDATE CASCADE)ENGINE=InnoDB;

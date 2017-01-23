@@ -66,29 +66,29 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Num. piezas primario</label>
-                                        <input class="form-control" type="number" name="num_pieza_primario" min="0" max="999" required=""/>
+                                        <input class="form-control" type="number" name="num_pieza_primario" min="0" max="9999" required=""/>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Volumen primario</label>
-                                        <input class="form-control" type="number" name="volumen_primario" id="volumen" step=".001" min="0.000" max="999999.999"  required="" />
+                                        <input class="form-control" type="text" name="volumen_primario" id="volumen" maxlength="16" required="" />
                                     </div>
                                 </div>
                                 <div class="lado_izquierdo"><!-- Grupo izquierdo-->
                                     <div class="form-group">
                                         <label class="control-label">Num. piezas secundario</label>
-                                        <input class="form-control" type="number" name="num_pieza_secundario" min="0" max="999" required=""/>
+                                        <input class="form-control" type="number" name="num_pieza_secundario" min="0" max="9999" required=""/>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Volumen secundario</label>
-                                        <input class="form-control" type="number" name="volumen_secundario" id="volumen" step=".001" min="0.000" max="999999.999"  required=""/>
+                                        <input class="form-control" type="text" name="volumen_secundario" id="volumen" maxlength="16"  required=""/>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Num. piezas terciario</label>
-                                        <input class="form-control" type="number" name="num_pieza_terciario" min="0" max="999" required=""/>
+                                        <input class="form-control" type="number" name="num_pieza_terciario" min="0" max="9999" required=""/>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Volumen terciario</label>
-                                        <input class="form-control" type="number" name="volumen_terciario" id="volumen" step=".001" min="0.000" max="999999.999"  required=""/>
+                                        <input class="form-control" type="text" name="volumen_terciario" id="volumen" maxlength="16" required=""/>
                                     </div>
                                     <div class="form-group">
                                         <a href="/aserradero/EntradaMaderaRolloController?action=listar"><input class="btn btn-warning" type="button" value="Cancelar"/></a>
