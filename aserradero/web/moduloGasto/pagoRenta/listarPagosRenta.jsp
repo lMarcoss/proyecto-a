@@ -4,6 +4,7 @@
     Author     : rcortes
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="entidades.gasto.PagoRenta"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -49,13 +50,14 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        DecimalFormat form=new DecimalFormat("###,###.##");
                                         int i = 0;
                                         for (PagoRenta pago_renta : pagosrenta) {
                                             out.print("<tr>"
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td>" + pago_renta.getFecha() + "</td>"
                                                     + "<td>" + pago_renta.getNombre_persona() + "</td>"
-                                                    + "<td>" + pago_renta.getMonto() + "</td>"
+                                                    + "<td>" + form.format(pago_renta.getMonto()) + "</td>"
                                                     + "<td>" + pago_renta.getObservacion() + "</td>"
                                                     + "<td>" + pago_renta.getEmpleado() + "</td>"
                                                     + "<td><a class='btn btn-warning' href=\"/aserradero/PagoRentaController?action=modificar&id_pago_renta=" + pago_renta.getId_pago_renta() + "\">Modificar</a></td>"

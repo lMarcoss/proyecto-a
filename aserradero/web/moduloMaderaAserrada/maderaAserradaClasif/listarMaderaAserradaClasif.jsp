@@ -4,6 +4,7 @@
     Author     : lmarcoss
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="entidades.maderaAserrada.MaderaAserradaClasif"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -52,6 +53,7 @@
                                     </thead>
                                     <tbody>
                                         <%
+                                             DecimalFormat form=new DecimalFormat("###,###.##");
                                             int i = 0;
                                             for (MaderaAserradaClasif maderaClasificacion : listaMaderaAserradaClasif) {
                                                 out.print("<tr>"
@@ -61,7 +63,7 @@
                                                         + "<td>" + maderaClasificacion.getAncho_f() + "</td>"
                                                         + "<td>" + maderaClasificacion.getLargo_f() + "</td>"
                                                         + "<td>" + maderaClasificacion.getVolumen() + "</td>"
-                                                        + "<td>" + maderaClasificacion.getCosto_por_volumen() + "</td>"
+                                                        + "<td>" + form.format(maderaClasificacion.getCosto_por_volumen()) + "</td>"
                                                         + "<td>" + maderaClasificacion.getEmpleado() + "</td>"
                                                         + "<td><a class='btn btn-warning' href=\"/aserradero/MaderaAserradaClasifController?action=modificar&id_madera=" + maderaClasificacion.getId_madera() + "\">Modificar</a></td>"
                                                         + "<td><a class='btn btn-danger' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/MaderaAserradaClasifController?action=eliminar&id_madera=" + maderaClasificacion.getId_madera() + "';};\">Eliminar</a></td>"

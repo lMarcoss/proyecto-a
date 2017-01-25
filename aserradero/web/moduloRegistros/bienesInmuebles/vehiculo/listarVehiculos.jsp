@@ -4,6 +4,7 @@
     Author     : rcortes
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="entidades.registros.bienesInmuebles.Vehiculo"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -58,6 +59,7 @@
                             </thead>
                             <tbody>
                                 <%
+                                    DecimalFormat form=new DecimalFormat("###,###.##");
                                     int i = 0;
                                     for (Vehiculo vehiculo : vehiculos) {
                                         out.print("<tr>"
@@ -68,7 +70,7 @@
                                                 + "<td>" + vehiculo.getCarga_admitida() + "</td>"
                                                 + "<td>" + vehiculo.getMotor() + "</td>"
                                                 + "<td>" + vehiculo.getModelo() + "</td>"
-                                                + "<td>" + vehiculo.getCosto() + "</td>"
+                                                + "<td>" + form.format(vehiculo.getCosto()) + "</td>"
                                                 + "<td>" + vehiculo.getEmpleado() + "</td>"
                                                 + "<td><a class=\"btn btn-warning\" href=\"/aserradero/VehiculoController?action=modificar&id_vehiculo=" + vehiculo.getId_vehiculo() + "\">Modificar</a></td>"
                                                 + "<td><a class=\"btn btn-danger\" href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/VehiculoController?action=eliminar&id_vehiculo=" + vehiculo.getId_vehiculo() + "';};\">Eliminar</a></td>"

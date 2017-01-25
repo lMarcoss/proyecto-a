@@ -4,6 +4,7 @@
     Author     : rcortes
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="entidades.maderaRollo.EntradaMaderaRollo"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -56,6 +57,7 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        DecimalFormat form=new DecimalFormat("###,###.##");
                                         int i = 0;
                                         for (EntradaMaderaRollo entrada : entradas) {
                                             out.print("<tr>"
@@ -72,7 +74,7 @@
                                                     + "<td>" + entrada.getVolumen_terciario() + "</td>"
                                                     + "<td>" + entrada.getNum_pieza_total() + "</td>"
                                                     + "<td>" + entrada.getVolumen_total() + "</td>"
-                                                    + "<td>" + entrada.getCosto_total() + "</td>"
+                                                    + "<td>" + form.format(entrada.getCosto_total()) + "</td>"
                                                     + "<td><a class='btn btn-warning' href=\"/aserradero/EntradaMaderaRolloController?action=modificar&id_entrada=" + entrada.getId_entrada() + "\">Modificar</a></td>"
                                                     //                                + "<td><a href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/EntradaMaderaRolloController?action=eliminar&id_entrada="+entrada.getId_entrada()+"';};\">Eliminar</a></td>"
                                                     + "</tr>");

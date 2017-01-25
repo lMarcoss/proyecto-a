@@ -4,6 +4,7 @@
     Author     : Marcos
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="entidades.anticipo.AnticipoProveedor"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -48,13 +49,14 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        DecimalFormat form=new DecimalFormat("###,###.##");
                                         int i = 0;
                                         for (AnticipoProveedor anticipoProveedor : anticipoProveedores) {
                                             out.print("<tr>"
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td>" + anticipoProveedor.getFecha() + "</td>"
                                                     + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + anticipoProveedor.getId_proveedor() + "\">" + anticipoProveedor.getProveedor() + "</a></td>"
-                                                    + "<td>" + anticipoProveedor.getMonto_anticipo() + "</td>"
+                                                    + "<td>" + form.format(anticipoProveedor.getMonto_anticipo()) + "</td>"
                                                     + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + anticipoProveedor.getId_empleado() + "\">" + anticipoProveedor.getEmpleado() + "</a></td>"
                                                     + "<td><a class='btn btn-warning'  href=\"/aserradero/AnticipoProveedorController?action=modificar&id_anticipo_p=" + anticipoProveedor.getId_anticipo_p() + "\">Modificar</a></td>"
                                                     //                                + "<td><a href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/AnticipoProveedorController?action=eliminar&id_anticipo_p="+anticipoProveedor.getId_anticipo_p()+"';};\">Eliminar</a></td>"
