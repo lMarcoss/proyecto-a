@@ -4,6 +4,7 @@
     Author     : lmarcoss
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="entidades.anticipo.CuentaPorPagar"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -42,12 +43,13 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        DecimalFormat form=new DecimalFormat("###,###.##");
                                         int i = 0;
                                         for (CuentaPorPagar cuentaPorPagar : cuentaPorPagares) {
                                             out.print("<tr>"
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + cuentaPorPagar.getId_persona() + "\">" + cuentaPorPagar.getPersona() + "</a></td>"
-                                                    + "<td>" + cuentaPorPagar.getMonto() + "</td>"
+                                                    + "<td>" + form.format(cuentaPorPagar.getMonto()) + "</td>"
                                                     + "</tr>");
                                             i++;
                                         }

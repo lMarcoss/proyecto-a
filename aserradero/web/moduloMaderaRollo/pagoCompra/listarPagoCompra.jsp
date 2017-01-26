@@ -4,6 +4,8 @@
     Author     : lmarcoss
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="entidades.maderaRollo.PagoCompra"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -48,15 +50,16 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        DecimalFormat form=new DecimalFormat("###,###.##");
                                         int i = 0;
                                         for (PagoCompra pago : listaPagoCompra) {
                                             out.print("<tr>"
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td>" + pago.getFecha() + "</td>"
                                                     + "<td>" + pago.getProveedor() + "</td>"
-                                                    + "<td>" + pago.getMonto_pago() + "</td>"
-                                                    + "<td>" + pago.getMonto_por_pagar() + "</td>"
-                                                    + "<td>" + pago.getMonto_por_cobrar() + "</td>"
+                                                    + "<td>" + form.format(pago.getMonto_pago()) + "</td>"
+                                                    + "<td>" + form.format(pago.getMonto_por_pagar()) + "</td>"
+                                                    + "<td>" + form.format(pago.getMonto_por_cobrar()) + "</td>"
                                                     + "<td><a class='btn btn-primary' href=\"/aserradero/PagoCompraController?action=detalle&id_pago=" + pago.getId_pago() + "&id_proveedor=" + pago.getId_proveedor() + "\">Detalle</a></td>"
                                                     + "<td><a class='btn btn-warning' href=\"/aserradero/PagoCompraController?action=modificar&id_pago=" + pago.getId_pago() + "\">Modificar</a></td>"
                                                     + "<td><a class='btn btn-success' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/PagoCompraController?action=eliminar&id_pago=" + pago.getId_pago() + "';};\">Eliminar</a></td>"

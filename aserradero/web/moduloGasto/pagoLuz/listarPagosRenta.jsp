@@ -4,6 +4,7 @@
     Author     : rcortes
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="entidades.gasto.PagoLuz"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -48,12 +49,13 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        DecimalFormat form=new DecimalFormat("###,###.##");
                                         int i = 0;
                                         for (PagoLuz pagoluz : pagosluz) {
                                             out.print("<tr>"
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td>" + pagoluz.getFecha() + "</td>"
-                                                    + "<td>" + pagoluz.getMonto() + "</td>"
+                                                    + "<td>" + form.format(pagoluz.getMonto()) + "</td>"
                                                     + "<td>" + pagoluz.getObservacion() + "</td>"
                                                     + "<td>" + pagoluz.getEmpleado() + "</td>"
                                                     + "<td><a class='btn btn-warning' href=\"/aserradero/PagoLuzController?action=modificar&id_pago_luz=" + pagoluz.getId_pago_luz() + "\">Modificar</a></td>"

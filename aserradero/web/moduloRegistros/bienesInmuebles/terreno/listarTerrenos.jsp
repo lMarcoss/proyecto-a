@@ -4,6 +4,7 @@
     Author     : lmarcoss
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="entidades.registros.bienesInmuebles.Terreno"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -56,6 +57,7 @@
                             </thead>
                             <tbody>
                                 <%
+                                    DecimalFormat form=new DecimalFormat("###,###.##");
                                     int i = 0;
                                     for (Terreno terreno : terrenos) {
                                         out.print("<tr>"
@@ -64,7 +66,7 @@
                                                 + "<td>" + terreno.getDimension() + "</td>"
                                                 + "<td>" + terreno.getDireccion() + "</td>"
                                                 + "<td>" + terreno.getNombre_localidad() + ", " + terreno.getNombre_municipio() + "</td>"
-                                                + "<td>" + terreno.getValor_estimado() + "</td>"
+                                                + "<td>" + form.format(terreno.getValor_estimado()) + "</td>"
                                                 + "<td>" + terreno.getEmpleado() + "</td>"
                                                 + "<td><a class=\"btn btn-warning\" href=\"/aserradero/TerrenoController?action=modificar&id_terreno=" + terreno.getId_terreno() + "\">Modificar</a></td>"
                                                 + "<td><a class=\"btn btn-danger\" href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/TerrenoController?action=eliminar&id_terreno=" + terreno.getId_terreno() + "';};\">Eliminar</a></td>"

@@ -4,6 +4,7 @@
     Author     : lmarcoss
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="entidades.prestamo.PagoPrestamo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -46,13 +47,14 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        DecimalFormat form=new DecimalFormat("###,###.##");
                                         int i = 0;
                                         for (PagoPrestamo pago : listaPagoPrestamo) {
                                             out.print("<tr>"
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td>" + pago.getFecha() + "</td>"
                                                     + "<td>" + pago.getPrestador() + "</td>"
-                                                    + "<td>" + pago.getMonto_pago() + "</td>"
+                                                    + "<td>" + form.format(pago.getMonto_pago()) + "</td>"
                                                     + "<td>" + pago.getEmpleado() + "</td>"
                                                     + "<td><a class='btn btn-warning' href=\"/aserradero/PagoPrestamoController?action=modificar&id_pago=" + pago.getId_pago() + "&id_prestamo=" + pago.getId_prestamo() + "\">Modificar</a></td>"
                                                     + "<td><a class='btn btn-danger' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/PagoPrestamoController?action=eliminar&id_pago=" + pago.getId_pago() + "';};\">Eliminar</a></td>"

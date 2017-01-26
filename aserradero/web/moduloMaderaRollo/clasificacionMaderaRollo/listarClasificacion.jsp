@@ -4,6 +4,7 @@
     Author     : rcortes
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="entidades.maderaRollo.ClasificacionMaderaRollo"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
@@ -48,13 +49,14 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        DecimalFormat form=new DecimalFormat("###,###.##");
                                         int i = 0;
                                         for (ClasificacionMaderaRollo clasificacion : listaClasificacion) {
                                             out.print("<tr>"
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td>" + clasificacion.getProveedor() + "</td>"
                                                     + "<td>" + clasificacion.getClasificacion() + "</td>"
-                                                    + "<td>" + clasificacion.getCosto() + "</td>"
+                                                    + "<td>" + form.format(clasificacion.getCosto()) + "</td>"
                                                     + "<td><a class='btn btn-warning' href=\"/aserradero/ClasificacionMaderaRolloController?action=modificar&id_proveedor=" + clasificacion.getId_proveedor() + "&clasificacion=" + clasificacion.getClasificacion() + "\">Cambiar costo</a></td>"
                                                     + "<td><a class='btn btn-danger' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/ClasificacionMaderaRolloController?action=eliminar&id_proveedor=" + clasificacion.getId_proveedor() + "&clasificacion=" + clasificacion.getClasificacion() + "';};\">Eliminar</a></td>"
                                                     + "</tr>");

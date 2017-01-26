@@ -4,6 +4,7 @@
     Author     : rcortes
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="entidades.gasto.OtroGasto"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -47,13 +48,14 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        DecimalFormat form=new DecimalFormat("###,###.##");
                                         int i = 0;
                                         for (OtroGasto otrogasto : otrosgastos) {
                                             out.print("<tr>"
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td>" + otrogasto.getFecha() + "</td>"
                                                     + "<td>" + otrogasto.getNombre_gasto() + "</td>"
-                                                    + "<td>" + otrogasto.getMonto() + "</td>"
+                                                    + "<td>" + form.format(otrogasto.getMonto()) + "</td>"
                                                     + "<td>" + otrogasto.getObservacion() + "</td>"
                                                     + "<td>" + otrogasto.getEmpleado() + "</td>"
                                                     + "<td><a class='btn btn-warning' href=\"/aserradero/OtroGastoController?action=modificar&id_gasto=" + otrogasto.getId_gasto() + "\">Modificar</a></td>"

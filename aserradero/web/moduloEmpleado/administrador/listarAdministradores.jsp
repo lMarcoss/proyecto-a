@@ -4,6 +4,7 @@
     Author     : lmarcoss
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="entidades.empleado.Administrador"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -50,12 +51,14 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                       
+                                        DecimalFormat form=new DecimalFormat("###,###.##");
                                         int i = 0;
                                         for (Administrador administrador : administradores) {
                                             out.print("<tr>"
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + administrador.getId_administrador() + "\">" + administrador.getNombre() + "</a></td>"
-                                                    + "<td>" + administrador.getCuenta_inicial() + "</td>"
+                                                    + "<td>" + form.format(administrador.getCuenta_inicial()) + "</td>"
                                                     + "<td><a class='btn btn-warning' href=\"/aserradero/AdministradorController?action=modificar&id_administrador=" + administrador.getId_administrador() + "\">Modificar cuenta</a></td>"
                                                     //                                + "<td><a href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/AdministradorController?action=eliminar&id_administrador="+administrador.getId_administrador()+"';};\">Eliminar</a></td>"
                                                     + "</tr>");

@@ -3,6 +3,7 @@
     Created on : 29/09/2016, 08:02:31 AM
     Author     : Marcos
 --%>
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="entidades.empleado.PagoEmpleado"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -53,13 +54,14 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        DecimalFormat form=new DecimalFormat("###,###.##");
                                         int i = 0;
                                         for (PagoEmpleado pagoEmpleado : pagoEmpleados) {
                                             out.print("<tr>"
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td>" + pagoEmpleado.getFecha() + "</td>"
                                                     + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + pagoEmpleado.getId_empleado() + "\">" + pagoEmpleado.getEmpleado() + "</a></td>"
-                                                    + "<td>" + pagoEmpleado.getMonto() + "</td>"
+                                                    + "<td>" + form.format(pagoEmpleado.getMonto()) + "</td>"
                                                     + "<td>" + pagoEmpleado.getObservacion() + "</td>"
                                                     + "<td><a class='btn btn-warning' href=\"/aserradero/PagoEmpleadoController?action=modificar&id_pago_empleado=" + pagoEmpleado.getId_pago_empleado() + "\">Modificar</a></td>"
                                                     + "<td><a class='btn-danger btn' href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/PagoEmpleadoController?action=eliminar&id_pago_empleado=" + pagoEmpleado.getId_pago_empleado() + "';};\">Eliminar</a></td>"

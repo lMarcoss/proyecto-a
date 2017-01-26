@@ -4,6 +4,7 @@
     Author     : Marcos
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="entidades.anticipo.AnticipoCliente"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -49,14 +50,14 @@
                                 </thead>
                                 <tbody>
                                     <%
-
+                                        DecimalFormat form=new DecimalFormat("###,###.##");
                                         int i = 0;
                                         for (AnticipoCliente anticipoCliente : anticipoClientes) {
                                             out.print("<tr>"
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td>" + anticipoCliente.getFecha() + "</td>"
                                                     + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + anticipoCliente.getId_cliente() + "\">" + anticipoCliente.getCliente() + "</a></td>"
-                                                    + "<td>" + anticipoCliente.getMonto_anticipo() + "</td>"
+                                                    + "<td>" + form.format(anticipoCliente.getMonto_anticipo()) + "</td>"
                                                     + "<td><a href=\"/aserradero/PersonaController?action=buscar_persona&id_persona=" + anticipoCliente.getId_empleado() + "\">" + anticipoCliente.getEmpleado() + "</a></td>"
                                                     + "<td><a class='btn btn-warning'  href=\"/aserradero/AnticipoClienteController?action=modificar&id_anticipo_c=" + anticipoCliente.getId_anticipo_c() + "\">Modificar</a></td>"
                                                     //                                + "<td><a class='btn btn-danger'  href=\"javascript:if (confirm('¿Estás seguro de eliminar?')){parent.location='/aserradero/AnticipoClienteController?action=eliminar&id_anticipo_c="+anticipoCliente.getId_anticipo_c()+"';};\">Eliminar</a></td>"

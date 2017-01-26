@@ -4,6 +4,7 @@
     Author     : lmarcoss
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="entidades.prestamo.Prestamo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -57,15 +58,16 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        DecimalFormat form=new DecimalFormat("###,###.##");
                                         int i = 0;
                                         for (Prestamo prestamo : listaPrestamo) {
                                             out.print("<tr>"
                                                     + "<td>" + (i + 1) + "</td>"
                                                     + "<td>" + prestamo.getFecha() + "</td>"
                                                     + "<td>" + prestamo.getPrestador() + "</td>"
-                                                    + "<td>" + prestamo.getMonto_prestamo() + "</td>"
-                                                    + "<td>" + prestamo.getMonto_pagado() + "</td>"
-                                                    + "<td>" + prestamo.getMonto_por_pagar() + "</td>"
+                                                    + "<td>" + form.format(prestamo.getMonto_prestamo()) + "</td>"
+                                                    + "<td>" + form.format(prestamo.getMonto_pagado()) + "</td>"
+                                                    + "<td>" + form.format(prestamo.getMonto_por_pagar()) + "</td>"
                                                     + "<td>" + prestamo.getInteres() + "%" + "</td>"
                                                     + "<td>" + prestamo.getInteres_mesual() + "</td>"
                                                     + "<td><a class='btn btn-warning' href=\"/aserradero/PrestamoController?action=modificar&id_prestamo=" + prestamo.getId_prestamo() + "\">Modificar</a></td>"
