@@ -77,6 +77,9 @@ public class SalidaMaderaRolloController extends HttpServlet {
                 case "eliminar":
                     eliminarSalidaMaderaRollo(request, sesion, response);
                     break;
+                case "resumen_hoy":
+                    listarResumenHoy(request, response, sesion, action);
+                    break;
             }
         } else {
             try {
@@ -273,6 +276,27 @@ public class SalidaMaderaRolloController extends HttpServlet {
             System.out.println(e);
             listarSalidaMaderaRollo(request, response, sesion, "error_eliminar");
             Logger.getLogger(SalidaMaderaRolloController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    private void listarResumenHoy(HttpServletRequest request, HttpServletResponse response, HttpSession sesion, String action) {
+        try {
+            SalidaMaderaRolloCRUD salidaCRUD = new SalidaMaderaRolloCRUD();
+            List<SalidaMaderaRollo> listaSalida = null;
+            SalidaMaderaRollo salidaTotalHoy = null;
+            try {
+                listaSalida = (List<SalidaMaderaRollo>) salidaCRUD.listarSalidaHoy((String) sesion.getAttribute("id_jefe"));
+                salidaTotalHoy = (SalidaMaderaRollo) salidaCRUD.salidaTotalHoy((String) sesion.getAttribute("id_jefe"));
+            } catch (Exception ex) {
+                Logger.getLogger(EntradaMaderaRolloController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            request.setAttribute("listaSalida", listaSalida);
+            request.setAttribute("salidaTotal", salidaTotalHoy);
+            RequestDispatcher view = request.getRequestDispatcher("moduloMaderaRollo/salidaMaderaRollo/resumenHoy.jsp");
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(EntradaMaderaRolloController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

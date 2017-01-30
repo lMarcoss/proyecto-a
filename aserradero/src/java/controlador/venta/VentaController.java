@@ -89,6 +89,10 @@ public class VentaController extends HttpServlet {
                     case "ticket_sin_costo":
                         ticketSinCosto(request, sesion, response);
                         break;
+                    case "resumen_hoy":
+                        resumenVentaHoy(request, sesion, response);
+                        break;
+
                     /**
                      *********Ventas que no aparecen en ventaMayoreo,
                      * VentaPaquete o VentaExtra *********************
@@ -626,6 +630,7 @@ public class VentaController extends HttpServlet {
         }
     }
 
+    @SuppressWarnings("empty-statement")
     private void eliminarVentaPEliminar(HttpServletRequest request, HttpSession sesion, HttpServletResponse response) throws IOException {
         try {
             Venta venta = new Venta();
@@ -640,6 +645,10 @@ public class VentaController extends HttpServlet {
     }
 
     private void modificarVentaPEliminar(HttpServletRequest request, HttpSession sesion, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void resumenVentaHoy(HttpServletRequest request, HttpSession sesion, HttpServletResponse response) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

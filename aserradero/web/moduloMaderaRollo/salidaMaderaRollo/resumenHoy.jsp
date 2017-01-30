@@ -1,6 +1,6 @@
-<%--
-    Document   : salidaMaderaRollos
-    Created on : 27-oct-2016, 22:46:40
+<%-- 
+    Document   : resumenHoy
+    Created on : 30/01/2017, 02:42:57 PM
     Author     : lmarcoss
 --%>
 
@@ -8,8 +8,8 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    List<SalidaMaderaRollo> salidas = (List<SalidaMaderaRollo>) request.getAttribute("listaSalidaMaderaRollo");
-    String mensaje = (String) request.getAttribute("mensaje");
+    List<SalidaMaderaRollo> salidas = (List<SalidaMaderaRollo>) request.getAttribute("listaSalida");
+    SalidaMaderaRollo salidaTotal = (SalidaMaderaRollo) request.getAttribute("salidaTotal");
 %>
 <!DOCTYPE html>
 <html>
@@ -21,11 +21,10 @@
         <!--menu-->
         <%@ include file="/TEMPLATE/menu.jsp" %>
 
-        <input type="hidden" name="mensaje" id="mensaje" value="<%=mensaje%>">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="page-header">Lista de salida madera en rollo</h2>
+                    <h2 class="page-header">Resumen de salida madera en rollo hoy</h2>
                 </div>
             </div>
             <div class="row">
@@ -48,7 +47,6 @@
                                     <th>Total piezas</th>
                                     <th>Volumen total</th>
                                     <th>Registró</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,16 +65,28 @@
                                                 + "<td>" + salida.getNum_pieza_total() + "</td>"
                                                 + "<td>" + salida.getVolumen_total() + "</td>"
                                                 + "<td>" + salida.getEmpleado() + "</td>"
-                                                + "<td><a class='btn btn-warning' href=\"/aserradero/SalidaMaderaRolloController?action=modificar&id_salida=" + salida.getId_salida() + "\">Modificar</a></td>"
                                                 + "</tr>");
                                         i++;
                                     }
+                                    if (salidaTotal != null) {
+                                        out.print("<tr>"
+                                                + "<td>" + (i + 1) + "</td>"
+                                                + "<td><b>Total</b></td>"
+                                                + "<td><b>" + salidaTotal.getNum_pieza_primario() + "<b></td>"
+                                                + "<td><b>" + salidaTotal.getVolumen_primario() + "<b></td>"
+                                                + "<td><b>" + salidaTotal.getNum_pieza_secundario() + "<b></td>"
+                                                + "<td><b>" + salidaTotal.getVolumen_secundario() + "<b></td>"
+                                                + "<td><b>" + salidaTotal.getNum_pieza_terciario() + "<b></td>"
+                                                + "<td><b>" + salidaTotal.getVolumen_terciario() + "<b></td>"
+                                                + "<td><b>" + salidaTotal.getNum_pieza_total() + "<b></td>"
+                                                + "<td><b>" + salidaTotal.getVolumen_total() + "<b></td>"
+                                                + "<td></td>"
+                                                + "</tr>");
+                                    }
+
                                 %>
                             </tbody>
                         </table>
-                        <div class="agregar_element">
-                            <input type="button" class="btn btn-primary" value="Registrar salida" onClick=" window.location.href = '/aserradero/SalidaMaderaRolloController?action=nuevo'">
-                        </div>
                     </div>
                 </div>
             </div>

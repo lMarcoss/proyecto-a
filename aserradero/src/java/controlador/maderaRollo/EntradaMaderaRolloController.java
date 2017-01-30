@@ -306,6 +306,5 @@ public class EntradaMaderaRolloController extends HttpServlet {
         } catch (ServletException | IOException ex) {
             Logger.getLogger(EntradaMaderaRolloController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 }

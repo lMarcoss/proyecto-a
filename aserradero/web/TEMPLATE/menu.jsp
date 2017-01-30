@@ -78,7 +78,11 @@
                                 <li><a href="/aserradero/EntradaMaderaRolloController?action=resumen_hoy">Resumen hoy</a></li>
                             </ul>
                         </li>
-                        <li class="salida_madera_rollo"><a href="/aserradero/SalidaMaderaRolloController?action=listar">Salida</a></li>
+                        <li class="salida_madera_rollo"><a href="/aserradero/SalidaMaderaRolloController?action=listar">Salida</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/aserradero/SalidaMaderaRolloController?action=resumen_hoy">Resumen hoy</a></li>
+                            </ul>
+                        </li>
                         <li class="inventario_madera_entrada"><a href="/aserradero/InventarioMaderaRolloController?action=listar">Inventario</a></li>
                         <li class="costo_madera_entrada"><a href="/aserradero/ClasificacionMaderaRolloController?action=listar">Clasficación</a></li>
                         <li class="pago_compra"><a href="/aserradero/PagoCompraController?action=listar">Pagos compra</a></li> <!--Solo administrador-->
@@ -103,6 +107,7 @@
                         <li id="ventas_extras"><a href="/aserradero/VentaExtraController?action=listar">Ventas extras</a></li>
                         <li id="ventas_mayoreo"><a href="/aserradero/VentaMayoreoController?action=listar">Ventas Mayoreo</a></li>
                         <li id="ventas_por_paquete"><a href="/aserradero/VentaPaqueteController?action=listar">Ventas por paquete</a></li>
+                        <li id="ventas_por_paquete"><a href="/aserradero/Venta?action=resumen_hoy">Resumen hoy</a></li>
                     </ul>
                 </li>
                 <li id="anticipos" class="submenu">
