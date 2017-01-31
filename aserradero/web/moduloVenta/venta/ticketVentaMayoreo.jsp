@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : ticketVentaMayoreo
     Created on : 02-oct-2016, 15:56:25
     Author     : lmarcoss
@@ -33,6 +33,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ticket venta por mayoreo</title>
+        <%@ include file="/TEMPLATE/head.jsp" %>
         <link rel="stylesheet" href="/aserradero/dist/css/bootstrap.css">
         <style>
             tr th{
@@ -51,18 +52,25 @@
                 <table style="width: 100%;">
                     <tr>
                         <td>Cliente: <%= datosCliente.getCliente()%></td>
+                        <% out.print("<input type='hidden' name='cliente' id='cliente' value='"+datosCliente.getCliente()+"' />"); %>
                         <td>Municipio: <%= datosCliente.getMunicipio()%></td>
+                        <% out.print("<input type='hidden' name='municipio' id='municipio' value='"+datosCliente.getMunicipio()+"' />");%>
                     </tr>
                     <tr>
                         <td>Dirección: <%= datosCliente.getDireccion()%></td>
+                        <% out.print("<input type='hidden' name='direccion' id='direccion' value='"+datosCliente.getDireccion()+"' />");%>
                         <td>Estado: <%= datosCliente.getEstado()%></td>
+                        <% out.print("<input type='hidden' name='estado' id='estado' value='"+datosCliente.getEstado()+"' />");%>
                     </tr>
                     <tr>
                         <td>Localidad: <%= datosCliente.getLocalidad()%></td>
+                        <% out.print("<input type='hidden' name='localidad' id='localidad' value='"+datosCliente.getLocalidad()+"' />");%>
                         <td>Fecha: <%= datosCliente.getFecha()%></td>
+                        <% out.print("<input type='hidden' name='fecha' id='fecha' value='"+datosCliente.getFecha()+"' />");%>
                     </tr>
                     <tr>
                         <td>Id_venta: <%= id_venta%></td>
+                        <% out.print("<input type='hidden' name='id_venta' id='id_venta' value='"+datosCliente.getId_venta()+"' />");%>
                         <td></td>
                     </tr>
                 </table>
@@ -85,6 +93,7 @@
                         for (Madera madera : listaMadera) {
                             out.print("<tr>");
                             out.print("<td>" + madera.getId_madera() + "</td>");
+                            out.print("<input type='hidden' name='id_madera' id='id_madera' value='"+madera.getId_madera()+"' />");
                             out.print("<td>" + madera.getGrueso_f() + "</td>");
                             out.print("<td>" + madera.getAncho_f() + "</td>");
                             out.print("<td>" + madera.getLargo_f() + "</td>");
@@ -209,6 +218,10 @@
                     </table>
                 </div>
                 <%}%>
+            </div>
+            <div class="form-group pull-right">
+                <button type="button" id="ver_pdf_VM" class="btn btn-primary">Ver pdf</button>
+                <button type="button" id="btn-regresar-VM" class="btn btn-warning">Regresar</button>
             </div>
         </div>
     </body>
