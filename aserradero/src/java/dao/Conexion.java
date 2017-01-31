@@ -17,17 +17,10 @@ public class Conexion {
 
     // base de datos credenciales
     private final String USER = "root";
-<<<<<<< HEAD
     private final String PASSWORD = "root";
 
     public void abrirConexion() throws Exception {
         try {
-=======
-    private final String PASSWORD = "Ricardo03m*";
-    
-    public void abrirConexion() throws Exception{
-        try{
->>>>>>> c06d31b76144573094336c2dafbd8f423bda47eb
             Class.forName(JDBC_DRIVER);
             conexion = DriverManager.getConnection(DB_URL, USER, PASSWORD);
         } catch (SQLException e) {
