@@ -38,3 +38,5 @@
 <script src="/aserradero/js/libs/ajax_venta_mayoreo.js"></script>
 <script src="/aserradero/js/libs/ajax_venta_extra.js"></script>
 <script src="/aserradero/js/libs/ajax_venta_paquete.js"></script>
+
+<script src="/aserradero/js/tickets_pdf/ticketVM.js"></script>

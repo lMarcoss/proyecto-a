@@ -3,15 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/home/rcortes/NetBeansProjects/Aserradero/proyecto-a/aserradero/src/java/controlador/registros/PersonaController.java</file>
-            <file>file:/home/rcortes/NetBeansProjects/Aserradero/proyecto-a/aserradero/web/moduloVenta/ventaExtra/mostrarDetalleVE.jsp</file>
-            <file>file:/home/rcortes/NetBeansProjects/Aserradero/proyecto-a/aserradero/src/java/controlador/generadorticket/generadorpdfticket.java</file>
-            <file>file:/home/rcortes/NetBeansProjects/Aserradero/proyecto-a/aserradero/web/moduloVenta/venta/ticketVentaExtra.jsp</file>
-=======
-            <file>file:/home/lmarcoss/workspaceNetbeans/p-aserradero/aserradero/web/moduloMaderaRollo/clasificacionMaderaRollo/nuevoClasificacion.jsp</file>
-            <file>file:/home/lmarcoss/workspaceNetbeans/p-aserradero/aserradero/web/moduloMaderaRollo/entradaMaderaRollo/nuevoEntradaMaderaRollo.jsp</file>
->>>>>>> master
+            <file>file:/home/rcortes/NetBeansProjects/Aserradero/proyecto-a/aserradero/src/java/controlador/generadorticket/GenerarpdfticketVM.java</file>
+            <file>file:/home/rcortes/NetBeansProjects/Aserradero/proyecto-a/aserradero/src/java/controlador/venta/VentasAjaxController.java</file>
+            <file>file:/home/rcortes/NetBeansProjects/Aserradero/proyecto-a/aserradero/web/moduloVenta/venta/ticketVentaMayoreo.jsp</file>
+            <file>file:/home/rcortes/NetBeansProjects/Aserradero/proyecto-a/aserradero/src/java/controlador/generadorticket/GenerarpdfticketVE.java</file>
+            <file>file:/home/rcortes/NetBeansProjects/Aserradero/proyecto-a/aserradero/web/js/tickets_pdf/ticketVM.js</file>
         </group>
     </open-files>
 </project-private>

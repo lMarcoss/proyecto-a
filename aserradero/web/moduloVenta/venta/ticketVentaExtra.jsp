@@ -49,7 +49,7 @@
                             <td>Fecha: <%= datosCliente.getFecha()%></td>
                         </tr>
                         <tr>
-                            <td>Id_venta: <%= id_venta%></td>
+                            <td>Id_venta: <%=id_venta%></td>
                             <td></td>
                         </tr>
                         <!--Datos a enviar al controlador para imprimir el pdf-->
@@ -74,17 +74,17 @@
                             int i=0;
                             for (VentaExtra venta : listaMaderaExtra) {                                
                                 out.print("<tr>");
-                                out.print("<input type=\"hidden\" name=\"tipo[]\" value=\""+venta.getTipo()+"\"/>");
+                                out.print("<input type=\"hidden\" name=\"tipo\" value=\""+venta.getTipo()+"\"/>");
                                 out.print("<td>" + venta.getTipo() + ">");                                
                                 if (tipo_ticket.equals("costo")) {
                                     out.print("<td>" + venta.getMonto() + "</td>");
-                                    out.print("<input type=\"hidden\" name=\"costo[]\" value=\""+venta.getMonto()+"\"/>");
+                                    out.print("<input type=\"hidden\" name=\"costo\" value=\""+venta.getMonto()+"\"/>");
                                 } else {
                                     out.print("<td></td>");
-                                    out.print("<input type=\"hidden\" name=\"tipo[]\" value=\" \"/>");
+                                    out.print("<input type=\"hidden\" name=\"costo\" value=\" \"/>");
                                 }
                                 out.print("<td>" + venta.getObservacion() + "</td>");
-                                out.print("<input type=\"hidden\" name=\"observacion[]\" value=\""+venta.getObservacion()+"\"/>");
+                                out.print("<input type=\"hidden\" name=\"observacion\" value=\""+venta.getObservacion()+"\"/>");
                                 out.print("</tr>");
                             }
                         %>                        
@@ -93,8 +93,10 @@
                             <%
                                 if (tipo_ticket.equals("costo")) {
                                     out.print("<td><b>" + costo_venta + "</b></td>");
+                                    out.print("<input type=\"hidden\" name=\"total\" value=\""+costo_venta+"\"/>");
                                 } else {
                                     out.print("<td></td>");
+                                    out.print("<input type=\"hidden\" name=\"total\" value=\" \"/>");
                                 }
                             %>
                             <td></td>

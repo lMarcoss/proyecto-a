@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author rcortes
  */
-public class generadorpdfticket extends HttpServlet {
+public class GenerarpdfticketVE extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,7 +43,10 @@ public class generadorpdfticket extends HttpServlet {
         String Encabezado=(request.getParameter("encabezado"));
         String Encabezado1=(request.getParameter("encabezado1"));
         String Encabezado2=(request.getParameter("encabezado2"));
+        String total=(request.getParameter("total"));
         String Tipo[]=request.getParameterValues("tipo");
+        String Costo[]=request.getParameterValues("costo");
+        String Observacion[]=request.getParameterValues("observacion");
         
         String Fecha=(request.getParameter("Fecha"));
         String Municipio=(request.getParameter("Municipio"));
@@ -51,7 +54,7 @@ public class generadorpdfticket extends HttpServlet {
         String Estado=(request.getParameter("Estado"));
         String Direccion=(request.getParameter("Direccion"));
         String Localidad=(request.getParameter("Localidad"));
-        String Venta=(request.getParameter("Venta"));
+        String Venta=(request.getParameter("Id_venta"));
         
         Font fuente=new Font(Font.FontFamily.COURIER, 10);
         Paragraph P=new Paragraph();
@@ -78,8 +81,14 @@ public class generadorpdfticket extends HttpServlet {
             tabla1.addCell("Tipo");
             tabla1.addCell("Monto");
             tabla1.addCell("Observación");
-            System.out.println(Tipo[0]);
+            for (int i=0;i<Tipo.length;i++){
+                tabla1.addCell(Tipo[i]);
+                tabla1.addCell(Costo[i]);
+                tabla1.addCell(Observacion[i]);
+            }
             doc.add(tabla1);
+            doc.add(new Paragraph(" "));
+            doc.add(new Paragraph("Total:  "+total));
             doc.close();
             System.out.println("Se creo pdf\n");
         } catch (DocumentException e) {
