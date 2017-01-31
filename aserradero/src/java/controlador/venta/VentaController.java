@@ -7,6 +7,7 @@ import dao.venta.VentaExtraCRUD;
 import dao.venta.VentaMayoreoCRUD;
 import dao.venta.VentaPaqueteCRUD;
 import entidades.registros.Cliente;
+import entidades.venta.ReporteVentaPM;
 import entidades.venta.Venta;
 import entidades.venta.VentaExtra;
 import entidades.venta.VentaMayoreo;
@@ -648,8 +649,14 @@ public class VentaController extends HttpServlet {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void resumenVentaHoy(HttpServletRequest request, HttpSession sesion, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void resumenVentaHoy(HttpServletRequest request, HttpSession sesion, HttpServletResponse response) throws Exception {
+        VentaCRUD ventaCRUD = new VentaCRUD();
+        List<ReporteVentaPM> listaReporte = (List<ReporteVentaPM>) ventaCRUD.consultarMaderaVendidaHoy((String) sesion.getAttribute("id_jefe"));
+        ReporteVentaPM totalReporte = ventaCRUD.consultarTotalMaderaVendidaHoy((String) sesion.getAttribute("id_jefe"));
+        request.setAttribute("listaReporte", listaReporte);
+        request.setAttribute("totalReporte", totalReporte);
+        RequestDispatcher view = request.getRequestDispatcher("moduloVenta/venta/resumenHoy.jsp");
+        view.forward(request, response);
     }
 
 }

@@ -107,7 +107,7 @@
                         <li id="ventas_extras"><a href="/aserradero/VentaExtraController?action=listar">Ventas extras</a></li>
                         <li id="ventas_mayoreo"><a href="/aserradero/VentaMayoreoController?action=listar">Ventas Mayoreo</a></li>
                         <li id="ventas_por_paquete"><a href="/aserradero/VentaPaqueteController?action=listar">Ventas por paquete</a></li>
-                        <li id="ventas_por_paquete"><a href="/aserradero/Venta?action=resumen_hoy">Resumen hoy</a></li>
+                        <li id="ventas_por_paquete"><a href="/aserradero/VentaController?action=resumen_hoy">Resumen hoy</a></li>
                     </ul>
                 </li>
                 <li id="anticipos" class="submenu">

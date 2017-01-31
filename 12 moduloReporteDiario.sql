@@ -42,11 +42,11 @@ GROUP BY id_administrador,id_madera;
 
 DROP VIEW IF EXISTS MONTO_VENTAS_HOY;
 CREATE VIEW MONTO_VENTAS_HOY AS 
-(SELECT id_administrador,VENTA.id_venta,SUM(monto) AS monto FROM VENTA,VENTA_PAQUETE WHERE VENTA.id_venta = VENTA_PAQUETE.id_venta GROUP BY id_administrador,id_venta)
+(SELECT id_administrador,VENTA.id_venta,SUM(monto) AS monto FROM VENTA,VENTA_PAQUETE WHERE VENTA.id_venta = VENTA_PAQUETE.id_venta AND fecha = CURDATE() GROUP BY id_administrador,id_venta)
 UNION
-(SELECT id_administrador,VENTA.id_venta,SUM(monto) AS monto FROM VENTA,VENTA_MAYOREO WHERE VENTA.id_venta = VENTA_MAYOREO.id_venta GROUP BY id_administrador,id_venta)
+(SELECT id_administrador,VENTA.id_venta,SUM(monto) AS monto FROM VENTA,VENTA_MAYOREO WHERE VENTA.id_venta = VENTA_MAYOREO.id_venta AND fecha = CURDATE() GROUP BY id_administrador,id_venta)
 UNION
-(SELECT id_jefe as id_administrador,VENTA.id_venta,SUM(monto) AS monto FROM VENTA,VENTA_EXTRA,EMPLEADO AS E WHERE VENTA.id_venta = VENTA_EXTRA.id_venta AND E.id_empleado = VENTA.id_empleado GROUP BY id_jefe,id_venta);
+(SELECT id_jefe as id_administrador,VENTA.id_venta,SUM(monto) AS monto FROM VENTA,VENTA_EXTRA,EMPLEADO AS E WHERE VENTA.id_venta = VENTA_EXTRA.id_venta AND E.id_empleado = VENTA.id_empleado  AND fecha = CURDATE() GROUP BY id_jefe,id_venta);
 
 DROP VIEW IF EXISTS VENTAS_HOY;
 CREATE VIEW VENTAS_HOY AS 

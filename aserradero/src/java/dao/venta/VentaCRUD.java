@@ -1,6 +1,7 @@
 package dao.venta;
 
 import dao.Conexion;
+import entidades.venta.ReporteVentaPM;
 import ticketVenta.DatosClienteTicket;
 import entidades.venta.Venta;
 import ticketVenta.Madera;
@@ -579,5 +580,82 @@ public class VentaCRUD extends Conexion implements OperacionesCRUD {
             this.cerrarConexion();
         }
         return venta;
+    }
+
+    public List<ReporteVentaPM> consultarMaderaVendidaHoy(String id_jefe) throws Exception {
+        List<ReporteVentaPM> listaMaderaVendida;
+        try {
+            this.abrirConexion();
+            try (PreparedStatement st = this.conexion.prepareStatement(
+                    "SELECT "
+                            + "id_madera, "
+                            + "SUM(num_piezas) AS num_piezas, "
+                            + "FORMAT(SUM(volumen),2) AS volumen, "
+                            + "FORMAT(SUM(monto),2) AS monto "
+                            + "FROM REPORTE_VENTA_P_M "
+                            + "WHERE id_administrador = ? AND fecha = CURDATE()"
+                            + "GROUP BY id_madera")) {
+                st.setString(1, id_jefe);
+                listaMaderaVendida = new ArrayList();
+                try (ResultSet rs = st.executeQuery()) {
+                    while (rs.next()) {
+                        ReporteVentaPM reporte = (ReporteVentaPM) extraerReporteVenta(rs);
+                        listaMaderaVendida.add(reporte);
+                    }
+                }
+            } catch (Exception e) {
+                listaMaderaVendida = null;
+                System.out.println(e);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
+        return listaMaderaVendida;
+    }
+
+    private ReporteVentaPM extraerReporteVenta(ResultSet rs) throws SQLException {
+        ReporteVentaPM reporte = new ReporteVentaPM();
+        reporte.setId_madera(rs.getString("id_madera"));
+        reporte.setNum_piezas(rs.getInt("num_piezas"));
+        reporte.setVolumen(rs.getString("volumen"));
+        reporte.setMonto(rs.getString("monto"));
+        return reporte;
+    }
+
+    public ReporteVentaPM consultarTotalMaderaVendidaHoy(String id_jefe) throws Exception {
+        ReporteVentaPM reporte = null;
+        try {
+            this.abrirConexion();
+            try (PreparedStatement st = this.conexion.prepareStatement(
+                    "SELECT "
+                            + "SUM(num_piezas) AS num_piezas, "
+                            + "FORMAT(SUM(volumen),2) AS volumen, "
+                            + "FORMAT(SUM(monto),2) AS monto "
+                            + "FROM REPORTE_VENTA_P_M "
+                            + "WHERE id_administrador = ? AND fecha = CURDATE()"
+                            + "GROUP BY id_administrador")) {
+                st.setString(1, id_jefe);
+                try (ResultSet rs = st.executeQuery()) {
+                    while (rs.next()) {
+                        reporte = new ReporteVentaPM();
+                        reporte.setNum_piezas(rs.getInt("num_piezas"));
+                        reporte.setVolumen(rs.getString("volumen"));
+                        reporte.setMonto(rs.getString("monto"));
+                    }
+                }
+            } catch (Exception e) {
+                reporte = null;
+                System.out.println(e);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        } finally {
+            this.cerrarConexion();
+        }
+        return reporte;
     }
 }
